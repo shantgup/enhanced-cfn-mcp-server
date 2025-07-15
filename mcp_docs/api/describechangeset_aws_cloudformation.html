@@ -1,0 +1,545 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>DescribeChangeSet - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="API_DescribeChangeSet" /><meta name="default_state" content="API_DescribeChangeSet" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" /><meta name="description" content="Returns the inputs for the change set and a list of changes that CloudFormation will make if you execute the change set. For more information, see Update CloudFormation stacks using change sets in the AWS CloudFormation User Guide ." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="API Reference" /><meta name="abstract" content="AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can use CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service, Elastic Load Balancing, and Amazon EC2 Auto Scaling to build highly reliable, highly scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="API Reference" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="API Reference" /><meta id="panorama-serviceConsolePage" value="DescribeChangeSet" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>DescribeChangeSet - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/APIReference/cfn-api.pdf#API_DescribeChangeSet" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html" /><meta name="keywords" content="API,requests,DescribeChangeSet" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "API Reference",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Actions",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Operations.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "DescribeChangeSet",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Operations.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/APIReference/cfn-api.pdf#API_DescribeChangeSet" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">API Reference</a></div><div id="page-toc-src"><a href="#API_DescribeChangeSet_RequestParameters">Request Parameters</a><a href="#API_DescribeChangeSet_ResponseElements">Response Elements</a><a href="#API_DescribeChangeSet_Errors">Errors</a><a href="#API_DescribeChangeSet_Examples">Examples</a><a href="#API_DescribeChangeSet_SeeAlso">See Also</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="API_DescribeChangeSet">DescribeChangeSet</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>Returns the inputs for the change set and a list of changes that CloudFormation will make if
+      you execute the change set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html">Update
+        CloudFormation stacks using change sets</a> in the
+      <em>
+         AWS CloudFormation User Guide</em>.</p>
+      <h2 id="API_DescribeChangeSet_RequestParameters">Request Parameters</h2>
+      <p> For information about the parameters that are common to all actions, see <a href="./CommonParameters.html">Common Parameters</a>.</p>
+      <div class="variablelist">
+          
+          
+          
+          
+      <dl>
+            <dt><span class="term">
+               <b>
+                  ChangeSetName
+               </b>
+            </span></dt>
+            <dd>
+               <p>The name or Amazon Resource Name (ARN) of the change set that you want to describe.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1. Maximum length of 1600.</p>
+               <p>Pattern: <code class="code">[a-zA-Z][-a-zA-Z0-9]*|arn:[-a-zA-Z0-9:/]*</code>
+               </p>
+               <p>Required: Yes</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  IncludePropertyValues
+               </b>
+            </span></dt>
+            <dd>
+               <p>If <code class="code">true</code>, the returned changes include detailed changes in the property
+      values.</p>
+               <p>Type: Boolean</p>
+               <p>Required: No</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  NextToken
+               </b>
+            </span></dt>
+            <dd>
+               <p>A string (provided by the <a href="./API_DescribeChangeSet.html">DescribeChangeSet</a> response output) that
+      identifies the next page of information that you want to retrieve.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1. Maximum length of 1024.</p>
+               <p>Required: No</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  StackName
+               </b>
+            </span></dt>
+            <dd>
+               <p>If you specified the name of a change set, specify the stack name or ID (ARN) of the
+      change set you want to describe.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1.</p>
+               <p>Pattern: <code class="code">([a-zA-Z][-a-zA-Z0-9]*)|(arn:\b(aws|aws-us-gov|aws-cn)\b:[-a-zA-Z0-9:/._+]*)</code>
+               </p>
+               <p>Required: No</p>
+            </dd>
+         </dl></div>
+    
+      <h2 id="API_DescribeChangeSet_ResponseElements">Response Elements</h2>
+      <p>The following elements are returned by the service.</p>
+      <div class="variablelist">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      <dl>
+            <dt><span class="term">
+               <b>Capabilities.member.N</b>
+            </span></dt>
+            <dd>
+               <p>If you execute the change set, the list of capabilities that were explicitly acknowledged
+      when the change set was created.</p>
+               <p>Type: Array of strings</p>
+               <p>Valid Values: <code class="code">CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_AUTO_EXPAND</code>
+               </p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>Changes.member.N</b>
+            </span></dt>
+            <dd>
+               <p>A list of <code class="code">Change</code> structures that describes the resources CloudFormation changes
+      if you execute the change set.</p>
+               <p>Type: Array of <a href="./API_Change.html">Change</a> objects</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  ChangeSetId
+               </b>
+            </span></dt>
+            <dd>
+               <p>The Amazon Resource Name (ARN) of the change set.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1.</p>
+               <p>Pattern: <code class="code">arn:[-a-zA-Z0-9:/]*</code>
+               </p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  ChangeSetName
+               </b>
+            </span></dt>
+            <dd>
+               <p>The name of the change set.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1. Maximum length of 128.</p>
+               <p>Pattern: <code class="code">[a-zA-Z][-a-zA-Z0-9]*</code>
+               </p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  CreationTime
+               </b>
+            </span></dt>
+            <dd>
+               <p>The start time when the change set was created, in UTC.</p>
+               <p>Type: Timestamp</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  Description
+               </b>
+            </span></dt>
+            <dd>
+               <p>Information about the change set.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1. Maximum length of 1024.</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  ExecutionStatus
+               </b>
+            </span></dt>
+            <dd>
+               <p>If the change set execution status is <code class="code">AVAILABLE</code>, you can execute the change
+      set. If you can't execute the change set, the status indicates why. For example, a change set
+      might be in an <code class="code">UNAVAILABLE</code> state because CloudFormation is still creating it or in an
+        <code class="code">OBSOLETE</code> state because the stack was already updated.</p>
+               <p>Type: String</p>
+               <p>Valid Values: <code class="code">UNAVAILABLE | AVAILABLE | EXECUTE_IN_PROGRESS | EXECUTE_COMPLETE | EXECUTE_FAILED | OBSOLETE</code>
+               </p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  ImportExistingResources
+               </b>
+            </span></dt>
+            <dd>
+               <p>Indicates if the change set imports resources that already exist.</p>
+               <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>This parameter can only import resources that have <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-name.html">custom names</a> in
+        templates. To import resources that do not accept custom names, such as EC2 instances, use
+        the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html">resource import</a>
+        feature instead.</p></div></div>
+               <p>Type: Boolean</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  IncludeNestedStacks
+               </b>
+            </span></dt>
+            <dd>
+               <p>Verifies if <code class="code">IncludeNestedStacks</code> is set to <code class="code">True</code>.</p>
+               <p>Type: Boolean</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  NextToken
+               </b>
+            </span></dt>
+            <dd>
+               <p>If the output exceeds 1 MB, a string that identifies the next page of changes. If there is
+      no additional page, this value is null.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1. Maximum length of 1024.</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>NotificationARNs.member.N</b>
+            </span></dt>
+            <dd>
+               <p>The ARNs of the Amazon SNS topics that will be associated with the stack if you execute the
+      change set.</p>
+               <p>Type: Array of strings</p>
+               <p>Array Members: Maximum number of 5 items.</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  OnStackFailure
+               </b>
+            </span></dt>
+            <dd>
+               <p>Determines what action will be taken if stack creation fails. When this parameter is
+      specified, the <code class="code">DisableRollback</code> parameter to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html">ExecuteChangeSet</a> API operation must not be specified. This must be one of these
+      values:</p>
+               <div class="itemizedlist">
+                   
+                   
+                   
+               <ul class="itemizedlist"><li class="listitem">
+                     <p>
+                        <code class="code">DELETE</code> - Deletes the change set if the stack creation fails. This is only
+          valid when the <code class="code">ChangeSetType</code> parameter is set to <code class="code">CREATE</code>. If the
+          deletion of the stack fails, the status of the stack is <code class="code">DELETE_FAILED</code>.</p>
+                  </li><li class="listitem">
+                     <p>
+                        <code class="code">DO_NOTHING</code> - if the stack creation fails, do nothing. This is equivalent
+          to specifying <code class="code">true</code> for the <code class="code">DisableRollback</code> parameter to the
+            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html">ExecuteChangeSet</a> API operation.</p>
+                  </li><li class="listitem">
+                     <p>
+                        <code class="code">ROLLBACK</code> - if the stack creation fails, roll back the stack. This is
+          equivalent to specifying <code class="code">false</code> for the <code class="code">DisableRollback</code> parameter
+          to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html">ExecuteChangeSet</a> API operation.</p>
+                  </li></ul></div>
+               <p>Type: String</p>
+               <p>Valid Values: <code class="code">DO_NOTHING | ROLLBACK | DELETE</code>
+               </p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>Parameters.member.N</b>
+            </span></dt>
+            <dd>
+               <p>A list of <code class="code">Parameter</code> structures that describes the input parameters and their
+      values used to create the change set. For more information, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html">Parameter</a> data type.</p>
+               <p>Type: Array of <a href="./API_Parameter.html">Parameter</a> objects</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  ParentChangeSetId
+               </b>
+            </span></dt>
+            <dd>
+               <p>Specifies the change set ID of the parent change set in the current nested change set
+      hierarchy.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1.</p>
+               <p>Pattern: <code class="code">arn:[-a-zA-Z0-9:/]*</code>
+               </p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  RollbackConfiguration
+               </b>
+            </span></dt>
+            <dd>
+               <p>The rollback triggers for CloudFormation to monitor during stack creation and updating
+      operations, and for the specified monitoring period afterwards.</p>
+               <p>Type: <a href="./API_RollbackConfiguration.html">RollbackConfiguration</a> object</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  RootChangeSetId
+               </b>
+            </span></dt>
+            <dd>
+               <p>Specifies the change set ID of the root change set in the current nested change set
+      hierarchy.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1.</p>
+               <p>Pattern: <code class="code">arn:[-a-zA-Z0-9:/]*</code>
+               </p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  StackId
+               </b>
+            </span></dt>
+            <dd>
+               <p>The Amazon Resource Name (ARN) of the stack that's associated with the change set.</p>
+               <p>Type: String</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  StackName
+               </b>
+            </span></dt>
+            <dd>
+               <p>The name of the stack that's associated with the change set.</p>
+               <p>Type: String</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  Status
+               </b>
+            </span></dt>
+            <dd>
+               <p>The current status of the change set, such as <code class="code">CREATE_PENDING</code>,
+        <code class="code">CREATE_COMPLETE</code>, or <code class="code">FAILED</code>.</p>
+               <p>Type: String</p>
+               <p>Valid Values: <code class="code">CREATE_PENDING | CREATE_IN_PROGRESS | CREATE_COMPLETE | DELETE_PENDING | DELETE_IN_PROGRESS | DELETE_COMPLETE | DELETE_FAILED | FAILED</code>
+               </p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  StatusReason
+               </b>
+            </span></dt>
+            <dd>
+               <p>A description of the change set's status. For example, if your attempt to create a change
+      set failed, CloudFormation shows the error message.</p>
+               <p>Type: String</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>Tags.member.N</b>
+            </span></dt>
+            <dd>
+               <p>If you execute the change set, the tags that will be associated with the stack.</p>
+               <p>Type: Array of <a href="./API_Tag.html">Tag</a> objects</p>
+               <p>Array Members: Maximum number of 50 items.</p>
+            </dd>
+         </dl></div>
+    
+      <h2 id="API_DescribeChangeSet_Errors">Errors</h2>
+      <p>For information about the errors that are common to all actions, see <a href="./CommonErrors.html">Common Errors</a>.</p>
+      <div class="variablelist">
+          
+      <dl>
+            <dt><span class="term">
+               <b>
+                  ChangeSetNotFound
+               </b>
+            </span></dt>
+            <dd>
+               <p>The specified change set name or ID doesn't exit. To view valid change sets for a stack, use the
+   <code class="code">ListChangeSets</code> operation.</p>
+               <p>HTTP Status Code: 404</p>
+            </dd>
+         </dl></div>
+    
+      <h2 id="API_DescribeChangeSet_Examples">Examples</h2>
+       
+         <h3 id="API_DescribeChangeSet_Example_1">DescribeChangeSet</h3>
+         <p>This example illustrates one usage of DescribeChangeSet.</p>
+          
+            <h4 id="API_DescribeChangeSet_Example_1_Request">Sample Request</h4>
+            <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli ()--><code class="">
+https://cloudformation.us-east-1.amazonaws.com/
+ ?Action=DescribeChangeSet
+ &amp;ChangeSetName=arn:aws:cloudformation:us-east-1:123456789012:changeSet/SampleChangeSet/12a3b456-0e10-4ce0-9052-5d484a8c4e5b
+ &amp;Version=2010-05-15
+ &amp;X-Amz-Algorithm=AWS4-HMAC-SHA256
+ &amp;X-Amz-Credential=[Access key ID and scope]
+ &amp;X-Amz-Date=20160316T233349Z
+ &amp;X-Amz-SignedHeaders=content-type;host
+ &amp;X-Amz-Signature=[Signature]</code></pre>
+          
+          
+            <h4 id="API_DescribeChangeSet_Example_1_Response">Sample Response</h4>
+            <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli ()--><code class="">
+&lt;DescribeChangeSetResponse xmlns="http://cloudformation.amazonaws.com/doc/2010-05-15/"&gt;
+  &lt;DescribeChangeSetResult&gt;
+    &lt;StackId&gt;arn:aws:cloudformation:us-east-1:123456789012:stack/SampleStack/12a3b456-0e10-4ce0-9052-5d484a8c4e5b&lt;/StackId&gt;
+    &lt;Status&gt;CREATE_COMPLETE&lt;/Status&gt;
+    &lt;ChangeSetId&gt;arn:aws:cloudformation:us-east-1:123456789012:changeSet/SampleChangeSet-direct/12a3b456-0e10-4ce0-9052-5d484a8c4e5b&lt;/ChangeSetId&gt;
+    &lt;StackName&gt;SampleStack&lt;/StackName&gt;
+    &lt;ChangeSetName&gt;SampleChangeSet-direct&lt;/ChangeSetName&gt;
+    &lt;NotificationARNs/&gt;
+    &lt;CreationTime&gt;2016-03-17T23:35:25.813Z&lt;/CreationTime&gt;
+    &lt;Capabilities/&gt;
+    &lt;Parameters&gt;
+      &lt;member&gt;
+        &lt;ParameterValue&gt;testing&lt;/ParameterValue&gt;
+        &lt;ParameterKey&gt;Purpose&lt;/ParameterKey&gt;
+      &lt;/member&gt;
+      &lt;member&gt;
+        &lt;ParameterValue&gt;MyKeyName&lt;/ParameterValue&gt;
+        &lt;ParameterKey&gt;KeyPairName&lt;/ParameterKey&gt;
+      &lt;/member&gt;
+      &lt;member&gt;
+        &lt;ParameterValue&gt;t2.micro&lt;/ParameterValue&gt;
+        &lt;ParameterKey&gt;InstanceType&lt;/ParameterKey&gt;
+      &lt;/member&gt;
+    &lt;/Parameters&gt;
+    &lt;Changes&gt;
+      &lt;member&gt;
+        &lt;ResourceChange&gt;
+          &lt;Replacement&gt;False&lt;/Replacement&gt;
+          &lt;Scope&gt;
+            &lt;member&gt;Tags&lt;/member&gt;
+          &lt;/Scope&gt;
+          &lt;Details&gt;
+            &lt;member&gt;&lt;ChangeSource&gt;DirectModification&lt;/ChangeSource&gt;
+              &lt;Target&gt;
+                &lt;RequiresRecreation&gt;Never&lt;/RequiresRecreation&gt;
+                &lt;Attribute&gt;Tags&lt;/Attribute&gt;
+              &lt;/Target&gt;
+              &lt;Evaluation&gt;Static&lt;/Evaluation&gt;
+            &lt;/member&gt;
+          &lt;/Details&gt;
+          &lt;LogicalResourceId&gt;MyEC2Instance&lt;/LogicalResourceId&gt;
+          &lt;Action&gt;Modify&lt;/Action&gt;
+          &lt;PhysicalResourceId&gt;i-1abc23d4&lt;/PhysicalResourceId&gt;
+          &lt;ResourceType&gt;AWS::EC2::Instance&lt;/ResourceType&gt;
+        &lt;/ResourceChange&gt;
+        &lt;Type&gt;Resource&lt;/Type&gt;
+      &lt;/member&gt;
+    &lt;/Changes&gt;
+  &lt;/DescribeChangeSetResult&gt;
+  &lt;ResponseMetadata&gt;
+    &lt;RequestId&gt;b9b4b068-3a41-11e5-94eb-example&lt;/RequestId&gt;
+  &lt;/ResponseMetadata&gt;
+&lt;/DescribeChangeSetResponse&gt;</code></pre>
+          
+       
+    
+      <h2 id="API_DescribeChangeSet_SeeAlso">See Also</h2>
+      <p>For more information about using this API in one of the language-specific AWS SDKs, see the following:</p>
+      <div class="itemizedlist">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      <ul class="itemizedlist"><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/aws-cli/cloudformation-2010-05-15/DescribeChangeSet">AWS Command Line Interface</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/DotNetSDKV3/cloudformation-2010-05-15/DescribeChangeSet">AWS SDK for .NET</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForCpp/cloudformation-2010-05-15/DescribeChangeSet">AWS SDK for C++</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForGoV2/cloudformation-2010-05-15/DescribeChangeSet">AWS SDK for Go v2</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForJavaV2/cloudformation-2010-05-15/DescribeChangeSet">AWS SDK for Java V2</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForJavaScriptV3/cloudformation-2010-05-15/DescribeChangeSet">AWS SDK for JavaScript V3</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForKotlin/cloudformation-2010-05-15/DescribeChangeSet">AWS SDK for Kotlin</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForPHPV3/cloudformation-2010-05-15/DescribeChangeSet">AWS SDK for PHP V3</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/boto3/cloudformation-2010-05-15/DescribeChangeSet">AWS SDK for Python</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForRubyV3/cloudformation-2010-05-15/DescribeChangeSet">AWS SDK for Ruby V3</a>
+            </p>
+         </li></ul></div>
+   <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./API_DescribeAccountLimits.html">DescribeAccountLimits</div><div id="next" class="next-link" accesskey="n" href="./API_DescribeChangeSetHooks.html">DescribeChangeSetHooks</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeChangeSet.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

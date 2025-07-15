@@ -1,0 +1,208 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros-overview.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Overview of CloudFormation macros - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="template-macros-overview" /><meta name="default_state" content="template-macros-overview" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" /><meta name="description" content="Learn about macros for CloudFormation stack templates." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="Overview of CloudFormation macros" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Overview of CloudFormation macros - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#template-macros-overview" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-macros-overview.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set,CloudFormation templates,define your infrastructure" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Working with CloudFormation templates",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "Extend your template's capabilities with CloudFormation-supplied resource types",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-supplied-resource-types.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 6,
+        "name" : "Perform custom processing on CloudFormation templates with template macros",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 7,
+        "name" : "Overview of CloudFormation macros",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#template-macros-overview" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#template-macros-change-sets">How to create stacks directly</a><a href="#template-macros-considerations">Considerations</a><a href="#template-macros-permissions">Macro account scope and
+                    permissions</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="template-macros-overview">Overview of CloudFormation macros</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>There are two major steps to processing templates using macros: creating the macro
+            itself, and then using the macro to perform processing on your templates.</p><p>To create a macro definition, you must create the following:</p><div class="itemizedlist">
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>A Lambda function to perform the template processing. This Lambda function
+                    accepts either a snippet or an entire template, and any additional parameters
+                    that you define. It returns the processed template snippet or the entire
+                    template as a response.</p>
+            </li><li class="listitem">
+                <p>A resource of type <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudformation-macro.html">AWS::CloudFormation::Macro</a>, which enables users
+                    to call the Lambda function from within CloudFormation templates. This resource
+                    specifies the ARN of the Lambda function to invoke for this macro, and additional
+                    optional properties to assist with debugging. To create this resource within an
+                    account, author a template that includes the
+                        <code class="code">AWS::CloudFormation::Macro</code> resource, and then create either a
+                    stack or stack set with self-managed permissions from the template. AWS CloudFormation StackSets
+                    doesn't currently support creating or updating stack sets with service-managed
+                    permissions from templates that reference macros.</p>
+            </li></ul></div><p>To use a macro, reference the macro in your template:</p><div class="itemizedlist">
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>To process a section, or part, of a template, reference the macro in an
+                        <code class="code">Fn::Transform</code> function located relative to the template content
+                    you want to transform. When using <code class="code">Fn::Transform</code>, you can also pass
+                    any specified parameters it requires.</p>
+            </li><li class="listitem">
+                <p>To process an entire template, reference the macro in the <a href="./transform-section-structure.html">Transform</a> section of the
+                    template.</p>
+            </li></ul></div><p>Next, you typically create a change set and then execute it. (Processing macros can
+            add multiple resources that you might not be aware of. To ensure that you're aware of
+            all of the changes introduced by macros, we strongly advise that you use change sets.)
+            CloudFormation passes the specified template content, along with any additional specified
+            parameters, to the Lambda function specified in the macro resource. The Lambda function
+            returns the processed template content, be it a snippet or an entire template.</p><p>After all macros in the template have been called, CloudFormation generates a change set
+            that includes the processed template content. After you review the change set, execute
+            it to apply the changes.</p><div class="mediaobject">
+             
+                <img src="/images/AWSCloudFormation/latest/UserGuide/images/template-macro-use.png" class="aws-docs-img-whiteBg aws-docs-img-padding" alt="Use the Fn::Transform intrinsic function or the Transform section of the template, to pass the template contents and associated parameters to the macro's underlying Lambda function, which returns the processed template contents." style="max-width:100%" />
+             
+             
+        </div>
+            <h2 id="template-macros-change-sets">How to create stacks directly</h2>
+            <p>To create or update a stack using a template that references macros, you typically
+                create a change set and then execute it. A change set describes the actions
+                CloudFormation will take based on the processed template. Processing macros can add
+                multiple resources that you might not be aware of. To ensure that you're aware of
+                all the changes introduced by macros, we strongly suggest you use change sets. After
+                you review the change set, you can execute it to actually apply the changes.</p>
+            <p>A macro can add IAM resources to your template. For these resources, CloudFormation
+                requires you to <a href="./control-access-with-iam.html#using-iam-capabilities">acknowledge their
+                    capabilities</a>. Because CloudFormation can't know which resources are added
+                before processing your template, you might need to acknowledge IAM capabilities
+                when you create the change set, depending on whether the referenced macros contain
+                IAM resources. That way, when you run the change set, CloudFormation has the necessary
+                capabilities to create IAM resources.</p>
+            <p>To create or update a stack directly from a processed template without first
+                reviewing the proposed changes in a change set, specify the
+                    <code class="code">CAPABILITY_AUTO_EXPAND</code> capability during a <code class="code">CreateStack</code>
+                or <code class="code">UpdateStack</code> request. You should only create stacks directly from a
+                stack template that contains macros if you know what processing the macro performs.
+                You can't use change sets with stack set macros; you must update your stack set
+                directly.</p>
+            <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html">CreateStack</a> or <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStack.html">UpdateStack</a> in the
+                    <em>AWS CloudFormation API Reference</em>.</p>
+            <div class="awsdocs-note awsdocs-important"><div class="awsdocs-note-title"><awsui-icon name="status-warning" variant="error"></awsui-icon><h6>Important</h6></div><div class="awsdocs-note-text"><p>If your stack set template references one or more macros, you must create the
+                    stack set directly from the processed template, without first reviewing the
+                    resulting changes in a change set. Processing macros can add multiple resources
+                    that you might not be aware of. Before you create or update a stack set from a
+                    template that references macros directly, be sure that you know what processing
+                    the macros performs.</p></div></div>
+            <p>To reduce the number of steps for launching stacks from templates that reference
+                macros, you can use the <code class="code">package</code> and <code class="code">deploy</code> AWS CLI commands.
+                For more information, see <a href="./using-cfn-cli-package.html">Upload local artifacts to an S3 bucket with the
+      AWS CLI</a> and <a href="./service_code_examples.html#deploy-sdk">Create a stack that includes transforms</a>.</p>
+         
+            <h2 id="template-macros-considerations">Considerations</h2>
+            <p>When working with macros, keep in mind the following notes and limitations:</p>
+            <div class="itemizedlist">
+                 
+                 
+                 
+                 
+                
+                 
+                 
+                 
+                
+                 
+                 
+                 
+            <ul class="itemizedlist"><li class="listitem">
+                    <p>Macros are supported only in AWS Regions where Lambda is available. For a
+                        list of Regions where Lambda is available, see <a href="https://docs.aws.amazon.com/general/latest/gr/lambda-service.html">AWS Lambda endpoints and
+                            quotas</a>.</p>
+                </li><li class="listitem">
+                    <p>Any processed template snippets must be valid JSON.</p>
+                </li><li class="listitem">
+                    <p>Any processed template snippets must pass validation checks for a create
+                        stack, update stack, create stack set, or update stack set operation.</p>
+                </li><li class="listitem">
+                    <p>CloudFormation resolves macros first, and then processes the template. The
+                        resulting template must be valid JSON and must not exceed the
+                        template size limit.</p>
+                </li><li class="listitem">
+                    <p>Because of the order in which CloudFormation processes elements in a template,
+                        a macro can't include modules in the processed template content it returns
+                        to CloudFormation. For more information, see <a href="./template-macros-author.html#template-macros-order">Macro evaluation order</a>.</p>
+                </li><li class="listitem">
+                    <p>When using the update rollback feature, CloudFormation uses a copy of the
+                        original template. It rolls back to the original template even if the
+                        included snippet was changed.</p>
+                </li><li class="listitem">
+                    <p>Including macros within macros doesn't work because we don't process
+                        macros recursively.</p>
+                </li><li class="listitem">
+                    <p>The <code class="code">Fn::ImportValue</code> intrinsic function isn't currently
+                        supported in macros.</p>
+                </li><li class="listitem">
+                    <p>Intrinsic functions included in the template are evaluated after any
+                        macros. Therefore, the processed template content your macro returns can
+                        include calls to intrinsic functions, and they're evaluated as usual.</p>
+                </li><li class="listitem">
+                    <p>StackSets doesn't currently support creating or updating stack sets
+                        with service-managed permissions from templates that reference CloudFormation
+                        macros.</p>
+                </li></ul></div>
+         
+            <h2 id="template-macros-permissions">Macro account scope and
+                    permissions</h2>
+            <p>You can use macros only in the account in which they were created as a resource.
+                The name of the macro must be unique within a given account. However, you can make
+                the same functionality available in multiple accounts by enabling cross-account
+                access on the underlying Lambda function, and then creating macro definitions
+                referencing that function in multiple accounts. In the example below, three accounts
+                contain macro definitions that each point to the same Lambda function.</p>
+            <div class="mediaobject">
+                 
+                    <img src="/images/AWSCloudFormation/latest/UserGuide/images/template-macro-accounts.png" class="aws-docs-img-whiteBg aws-docs-img-padding" alt="By allowing cross-account access on the Lambda function, AWS enables you to create macros in multiple accounts that reference that function." style="max-width:100%" />
+                 
+                 
+            </div>
+            <p>To create a macro definition, the user must have permissions to create a stack or
+                stack set within the specified account.</p>
+            <p>For CloudFormation to successfully run a macro included in a template, the user must
+                have <code class="code">Invoke</code> permissions for the underlying Lambda function. To prevent
+                potential escalation of permissions, CloudFormation impersonates the user while running
+                the macro.</p>
+            <p>For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html">Managing permissions in
+                    AWS Lambda</a> in the <em>AWS Lambda Developer Guide</em> and <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awslambda.html">Actions,
+                    resources, and condition keys for AWS Lambda</a> in the
+                    <em>Service Authorization Reference</em>.</p>
+        <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./template-macros.html">Template macros</div><div id="next" class="next-link" accesskey="n" href="./template-macros-author.html">Create a macro
+                definition</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-macros-overview.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-macros-overview.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

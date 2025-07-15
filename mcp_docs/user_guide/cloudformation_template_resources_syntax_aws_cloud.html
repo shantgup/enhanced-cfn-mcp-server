@@ -1,0 +1,406 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>CloudFormation template Resources syntax - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="resources-section-structure" /><meta name="default_state" content="resources-section-structure" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" /><meta name="description" content="Define the AWS resources to provision as part of your stack in the Resources section of a CloudFormation template." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="CloudFormation template Resources syntax" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>CloudFormation template Resources syntax - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#resources-section-structure" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/resources-section-structure.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set,CloudFormation templates,define your infrastructure" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Working with CloudFormation templates",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "CloudFormation template sections",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 6,
+        "name" : "CloudFormation template Resources syntax",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#resources-section-structure" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#resources-section-structure-syntax">Syntax</a><a href="#resources-section-logical-id">Logical ID (also called logical
+                    name)</a><a href="#resources-section-resource-type">Resource type</a><a href="#resources-section-resource-properties">Resource properties</a><a href="#resources-section-physical-id">Physical ID</a><a href="#using-cross-resource-references">Referencing resources</a><a href="#resources-section-structure-examples">Examples</a></div><div id="page-filters" style="display:none"><filter label="All" id="All"></filter><filter label="JSON" id="JSON"></filter><filter label="YAML" id="YAML"></filter></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="resources-section-structure">CloudFormation template Resources
+            syntax</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>The <code class="code">Resources</code> section is a required top-level section in a CloudFormation
+        template. It declares the AWS resources that you want CloudFormation to provision and
+        configure as part of your stack.</p>
+        <h2 id="resources-section-structure-syntax">Syntax</h2>
+        <p>The <code class="code">Resources</code> section uses the following syntax:</p>
+        <div id="JSON" name="JSON" class="section langfilter">
+            <h3 id="resources-section-structure-syntax.json">JSON</h3>
+            <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json ">"Resources" : <span>{</span>
+    "<code class="replaceable">LogicalResourceName1</code>" : <span>{</span>
+        "Type" : "AWS::<code class="replaceable">ServiceName::ResourceType</code>",
+        "Properties" : <span>{</span>
+            <code class="replaceable">"PropertyName1" : "PropertyValue1"</code>,
+            <code class="replaceable">...</code>
+        }
+    },
+
+    "<code class="replaceable">LogicalResourceName2</code>" : <span>{</span>
+        "Type" : "AWS::<code class="replaceable">ServiceName::ResourceType</code>",
+        "Properties" : <span>{</span>
+            <code class="replaceable">"PropertyName1" : "PropertyValue1"</code>,
+            <code class="replaceable">...</code>
+        }
+    }
+}</code></pre>
+        </div>
+        <div id="YAML" name="YAML" class="section langfilter">
+            <h3 id="resources-section-structure-syntax.yaml">YAML</h3>
+            <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Resources:
+  <code class="replaceable">LogicalResourceName1</code>:
+    Type: AWS::<code class="replaceable">ServiceName::ResourceType</code>
+    Properties:
+      <code class="replaceable">PropertyName1: PropertyValue1</code>
+      <code class="replaceable">...</code>
+
+  <code class="replaceable">LogicalResourceName2</code>:
+    Type: AWS::<code class="replaceable">ServiceName::ResourceType</code>
+    Properties:
+      <code class="replaceable">PropertyName1: PropertyValue1</code>
+      <code class="replaceable">...</code></code></pre>
+        </div>
+     
+        <h2 id="resources-section-logical-id">Logical ID (also called <em>logical
+                    name</em>)</h2>
+        <p>Within a CloudFormation template, resources are identified by their logical resource
+            names. These names must be alphanumeric (A-Za-z0-9) and unique within the template.
+            Logical names are used to reference resources from other sections of the template.
+        </p>
+     
+        <h2 id="resources-section-resource-type">Resource type</h2>
+        <p>Each resource must have a <code class="code">Type</code> attribute, which defines the kind of AWS
+            resource it is. The <code class="code">Type</code> attribute has the format
+                    <code class="code">AWS::<code class="replaceable">ServiceName</code>::<code class="replaceable">ResourceType</code></code>.
+            For example, the <code class="code">Type</code> attribute for an Amazon S3 bucket is
+                <code class="code">AWS::S3::Bucket</code>. </p>
+        <p>For the full list of supported resource types, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html">AWS resource and property types reference</a>.</p>
+     
+        <h2 id="resources-section-resource-properties">Resource properties</h2>
+        <p>Resource properties are additional options that you can specify to define
+            configuration details for the specific resource type. Some properties are required,
+            while others are optional. Some properties have default values, so specifying those
+            properties is optional.</p>
+        <p>For details on the properties supported for each resource type, see the topics in
+            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html">AWS resource and property types reference</a>.</p>
+        <p>Property values can be literal strings, lists of strings, Booleans, dynamic
+            references, parameter references, pseudo references, or the value returned by a
+            function. The following examples show you how to declare different property value
+            types:</p>
+        <div id="JSON" name="JSON" class="section langfilter">
+            <h3 id="resource-properties-example.json">JSON</h3>
+            <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json ">"Properties" : <span>{</span>
+    "<code class="replaceable">String</code>" : "<code class="replaceable">A string value</code>",
+    "<code class="replaceable">Number</code>" : <code class="replaceable">123</code>,
+    "<code class="replaceable">LiteralList</code>" : [ "<code class="replaceable">first-value</code>", "<code class="replaceable">second-value</code>" ],
+    "<code class="replaceable">Boolean</code>" : <code class="replaceable">true</code>
+}</code></pre>
+        </div>
+        <div id="YAML" name="YAML" class="section langfilter">
+            <h3 id="resource-properties-example.yaml">YAML</h3>
+            <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Properties:
+  <code class="replaceable">String</code>: <code class="replaceable">A string value</code> 
+  <code class="replaceable">Number</code>: <code class="replaceable">123</code>
+  <code class="replaceable">LiteralList</code>:
+    - <code class="replaceable">first-value</code>
+    - <code class="replaceable">second-value</code>
+  <code class="replaceable">Boolean</code>: <code class="replaceable">true</code>
+</code></pre>
+        </div>
+     
+        <h2 id="resources-section-physical-id">Physical ID</h2>
+        <p>In addition to the logical ID, certain resources also have a physical ID, which is the
+            actual assigned name for that resource, such as an EC2 instance ID or an S3 bucket name.
+            Use the physical IDs to identify resources outside of CloudFormation templates, but only
+            after the resources have been created. For example, suppose you give an EC2 instance
+            resource a logical ID of <code class="code">MyEC2Instance</code>. When CloudFormation creates the
+            instance, CloudFormation automatically generates and assigns a physical ID (such as
+                <code class="code">i-1234567890abcdef0</code>) to the instance. You can use this physical ID to
+            identify the instance and view its properties (such as the DNS name) by using the Amazon
+            EC2 console. </p>
+        <p>For Amazon S3 buckets and many other resources, CloudFormation automatically generates a unique
+            physical name for the resource if you don't explicitly specify one. This physical name
+            is based on a combination of the name of the CloudFormation stack, the resource's logical
+            name specified in the CloudFormation template, and a unique ID. For example, if you have an
+            Amazon S3 bucket with the logical name <code class="code">MyBucket</code> in a stack named
+                <code class="code">MyStack</code>, CloudFormation might name the bucket with the following physical
+            name <code class="code">MyStack-MyBucket-abcdefghijk1</code>.</p>
+        <p>For resources that support custom names, you can assign your own physical names to
+            help you quickly identify resources. For example, you can name an S3 bucket that stores
+            logs as <code class="code">MyPerformanceLogs</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-name.html">Name type</a>.</p>
+     
+        <h2 id="using-cross-resource-references">Referencing resources</h2>
+        <p>Often, you need to set properties on one resource based on the name or property of
+            another resource. For example, you might create an EC2 instance that uses EC2 security
+            groups, or a CloudFront distribution backed by an S3 bucket. All of these resources can be
+            created in the same CloudFormation template. </p>
+        <p>CloudFormation provides intrinsic functions that you can use to refer to other resources
+            and their properties. These functions allow you to create dependencies between resources
+            and pass values from one resource to another.</p>
+         
+            <h3 id="resource-properties-ref">The <code class="code">Ref</code> function</h3>
+            <p>The <code class="code">Ref</code> function is commonly used to retrieve an identifying property
+                of resources defined within the same CloudFormation template. What it returns depends on
+                the type of resource. For most resources, it returns the physical name of the
+                resource. However, for some resource types, it might return a different value, such
+                as an IP address for an <code class="code">AWS::EC2::EIP</code> resource or an Amazon Resource
+                Name (ARN) for an Amazon SNS topic. </p>
+            <p>The following examples demonstrate how to use the <code class="code">Ref</code> function in
+                properties. In each of these examples, the <code class="code">Ref</code> function will return the
+                actual name of the <code class="code">LogicalResourceName</code> resource declared elsewhere in
+                the template. The <code class="code">!Ref</code> syntax example in the YAML example is just a
+                shorter way of writing the <code class="code">Ref</code> function.</p>
+            <div id="JSON" name="JSON" class="section langfilter">
+                <h4 id="resource-properties-ref-example.json">JSON</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json ">"Properties" : <span>{</span>
+    "<code class="replaceable">PropertyName</code>" : <span>{</span> "Ref" : "<code class="replaceable">LogicalResourceName</code>" }
+}</code></pre>
+            </div>
+            <div id="YAML" name="YAML" class="section langfilter">
+                <h4 id="resource-properties-ref-example.yaml">YAML</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Properties:
+  <code class="replaceable">PropertyName1</code>:
+    Ref: <code class="replaceable">LogicalResourceName</code>
+  <code class="replaceable">PropertyName2</code>: !Ref <code class="replaceable">LogicalResourceName</code></code></pre>
+            </div>
+            <p>For more detailed information about the <code class="code">Ref</code> function, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-ref.html">Ref</a>. </p>
+         
+         
+            <h3 id="resource-properties-getatt">The <code class="code">Fn::GetAtt</code>
+                    function</h3>
+            <p>The <code class="code">Ref</code> function is helpful if the parameter or the value returned
+                for a resource is exactly what you want. However, you may need other attributes of a
+                resource. For example, if you want to create a CloudFront distribution with an S3 origin,
+                you need to specify the bucket location by using a DNS-style address. A number of
+                resources have additional attributes whose values you can use in your template. To
+                get these attributes, you use the <code class="code">Fn::GetAtt</code> function.</p>
+            <p>The following examples demonstrate how to use the <code class="code">GetAtt</code> function in
+                properties. The <code class="code">Fn::GetAtt</code> function takes two parameters, the logical
+                name of the resource and the name of the attribute to be retrieved. The
+                    <code class="code">!GetAtt</code> syntax example in the YAML example is just a shorter way of
+                writing the <code class="code">GetAtt</code> function.</p>
+            <div id="JSON" name="JSON" class="section langfilter">
+                <h4 id="resource-properties-getatt-example.json">JSON</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json ">"Properties" : <span>{</span>
+    "<code class="replaceable">PropertyName</code>" : <span>{</span>
+        "Fn::GetAtt" : [ "<code class="replaceable">LogicalResourceName</code>", "<code class="replaceable">AttributeName</code>" ]
+    }
+}</code></pre>
+            </div>
+            <div id="YAML" name="YAML" class="section langfilter">
+                <h4 id="resource-properties-getatt-example.yaml">YAML</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Properties:
+  <code class="replaceable">PropertyName1</code>:
+    Fn::GetAtt:
+      - <code class="replaceable">LogicalResourceName</code>
+      - <code class="replaceable">AttributeName</code>
+  <code class="replaceable">PropertyName2</code>: !GetAtt <code class="replaceable">LogicalResourceName</code>.<code class="replaceable">AttributeName</code></code></pre>
+            </div>
+            <p>For more detailed information about the <code class="code">GetAtt</code> function, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.</p>
+         
+     
+        <h2 id="resources-section-structure-examples">Examples</h2>
+        <p>The following examples illustrate how to declare resources and how CloudFormation
+            templates can reference other resources defined within the same template and existing
+            AWS resources.</p>
+        <div class="highlights" id="inline-topiclist"><h6>Topics</h6><ul><li><p><a href="#resources-section-structure-examples-single-resource">Declaring a
+                    single resource with a custom name</a></p></li><li><p><a href="#resources-section-structure-examples-ref">Referencing other
+                    resources with the Ref function</a></p></li><li><p><a href="#resources-section-structure-examples-getatt">Referencing resource
+                    attributes using the Fn::GetAtt function</a></p></li></ul></div>
+         
+            <h3 id="resources-section-structure-examples-single-resource">Declaring a
+                    single resource with a custom name</h3>
+
+            <p>The following examples declare a single resource of type
+                    <code class="code">AWS::S3::Bucket</code> with the logical name <code class="code">MyBucket</code>. The
+                    <code class="code">BucketName</code> property is set to <code class="replaceable">amzn-s3-demo-bucket</code>,
+                which should be replaced with the desired name for your S3 bucket.</p>
+            <p>If you use this resource declaration to create a stack, CloudFormation will create an
+                Amazon S3 bucket with default settings. For other resources, such as an Amazon EC2 instance or
+                Auto Scaling group, CloudFormation requires more information.</p>
+            <div id="JSON" name="JSON" class="section langfilter">
+                <h4 id="resources-section-structure-examples-single-resource.json">JSON</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "Resources": <span>{</span>
+        "MyBucket": <span>{</span>
+            "Type": "AWS::S3::Bucket",
+            "Properties": <span>{</span>
+                "BucketName": "<code class="replaceable">amzn-s3-demo-bucket</code>"
+            }
+        }
+    }
+}</code></pre>
+            </div>
+            <div id="YAML" name="YAML" class="section langfilter">
+                <h4 id="resources-section-structure-examples-single-resource.yaml">YAML</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Resources:
+  MyBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: <code class="replaceable">amzn-s3-demo-bucket</code></code></pre>
+            </div>
+         
+         
+            <h3 id="resources-section-structure-examples-ref">Referencing other
+                    resources with the <code class="code">Ref</code> function</h3>
+            <p>The following examples show a resource declaration that defines an EC2 instance
+                and a security group. The <code class="code">Ec2Instance</code> resource references the
+                    <code class="code">InstanceSecurityGroup</code> resource as part of its
+                    <code class="code">SecurityGroupIds</code> property using the <code class="code">Ref</code> function. It
+                also includes an existing security group (<code class="code">sg-12a4c434</code>) that's not
+                declared in the template. You use literal strings to refer to existing AWS
+                resources.</p>
+            <div id="JSON" name="JSON" class="section langfilter">
+                <h4 id="resources-section-structure-examples-ref.json">JSON</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "Resources": <span>{</span>
+        "Ec2Instance": <span>{</span>
+            "Type": "AWS::EC2::Instance",
+            "Properties": <span>{</span>
+                "SecurityGroupIds": [
+                    <span>{</span>
+                        "Ref": "InstanceSecurityGroup"
+                    },
+                    "sg-12a4c434"
+                ],
+                "KeyName": "MyKey",
+                "ImageId": "ami-1234567890abcdef0"
+            }
+        },
+        "InstanceSecurityGroup": <span>{</span>
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": <span>{</span>
+                "GroupDescription": "Enable SSH access via port 22",
+                "SecurityGroupIngress": [
+                    <span>{</span>
+                        "IpProtocol": "tcp",
+                        "FromPort": 22,
+                        "ToPort": 22,
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ]
+            }
+        }
+    }
+}</code></pre>
+            </div>
+            <div id="YAML" name="YAML" class="section langfilter">
+                <h4 id="resources-section-structure-examples-ref.yaml">YAML</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Resources:
+  Ec2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+        - sg-12a4c434
+      KeyName: MyKey
+      ImageId: ami-1234567890abcdef0
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0</code></pre>
+            </div>
+         
+
+         
+            <h3 id="resources-section-structure-examples-getatt">Referencing resource
+                    attributes using the <code class="code">Fn::GetAtt</code> function</h3>
+            <p>The following examples show a resource declaration that defines a CloudFront
+                distribution resource and an S3 bucket. The <code class="code">MyDistribution</code> resource
+                specifies the DNS name of the <code class="code">MyBucket</code> resource using
+                    <code class="code">Fn::GetAtt</code> function to get the bucket's <code class="code">DomainName</code>
+                attribute. You'll notice that the <code class="code">Fn::GetAtt</code> function lists its two
+                parameters in an array. For functions that take multiple parameters, you use an
+                array to specify their parameters.</p>
+            <div id="JSON" name="JSON" class="section langfilter">
+                <h4 id="resources-section-structure-examples-getatt.json">JSON</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+  "Resources": <span>{</span>
+    "MyBucket": <span>{</span>
+      "Type": "AWS::S3::Bucket"
+    },
+    "MyDistribution": <span>{</span>
+      "Type": "AWS::CloudFront::Distribution",
+      "Properties": <span>{</span>
+        "DistributionConfig": <span>{</span>
+          "Origins": [
+            <span>{</span>
+              "DomainName": <span>{</span>
+                "Fn::GetAtt": [
+                  "MyBucket",
+                  "DomainName"
+                ]
+              },
+              "Id": "MyS3Origin",
+              "S3OriginConfig": <span>{</span>}
+            }
+          ],
+          "Enabled": "true",
+          "DefaultCacheBehavior": <span>{</span>
+            "TargetOriginId": "MyS3Origin",
+            "ForwardedValues": <span>{</span>
+              "QueryString": "false"
+            },
+            "ViewerProtocolPolicy": "allow-all"
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+            </div>
+            <div id="YAML" name="YAML" class="section langfilter">
+                <h4 id="resources-section-structure-examples-getatt.yaml">YAML</h4>
+                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Resources:
+  MyBucket:
+    Type: 'AWS::S3::Bucket'
+  MyDistribution:
+    Type: 'AWS::CloudFront::Distribution'
+    Properties:
+      DistributionConfig:
+        Origins:
+          - DomainName: !GetAtt 
+              - MyBucket
+              - DomainName
+            Id: MyS3Origin
+            S3OriginConfig: <span>{</span>}
+        Enabled: 'true'
+        DefaultCacheBehavior:
+          TargetOriginId: MyS3Origin
+          ForwardedValues:
+            QueryString: 'false'
+          ViewerProtocolPolicy: allow-all</code></pre>
+            </div>
+         
+    <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./template-anatomy.html">Template sections</div><div id="next" class="next-link" accesskey="n" href="./parameters-section-structure.html">Parameters</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/resources-section-structure.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/resources-section-structure.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

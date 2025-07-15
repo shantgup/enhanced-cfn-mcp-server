@@ -1,0 +1,687 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>AWS::SecurityLake::DataLake - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="aws-resource-securitylake-datalake" /><meta name="default_state" content="aws-resource-securitylake-datalake" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" /><meta name="description" content="Use the AWS CloudFormation AWS::SecurityLake::DataLake resource for SecurityLake." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="Template Reference" /><meta name="abstract" content="Describes the resource types, resource properties, resource attributes, intrinsic functions, and transforms that you can use in CloudFormation templates." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json;toc-AWS_SecurityLake.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" hreflang="x-default" /><meta name="feedback-item" content="Security Lake" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="Template Reference" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="Template Reference" /><meta id="panorama-serviceConsolePage" value="AWS::SecurityLake::DataLake" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>AWS::SecurityLake::DataLake - AWS CloudFormation</title><meta name="rss" content="aws-cloudformation-template-reference-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Security%20Lake&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,CloudFormation template reference" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "Template Reference",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Amazon Security Lake resource type reference",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/AWS_SecurityLake.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "AWS::SecurityLake::DataLake",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/AWS_SecurityLake.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="AWS_SecurityLake.html">Template Reference</a></div><div id="page-toc-src"><a href="#aws-resource-securitylake-datalake-syntax">Syntax</a><a href="#aws-resource-securitylake-datalake-properties">Properties</a><a href="#aws-resource-securitylake-datalake-return-values">Return values</a><a href="#aws-resource-securitylake-datalake--examples">Examples</a></div><div id="page-filters" style="display:none"><filter label="All" id="All"></filter><filter label="JSON" id="JSON"></filter><filter label="YAML" id="YAML"></filter></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><awsui-alert class="awsdocs-page-banner awsui-util-mb-l"><p>This is the new <em>AWS CloudFormation Template Reference Guide</em>.
+         Please update your bookmarks and links. For help getting started with CloudFormation, see the
+            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html">AWS CloudFormation User Guide</a>.</p></awsui-alert><h1 class="topictitle" id="aws-resource-securitylake-datalake">AWS::SecurityLake::DataLake</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>Initializes an Amazon Security Lake instance with the provided (or default) configuration. You
+            can enable Security Lake in AWS Regions with customized settings before enabling
+            log collection in Regions. To specify particular Regions, configure these Regions using the
+           <code class="code">configurations</code> parameter. If you have already enabled Security Lake in a Region
+            when you call this command, the command will update the Region if you provide new
+            configuration parameters. If you have not already enabled Security Lake in the Region when you
+            call this API, it will set up the data lake in the Region with the specified
+            configurations.</p><p>When you enable Security Lake, it starts ingesting security data after the
+            <code class="code">CreateAwsLogSource</code> call. This includes ingesting security data from
+           sources, storing data, and making data accessible to subscribers. Security Lake also enables
+            all the existing settings and resources that it stores or maintains for your AWS account in the current Region, including security log and event data. For
+            more information, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html">Amazon Security Lake User
+                Guide</a>.</p><div class="awsdocs-note awsdocs-important"><div class="awsdocs-note-title"><awsui-icon name="status-warning" variant="error"></awsui-icon><h6>Important</h6></div><div class="awsdocs-note-text"><p>If you use this template to create multiple data lakes in different AWS Regions, 
+               and more than one of your data lakes include an <a href="/AWSCloudFormation/latest/UserGuide/aws-resource-securitylake-awslogsource.html" rel="noopener noreferrer" target="_blank">AWS::SecurityLake::AwsLogSource</a> resource, then you must deploy these data lakes sequentially. 
+               This is required because data lakes operate globally, and <code class="code">AwsLogSource</code> resources must be deployed one at a time.</p></div></div><h2 id="aws-resource-securitylake-datalake-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter"><h3 id="aws-resource-securitylake-datalake-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+  "Type" : "AWS::SecurityLake::DataLake",
+  "Properties" : <span>{</span>
+      "<a href="#cfn-securitylake-datalake-encryptionconfiguration">EncryptionConfiguration</a>" : <code class="replaceable"><a href="./aws-properties-securitylake-datalake-encryptionconfiguration.html">EncryptionConfiguration</a></code>,
+      "<a href="#cfn-securitylake-datalake-lifecycleconfiguration">LifecycleConfiguration</a>" : <code class="replaceable"><a href="./aws-properties-securitylake-datalake-lifecycleconfiguration.html">LifecycleConfiguration</a></code>,
+      "<a href="#cfn-securitylake-datalake-metastoremanagerrolearn">MetaStoreManagerRoleArn</a>" : <code class="replaceable">String</code>,
+      "<a href="#cfn-securitylake-datalake-replicationconfiguration">ReplicationConfiguration</a>" : <code class="replaceable"><a href="./aws-properties-securitylake-datalake-replicationconfiguration.html">ReplicationConfiguration</a></code>,
+      "<a href="#cfn-securitylake-datalake-tags">Tags</a>" : <code class="replaceable">[ <a href="./aws-properties-securitylake-datalake-tag.html">Tag</a>, ... ]</code>
+    }
+}
+</code></pre></div><div id="YAML" name="YAML" class="section langfilter"><h3 id="aws-resource-securitylake-datalake-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Type: AWS::SecurityLake::DataLake
+Properties:
+  <a href="#cfn-securitylake-datalake-encryptionconfiguration">EncryptionConfiguration</a>: <code class="replaceable">
+    <a href="./aws-properties-securitylake-datalake-encryptionconfiguration.html">EncryptionConfiguration</a></code>
+  <a href="#cfn-securitylake-datalake-lifecycleconfiguration">LifecycleConfiguration</a>: <code class="replaceable">
+    <a href="./aws-properties-securitylake-datalake-lifecycleconfiguration.html">LifecycleConfiguration</a></code>
+  <a href="#cfn-securitylake-datalake-metastoremanagerrolearn">MetaStoreManagerRoleArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-securitylake-datalake-replicationconfiguration">ReplicationConfiguration</a>: <code class="replaceable">
+    <a href="./aws-properties-securitylake-datalake-replicationconfiguration.html">ReplicationConfiguration</a></code>
+  <a href="#cfn-securitylake-datalake-tags">Tags</a>: <code class="replaceable">
+    - <a href="./aws-properties-securitylake-datalake-tag.html">Tag</a></code>
+</code></pre></div><h2 id="aws-resource-securitylake-datalake-properties">Properties</h2><div class="variablelist"><dl><dt id="cfn-securitylake-datalake-encryptionconfiguration"><span class="term"><code class="code">EncryptionConfiguration</code></span></dt><dd>
+                    <p>Provides encryption details of the Amazon Security Lake object.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: <a href="./aws-properties-securitylake-datalake-encryptionconfiguration.html">EncryptionConfiguration</a></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-securitylake-datalake-lifecycleconfiguration"><span class="term"><code class="code">LifecycleConfiguration</code></span></dt><dd>
+                    <p>You can customize Security Lake to store data in your preferred AWS Regions for your preferred amount of time. Lifecycle management can help you comply with different compliance requirements. For more details, see <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/lifecycle-management.html">Lifecycle management</a> in the Amazon Security Lake User Guide.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: <a href="./aws-properties-securitylake-datalake-lifecycleconfiguration.html">LifecycleConfiguration</a></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-securitylake-datalake-metastoremanagerrolearn"><span class="term"><code class="code">MetaStoreManagerRoleArn</code></span></dt><dd>
+                    <p>The Amazon Resource Name (ARN) used to create and update the AWS Glue table. This table contains partitions generated by the ingestion and normalization of AWS log sources and custom sources.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: String</p><p><em>Pattern</em>: <code class="code">^arn:.*$</code></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-securitylake-datalake-replicationconfiguration"><span class="term"><code class="code">ReplicationConfiguration</code></span></dt><dd>
+                    <p>Provides replication details of Amazon Security Lake object.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: <a href="./aws-properties-securitylake-datalake-replicationconfiguration.html">ReplicationConfiguration</a></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-securitylake-datalake-tags"><span class="term"><code class="code">Tags</code></span></dt><dd>
+                    <p>An array of objects, one for each tag to associate with the data lake configuration. For each tag, you must specify both a tag key and a tag value. A tag value cannot be null, but it can be an empty string.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: Array of <a href="./aws-properties-securitylake-datalake-tag.html">Tag</a></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd></dl></div><h2 id="aws-resource-securitylake-datalake-return-values">Return values</h2><h3 id="aws-resource-securitylake-datalake-return-values-ref">Ref</h3><p>When you pass the logical ID of this resource to the intrinsic <code class="code">ref</code> function, <code class="code">ref</code> returns the <code class="code">DataLake</code> name.</p><p>For more information about using the <code class="code">Ref</code> function, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html"><code class="code">Ref</code></a>.</p><h3 id="aws-resource-securitylake-datalake-return-values-fn--getatt">Fn::GetAtt</h3><p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following are the available attributes and sample return values.</p>
+<p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html"><code class="code">Fn::GetAtt</code></a>.</p><h4 id="aws-resource-securitylake-datalake-return-values-fn--getatt-fn--getatt"></h4><div class="variablelist"><dl><dt id="Arn-fn::getatt"><span class="term"><code class="code">Arn</code></span></dt><dd>
+                            <p>The Amazon Resource Name (ARN) of the data lake.</p>
+                        </dd><dt id="S3BucketArn-fn::getatt"><span class="term"><code class="code">S3BucketArn</code></span></dt><dd>
+                            <p>The Amazon Resource Name (ARN) of the Amazon S3 bucket.</p>
+                        </dd></dl></div><h2 id="aws-resource-securitylake-datalake--examples">Examples</h2><div class="highlights" id="inline-topiclist"><h6> </h6><ul><li><p><a href="#aws-resource-securitylake-datalake--examples--Enable_in_two_accounts_for_three_log_sources">Enable Security Lake in two accounts for three log sources</a></p></li><li><p><a href="#aws-resource-securitylake-datalake--examples--Enable_in_all_accounts_for_three_log_sources">Enable Security Lake in all accounts for three log sources</a></p></li><li><p><a href="#aws-resource-securitylake-datalake--examples--Deploys_a_contributing_Security_Lake_Region">Deploys a contributing Security Lake Region</a></p></li><li><p><a href="#aws-resource-securitylake-datalake--examples--Configure_with_KMS">Configure with KMS</a></p></li></ul></div>
+            <h3 id="aws-resource-securitylake-datalake--examples--Enable_in_two_accounts_for_three_log_sources">Enable Security Lake in two accounts for three log sources</h3><div id="JSON" name="JSON" class="section langfilter"><h4 id="aws-resource-securitylake-datalake--examples--Enable_in_two_accounts_for_three_log_sources--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+"AWSTemplateFormatVersion": "2010-09-09",
+"Transform": "AWS::Serverless-2016-10-31",
+"Description": "Creates Security Lake with NO KMS and two sources, this can be used as a rollup region.",
+"Parameters": <span>{</span>
+    "RoleName": <span>{</span>
+        "Type": "String",
+        "Default": "Provide a name if Security Lake has not been enabled from console",
+        "Description": "Prefix for role name with managed policy"
+    },
+    "Account1": <span>{</span>
+        "Type": "String",
+        "Default": "Enter an account for Security Lake to enable log sources",
+        "Description": "Account number to enable logs"
+    },
+    "Account2": <span>{</span>
+        "Type": "String",
+        "Default": "Enter another account for Security Lake to enable log sources",
+        "Description": "Account number n to enable logs"
+    }
+},
+"Resources": <span>{</span>
+    "AmazonSecurityLakeMetaStoreManagerRole": <span>{</span>
+        "Type": "AWS::IAM::Role",
+        "Properties": <span>{</span>
+            "RoleName": <span>{</span>
+                "Fn::Sub": "$<span>{</span>RoleName}-SecurityLakeMetasStoreManager"
+            },
+            "AssumeRolePolicyDocument": <span>{</span>
+                "Version": "2012-10-17",
+                "Statement": [
+                    <span>{</span>
+                        "Effect": "Allow",
+                        "Principal": <span>{</span>
+                            "Service": "lambda.amazonaws.com"
+                        },
+                        "Action": "sts:AssumeRole"
+                    }
+                ]
+            },
+            "ManagedPolicyArns": [
+                "arn:aws:iam::aws:policy/service-role/AmazonSecurityLakeMetastoreManager"
+            ]
+        }
+    },
+    "SecurityLakeEnablement": <span>{</span>
+        "Type": "AWS::SecurityLake::DataLake",
+        "Properties": <span>{</span>
+            "MetaStoreManagerRoleArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "AmazonSecurityLakeMetaStoreManagerRole",
+                    "Arn"
+                ]
+            }
+        }
+    },
+    "SecurityLakeSourcesRoute53": <span>{</span>
+        "Type": "AWS::SecurityLake::AwsLogSource",
+        "Properties": <span>{</span>
+            "Accounts": [
+                <span>{</span>
+                    "Ref": "Account1"
+                },
+                <span>{</span>
+                    "Ref": "Account2"
+                }
+            ],
+            "DataLakeArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "SecurityLakeEnablement",
+                    "Arn"
+                ]
+            },
+            "SourceName": "ROUTE53",
+            "SourceVersion": "2.0"
+        },
+        "DependsOn": "SecurityLakeEnablement"
+    },
+    "SecurityLakeSourcesSecurityHub": <span>{</span>
+        "Type": "AWS::SecurityLake::AwsLogSource",
+        "Properties": <span>{</span>
+            "Accounts": [
+                <span>{</span>
+                    "Ref": "Account1"
+                },
+                <span>{</span>
+                    "Ref": "Account2"
+                }
+            ],
+            "DataLakeArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "SecurityLakeEnablement",
+                    "Arn"
+                ]
+            },
+            "SourceName": "SH_FINDINGS",
+            "SourceVersion": "2.0"
+        },
+        "DependsOn": "SecurityLakeSourcesRoute53"
+    },
+    "SecurityLakeSourcesS3": <span>{</span>
+        "Type": "AWS::SecurityLake::AwsLogSource",
+        "Properties": <span>{</span>
+            "Accounts": [
+                <span>{</span>
+                    "Ref": "Account1"
+                },
+                <span>{</span>
+                    "Ref": "Account2"
+                }
+            ],
+            "DataLakeArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "SecurityLakeEnablement",
+                    "Arn"
+                ]
+            },
+            "SourceName": "S3_DATA",
+            "SourceVersion": "2.0"
+        },
+        "DependsOn": "SecurityLakeSourcesSecurityHub"
+    }
+}
+}
+               
+           </code></pre></div><div id="YAML" name="YAML" class="section langfilter"><h4 id="aws-resource-securitylake-datalake--examples--Enable_in_two_accounts_for_three_log_sources--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description:  Creates Security Lake with NO KMS and two sources, this can be used as a rollup region.
+
+Parameters:
+  RoleName:
+    Type: String
+    Default: Provide a name if Security Lake has not been enabled from console
+    Description: Prefix for role name with managed policy
+  Account1:
+    Type: String
+    Default: Enter an account for Security Lake to enable log sources
+    Description: Account number to enable logs
+  Account2:
+    Type: String
+    Default: Enter another account for Security Lake to enable log sources
+    Description: Account number n to enable logs
+
+Resources:
+  AmazonSecurityLakeMetaStoreManagerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: 
+        Fn::Sub: $<span>{</span>RoleName}-SecurityLakeMetasStoreManager
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: lambda.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/service-role/AmazonSecurityLakeMetastoreManager
+
+  SecurityLakeEnablement:
+    Type: AWS::SecurityLake::DataLake
+    Properties:
+      MetaStoreManagerRoleArn:
+        Fn::GetAtt:
+        - AmazonSecurityLakeMetaStoreManagerRole
+        - Arn
+
+  SecurityLakeSourcesRoute53:
+    Type: AWS::SecurityLake::AwsLogSource
+    Properties:
+      Accounts: 
+      - Ref: Account1
+      - Ref: Account2
+      DataLakeArn:
+        Fn::GetAtt:
+        - SecurityLakeEnablement
+        - Arn
+      SourceName: ROUTE53
+      SourceVersion: "2.0"
+    DependsOn: SecurityLakeEnablement
+
+  SecurityLakeSourcesSecurityHub:
+    Type: AWS::SecurityLake::AwsLogSource
+    Properties:
+      Accounts: 
+      - Ref: Account1
+      - Ref: Account2
+      DataLakeArn:
+        Fn::GetAtt:
+        - SecurityLakeEnablement
+        - Arn
+      SourceName: SH_FINDINGS
+      SourceVersion: "2.0"
+    DependsOn: SecurityLakeSourcesRoute53
+    
+  SecurityLakeSourcesS3:
+    Type: AWS::SecurityLake::AwsLogSource
+    Properties:
+      Accounts: 
+      - Ref: Account1
+      - Ref: Account2
+      DataLakeArn:
+        Fn::GetAtt:
+        - SecurityLakeEnablement
+        - Arn
+      SourceName: S3_DATA
+      SourceVersion: "2.0"
+    DependsOn: SecurityLakeSourcesSecurityHub
+           </code></pre></div>
+            <h3 id="aws-resource-securitylake-datalake--examples--Enable_in_all_accounts_for_three_log_sources">Enable Security Lake in all accounts for three log sources</h3><div id="JSON" name="JSON" class="section langfilter"><h4 id="aws-resource-securitylake-datalake--examples--Enable_in_all_accounts_for_three_log_sources--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+"AWSTemplateFormatVersion": "2010-09-09",
+"Transform": "AWS::Serverless-2016-10-31",
+"Description": "Creates Security Lake with NO KMS and two sources. This can be used as a centralized Region.",
+"Parameters": <span>{</span>
+    "RoleName": <span>{</span>
+        "Type": "String",
+        "Default": "Provide a name if Security Lake has not been enabled from console",
+        "Description": "Prefix for role name with managed policy"
+    },   
+},
+"Resources": <span>{</span>
+    "AmazonSecurityLakeMetaStoreManagerRole": <span>{</span>
+        "Type": "AWS::IAM::Role",
+        "Properties": <span>{</span>
+            "RoleName": <span>{</span>
+                "Fn::Sub": "$<span>{</span>RoleName}-SecurityLakeMetasStoreManager"
+            },
+            "AssumeRolePolicyDocument": <span>{</span>
+                "Version": "2012-10-17",
+                "Statement": [
+                    <span>{</span>
+                        "Effect": "Allow",
+                        "Principal": <span>{</span>
+                            "Service": "lambda.amazonaws.com"
+                        },
+                        "Action": "sts:AssumeRole"
+                    }
+                ]
+            },
+            "ManagedPolicyArns": [
+                "arn:aws:iam::aws:policy/service-role/AmazonSecurityLakeMetastoreManager"
+            ]
+        }
+    },
+    "SecurityLakeEnablement": <span>{</span>
+        "Type": "AWS::SecurityLake::DataLake",
+        "Properties": <span>{</span>
+            "MetaStoreManagerRoleArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "AmazonSecurityLakeMetaStoreManagerRole",
+                    "Arn"
+                ]
+            }
+        }
+    },
+    "SecurityLakeSourcesRoute53": <span>{</span>
+        "Type": "AWS::SecurityLake::AwsLogSource",
+        "Properties": <span>{</span>
+            "DataLakeArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "SecurityLakeEnablement",
+                    "Arn"
+                ]
+            },
+            "SourceName": "ROUTE53",
+            "SourceVersion": "2.0"
+        },
+        "DependsOn": "SecurityLakeEnablement"
+    },
+    "SecurityLakeSourcesSecurityHub": <span>{</span>
+        "Type": "AWS::SecurityLake::AwsLogSource",
+        "Properties": <span>{</span>
+            "DataLakeArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "SecurityLakeEnablement",
+                    "Arn"
+                ]
+            },
+            "SourceName": "SH_FINDINGS",
+            "SourceVersion": "2.0"
+        },
+        "DependsOn": "SecurityLakeSourcesRoute53"
+    },
+    "SecurityLakeSourcesS3": <span>{</span>
+        "Type": "AWS::SecurityLake::AwsLogSource",
+        "Properties": <span>{</span>
+            "DataLakeArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "SecurityLakeEnablement",
+                    "Arn"
+                ]
+            },
+            "SourceName": "S3_DATA",
+            "SourceVersion": "2.0"
+        },
+        "DependsOn": "SecurityLakeSourcesSecurityHub"
+    }
+}
+}
+               
+           </code></pre></div><div id="YAML" name="YAML" class="section langfilter"><h4 id="aws-resource-securitylake-datalake--examples--Enable_in_all_accounts_for_three_log_sources--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description:  Creates Security Lake with NO KMS on three sources and all accounts. This can be used as a centralized Region.
+
+Parameters:
+  RoleName:
+    Type: String
+    Default: Provide a name if Security Lake has not been enabled from console
+    Description: Prefix for role name with managed policy
+
+Resources:
+  AmazonSecurityLakeMetaStoreManagerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: 
+        Fn::Sub: $<span>{</span>RoleName}-SecurityLakeMetasStoreManager
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: lambda.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/service-role/AmazonSecurityLakeMetastoreManager
+
+  SecurityLakeEnablement:
+    Type: AWS::SecurityLake::DataLake
+    Properties:
+      MetaStoreManagerRoleArn:
+        Fn::GetAtt:
+        - AmazonSecurityLakeMetaStoreManagerRole
+        - Arn
+
+  SecurityLakeSourcesRoute53:
+    Type: AWS::SecurityLake::AwsLogSource
+    Properties:
+      DataLakeArn:
+        Fn::GetAtt:
+        - SecurityLakeEnablement
+        - Arn
+      SourceName: ROUTE53
+      SourceVersion: "2.0"
+    DependsOn: SecurityLakeEnablement
+
+  SecurityLakeSourcesSecurityHub:
+    Type: AWS::SecurityLake::AwsLogSource
+    Properties:
+      DataLakeArn:
+        Fn::GetAtt:
+        - SecurityLakeEnablement
+        - Arn
+      SourceName: SH_FINDINGS
+      SourceVersion: "2.0"
+    DependsOn: SecurityLakeSourcesRoute53
+    
+  SecurityLakeSourcesS3:
+    Type: AWS::SecurityLake::AwsLogSource
+    Properties:
+      DataLakeArn:
+        Fn::GetAtt:
+        - SecurityLakeEnablement
+        - Arn
+      SourceName: S3_DATA
+      SourceVersion: "2.0"
+    DependsOn: SecurityLakeSourcesSecurityHub
+           </code></pre></div>
+            <h3 id="aws-resource-securitylake-datalake--examples--Deploys_a_contributing_Security_Lake_Region">Deploys a contributing Security Lake Region</h3><p> Enables Security lake in two accounts for three logs sources as a contributing Region.</p><div id="JSON" name="JSON" class="section langfilter"><h4 id="aws-resource-securitylake-datalake--examples--Deploys_a_contributing_Security_Lake_Region--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+"AWSTemplateFormatVersion": "2010-09-09",
+"Transform": "AWS::Serverless-2016-10-31",
+"Description": "Creates Security Lake with NO KMS and two sources, replicates to one region.",
+"Parameters": <span>{</span>
+    "Account1": <span>{</span>
+        "Type": "String",
+        "Default": "Enter an account for Security Lake to enable log sources",
+        "Description": "Account number to enable logs"
+    },
+    "Account2": <span>{</span>
+        "Type": "String",
+        "Default": "Enter another account for Security Lake to enable log sources",
+        "Description": "Account number n to enable logs"
+    },
+    "ReplicationRegionDestination": <span>{</span>
+        "Type": "String",
+        "Default": "Enter destination region",
+        "Description": "Centralized destination region"
+    },
+    "MetaStoreRoleArn": <span>{</span>
+        "Type": "String",
+        "Default": "Security Lake Metastore Manager Role",
+        "Description": "arn for AWS Security Lake Metastore Manager Role"
+    },
+    "ReplicationRoleArn": <span>{</span>
+        "Type": "String",
+        "Default": "Replication Role ARN",
+        "Description": "Replication role arn that supports rollup to destination region"
+    }
+},
+"Resources": <span>{</span>
+    "SecurityLakeEnablement": <span>{</span>
+        "Type": "AWS::SecurityLake::DataLake",
+        "Properties": <span>{</span>
+            "MetaStoreManagerRoleArn": <span>{</span>
+                "Ref": "MetaStoreRoleArn"
+            },
+            "ReplicationConfiguration": <span>{</span>
+                "Regions": [
+                    <span>{</span>
+                        "Ref": "ReplicationRegionDestination"
+                    }
+                ],
+                "RoleArn": "arn:aws:iam::123456789123:role/SecurityLake-Replication-Role"
+            }
+        }
+    },
+    "SecurityLakeSourcesRoute53": <span>{</span>
+        "Type": "AWS::SecurityLake::AwsLogSource",
+        "Properties": <span>{</span>
+            "Accounts": [
+                <span>{</span>
+                    "Ref": "Account1"
+                },
+                <span>{</span>
+                    "Ref": "Account2"
+                }
+            ],
+            "DataLakeArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "SecurityLakeEnablement",
+                    "Arn"
+                ]
+            },
+            "SourceName": "ROUTE53",
+            "SourceVersion": "2.0"
+        },
+        "DependsOn": "SecurityLakeEnablement"
+    },
+    "SecurityLakeSourcesSecurityHub": <span>{</span>
+        "Type": "AWS::SecurityLake::AwsLogSource",
+        "Properties": <span>{</span>
+            "Accounts": [
+                <span>{</span>
+                    "Ref": "Account1"
+                },
+                <span>{</span>
+                    "Ref": "Account2"
+                }
+            ],
+            "DataLakeArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "SecurityLakeEnablement",
+                    "Arn"
+                ]
+            },
+            "SourceName": "SH_FINDINGS",
+            "SourceVersion": "2.0"
+        },
+        "DependsOn": "SecurityLakeSourcesRoute53"
+    },
+    "SecurityLakeSourcesS3": <span>{</span>
+        "Type": "AWS::SecurityLake::AwsLogSource",
+        "Properties": <span>{</span>
+            "Accounts": [
+                <span>{</span>
+                    "Ref": "Account1"
+                },
+                <span>{</span>
+                    "Ref": "Account2"
+                }
+            ],
+            "DataLakeArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "SecurityLakeEnablement",
+                    "Arn"
+                ]
+            },
+            "SourceName": "S3_DATA",
+            "SourceVersion": "2.0"
+        },
+        "DependsOn": "SecurityLakeSourcesSecurityHub"
+    }
+}
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter"><h4 id="aws-resource-securitylake-datalake--examples--Deploys_a_contributing_Security_Lake_Region--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Creates Security Lake with NO KMS and two sources, replicates to one region.
+
+Parameters:
+  Account1:
+    Type: String
+    Default: Enter an account for Security Lake to enable log sources
+    Description: Account number to enable logs
+  Account2:
+    Type: String
+    Default: Enter another account for Security Lake to enable log sources
+    Description: Account number n to enable logs
+  ReplicationRegionDestination:
+    Type: String
+    Default: Enter destination region
+    Description: Centralized destination region
+  MetaStoreRoleArn:   
+    Type: String
+    Default: Security Lake Metastore Manager Role
+    Description: arn for AWS Security Lake Metastore Manager Role
+  ReplicationRoleArn:
+    Type: String
+    Default: Replication Role ARN
+    Description: Replication role arn that supports rollup to destination region
+
+Resources:
+  SecurityLakeEnablement:
+    Type: AWS::SecurityLake::DataLake
+    Properties:
+      MetaStoreManagerRoleArn: 
+        Ref: MetaStoreRoleArn
+      ReplicationConfiguration:
+        Regions:
+        - Ref: ReplicationRegionDestination
+        RoleArn: arn:aws:iam::123456789123:role/SecurityLake-Replication-Role
+
+  SecurityLakeSourcesRoute53:
+    Type: AWS::SecurityLake::AwsLogSource
+    Properties:
+      Accounts: 
+      - Ref: Account1
+      - Ref: Account2
+      DataLakeArn:
+        Fn::GetAtt:
+        - SecurityLakeEnablement
+        - Arn
+      SourceName: ROUTE53
+      SourceVersion: "2.0"
+    DependsOn: SecurityLakeEnablement
+
+  SecurityLakeSourcesSecurityHub:
+    Type: AWS::SecurityLake::AwsLogSource
+    Properties:
+      Accounts: 
+      - Ref: Account1
+      - Ref: Account2
+      DataLakeArn:
+        Fn::GetAtt:
+        - SecurityLakeEnablement
+        - Arn
+      SourceName: SH_FINDINGS
+      SourceVersion: "2.0"
+    DependsOn: SecurityLakeSourcesRoute53
+    
+  SecurityLakeSourcesS3:
+    Type: AWS::SecurityLake::AwsLogSource
+    Properties:
+      Accounts: 
+      - Ref: Account1
+      - Ref: Account2
+      DataLakeArn:
+        Fn::GetAtt:
+        - SecurityLakeEnablement
+        - Arn
+      SourceName: S3_DATA
+      SourceVersion: "2.0"
+    DependsOn: SecurityLakeSourcesSecurityHub
+           </code></pre></div>
+            <h3 id="aws-resource-securitylake-datalake--examples--Configure_with_KMS">Configure with KMS</h3><p>For each Region add the encryption configuration parameter and assign respective KMS ARN for your Region.</p><div id="JSON" name="JSON" class="section langfilter"><h4 id="aws-resource-securitylake-datalake--examples--Configure_with_KMS--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "SecurityLakeEnablement": <span>{</span>
+        "Type": "AWS::SecurityLake::DataLake",
+        "Properties": <span>{</span>
+            "MetaStoreManagerRoleArn": <span>{</span>
+                "Fn::GetAtt": [
+                    "AmazonSecurityLakeMetaStoreManagerRole",
+                    "Arn"
+                ]
+            },
+            "EncryptionConfiguration": <span>{</span>
+                "KmsKeyId": <span>{</span>
+                    "Ref": "KmsArn"
+                }
+            }
+        }
+    }
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter"><h4 id="aws-resource-securitylake-datalake--examples--Configure_with_KMS--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">
+SecurityLakeEnablement:
+    Type: AWS::SecurityLake::DataLake
+    Properties:
+      MetaStoreManagerRoleArn:
+        Fn::GetAtt:
+        - AmazonSecurityLakeMetaStoreManagerRole
+        - Arn
+      EncryptionConfiguration:
+        KmsKeyId: 
+          Ref: KmsArn
+           </code></pre></div>
+        <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./aws-resource-securitylake-awslogsource.html">AWS::SecurityLake::AwsLogSource</div><div id="next" class="next-link" accesskey="n" href="./aws-properties-securitylake-datalake-encryptionconfiguration.html">EncryptionConfiguration</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Security Lake&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Security Lake&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-securitylake-datalake.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

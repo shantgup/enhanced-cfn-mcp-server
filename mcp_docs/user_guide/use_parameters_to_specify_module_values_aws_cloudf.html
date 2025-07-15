@@ -1,0 +1,152 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/module-using-params.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Use parameters to specify module values - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="module-using-params" /><meta name="default_state" content="module-using-params" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/module-using-params.html" /><meta name="description" content="Discover how to use parameters to specify module values in your CloudFormation templates." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/module-using-params.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/module-using-params.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="Use parameters to specify module values" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Use parameters to specify module values - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#module-using-params" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/module-using-params.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/module-using-params.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/module-using-params.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set,CloudFormation templates,define your infrastructure" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Working with CloudFormation templates",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "Create reusable resource configurations that can be included across templates with CloudFormation modules",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/modules.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 6,
+        "name" : "Use parameters to specify module values",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/modules.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#module-using-params" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#module-using-params-example-1">Using template parameters to specify module
+          parameter values</a><a href="#module-using-params-example-2">Specifying properties on resources in a
+          child module from the parent module</a><a href="#modules-using-parameters-constraints">Specifying parameter
+          constraints</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="module-using-params">Use parameters to specify module values</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>In CloudFormation, you can use template parameters to customize your stacks by providing input
+      values during stack creation or update. These parameters allow you to change certain aspects
+      of the stack based on your needs. For more information about defining template parameters, see
+        <a href="./parameters-section-structure.html">CloudFormation template Parameters
+      syntax</a>.</p><p>Similarly, modules can also have parameters. These module parameters allow you to input
+      custom values to the module from the template (or another module) that's using it. The module
+      can then use these custom values to set property values for the resources it contains.</p><p>You can also define template parameters that set module properties, so that you can input
+      values that get passed to the module at the time of the stack operation. </p><p>If a module contains a nested module that has its own module parameters, you can
+      either:</p><div class="itemizedlist">
+       
+       
+    <ul class="itemizedlist"><li class="listitem">
+        <p>Specify the values for the nested module's parameters directly in the parent
+          module.</p>
+      </li><li class="listitem">
+        <p>Define corresponding module parameters in the parent module that enable the nested
+          module's parameters to be set by the template (or module) in which the parent module is
+          contained.</p>
+      </li></ul></div>
+      <h2 id="module-using-params-example-1">Using template parameters to specify module
+          parameter values</h2>
+      <p>The following example shows how to define template parameters that pass values to a
+        module.</p>
+      <p>This template containing <code class="code">My::S3::SampleBucket::MODULE</code> defines a template
+        parameter, <code class="code">BucketName</code>, that enables the user to specify an S3 bucket name
+        during the stack operation.</p>
+      <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml "># Template containing My::S3::SampleBucket::MODULE
+Parameters:
+  BucketName:
+    Description: Name for your sample bucket
+    Type: String
+Resources:
+  MyBucket:
+    Type: 'My::S3::SampleBucket::MODULE'
+    Properties:
+      BucketName: !Ref BucketName</code></pre>
+     
+      <h2 id="module-using-params-example-2">Specifying properties on resources in a
+          child module from the parent module</h2>
+      <p>The following example illustrates how to specify parameter values in a module that's
+        nested within another module.</p>
+      <p>This first module, <code class="code">My::S3::SampleBucketPrivate::MODULE</code>, will be the child
+        module. It defines two parameters: <code class="code">BucketName</code> and <code class="code">AccessControl</code>.
+        The values specified for these parameters are used to specify the <code class="code">BucketName</code>
+        and <code class="code">AccessControl</code> properties of the <code class="code">AWS::S3::Bucket</code> resource the
+        module contains. Below is the template fragment for
+          <code class="code">My::S3::SampleBucketPrivate::MODULE</code>.</p>
+      <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml "># My::S3::SampleBucketPrivate::MODULE
+AWSTemplateFormatVersion: 2010-09-09
+Description: A sample S3 Bucket with Versioning and DeletionPolicy.
+Parameters:
+  BucketName:
+    Description: Name for the bucket
+    Type: String
+  AccessControl:
+    Description: AccessControl for the bucket
+    Type: String
+Resources:
+  S3Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Ref BucketName
+      AccessControl: !Ref AccessControl
+      DeletionPolicy: Retain
+      VersioningConfiguration:
+        Status: Enabled</code></pre>
+      <p>Next, the previous module is nested within a parent module,
+          <code class="code">My::S3::SampleBucket::MODULE</code>. The parent module,
+          <code class="code">My::S3::SampleBucket::MODULE</code>, sets the child module parameters in the
+        following ways:</p>
+      <div class="itemizedlist">
+         
+         
+      <ul class="itemizedlist"><li class="listitem">
+          <p>It sets the <code class="code">AccessControl</code> parameter of
+              <code class="code">My::S3::SampleBucketPrivate::MODULE</code> to <code class="code">Private</code>.</p>
+        </li><li class="listitem">
+          <p>For <code class="code">BucketName</code>, it defines a module parameter, which will enable the
+            bucket name to be specified in the template (or module) that contains
+              <code class="code">My::S3::SampleBucket::MODULE</code>.</p>
+        </li></ul></div>
+      <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml "># My::S3::SampleBucket::MODULE
+AWSTemplateFormatVersion: 2010-09-09
+Description: A sample S3 Bucket. With Private AccessControl.
+Parameters:
+  BucketName:
+    Description: Name for your sample bucket
+    Type: String
+Resources:
+  MyBucket:
+    Type: 'My::S3::SampleBucketPrivate::MODULE'
+    Properties:
+      BucketName: !Ref BucketName
+      AccessControl: Private</code></pre>
+     
+      <h2 id="modules-using-parameters-constraints">Specifying constraints for module
+          parameters</h2>
+      <p>Module parameters don't support constraint enforcement. To perform constraint checking
+        on a module parameter, create a template parameter with the desired constraints. Then,
+        reference that template parameter in your module parameter. For more information about
+        defining template parameters, see <a href="./parameters-section-structure.html">CloudFormation template Parameters
+      syntax</a>.</p>
+    <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./modules-using.html">Use modules in a template</div><div id="next" class="next-link" accesskey="n" href="./module-ref-resources.html">Reference module resources</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/module-using-params.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/module-using-params.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

@@ -1,0 +1,252 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Create a CloudFormation template from resources scanned with IaC generator - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="iac-generator-create-template-from-scanned-resources" /><meta name="default_state" content="iac-generator-create-template-from-scanned-resources" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" /><meta name="description" content="Learn how to use IaC generator to create a template from scanned resources." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="Create a CloudFormation template from resources scanned with IaC generator" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Create a CloudFormation template from resources scanned with IaC generator - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#iac-generator-create-template-from-scanned-resources" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set,CloudFormation templates,define your infrastructure,IaC generator,AWS CloudFormation IaC generator,create a template from scanned resources" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Working with CloudFormation templates",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "Generate templates from existing resources with IaC generator",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 6,
+        "name" : "Create a CloudFormation template from resources scanned with IaC generator",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#iac-generator-create-template-from-scanned-resources" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#create-template-from-scanned-resources-console">Create a template
+                    from scanned resources (console)</a><a href="#create-template-from-scanned-resources-cli">Create a template from
+                    scanned resources (AWS CLI)</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="iac-generator-create-template-from-scanned-resources">Create a
+                CloudFormation template from resources scanned with IaC generator</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>This topic explains how to create a template from resources that were scanned using
+            the IaC generator feature.
+            </p>
+            <h2 id="create-template-from-scanned-resources-console">Create a template
+                    from scanned resources (console)</h2>
+
+            <div class="procedure"><h6>To create a stack template from scanned resources</h6><ol><li>
+                    <p>Open the <a href="https://console.aws.amazon.com/cloudformation/home?#iac-generator" rel="noopener noreferrer" target="_blank"><span>IaC
+                            generator page</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> of the CloudFormation console.</p>
+                </li><li>
+                    <p>On the navigation bar at the top of the screen, choose the AWS Region
+                        that contains the scanned resources.</p>
+                </li><li>
+                    <p>From the <b>Templates</b> section, choose <b>Create
+                            template</b>. </p>
+                </li><li>
+                    <p>Choose <b>Start from a new template</b>.</p>
+                    <ol><li>
+                            <p>For <b>Template name</b>, provide a name for your
+                                template.</p>
+                        </li><li>
+                            <p>(Optional) Configure your <b>Deletion policy</b> and
+                                    <b>Update replace policy</b>.</p>
+                        </li><li>
+                            <p>Choose <b>Next</b> to add scanned resources to the
+                                template.</p>
+                        </li></ol>
+                </li><li>
+                    <p>For <b>Add scanned resources</b>, browse the list of scanned
+                        resources and select the resources you want to add to your template. You can
+                        filter the resources by resource identifier, resource type, or tags. The
+                        filters are mutually inclusive.</p>
+                </li><li>
+                    <p>When you've added all needed resources to your template, choose
+                            <b>Next</b> to exit the <b>Add scanned
+                            resources</b> page and proceed to the <b>Add related
+                            resources</b> page.</p>
+                </li><li>
+                    <p>Review a recommended list of related resources. Related resources, such as
+                        Amazon EC2 instances and security groups, are interdependent and typically belong
+                        to the same workload. Select the related resources that you want to include
+                        in the generated template.</p>
+                    <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>We suggest that you add all related resources to this template.</p></div></div>
+                </li><li>
+                    <p>Review the template details, scanned resources, and related resources.
+                    </p>
+                </li><li>
+                    <p>Choose <b>Create template</b> to exit the <b>Review
+                            and create</b> page and create the template.</p>
+                </li></ol></div>
+         
+            <h2 id="create-template-from-scanned-resources-cli">Create a template from
+                    scanned resources (AWS CLI)</h2>
+
+            <div class="procedure"><h6>To create a stack template from scanned resources</h6><ol><li>
+                    <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/list-resource-scan-resources.html">list-resource-scan-resources</a> command to list the resources
+                        found during the scan, optionally specifying the
+                            <code class="code">--resource-identifier</code> option to limit the output. For the
+                            <code class="code">--resource-scan-id</code> option, replace the sample ARN with the
+                        actual ARN.</p>
+                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation list-resource-scan-resources \
+  --resource-scan-id <code class="replaceable">arn:aws:cloudformation:us-east-1:123456789012:resourceScan/0a699f15-489c-43ca-a3ef-3e6ecfa5da60</code> \
+  --resource-identifier <code class="replaceable">MyApp</code></code></pre>
+                    <p>The following is an example response, where <code class="code">ManagedByStack</code>
+                        indicates whether CloudFormation manages the resource already. Copy the output.
+                        You need it for the next step.</p>
+                    <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "Resources": [
+        <span>{</span>
+            "ResourceType": "AWS::EKS::Cluster",
+            "ResourceIdentifier": <span>{</span>
+                "ClusterName": "MyAppClusterName"
+            },
+            <b>"ManagedByStack": false</b>
+        },
+        <span>{</span>
+            "ResourceType": "AWS::AutoScaling::AutoScalingGroup",
+            "ResourceIdentifier": <span>{</span>
+                "AutoScalingGroupName": "MyAppASGName"
+            },
+            <b>"ManagedByStack": false</b>
+        }
+    ]
+}</code></pre>
+                    <p>For a description of the fields in the output, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ScannedResource.html">ScannedResource</a> in the
+                        <em>AWS CloudFormation API Reference</em>.</p>
+                </li><li>
+                    <p>Use the <code class="code">cat</code> command to store the resource types and
+                        identifiers in a JSON file named <code class="code">resources.json</code> in your home
+                        directory. The following is example JSON based on the example output in the
+                        previous step.</p>
+                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json ">$ cat &gt; resources.json
+[
+    <span>{</span>
+        "ResourceType": "AWS::EKS::Cluster",
+        "ResourceIdentifier": <span>{</span>
+            "ClusterName": "MyAppClusterName"
+        }
+    },
+    <span>{</span>
+        "ResourceType": "AWS::AutoScaling::AutoScalingGroup",
+        "ResourceIdentifier": <span>{</span>
+            "AutoScalingGroupName": "MyAppASGName"
+        }
+    }
+]</code></pre>
+                </li><li>
+                    <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/list-resource-scan-related-resources.html">list-resource-scan-related-resources</a> command, along with the
+                            <code class="code">resources.json</code> file you created, to list the resources
+                        related to your scanned resources.</p>
+                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation list-resource-scan-related-resources \
+  --resource-scan-id <code class="replaceable">arn:aws:cloudformation:us-east-1:123456789012:resourceScan/0a699f15-489c-43ca-a3ef-3e6ecfa5da60</code> \
+  --resources <code class="replaceable">file://resources.json</code></code></pre>
+                    <p>The following is an example response, where <code class="code">ManagedByStack</code>
+                        indicates whether CloudFormation manages the resource already. Add these
+                        resources to the JSON file you created in the previous step. You'll need it
+                        to create your template.</p>
+                    <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "RelatedResources": [
+        <span>{</span>
+            "ResourceType": "AWS::EKS::Nodegroup",
+            "ResourceIdentifier": <span>{</span>
+                "NodegroupName": "MyAppNodegroupName"
+            },
+            <b>"ManagedByStack": false</b>
+        },
+        <span>{</span>
+            "ResourceType": "AWS::IAM::Role",
+            "ResourceIdentifier": <span>{</span>
+                "RoleId": "arn:aws::iam::<code class="replaceable">account-id</code>:role/MyAppIAMRole"
+            },
+            <b>"ManagedByStack": false</b>
+        }
+    ]
+}</code></pre>
+                    <p>For a description of the fields in the output, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ScannedResource.html">ScannedResource</a> in the
+                        <em>AWS CloudFormation API Reference</em>.</p>
+                    <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>The input list of resources can't exceed a length of 100. To list
+                            related resources for more than 100 resources, run the
+                                <b>list-resource-scan-related-resources</b> command in
+                            batches of 100 and consolidate the results.</p><p>Be aware that the output may contain duplicated resources in the
+                            list.</p></div></div>
+                </li><li>
+                    <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-generated-template.html">create-generated-template</a> command to create a new stack
+                        template, as follows, with these modifications:</p>
+                    <div class="itemizedlist">
+                         
+                         
+                    <ul class="itemizedlist"><li class="listitem">
+                            <p>Replace
+                                    <code class="code"><code class="replaceable">us-east-1</code></code>
+                                with the AWS Region that contains the scanned resources.</p>
+                        </li><li class="listitem">
+                            <p>Replace <code class="code"><code class="replaceable">MyTemplate</code></code> with
+                                the name of the template to create.</p>
+                        </li></ul></div>
+                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation create-generated-template --region <code class="replaceable">us-east-1</code> \
+ --generated-template-name <code class="replaceable">MyTemplate</code> \
+  --resources <code class="replaceable">file://resources.json</code></code></pre>
+                    <p>The following is an example <code class="code">resources.json</code> file.</p>
+                    <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli (json)--><code class="json ">[
+    <span>{</span>
+        "ResourceType": "AWS::EKS::Cluster",
+        "LogicalResourceId":"MyCluster",
+        "ResourceIdentifier": <span>{</span>
+            "ClusterName": "MyAppClusterName"
+        }
+    },
+    <span>{</span>
+        "ResourceType": "AWS::AutoScaling::AutoScalingGroup",
+        "LogicalResourceId":"MyASG",
+        "ResourceIdentifier": <span>{</span>
+            "AutoScalingGroupName": "MyAppASGName"
+        }
+    },
+    <span>{</span>
+        "ResourceType": "AWS::EKS::Nodegroup",
+        "LogicalResourceId":"MyNodegroup",
+        "ResourceIdentifier": <span>{</span>
+            "NodegroupName": "MyAppNodegroupName"
+        }
+    },
+    <span>{</span>
+        "ResourceType": "AWS::IAM::Role",
+        "LogicalResourceId":"MyRole",
+        "ResourceIdentifier": <span>{</span>
+            "RoleId": "arn:aws::iam::<code class="replaceable">account-id</code>:role/MyAppIAMRole"
+        }
+    }
+]</code></pre>
+                    <p>If successful, this command returns the following.</p>
+                    <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+  "Arn":
+    "arn:aws:cloudformation:<code class="replaceable">region</code>:<code class="replaceable">account-id</code>:generatedtemplate/<code class="replaceable">7fc8512c-d8cb-4e02-b266-d39c48344e48</code>",
+  "Name": "<code class="replaceable">MyTemplate</code>"
+}</code></pre>
+                </li></ol></div>
+
+
+            
+        <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./generate-IaC-view-scan-summary.html">View the scan
+                summary</div><div id="next" class="next-link" accesskey="n" href="./iac-generator-create-stack-from-scanned-resources.html">Create a
+                stack from scanned resources</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-create-template-from-scanned-resources.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

@@ -1,0 +1,45 @@
+{
+  "version": "1",
+  "schemas": {
+    "AWS::Fake::V4X1U": {
+      "last_updated": "2025-06-16T04:14:13.590329",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_Fake_V4X1U.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::Fake::SRPTP": {
+      "last_updated": "2025-06-16T04:14:13.593103",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_Fake_SRPTP.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::S3::Bucket": {
+      "last_updated": "2025-07-14T16:01:00.785466",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_S3_Bucket.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::Lambda::Function": {
+      "last_updated": "2025-07-14T21:32:30.760117",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_Lambda_Function.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::ECS::TaskDefinition": {
+      "last_updated": "2025-06-26T14:58:26.744442",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_ECS_TaskDefinition.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::CloudFormation::WaitCondition": {
+      "last_updated": "2025-07-14T20:49:31.861955",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_CloudFormation_WaitCondition.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::EKS::Cluster": {
+      "last_updated": "2025-07-15T01:02:50.378902",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_EKS_Cluster.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::DynamoDB::Table": {
+      "last_updated": "2025-07-15T17:09:48.332941",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_DynamoDB_Table.json",
+      "source": "cloudformation_api"
+    }
+  }
+}

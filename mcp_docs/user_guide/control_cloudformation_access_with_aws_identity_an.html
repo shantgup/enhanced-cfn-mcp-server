@@ -1,0 +1,584 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Control CloudFormation access with AWS Identity and Access Management - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="control-access-with-iam" /><meta name="default_state" content="control-access-with-iam" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" /><meta name="description" content="Use AWS Identity and Access Management to control who has access to CloudFormation." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="Control CloudFormation access with AWS Identity and Access Management" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Control CloudFormation access with AWS Identity and Access Management - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#control-access-with-iam" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Security in AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/security.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "Control CloudFormation access with AWS Identity and Access Management",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/security.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#control-access-with-iam" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#iam-id-based-policies">Defining IAM identity-based policies for
+            CloudFormation</a><a href="#using-iam-capabilities">Acknowledging IAM resources in CloudFormation
+            templates</a><a href="#using-iam-manage-creds">Managing credentials for applications running on
+            Amazon EC2 instances</a><a href="#using-iam-grant-access">Granting temporary access (federated
+            access)</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="control-access-with-iam">Control CloudFormation access with AWS Identity and Access Management</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>With AWS Identity and Access Management (IAM), you can create IAM users and control their access to specific
+      resources in your AWS account. When you use IAM, you can control what users can do with
+      CloudFormation, such as whether they can view stack templates, create stacks, or delete
+      stacks.</p><p>Beyond CloudFormation-specific actions, you can manage what AWS services and resources are
+      available to each user. That way, you can control which resources users can access when they
+      use CloudFormation. For example, you can specify which users can create Amazon EC2 instances, terminate
+      database instances, or update VPCs. Those same permissions apply anytime they use CloudFormation
+      to do those actions.</p><p>Use the information in the following sections to control who can access CloudFormation. We will
+      also explore how to authorize IAM resource creation in templates, give applications running
+      on EC2 instances the permissions they need, and make use of temporary security credentials for
+      enhanced security in your AWS environment.</p>
+      <h2 id="iam-id-based-policies">Defining IAM identity-based policies for
+            CloudFormation</h2>
+      <p>To give access to CloudFormation, you need to create and assign IAM policies that give
+         your IAM identities (such as users or roles) permission to call the API actions they
+         need.</p>
+      <p>With IAM identity-based policies, you can specify allowed or denied actions and
+         resources, as well as the conditions under which actions are allowed or denied. CloudFormation
+         supports specific actions, resources, and condition keys. </p>
+
+      <p>If you're new to IAM, start by familiarizing yourself with the elements of an IAM
+         JSON policy. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html">IAM JSON policy element
+            reference</a> in the <em>IAM User Guide</em>. To learn how to create
+         IAM policies, complete the tutorial <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html">Create and attach your first customer
+            managed policy</a> in the IAM documentation.</p>
+
+      <div class="highlights" id="inline-topiclist"><h6>Topics</h6><ul><li><p><a href="#using-iam-actions">Policy actions for CloudFormation</a></p></li><li><p><a href="#console-specific-actions">Console-specific actions for
+               CloudFormation</a></p></li><li><p><a href="#resource-level-permissions">Policy resources for CloudFormation</a></p></li><li><p><a href="#using-iam-conditions">Policy condition keys for CloudFormation</a></p></li></ul></div>
+       
+         <h3 id="using-iam-actions">Policy actions for CloudFormation</h3>
+         <p>In the <code class="code">Action</code> element of your IAM policy statement, you can specify
+            any API action that CloudFormation offers. You must prefix the action name with the
+            lowercase string <code class="code">cloudformation:</code>. For example:
+               <code class="code">cloudformation:CreateStack</code>, <code class="code">cloudformation:CreateChangeSet</code>,
+            and <code class="code">cloudformation:UpdateStack</code>.</p>
+         <p>To specify multiple actions in a single statement, separate them with commas, as
+            follows:</p>
+         <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json ">"Action": [ "cloudformation:<code class="replaceable">action1</code>", "cloudformation:<code class="replaceable">action2</code>" ]</code></pre>
+         <p>You can also specify multiple actions using wildcards. For example, you can specify
+            all actions whose names begin with the word <code class="code">Get</code>, as follows:</p>
+         <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json ">"Action": "cloudformation:Get*"</code></pre>
+         <p>To see a complete list of actions associated with the <code class="code">cloudformation</code>
+            service prefix, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awscloudformation.html">Actions,
+               resources, and condition keys for AWS CloudFormation</a> and <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awscloudcontrolapi.html">Actions,
+               resources, and condition keys for AWS Cloud Control API</a> in the
+               <em>Service Authorization Reference</em>.</p>
+          
+            <h4 id="using-iam-actions-examples">Examples</h4>
+            <p>The following shows an example of a permissions policy that grants permissions to
+               view CloudFormation stacks.</p>
+            <div class="example"><h6>Example 1: A sample policy that grants view
+                  stack permissions</h6><div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "Version":"2012-10-17",
+    "Statement":[<span>{</span>
+        "Effect":"Allow",
+        "Action":[
+            "cloudformation:DescribeStacks",
+            "cloudformation:DescribeStackEvents",
+            "cloudformation:DescribeStackResource",
+            "cloudformation:DescribeStackResources"
+        ],
+        "Resource":"*"
+    }]
+}</code></pre></div></div>
+            <p>Users who create or delete stacks need additional permissions based on their stack
+               templates. For example, if your template describes an Amazon SQS queue, users must have
+               permissions for both CloudFormation and Amazon SQS actions, as shown in the following sample
+               policy.</p>
+            <div class="example"><h6>Example 2: A sample policy that grants create
+                  and view stack actions and all Amazon SQS actions</h6><div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "Version":"2012-10-17",
+    "Statement":[<span>{</span>
+        "Effect":"Allow",
+        "Action":[
+            "sqs:*",
+            "cloudformation:CreateStack",
+            "cloudformation:DescribeStacks",
+            "cloudformation:DescribeStackEvents",
+            "cloudformation:DescribeStackResources",
+            "cloudformation:GetTemplate",
+            "cloudformation:ValidateTemplate"  
+        ],
+        "Resource":"*"
+    }]
+}</code></pre></div></div>
+          
+       
+       
+         <h3 id="console-specific-actions">Console-specific actions for
+               CloudFormation</h3>
+         <p>Users of the CloudFormation console require additional permissions beyond those needed
+            for the AWS Command Line Interface or CloudFormation APIs. These additional permissions support
+            console-specific features such as template uploads to Amazon S3 buckets and drop-down lists
+            for AWS-specific parameter types.</p>
+         <p>For all actions listed below, grant permissions to all resources; don't limit them to
+            specific stacks or buckets.</p>
+         <p>The following action is used only by the CloudFormation console and is not documented in
+            the API reference. The action allows users to upload templates to Amazon S3 buckets.</p>
+         <div class="itemizedlist">
+             
+         <ul class="itemizedlist"><li class="listitem">
+               <p><code class="code">cloudformation:CreateUploadBucket</code></p>
+            </li></ul></div>
+         <p>When users upload templates, users also require the following Amazon S3
+            permissions:</p>
+         <div class="itemizedlist">
+             
+             
+             
+             
+         <ul class="itemizedlist"><li class="listitem">
+               <p><code class="code">s3:PutObject</code></p>
+            </li><li class="listitem">
+               <p><code class="code">s3:ListBucket</code></p>
+            </li><li class="listitem">
+               <p><code class="code">s3:GetObject</code></p>
+            </li><li class="listitem">
+               <p><code class="code">s3:CreateBucket</code></p>
+            </li></ul></div>
+         <p>To see values in the parameter drop-down lists for templates with AWS-specific
+            parameter types, users need permissions to make the corresponding describe API calls.
+            For example, the following permissions are required when these parameter types are used
+            in the template:</p>
+         <div class="itemizedlist">
+             
+             
+             
+             
+         <ul class="itemizedlist"><li class="listitem">
+               <p>
+                  <code class="code">ec2:DescribeKeyPairs</code> â Required for the
+                     <code class="code">AWS::EC2::KeyPair::KeyName</code> parameter type.</p>
+            </li><li class="listitem">
+               <p><code class="code">ec2:DescribeSecurityGroups</code> â Required for the
+                     <code class="code">AWS::EC2::SecurityGroup::Id</code> parameter type.</p>
+            </li><li class="listitem">
+               <p><code class="code">ec2:DescribeSubnets</code> â Required for the
+                     <code class="code">AWS::EC2::Subnet::Id</code> parameter type.</p>
+            </li><li class="listitem">
+               <p><code class="code">ec2:DescribeVpcs</code> â Required for the
+                     <code class="code">AWS::EC2::VPC::Id</code> parameter type.</p>
+            </li></ul></div>
+         <p>For more information about AWS-specific parameter types, see <a href="./cloudformation-supplied-parameter-types.html">Specify existing resources at
+            runtime with CloudFormation-supplied parameter types</a>.</p>
+       
+       
+         <h3 id="resource-level-permissions">Policy resources for CloudFormation</h3>
+         <p>In an IAM policy statement, the <code class="code">Resource</code> element specifies the object
+            or objects that the statement covers. For CloudFormation, each IAM policy statement
+            applies to the resources that you specify using their Amazon Resource Names (ARNs). The
+            specific ARN format depends on the resource. </p>
+         <p>For a complete list of CloudFormation resource types and their ARNs, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awscloudformation.html#awscloudformation-resources-for-iam-policies">Resource types defined by AWS CloudFormation</a> in the
+            <em>Service Authorization Reference</em>. To learn with which actions you can specify with
+            each resource's ARN, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awscloudformation.html#awscloudformation-actions-as-permissions">Actions defined by AWS CloudFormation</a>.</p>
+
+         <p>You can specify actions for a specific stack, as shown in the following policy
+            example. When you provide an ARN, replace the <code class="code"><code class="replaceable">placeholder
+                  text</code></code> with your resource-specific information. </p>
+         <div class="example"><h6>Example 1: A sample policy that denies
+               the delete and update stack actions for the specified stack</h6><div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "Version":"2012-10-17",
+    "Statement":[<span>{</span>
+        "Effect":"Deny",
+        "Action":[
+            "cloudformation:DeleteStack",
+            "cloudformation:UpdateStack"
+        ],
+        "Resource":"arn:aws:cloudformation:<code class="replaceable">region</code>:<code class="replaceable">account-id</code>:stack/<code class="replaceable">MyProductionStack</code>/*"
+    }]
+}</code></pre></div></div>
+         <p>The policy above uses a wild card at the end of the stack name so that delete stack
+            and update stack are denied on both the full stack ID (such as
+                  <code class="code">arn:aws:cloudformation:<code class="replaceable">region</code>:<code class="replaceable">account-id</code>:stack/<code class="replaceable">MyProductionStack</code>/<code class="replaceable">abc9dbf0-43c2-11e3-a6e8-50fa526be49c</code></code>)
+            and the stack name (such as
+            <code class="code"><code class="replaceable">MyProductionStack</code></code>).</p>
+
+         <p>To allow <code class="code">AWS::Serverless</code> transforms to create a change set, include the
+                  <code class="code">arn:aws:cloudformation:<code class="replaceable">region</code>:aws:transform/Serverless-2016-10-31</code>
+            resource-level permission, as shown in the following policy.</p>
+         <div class="example"><h6>Example 2: A sample policy that allows
+               the create change set action for the specified transform</h6><div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "> <span>{</span>
+    "Version": "2012-10-17",
+    "Statement": [<span>{</span>
+        "Effect": "Allow",
+        "Action": [
+            "cloudformation:CreateChangeSet"
+        ],
+        "Resource": "arn:aws:cloudformation:<code class="replaceable">region</code>:aws:transform/Serverless-2016-10-31"
+    }]
+}</code></pre></div></div>
+       
+       
+         <h3 id="using-iam-conditions">Policy condition keys for CloudFormation</h3>
+
+         <p>In an IAM policy statement, you can optionally specify conditions that control when
+            a policy is in effect. For example, you can define a policy that allows users to create
+            a stack only when they specify a certain template URL. You can define
+            CloudFormation-specific conditions and AWS-wide conditions, such as
+               <code class="code">DateLessThan</code>, which specifies when a policy stops taking effect. For
+            more information and a list of AWS-wide conditions, see Condition in <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Condition">IAM policy elements
+               reference</a> in <em>IAM User Guide</em>.</p>
+         <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>Don't use the <code class="code">aws:SourceIp</code> AWS-wide condition. CloudFormation
+               provisions resources by using its own IP address, not the IP address of the
+               originating request. For example, when you create a stack, CloudFormation makes requests
+               from its IP address to launch an Amazon EC2 instance or to create an Amazon S3 bucket, not from
+               the IP address from the <code class="code">CreateStack</code> call or the
+                  <b>create-stack</b> command.</p></div></div>
+         <p>The following list describes the CloudFormation-specific conditions. These conditions are
+            applied only when users create or update stacks:</p>
+         <div class="variablelist">
+             
+             
+             
+             
+             
+             
+         <dl>
+               <dt><span class="term"><code class="code">cloudformation:ChangeSetName</code></span></dt>
+               <dd>
+                  <p>An CloudFormation change set name that you want to associate with a policy. Use
+                     this condition to control which change sets users can execute or delete.</p>
+               </dd>
+             
+               <dt><span class="term"><code class="code">cloudformation:ImportResourceTypes</code></span></dt>
+               <dd>
+                  <p>The template resource types that you want to associate with a policy, such
+                     as <code class="code">AWS::EC2::Instance</code>. Use this condition to control which
+                     resource types users can work with when they import resources into a stack.
+                     This condition is checked against the resource types that users declare in the
+                        <code class="code">ResourcesToImport</code> parameter, which is currently supported only
+                     for AWS CLI and API requests. When using this parameter, you must specify all the
+                     resource types you want users to control during import operations. For more
+                     information about the <code class="code">ResourcesToImport</code> parameter, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html">CreateChangeSet</a> action in the
+                        <em>AWS CloudFormation API Reference</em>.</p>
+                  <p>For a list of possible <code class="code">ResourcesToImport</code>, see <a href="./resource-import-supported-resources.html">Resource type
+      support</a>.</p>
+                  <p>Use the three-part resource naming convention to specify which resource
+                     types users can work with, from all resources across an organization, down to
+                     an individual resource type.</p>
+                  <div class="variablelist">
+                      
+                      
+                      
+                  <dl>
+                        <dt><span class="term"><code class="code"><code class="replaceable">organization</code>::*</code></span></dt>
+                        <dd>
+                           <p>Specify all resource types for a given organization.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code"><code class="replaceable">organization</code>::<code class="replaceable"><code class="replaceable">service_name</code></code>::*</code></span></dt>
+                        <dd>
+                           <p>Specify all resource types for the specified service within a given
+                              organization.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code"><code class="replaceable">organization</code>::<code class="replaceable"><code class="replaceable">service_name</code></code>::<code class="replaceable">resource_type</code></code></span></dt>
+                        <dd>
+                           <p>Specify a specific resource type.</p>
+                        </dd>
+                     </dl></div>
+
+                  <p>For example:</p>
+                  <div class="variablelist">
+                      
+                      
+                      
+                     
+                  <dl>
+                        <dt><span class="term"><code class="code">AWS::*</code></span></dt>
+                        <dd>
+                           <p>Specify all supported AWS resource types.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code">AWS::<code class="replaceable">service_name</code>::*</code></span></dt>
+                        <dd>
+                           <p>Specify all supported resources for a specific AWS
+                              service.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code">AWS::<code class="replaceable">service_name</code>::<code class="replaceable">resource_type</code></code></span></dt>
+                        <dd>
+                           <p>Specify a specific AWS resource type, such as
+                                 <code class="code">AWS::EC2::Instance</code> (all EC2 instances).</p>
+                        </dd>
+                     </dl></div>
+               </dd>
+             
+               <dt><span class="term"><code class="code">cloudformation:ResourceTypes</code></span></dt>
+               <dd>
+                  <p>The template resource types, such as <code class="code">AWS::EC2::Instance</code>, that
+                     you want to associate with a policy. Use this condition to control which
+                     resource types users can work with when they create or update a stack. This
+                     condition is checked against the resource types that users declare in the
+                        <code class="code">ResourceTypes</code> parameter, which is currently supported only for
+                     AWS CLI and API requests. When using this parameter, users must specify all the
+                     resource types that are in their template. For more information about the
+                        <code class="code">ResourceTypes</code> parameter, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html">CreateStack</a>
+                     action in the <em>AWS CloudFormation API Reference</em>.</p>
+                  <p>For a list of resource types, see .</p>
+                  <p>Use the three-part resource naming convention to specify which resource
+                     types users can work with, from all resources across an organization, down to
+                     an individual resource type.</p>
+                  <div class="variablelist">
+                      
+                      
+                      
+                  <dl>
+                        <dt><span class="term"><code class="code"><code class="replaceable">organization</code>::*</code></span></dt>
+                        <dd>
+                           <p>Specify all resource types for a given organization.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code"><code class="replaceable">organization</code>::<code class="replaceable"><code class="replaceable">service_name</code></code>::*</code></span></dt>
+                        <dd>
+                           <p>Specify all resource types for the specified service within a given
+                              organization.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code"><code class="replaceable">organization</code>::<code class="replaceable"><code class="replaceable">service_name</code></code>::<code class="replaceable">resource_type</code></code></span></dt>
+                        <dd>
+                           <p>Specify a specific resource type.</p>
+                        </dd>
+                     </dl></div>
+                  <p>For example:</p>
+                  <div class="variablelist">
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                  <dl>
+                        <dt><span class="term"><code class="code">AWS::*</code></span></dt>
+                        <dd>
+                           <p>Specify all supported AWS resource types.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code">AWS::<code class="replaceable">service_name</code>::*</code></span></dt>
+                        <dd>
+                           <p>Specify all supported resources for a specific AWS
+                              service.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code">AWS::<code class="replaceable">service_name</code>::<code class="replaceable">resource_type</code></code></span></dt>
+                        <dd>
+                           <p>Specify a specific AWS resource type, such as
+                                 <code class="code">AWS::EC2::Instance</code> (all EC2 instances).</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code">Alexa::ASK::*</code></span></dt>
+                        <dd>
+                           <p>Specify all resource types in the Alexa Skill Kit.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code">Alexa::ASK::Skill</code></span></dt>
+                        <dd>
+                           <p>Specify the individual <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/alexa-resource-ask-skill.html">Alexa::ASK::Skill</a> resource type.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code">Custom::*</code></span></dt>
+                        <dd>
+                           <p>Specify all custom resources.</p>
+                           <p>For more information, see <a href="./template-custom-resources.html">Create custom provisioning logic with custom
+            resources</a>.</p>
+                        </dd>
+                      
+                        <dt><span class="term"><code class="code">Custom::<code class="replaceable">resource_type</code></code></span></dt>
+                        <dd>
+                           <p>Specify a specific custom resource type.</p>
+                           <p>For more information, see <a href="./template-custom-resources.html">Create custom provisioning logic with custom
+            resources</a>.</p>
+                        </dd>
+                     </dl></div>
+               </dd>
+             
+               <dt><span class="term"><code class="code">cloudformation:RoleARN</code></span></dt>
+               <dd>
+                  <p>The Amazon Resource Name (ARN) of an IAM service role that you want to
+                     associate with a policy. Use this condition to control which service role users
+                     can use when they work with stacks or change sets.</p>
+               </dd>
+             
+               <dt><span class="term"><code class="code">cloudformation:StackPolicyUrl</code></span></dt>
+               <dd>
+                  <p>An Amazon S3 stack policy URL that you want to associate with a policy. Use this
+                     condition to control which stack policies users can associate with a stack
+                     during a create or update stack action. For more information about stack
+                     policies, see <a href="./protect-stack-resources.html">Prevent updates to stack resources</a>.</p>
+                  <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>To ensure that users can only create or update stacks with the stack
+                        policies that you uploaded, set the S3 bucket to read only for those
+                        users.</p></div></div>
+               </dd>
+             
+               <dt><span class="term"><code class="code">cloudformation:TemplateUrl</code></span></dt>
+               <dd>
+                  <p>An Amazon S3 template URL that you want to associate with a policy. Use this
+                     condition to control which templates users can use when they create or update
+                     stacks.</p>
+                  <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>To ensure that users can only create or update stacks with the templates
+                        that you uploaded, set the S3 bucket to read only for those users.</p></div></div>
+                  <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>The following CloudFormation-specific conditions apply to the API parameters
+                        of the same name:</p><div class="itemizedlist">
+                         
+                         
+                         
+                         
+                     <ul class="itemizedlist"><li class="listitem">
+                           <p><code class="code">cloudformation:ChangeSetName</code></p>
+                        </li><li class="listitem">
+                           <p><code class="code">cloudformation:RoleARN</code></p>
+                        </li><li class="listitem">
+                           <p><code class="code">cloudformation:StackPolicyUrl</code></p>
+                        </li><li class="listitem">
+                           <p><code class="code">cloudformation:TemplateUrl</code></p>
+                        </li></ul></div><p>For example, <code class="code">cloudformation:TemplateUrl</code> only applies to the
+                           <code class="code">TemplateUrl</code> parameter for <code class="code">CreateStack</code>,
+                           <code class="code">UpdateStack</code>, and <code class="code">CreateChangeSet</code> APIs.</p></div></div>
+               </dd>
+            </dl></div>
+         <p>For examples of IAM policies that use condition keys to control access, see <a href="./security_iam_id-based-policy-examples.html">Example IAM identity-based
+            policies for CloudFormation</a>.</p>
+       
+    
+      <h2 id="using-iam-capabilities">Acknowledging IAM resources in CloudFormation
+            templates</h2>
+
+      <p>Before you can create a stack, CloudFormation validates your template. During validation,
+         CloudFormation checks your template for IAM resources that it might create. IAM resources,
+         such as a user with full access, can access and modify any resource in your AWS account.
+         Therefore, we suggest that you review the permissions associated with each IAM resource
+         before proceeding so that you don't unintentionally create resources with escalated
+         permissions. To ensure that you've done so, you must acknowledge that the template contains
+         those resources, giving CloudFormation the specified capabilities before it creates the
+         stack.</p>
+      <p>You can acknowledge the capabilities of CloudFormation templates by using the CloudFormation
+         console, AWS Command Line Interface (AWS CLI), or API:</p>
+      <div class="itemizedlist">
+          
+          
+          
+      <ul class="itemizedlist"><li class="listitem">
+            <p>In the CloudFormation console, on the <b>Configure stack options</b>
+               page of the Create Stack or Update Stack wizards, choose <b>I acknowledge that
+                  this template may create IAM resources</b>.</p>
+         </li><li class="listitem">
+            <p>In the AWS CLI, when you use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack.html">create-stack</a> and <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/update-stack.html">update-stack</a> commands, specify the
+                  <code class="code">CAPABILITY_IAM</code> or <code class="code">CAPABILITY_NAMED_IAM</code> value for the
+                  <code class="code">--capabilities</code> option. If your template includes IAM resources, you
+               can specify either capability. If your template includes custom names for IAM
+               resources, you must specify <code class="code">CAPABILITY_NAMED_IAM</code>.</p>
+         </li><li class="listitem">
+            <p>In the API, when you use the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStack.html">CreateStack</a> and <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStack.html">UpdateStack</a> actions, specify
+                  <code class="code">Capabilities.member.1=CAPABILITY_IAM</code> or
+                  <code class="code">Capabilities.member.1=CAPABILITY_NAMED_IAM</code>. If your template includes
+               IAM resources, you can specify either capability. If your template includes custom
+               names for IAM resources, you must specify <code class="code">CAPABILITY_NAMED_IAM</code>.</p>
+         </li></ul></div>
+      <div class="awsdocs-note awsdocs-important"><div class="awsdocs-note-title"><awsui-icon name="status-warning" variant="error"></awsui-icon><h6>Important</h6></div><div class="awsdocs-note-text"><p>If your template contains custom named IAM resources, don't create multiple stacks
+            reusing the same template. IAM resources must be globally unique within your account.
+            If you use the same template to create multiple stacks in different Regions, your stacks
+            might share the same IAM resources, rather than each having a unique one. Shared
+            resources among stacks can have unintended consequences from which you can't recover.
+            For example, if you delete or update shared IAM resources in one stack, you will
+            unintentionally modify the resources of other stacks.</p></div></div>
+    
+      <h2 id="using-iam-manage-creds">Managing credentials for applications running on
+            Amazon EC2 instances</h2>
+
+      <p>If you have an application that runs on an Amazon EC2 instance and needs to make requests to
+         AWS resources such as Amazon S3 buckets or an DynamoDB table, the application requires AWS
+         security credentials. However, distributing and embedding long-term security credentials in
+         every instance that you launch is a challenge and a potential security risk. Instead of
+         using long-term credentials, like IAM user credentials, we recommend that you create an
+         IAM role that is associated with an Amazon EC2 instance when the instance is launched. An
+         application can then get temporary security credentials from the Amazon EC2 instance. You don't
+         have to embed long-term credentials on the instance. Also, to make managing credentials
+         easier, you can specify just a single role for multiple Amazon EC2 instances; you don't have to
+         create unique credentials for each instance.</p>
+      <p>For a template snippet that shows how to launch an instance with a role, see <a href="./quickref-iam.html#scenarios-iamroles">IAM role template examples</a>.</p>
+      <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>Applications on instances that use temporary security credentials can call any
+            CloudFormation actions. However, because CloudFormation interacts with many other AWS
+            services, you must verify that all the services that you want to use support temporary
+            security credentials. For a list of the services that accept temporary security
+            credentials, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html">AWS
+               services that work with IAM</a> in the
+            <em>IAM User Guide</em>.</p></div></div>
+    
+      <h2 id="using-iam-grant-access">Granting temporary access (federated
+            access)</h2>
+
+      <p>In some cases, you might want to grant users with no AWS credentials temporary access
+         to your AWS account. Rather than creating and deleting long-term credentials whenever you
+         want to grant temporary access, use AWS Security Token Service (AWS STS). For example, you can use IAM
+         roles. From one IAM role, you can programmatically create and then distribute many
+         temporary security credentials (which include an access key, secret access key, and
+         security token). These credentials have a limited life, so they cannot be used to access
+         your AWS account after they expire. You can also create multiple IAM roles in order to
+         grant individual users different levels of permissions. IAM roles are useful for
+         scenarios like federated identities and single sign-on.</p>
+      <p>A federated identity is a distinct identity that you can use across multiple systems.
+         For enterprise users with an established on-premises identity system (such as LDAP or
+         Active Directory), you can handle all authentication with your on-premises identity system.
+         After a user has been authenticated, you provide temporary security credentials from the
+         appropriate IAM user or role. For example, you can create an administrators role and a
+         developers role, where administrators have full access to the AWS account and developers
+         have permissions to work only with CloudFormation stacks. After an administrator is
+         authenticated, the administrator is authorized to obtain temporary security credentials
+         from the administrators role. However, for developers, they can obtain temporary security
+         credentials from only the developers role.</p>
+      <p>You can also grant federated users access to the AWS Management Console. After users authenticate
+         with your on-premises identity system, you can programmatically construct a temporary URL
+         that gives direct access to the AWS Management Console. When users use the temporary URL, they won't
+         need to sign in to AWS because they have already been authenticated (single sign-on).
+         Also, because the URL is constructed from the users' temporary security credentials, the
+         permissions that are available with those credentials determine what permissions users have
+         in the AWS Management Console.</p>
+      <p>You can use several different AWS STS APIs to generate temporary security credentials. For
+         more information about which API to use, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_sts-comparison.html">Compare AWS STS
+            credentials</a> in the <em>IAM User Guide</em>.</p>
+      <div class="awsdocs-note awsdocs-important"><div class="awsdocs-note-title"><awsui-icon name="status-warning" variant="error"></awsui-icon><h6>Important</h6></div><div class="awsdocs-note-text"><p>You cannot work with IAM when you use temporary security credentials that were
+            generated from the <code class="code">GetFederationToken</code> API. Instead, if you need to work
+            with IAM, use temporary security credentials from a role.</p></div></div>
+      <p>CloudFormation interacts with many other AWS services. When you use temporary security
+         credentials with CloudFormation, verify that all the services that you want to use support
+         temporary security credentials. For a list of the services that accept temporary security
+         credentials, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html">AWS services
+            that work with IAM</a> in the <em>IAM User Guide</em>.</p>
+      <p>For more information, see the following related resources in the
+            <em>IAM User Guide</em>:</p>
+      <div class="itemizedlist">
+          
+          
+      <ul class="itemizedlist"><li class="listitem">
+            <p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html#sts-introduction">Common
+                  scenarios for temporary credentials</a></p>
+         </li><li class="listitem">
+            <p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html">Enable custom identity broker access to the AWS console</a></p>
+         </li></ul></div>
+   <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./security-data-protection.html">Data protection</div><div id="next" class="next-link" accesskey="n" href="./security_iam_id-based-policy-examples.html">Identity-based policy examples</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

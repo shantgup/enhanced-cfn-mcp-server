@@ -1,0 +1,241 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>About blue/green deployments - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="about-blue-green-deployments" /><meta name="default_state" content="about-blue-green-deployments" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" /><meta name="description" content="This topic provides an overview of how performing blue/green deployments with CloudFormation works. It also explains how to prepare your CloudFormation template for blue/green deployments." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="About blue/green deployments" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>About blue/green deployments - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#about-blue-green-deployments" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set,CloudFormation templates,define your infrastructure" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Working with CloudFormation templates",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "CloudFormation walkthroughs",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthroughs.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 6,
+        "name" : "Perform ECS blue/green deployments through CodeDeploy using CloudFormation",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/blue-green.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 7,
+        "name" : "About blue/green deployments",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/blue-green.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#about-blue-green-deployments" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#blue-green-how-it-works">How it works</a><a href="#blue-green-resources">Resource updates that initiate green deployments</a><a href="#blue-green-setup">Preparing your template</a><a href="#blue-green-required">Modeling your blue/green deployment</a><a href="#blue-green-changesets">Change sets</a><a href="#blue-green-events">Monitoring stack events</a><a href="#blue-green-iam">IAM permissions</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="about-blue-green-deployments">About blue/green deployments</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>This topic provides an overview of how performing blue/green deployments with CloudFormation
+      works. It also explains how to prepare your CloudFormation template for blue/green
+      deployments.</p><div class="highlights" id="inline-topiclist"><h6>Topics</h6><ul><li><p><a href="#blue-green-how-it-works">How it works</a></p></li><li><p><a href="#blue-green-resources">Resource updates that initiate green deployments</a></p></li><li><p><a href="#blue-green-setup">Preparing your template</a></p></li><li><p><a href="#blue-green-required">Modeling your blue/green deployment</a></p></li><li><p><a href="#blue-green-changesets">Change sets</a></p></li><li><p><a href="#blue-green-events">Monitoring stack events</a></p></li><li><p><a href="#blue-green-iam">IAM permissions</a></p></li></ul></div>
+      <h2 id="blue-green-how-it-works">How it works</h2>
+      <p>When using CloudFormation to perform ECS blue/green deployments through CodeDeploy, you start by
+        creating a stack template that defines the resources for both your blue and green
+        application environments, including specifying the traffic routing and stabilization
+        settings to use. Next, you create a stack from that template. This generates your blue
+        (current) application. CloudFormation only creates the blue resources during stack creation.
+        Resources for a green deployment aren't created until they're required.</p>
+      <p>Then, if in a future stack update you update the task definition or task set resources
+        in your blue application, CloudFormation does the following:</p>
+      <div class="itemizedlist">
+         
+         
+         
+      <ul class="itemizedlist"><li class="listitem">
+          <p>Generates all the necessary green application environment resources</p>
+        </li><li class="listitem">
+          <p>Shifts the traffic based on the specified traffic routing parameters</p>
+        </li><li class="listitem">
+          <p>Deletes the blue resources</p>
+        </li></ul></div>
+      <p>If an error occurs at any point before the green deployment is successful and finalized,
+        CloudFormation rolls the stack back to its state before the entire green deployment was
+        initiated.</p>
+     
+      <h2 id="blue-green-resources">Resource updates that initiate green
+          deployments</h2>
+      <p>When you perform a stack update that updates certain properties of specific ECS
+        resources, CloudFormation initiates a green deployment process. The resources that initiate this
+        process are:</p>
+      <div class="itemizedlist">
+         
+         
+      <ul class="itemizedlist"><li class="listitem">
+          <p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ecs-taskdefinition.html">AWS::ECS::TaskDefinition</a></p>
+        </li><li class="listitem">
+          <p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ecs-taskset.html">AWS::ECS::TaskSet</a>
+          </p>
+        </li></ul></div>
+
+      <p>However, if the updates to these resources don't involve property changes that require
+        replacement, a green deployment won't be initiated. For more information, see <a href="./using-cfn-updating-stacks-update-behaviors.html">Understand update behaviors of stack
+         resources</a>.</p>
+      <p>It's important to note that you can't combine updates to the above resources with
+        updates to other resources in the same stack update operation. If you need to update both
+        the listed resources and other resources within the same stack, you have two options:</p>
+      <div class="itemizedlist">
+         
+         
+      <ul class="itemizedlist"><li class="listitem">
+          <p>Perform two separate stack update operations: one that includes only the updates to
+            the above resources, and a separate stack update that includes changes to any other
+            resources.</p>
+        </li><li class="listitem">
+          <p>Remove the <code class="code">Transform</code> and <code class="code">Hooks</code> sections from your template
+            and then perform the stack update. In this case, CloudFormation won't perform a green
+            deployment.</p>
+        </li></ul></div>
+     
+      <h2 id="blue-green-setup">Preparing your template to perform ECS blue/green
+          deployments</h2>
+      <p>To enable blue/green deployments on your stack, include the following sections in your
+        stack template before performing a stack update.</p>
+      <div class="itemizedlist">
+         
+         
+         
+      <ul class="itemizedlist"><li class="listitem">
+          <p>Add a reference to the <code class="code">AWS::CodeDeployBlueGreen</code> transform to your
+            template:</p>
+          <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json ">"Transform": [
+  "AWS::CodeDeployBlueGreen"
+],</code></pre>
+        </li><li class="listitem">
+          <p>Add a <code class="code">Hooks</code> section that invokes the
+              <code class="code">AWS::CodeDeploy::BlueGreen</code> hook and specifies the properties for your
+            deployment. For more information, see <a href="./blue-green-hook-syntax.html">AWS::CodeDeploy::BlueGreen hook
+        syntax</a>.</p>
+        </li><li class="listitem">
+          <p>In the <code class="code">Resources</code> section, define the blue and green resources for your
+            deployment.</p>
+        </li></ul></div>
+      <p>You can add these sections when you first create the template (that's, before creating
+        the stack itself), or you can add them to an existing template before performing a stack
+        update. If you specify the blue/green deployment for a new stack, CloudFormation only creates
+        the blue resources during stack creation â resources for the green deployment aren't
+        created until they're required during a stack update.</p>
+     
+      <h2 id="blue-green-required">Modeling your blue/green deployment using CloudFormation
+          resources</h2>
+      <p>To perform CodeDeploy blue/green deployment on ECS, your CloudFormation template needs to include
+        the resources that model your deployment, such as an Amazon ECS service and load balancer. For
+        more details on what these resources represent, see <a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-steps-ecs.html#deployment-steps-prerequisites-ecs">Before you begin an Amazon ECS deployment</a> in the <em>AWS CodeDeploy User
+          Guide</em>.</p>
+      <div class="table-container"><div class="table-contents disable-scroll"><table id="w523aac11c37c21c15c13b5"><thead>
+            <tr>
+              <th>Requirement</th>
+              <th>Resource</th>
+              <th>Required/Optional</th>
+              <th>Initiates blue/green deployment if replaced?</th>
+            </tr>
+          </thead>
+            <tr>
+              <td tabindex="-1">Amazon ECS cluster</td>
+              <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ecs-cluster.html">AWS::ECS::Cluster</a></td>
+              <td tabindex="-1">Optional. The default cluster can be used.</td>
+              <td tabindex="-1">No</td>
+            </tr>
+            <tr>
+              <td tabindex="-1">Amazon ECS service</td>
+              <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ecs-service.html">AWS::ECS::Service</a></td>
+              <td tabindex="-1">Required.</td>
+              <td tabindex="-1">No</td>
+            </tr>
+            <tr>
+              <td tabindex="-1">Application or Network Load Balancer</td>
+              <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-ecs-service-loadbalancer.html">AWS::ECS::Service LoadBalancer</a></td>
+              <td tabindex="-1">Required.</td>
+              <td tabindex="-1">No</td>
+            </tr>
+            <tr>
+              <td tabindex="-1">Production listener</td>
+              <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-elasticloadbalancingv2-listener.html">AWS::ElasticLoadBalancingV2::Listener</a></td>
+              <td tabindex="-1">Required.</td>
+              <td tabindex="-1">No</td>
+            </tr>
+            <tr>
+              <td tabindex="-1">Test listener </td>
+              <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-elasticloadbalancingv2-listener.html">AWS::ElasticLoadBalancingV2::Listener</a></td>
+              <td tabindex="-1">Optional.</td>
+              <td tabindex="-1">No</td>
+            </tr>
+            <tr>
+              <td tabindex="-1">Two target groups</td>
+              <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-elasticloadbalancingv2-targetgroup.html">AWS::ElasticLoadBalancingV2::TargetGroup</a></td>
+              <td tabindex="-1">Required.</td>
+              <td tabindex="-1">No</td>
+            </tr>
+            <tr>
+              <td tabindex="-1">Amazon ECS task definition </td>
+              <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ecs-taskdefinition.html">AWS::ECS::TaskDefinition</a></td>
+              <td tabindex="-1">Required.</td>
+              <td tabindex="-1">Yes</td>
+            </tr>
+            <tr>
+              <td tabindex="-1">Container for your Amazon ECS application</td>
+              <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-ecs-taskdefinition-containerdefinition.html#cfn-ecs-taskdefinition-containerdefinition-name">AWS::ECS::TaskDefinition ContainerDefinition
+                Name</a></td>
+              <td tabindex="-1">Required.</td>
+              <td tabindex="-1">No</td>
+            </tr>
+            <tr>
+              <td tabindex="-1">Port for your replacement task set</td>
+              <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-ecs-taskdefinition-portmapping.html#cfn-ecs-taskdefinition-portmapping-containerport">AWS::ECS::TaskDefinition PortMapping
+                ContainerPort</a></td>
+              <td tabindex="-1">Required.</td>
+              <td tabindex="-1">No</td>
+            </tr>
+          </table></div></div>
+     
+      <h2 id="blue-green-changesets">Change sets</h2>
+      <p>We strongly recommend that you create a change set before performing a stack update that
+        will initiate a green deployment. This allows you to see the actual changes that will be
+        made to your stack before performing stack update. Be aware that resource changes may not be
+        listed in the order in which they will be performed during the stack update. For more
+        information, see <a href="./using-cfn-updating-stacks-changesets.html">Update CloudFormation stacks using change
+      sets</a>.</p>
+     
+      <h2 id="blue-green-events">Monitoring stack events</h2>
+      <p>You can view the stack events generated at each step of the ECS deployment on the
+          <b>Events</b> tab of the <b>Stack</b> page, and using the
+        AWS CLI. For more information, see <a href="./monitor-stack-progress.html">Monitor stack progress</a>.</p>
+     
+      <h2 id="blue-green-iam">IAM permissions for blue/green deployments</h2>
+      <p>In order for CloudFormation to successfully perform the blue-green deployments, you must
+        have the following CodeDeploy permissions:</p>
+      <div class="itemizedlist">
+         
+         
+      <ul class="itemizedlist"><li class="listitem">
+          <p><code class="code">codedeploy:Get*</code></p>
+        </li><li class="listitem">
+          <p><code class="code">codedeploy:CreateCloudFormationDeployment</code></p>
+        </li></ul></div>
+      <p>For more information, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awscodedeploy.html">Actions, resources,
+          and condition keys for CodeDeploy</a> in the <em>Service Authorization Reference</em>.</p>
+    <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./blue-green.html">Perform ECS blue/green deployments</div><div id="next" class="next-link" accesskey="n" href="./blue-green-considerations.html">Considerations</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/about-blue-green-deployments.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

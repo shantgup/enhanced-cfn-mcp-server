@@ -1,0 +1,262 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Generate templates from existing resources with IaC generator - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="generate-IaC" /><meta name="default_state" content="generate-IaC" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html" /><meta name="description" content="Generate infrastructure as code (IaC) templates from AWS resource types deployed in your account that are not managed by CloudFormation." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="Generate templates from existing resources with IaC generator" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Generate templates from existing resources with IaC generator - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#generate-IaC" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/generate-IaC.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/generate-IaC.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/generate-IaC.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set,CloudFormation templates,define your infrastructure,IaC generator,AWS CloudFormation IaC generator" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Working with CloudFormation templates",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "Generate templates from existing resources with IaC generator",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#generate-IaC" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#iac-generator-considerations">Considerations</a><a href="#iac-generator-permissions">Permissions</a><a href="#iac-generator-commonly-used-commands">Commonly used commands</a><a href="#iac-generator-cdk-migrate">Migrate a template to the AWS CDK</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="generate-IaC">Generate templates from existing resources with IaC
+            generator</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>With the CloudFormation infrastructure as code generator (IaC generator), you can generate a
+        template using AWS resources provisioned in your account that are not already managed by
+        CloudFormation. </p><p>The following are benefits of the IaC generator:</p><div class="itemizedlist">
+         
+         
+         
+    <ul class="itemizedlist"><li class="listitem">
+            <p>Bring entire applications under CloudFormation management or migrate them into an
+                AWS CDK app.</p>
+        </li><li class="listitem">
+            <p>Generate templates without having to describe a resource property by property and
+                then translate that into JSON or YAML syntax.</p>
+        </li><li class="listitem">
+            <p>Use the template to replicate resources in a new account or Region.</p>
+        </li></ul></div><p>The IaC generation process consists of the following steps:</p><div class="orderedlist">
+         
+         
+         
+    <ol><li>
+            <p><span class="topcom">Scan resources</span> â The first step is to start
+                a scan of your resources. This scan is region-wide and expires after 30 days. During
+                this time, you can create multiple templates from the same scan.</p>
+        </li><li>
+            <p><span class="topcom">Create your template</span> â To create the
+                template, you have two options:</p>
+            <div class="itemizedlist">
+                 
+                 
+            <ul class="itemizedlist"><li class="listitem">
+                    <p>Create a new template from scratch and add the scanned resources and
+                        related resources to it.</p>
+                </li><li class="listitem">
+                    <p>Use an existing CloudFormation stack as a starting point and add the scanned
+                        resources and related resources to its template.</p>
+                </li></ul></div>
+        </li><li>
+            <p><span class="topcom">Import resources</span> â Use your template to
+                import the resources as a CloudFormation stack or migrate them into an AWS CDK app.</p>
+        </li></ol></div><p>The IaC generator feature is available in all commercial Regions and supports many common
+        AWS resource types. For a full list of supported resources, see <a href="./resource-import-supported-resources.html">Resource type
+      support</a>.</p><div class="highlights"><h6>Topics</h6><ul><li><p><a href="#iac-generator-considerations">Considerations</a></p></li><li><p><a href="#iac-generator-permissions">IAM permissions required for scanning
+                resources</a></p></li><li><p><a href="#iac-generator-commonly-used-commands">Commonly used commands for
+                template generation, management, and deletion</a></p></li><li><p><a href="#iac-generator-cdk-migrate">Migrate a template to the AWS CDK</a></p></li><li><p><a href="./iac-generator-start-resource-scan.html">Start a resource scan with
+                CloudFormation IaC generator</a></p></li><li><p><a href="./generate-IaC-view-scan-summary.html">View the scan summary in the CloudFormation
+                console</a></p></li><li><p><a href="./iac-generator-create-template-from-scanned-resources.html">Create a
+                CloudFormation template from resources scanned with IaC generator</a></p></li><li><p><a href="./iac-generator-create-stack-from-scanned-resources.html">Create a CloudFormation
+                stack from scanned resources</a></p></li><li><p><a href="./generate-IaC-write-only-properties.html">Resolve write-only properties</a></p></li></ul></div>
+        <h2 id="iac-generator-considerations">Considerations</h2>
+        <p>You can generate JSON or YAML templates for AWS resources that you have read access
+            to. The templates for the IaC generator capability models cloud resources reliably and
+            quickly without having to describe a resource property by property.</p>
+        <p>The following table lists the quotas available for the IaC generation feature.</p>
+        <div class="table-container"><div class="table-contents"><table id="w523aac11c27c17b7"><thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Full scan</th>
+                        <th>Partial scan</th>
+                    </tr>
+                </thead>
+                    <tr>
+                        <td tabindex="-1">
+                            <p>Maximum number of resources that can be processed in a scan</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>100,000</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>100,000</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">
+                            <p>Number of scans per day (for scans with less than 10,000
+                                resources)</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>10</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>10</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">
+                            <p>Number of scans per day (for scans with more than 10,000
+                                resources)</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>1</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>1</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">
+                            <p>Concurrent number of templates generating per account</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>5</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>5</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">
+                            <p>Concurrent number of resources modeled for one template
+                                generation</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>5</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>5</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">
+                            <p>Total number of resources that can be modeled in one
+                                template</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>500</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>500</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">
+                            <p>Maximum number of generated templates per account</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>1,000</p>
+                        </td>
+                        <td tabindex="-1">
+                            <p>1,000</p>
+                        </td>
+                    </tr>
+                </table></div></div>
+        <div class="awsdocs-note awsdocs-important"><div class="awsdocs-note-title"><awsui-icon name="status-warning" variant="error"></awsui-icon><h6>Important</h6></div><div class="awsdocs-note-text"><p>IaC generator only supports AWS resources that are supported by Cloud Control API in your
+                Region. For more information, see <a href="./resource-import-supported-resources.html">Resource type
+      support</a>.</p></div></div>
+     
+        <h2 id="iac-generator-permissions">IAM permissions required for scanning
+                resources</h2>
+
+        <p>To scan resources with IaC generator, your IAM principal (user, role, or group) must
+            have:</p>
+        <div class="itemizedlist">
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>CloudFormation scanning permissions</p>
+            </li><li class="listitem">
+                <p>Read permissions for target AWS services</p>
+            </li></ul></div>
+        <p>The scan scope is limited to resources you have read access to. Missing permissions
+            won't cause scan failure but will exclude those resources.</p>
+        <p>For an example IAM policy that grants scanning and template management permissions,
+            see <a href="./security_iam_id-based-policy-examples.html#iam-policy-example-for-iac-generator">Allow all IaC generator
+               operations</a>.</p>
+     
+        <h2 id="iac-generator-commonly-used-commands">Commonly used commands for
+                template generation, management, and deletion</h2>
+        <p>The commonly used commands for working with IaC generator include: </p>
+        <div class="itemizedlist">
+             
+             
+             
+             
+             
+             
+             
+             
+             
+            
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/start-resource-scan.html">start-resource-scan</a> to start a scan of the resources in the account
+                    in an AWS Region. </p>
+            </li><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-resource-scan.html">describe-resource-scan</a> to monitor the progress of a resource scan.
+                </p>
+            </li><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/list-resource-scans.html">list-resource-scans</a> to list the resource scans in an
+                    AWS Region.</p>
+            </li><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/list-resource-scan-resources.html">list-resource-scan-resources</a> to list the resources found during the
+                    resource scan.</p>
+            </li><li class="listitem">
+                <p>
+                    <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/list-resource-scan-related-resources.html">list-resource-scan-related-resources</a> to list the resources related
+                    to your scanned resources.</p>
+            </li><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-generated-template.html">create-generated-template</a> to generate a CloudFormation template from a
+                    set of scanned resources.</p>
+            </li><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/update-generated-template.html">update-generated-template</a> to update the generated template.</p>
+            </li><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-generated-template.html">describe-generated-template</a> to return information about a generated
+                    template.</p>
+            </li><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/list-generated-templates.html">list-generated-templates</a> to list all generated templates in your
+                    account and current Region.</p>
+            </li><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/delete-generated-template.html">delete-generated-template</a> to delete a generated template.</p>
+            </li></ul></div>
+     
+        <h2 id="iac-generator-cdk-migrate">Migrate a template to the AWS CDK</h2>
+        <p>The AWS Cloud Development Kit (AWS CDK) is an open-source software development framework that you can use to
+            develop, manage, and deploy CloudFormation resources using popular programming
+            languages.</p>
+        <p>The AWS CDK CLI provides an integration with IaC generator. Use the AWS CDK CLI <code class="code">cdk
+                migrate</code> command to convert the CloudFormation template and create a new CDK app
+            that contains your resources. Then, you can use the AWS CDK to manage your resources and
+            deploy to CloudFormation.</p>
+        <p>For more information, see <a href="https://docs.aws.amazon.com/cdk/v2/guide/migrate.html">Migrate to AWS CDK</a> in the <em>AWS Cloud Development Kit (AWS CDK) Developer Guide</em>.</p>
+    <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./infrastructure-composer-for-cloudformation.html">Infrastructure Composer</div><div id="next" class="next-link" accesskey="n" href="./iac-generator-start-resource-scan.html">Start a resource
+                scan</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/generate-IaC.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/generate-IaC.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

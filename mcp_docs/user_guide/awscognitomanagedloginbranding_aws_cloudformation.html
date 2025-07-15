@@ -1,0 +1,902 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>AWS::Cognito::ManagedLoginBranding - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="aws-resource-cognito-managedloginbranding" /><meta name="default_state" content="aws-resource-cognito-managedloginbranding" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" /><meta name="description" content="Creates a new set of branding settings for a user pool style and associates it with an app client. This operation is the programmatic option for the creation of a new style in the branding designer." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="Template Reference" /><meta name="abstract" content="Describes the resource types, resource properties, resource attributes, intrinsic functions, and transforms that you can use in CloudFormation templates." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json;toc-AWS_Cognito.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" hreflang="x-default" /><meta name="feedback-item" content="Amazon Cognito" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="Template Reference" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="Template Reference" /><meta id="panorama-serviceConsolePage" value="AWS::Cognito::ManagedLoginBranding" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>AWS::Cognito::ManagedLoginBranding - AWS CloudFormation</title><meta name="rss" content="aws-cloudformation-template-reference-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Amazon%20Cognito&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,CloudFormation template reference" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "Template Reference",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Amazon Cognito resource type reference",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/AWS_Cognito.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "AWS::Cognito::ManagedLoginBranding",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/AWS_Cognito.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="AWS_Cognito.html">Template Reference</a></div><div id="page-toc-src"><a href="#aws-resource-cognito-managedloginbranding-syntax">Syntax</a><a href="#aws-resource-cognito-managedloginbranding-properties">Properties</a><a href="#aws-resource-cognito-managedloginbranding-return-values">Return values</a><a href="#aws-resource-cognito-managedloginbranding--examples">Examples</a></div><div id="page-filters" style="display:none"><filter label="All" id="All"></filter><filter label="JSON" id="JSON"></filter><filter label="YAML" id="YAML"></filter></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><awsui-alert class="awsdocs-page-banner awsui-util-mb-l"><p>This is the new <em>AWS CloudFormation Template Reference Guide</em>.
+         Please update your bookmarks and links. For help getting started with CloudFormation, see the
+            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html">AWS CloudFormation User Guide</a>.</p></awsui-alert><h1 class="topictitle" id="aws-resource-cognito-managedloginbranding">AWS::Cognito::ManagedLoginBranding</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>Creates a new set of branding settings for a user pool style and associates it with an
+            app client. This operation is the programmatic option for the creation of a new style in
+            the branding designer.</p><p>Provides values for UI customization in a <code class="code">Settings</code> JSON object and image
+            files in an <code class="code">Assets</code> array. To send the JSON object <code class="code">Document</code>
+            type parameter in <code class="code">Settings</code>, you might need to update to the most recent
+            version of your AWS SDK. </p><p> This operation has a 2-megabyte request-size limit and include the CSS settings and
+            image assets for your app client. Your branding settings might exceed 2MB in size.
+            Amazon Cognito doesn't require that you pass all parameters in one request and preserves
+            existing style settings that you don't specify. If your request is larger than 2MB,
+            separate it into multiple requests, each with a size smaller than the limit. </p><p>As a best practice, modify the output of <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeManagedLoginBrandingByClient.html">DescribeManagedLoginBrandingByClient</a> into the request parameters for this
+            operation. To get all settings, set <code class="code">ReturnMergedResources</code> to
+                <code class="code">true</code>. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/managed-login-brandingdesigner.html#branding-designer-api">API and SDK operations for managed login branding</a></p><h2 id="aws-resource-cognito-managedloginbranding-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter"><h3 id="aws-resource-cognito-managedloginbranding-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+  "Type" : "AWS::Cognito::ManagedLoginBranding",
+  "Properties" : <span>{</span>
+      "<a href="#cfn-cognito-managedloginbranding-assets">Assets</a>" : <code class="replaceable">[ <a href="./aws-properties-cognito-managedloginbranding-assettype.html">AssetType</a>, ... ]</code>,
+      "<a href="#cfn-cognito-managedloginbranding-clientid">ClientId</a>" : <code class="replaceable">String</code>,
+      "<a href="#cfn-cognito-managedloginbranding-returnmergedresources">ReturnMergedResources</a>" : <code class="replaceable">Boolean</code>,
+      "<a href="#cfn-cognito-managedloginbranding-settings">Settings</a>" : <code class="replaceable">Json</code>,
+      "<a href="#cfn-cognito-managedloginbranding-usecognitoprovidedvalues">UseCognitoProvidedValues</a>" : <code class="replaceable">Boolean</code>,
+      "<a href="#cfn-cognito-managedloginbranding-userpoolid">UserPoolId</a>" : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div><div id="YAML" name="YAML" class="section langfilter"><h3 id="aws-resource-cognito-managedloginbranding-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Type: AWS::Cognito::ManagedLoginBranding
+Properties:
+  <a href="#cfn-cognito-managedloginbranding-assets">Assets</a>: <code class="replaceable">
+    - <a href="./aws-properties-cognito-managedloginbranding-assettype.html">AssetType</a></code>
+  <a href="#cfn-cognito-managedloginbranding-clientid">ClientId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cognito-managedloginbranding-returnmergedresources">ReturnMergedResources</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-cognito-managedloginbranding-settings">Settings</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-cognito-managedloginbranding-usecognitoprovidedvalues">UseCognitoProvidedValues</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-cognito-managedloginbranding-userpoolid">UserPoolId</a>: <code class="replaceable">String</code>
+</code></pre></div><h2 id="aws-resource-cognito-managedloginbranding-properties">Properties</h2><div class="variablelist"><dl><dt id="cfn-cognito-managedloginbranding-assets"><span class="term"><code class="code">Assets</code></span></dt><dd>
+                    <p>An array of image files that you want to apply to roles like backgrounds, logos, and
+            icons. Each object must also indicate whether it is for dark mode, light mode, or
+            browser-adaptive mode.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: Array of <a href="./aws-properties-cognito-managedloginbranding-assettype.html">AssetType</a></p><p><em>Minimum</em>: <code class="code">0</code></p><p><em>Maximum</em>: <code class="code">40</code></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-cognito-managedloginbranding-clientid"><span class="term"><code class="code">ClientId</code></span></dt><dd>
+                    <p>The app client that you want to assign the branding style to. Each style is linked to
+            an app client until you delete it.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: String</p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p></dd><dt id="cfn-cognito-managedloginbranding-returnmergedresources"><span class="term"><code class="code">ReturnMergedResources</code></span></dt><dd>
+                    <p>When <code class="code">true</code>, returns values for branding options that are unchanged from
+            Amazon Cognito defaults. When <code class="code">false</code> or when you omit this parameter, returns only
+            values that you customized in your branding style.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: Boolean</p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-cognito-managedloginbranding-settings"><span class="term"><code class="code">Settings</code></span></dt><dd>
+                    <p>A JSON file, encoded as a <code class="code">Document</code> type, with the the settings that you
+            want to apply to your style.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: Json</p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-cognito-managedloginbranding-usecognitoprovidedvalues"><span class="term"><code class="code">UseCognitoProvidedValues</code></span></dt><dd>
+                    <p>When true, applies the default branding style options. This option reverts to default
+            style options that are managed by Amazon Cognito. You can modify them later in the branding editor.</p>
+                    <p>When you specify <code class="code">true</code> for this option, you must also omit values for
+                <code class="code">Settings</code> and <code class="code">Assets</code> in the request.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: Boolean</p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-cognito-managedloginbranding-userpoolid"><span class="term"><code class="code">UserPoolId</code></span></dt><dd>
+                    <p>The user pool where the branding style is assigned.</p>
+                <p><em>Required</em>: Yes</p><p><em>Type</em>: String</p><p><em>Pattern</em>: <code class="code">[\w-]+_[0-9a-zA-Z]+</code></p><p><em>Minimum</em>: <code class="code">1</code></p><p><em>Maximum</em>: <code class="code">55</code></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p></dd></dl></div><h2 id="aws-resource-cognito-managedloginbranding-return-values">Return values</h2><h3 id="aws-resource-cognito-managedloginbranding-return-values-ref">Ref</h3><p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the style ID, for example
+                <code class="code">a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code>.</p><p>For more information about using the <code class="code">Ref</code> function, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html"><code class="code">Ref</code></a>.</p><h3 id="aws-resource-cognito-managedloginbranding-return-values-fn--getatt">Fn::GetAtt</h3><p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following are the available attributes and sample return values.</p>
+<p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html"><code class="code">Fn::GetAtt</code></a>.</p><h4 id="aws-resource-cognito-managedloginbranding-return-values-fn--getatt-fn--getatt"></h4><div class="variablelist"><dl><dt id="ManagedLoginBrandingId-fn::getatt"><span class="term"><code class="code">ManagedLoginBrandingId</code></span></dt><dd>
+                            <p>The ID of the managed login branding style.</p>
+                        </dd></dl></div><h2 id="aws-resource-cognito-managedloginbranding--examples">Examples</h2><p></p>
+            
+            <h3 id="aws-resource-cognito-managedloginbranding--examples--Creating_a_new_branding_style_for_an_app_client">Creating a new branding style for an app client</h3><p>The following example creates a branding style for the requested app
+                    client.</p><div id="JSON" name="JSON" class="section langfilter"><h4 id="aws-resource-cognito-managedloginbranding--examples--Creating_a_new_branding_style_for_an_app_client--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Provision a managed login branding style to a user pool app client\n",
+    "Resources": <span>{</span>
+        "ManagedLoginBranding": <span>{</span>
+            "Properties": <span>{</span>
+                "Assets": [
+                    <span>{</span>
+                        "Bytes": "PHN2ZyB3aWR0aD0iMjAwMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjAwMDAgNDAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMTcyNTlfMjM2Njc0KSI+CjxyZWN0IHdpZHRoPSIyMDAwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl8xNzI1OV8yMzY2NzQpIi8+CjxwYXRoIGQ9Ik0wIDBIMjAwMDBWNDAwSDBWMFoiIGZpbGw9IiMxMjIwMzciIGZpbGwtb3BhY2l0eT0iMC41Ii8+CjwvZz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0icGFpbnQwX2xpbmVhcl8xNzI1OV8yMzY2NzQiIHgxPSItODk0LjI0OSIgeTE9IjE5OS45MzEiIHgyPSIxODAzNC41IiB5Mj0iLTU4OTkuNTciIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0JGODBGRiIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGRjhGQUIiLz4KPC9saW5lYXJHcmFkaWVudD4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xNzI1OV8yMzY2NzQiPgo8cmVjdCB3aWR0aD0iMjAwMDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=",
+                        "Category": "PAGE_FOOTER_BACKGROUND",
+                        "ColorMode": "DARK",
+                        "Extension": "SVG"
+                    }
+                ],
+                "ClientId": "1example23456789",
+                "ReturnMergedResources": false,
+                "Settings": <span>{</span>
+                    "categories": <span>{</span>
+                        "auth": <span>{</span>
+                            "authMethodOrder": [
+                                [
+                                    <span>{</span>
+                                        "display": "BUTTON",
+                                        "type": "FEDERATED"
+                                    },
+                                    <span>{</span>
+                                        "display": "INPUT",
+                                        "type": "USERNAME_PASSWORD"
+                                    }
+                                ]
+                            ],
+                            "federation": <span>{</span>
+                                "interfaceStyle": "BUTTON_LIST",
+                                "order": [
+                                ]
+                            }
+                        },
+                        "form": <span>{</span>
+                            "displayGraphics": true,
+                            "instructions": <span>{</span>
+                                "enabled": false
+                            },
+                            "languageSelector": <span>{</span>
+                                "enabled": false
+                            },
+                            "location": <span>{</span>
+                                "horizontal": "CENTER",
+                                "vertical": "CENTER"
+                            },
+                            "sessionTimerDisplay": "NONE"
+                        },
+                        "global": <span>{</span>
+                            "colorSchemeMode": "LIGHT",
+                            "pageFooter": <span>{</span>
+                                "enabled": false
+                            },
+                            "pageHeader": <span>{</span>
+                                "enabled": false
+                            },
+                            "spacingDensity": "REGULAR"
+                        },
+                        "signUp": <span>{</span>
+                            "acceptanceElements": [
+                                <span>{</span>
+                                    "enforcement": "NONE",
+                                    "textKey": "en"
+                                }
+                            ]
+                        }
+                    },
+                    "componentClasses": <span>{</span>
+                        "buttons": <span>{</span>
+                            "borderRadius": 8.0
+                        },
+                        "divider": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "borderColor": "232b37ff"
+                            },
+                            "lightMode": <span>{</span>
+                                "borderColor": "ebebf0ff"
+                            }
+                        },
+                        "dropDown": <span>{</span>
+                            "borderRadius": 8.0,
+                            "darkMode": <span>{</span>
+                                "defaults": <span>{</span>
+                                    "itemBackgroundColor": "192534ff"
+                                },
+                                "hover": <span>{</span>
+                                    "itemBackgroundColor": "081120ff",
+                                    "itemBorderColor": "5f6b7aff",
+                                    "itemTextColor": "e9ebedff"
+                                },
+                                "match": <span>{</span>
+                                    "itemBackgroundColor": "d1d5dbff",
+                                    "itemTextColor": "89bdeeff"
+                                }
+                            },
+                            "lightMode": <span>{</span>
+                                "defaults": <span>{</span>
+                                    "itemBackgroundColor": "ffffffff"
+                                },
+                                "hover": <span>{</span>
+                                    "itemBackgroundColor": "f4f4f4ff",
+                                    "itemBorderColor": "7d8998ff",
+                                    "itemTextColor": "000716ff"
+                                },
+                                "match": <span>{</span>
+                                    "itemBackgroundColor": "414d5cff",
+                                    "itemTextColor": "0972d3ff"
+                                }
+                            }
+                        },
+                        "focusState": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "borderColor": "539fe5ff"
+                            },
+                            "lightMode": <span>{</span>
+                                "borderColor": "0972d3ff"
+                            }
+                        },
+                        "idpButtons": <span>{</span>
+                            "icons": <span>{</span>
+                                "enabled": true
+                            }
+                        },
+                        "input": <span>{</span>
+                            "borderRadius": 8.0,
+                            "darkMode": <span>{</span>
+                                "defaults": <span>{</span>
+                                    "backgroundColor": "0f1b2aff",
+                                    "borderColor": "5f6b7aff"
+                                },
+                                "placeholderColor": "8d99a8ff"
+                            },
+                            "lightMode": <span>{</span>
+                                "defaults": <span>{</span>
+                                    "backgroundColor": "ffffffff",
+                                    "borderColor": "7d8998ff"
+                                },
+                                "placeholderColor": "5f6b7aff"
+                            }
+                        },
+                        "inputDescription": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "textColor": "8d99a8ff"
+                            },
+                            "lightMode": <span>{</span>
+                                "textColor": "5f6b7aff"
+                            }
+                        },
+                        "inputLabel": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "textColor": "d1d5dbff"
+                            },
+                            "lightMode": <span>{</span>
+                                "textColor": "000716ff"
+                            }
+                        },
+                        "link": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "defaults": <span>{</span>
+                                    "textColor": "539fe5ff"
+                                },
+                                "hover": <span>{</span>
+                                    "textColor": "89bdeeff"
+                                }
+                            },
+                            "lightMode": <span>{</span>
+                                "defaults": <span>{</span>
+                                    "textColor": "0972d3ff"
+                                },
+                                "hover": <span>{</span>
+                                    "textColor": "033160ff"
+                                }
+                            }
+                        },
+                        "optionControls": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "defaults": <span>{</span>
+                                    "backgroundColor": "0f1b2aff",
+                                    "borderColor": "7d8998ff"
+                                },
+                                "selected": <span>{</span>
+                                    "backgroundColor": "539fe5ff",
+                                    "foregroundColor": "000716ff"
+                                }
+                            },
+                            "lightMode": <span>{</span>
+                                "defaults": <span>{</span>
+                                    "backgroundColor": "ffffffff",
+                                    "borderColor": "7d8998ff"
+                                },
+                                "selected": <span>{</span>
+                                    "backgroundColor": "0972d3ff",
+                                    "foregroundColor": "ffffffff"
+                                }
+                            }
+                        },
+                        "statusIndicator": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "error": <span>{</span>
+                                    "backgroundColor": "1a0000ff",
+                                    "borderColor": "eb6f6fff",
+                                    "indicatorColor": "eb6f6fff"
+                                },
+                                "pending": <span>{</span>
+                                    "indicatorColor": "AAAAAAAA"
+                                },
+                                "success": <span>{</span>
+                                    "backgroundColor": "001a02ff",
+                                    "borderColor": "29ad32ff",
+                                    "indicatorColor": "29ad32ff"
+                                },
+                                "warning": <span>{</span>
+                                    "backgroundColor": "1d1906ff",
+                                    "borderColor": "e0ca57ff",
+                                    "indicatorColor": "e0ca57ff"
+                                }
+                            },
+                            "lightMode": <span>{</span>
+                                "error": <span>{</span>
+                                    "backgroundColor": "fff7f7ff",
+                                    "borderColor": "d91515ff",
+                                    "indicatorColor": "d91515ff"
+                                },
+                                "pending": <span>{</span>
+                                    "indicatorColor": "AAAAAAAA"
+                                },
+                                "success": <span>{</span>
+                                    "backgroundColor": "f2fcf3ff",
+                                    "borderColor": "037f0cff",
+                                    "indicatorColor": "037f0cff"
+                                },
+                                "warning": <span>{</span>
+                                    "backgroundColor": "fffce9ff",
+                                    "borderColor": "8d6605ff",
+                                    "indicatorColor": "8d6605ff"
+                                }
+                            }
+                        }
+                    },
+                    "components": <span>{</span>
+                        "alert": <span>{</span>
+                            "borderRadius": 12.0,
+                            "darkMode": <span>{</span>
+                                "error": <span>{</span>
+                                    "backgroundColor": "1a0000ff",
+                                    "borderColor": "eb6f6fff"
+                                }
+                            },
+                            "lightMode": <span>{</span>
+                                "error": <span>{</span>
+                                    "backgroundColor": "fff7f7ff",
+                                    "borderColor": "d91515ff"
+                                }
+                            }
+                        },
+                        "favicon": <span>{</span>
+                            "enabledTypes": [
+                                "ICO",
+                                "SVG"
+                            ]
+                        },
+                        "form": <span>{</span>
+                            "backgroundImage": <span>{</span>
+                                "enabled": false
+                            },
+                            "borderRadius": 8.0,
+                            "darkMode": <span>{</span>
+                                "backgroundColor": "0f1b2aff",
+                                "borderColor": "424650ff"
+                            },
+                            "lightMode": <span>{</span>
+                                "backgroundColor": "ffffffff",
+                                "borderColor": "c6c6cdff"
+                            },
+                            "logo": <span>{</span>
+                                "enabled": false,
+                                "formInclusion": "IN",
+                                "location": "CENTER",
+                                "position": "TOP"
+                            }
+                        },
+                        "idpButton": <span>{</span>
+                            "custom": <span>{</span>
+                            },
+                            "standard": <span>{</span>
+                                "darkMode": <span>{</span>
+                                    "active": <span>{</span>
+                                        "backgroundColor": "354150ff",
+                                        "borderColor": "89bdeeff",
+                                        "textColor": "89bdeeff"
+                                    },
+                                    "defaults": <span>{</span>
+                                        "backgroundColor": "0f1b2aff",
+                                        "borderColor": "c6c6cdff",
+                                        "textColor": "c6c6cdff"
+                                    },
+                                    "hover": <span>{</span>
+                                        "backgroundColor": "192534ff",
+                                        "borderColor": "89bdeeff",
+                                        "textColor": "89bdeeff"
+                                    }
+                                },
+                                "lightMode": <span>{</span>
+                                    "active": <span>{</span>
+                                        "backgroundColor": "d3e7f9ff",
+                                        "borderColor": "033160ff",
+                                        "textColor": "033160ff"
+                                    },
+                                    "defaults": <span>{</span>
+                                        "backgroundColor": "ffffffff",
+                                        "borderColor": "424650ff",
+                                        "textColor": "424650ff"
+                                    },
+                                    "hover": <span>{</span>
+                                        "backgroundColor": "f2f8fdff",
+                                        "borderColor": "033160ff",
+                                        "textColor": "033160ff"
+                                    }
+                                }
+                            }
+                        },
+                        "pageBackground": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "color": "0f1b2aff"
+                            },
+                            "image": <span>{</span>
+                                "enabled": true
+                            },
+                            "lightMode": <span>{</span>
+                                "color": "ffffffff"
+                            }
+                        },
+                        "pageFooter": <span>{</span>
+                            "backgroundImage": <span>{</span>
+                                "enabled": false
+                            },
+                            "darkMode": <span>{</span>
+                                "background": <span>{</span>
+                                    "color": "0f141aff"
+                                },
+                                "borderColor": "424650ff"
+                            },
+                            "lightMode": <span>{</span>
+                                "background": <span>{</span>
+                                    "color": "fafafaff"
+                                },
+                                "borderColor": "d5dbdbff"
+                            },
+                            "logo": <span>{</span>
+                                "enabled": false,
+                                "location": "START"
+                            }
+                        },
+                        "pageHeader": <span>{</span>
+                            "backgroundImage": <span>{</span>
+                                "enabled": false
+                            },
+                            "darkMode": <span>{</span>
+                                "background": <span>{</span>
+                                    "color": "0f141aff"
+                                },
+                                "borderColor": "424650ff"
+                            },
+                            "lightMode": <span>{</span>
+                                "background": <span>{</span>
+                                    "color": "fafafaff"
+                                },
+                                "borderColor": "d5dbdbff"
+                            },
+                            "logo": <span>{</span>
+                                "enabled": false,
+                                "location": "START"
+                            }
+                        },
+                        "pageText": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "bodyColor": "b6bec9ff",
+                                "descriptionColor": "b6bec9ff",
+                                "headingColor": "d1d5dbff"
+                            },
+                            "lightMode": <span>{</span>
+                                "bodyColor": "414d5cff",
+                                "descriptionColor": "414d5cff",
+                                "headingColor": "000716ff"
+                            }
+                        },
+                        "phoneNumberSelector": <span>{</span>
+                            "displayType": "TEXT"
+                        },
+                        "primaryButton": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "active": <span>{</span>
+                                    "backgroundColor": "539fe5ff",
+                                    "textColor": "000716ff"
+                                },
+                                "defaults": <span>{</span>
+                                    "backgroundColor": "539fe5ff",
+                                    "textColor": "000716ff"
+                                },
+                                "disabled": <span>{</span>
+                                    "backgroundColor": "ffffffff",
+                                    "borderColor": "ffffffff"
+                                },
+                                "hover": <span>{</span>
+                                    "backgroundColor": "89bdeeff",
+                                    "textColor": "000716ff"
+                                }
+                            },
+                            "lightMode": <span>{</span>
+                                "active": <span>{</span>
+                                    "backgroundColor": "033160ff",
+                                    "textColor": "ffffffff"
+                                },
+                                "defaults": <span>{</span>
+                                    "backgroundColor": "0972d3ff",
+                                    "textColor": "ffffffff"
+                                },
+                                "disabled": <span>{</span>
+                                    "backgroundColor": "ffffffff",
+                                    "borderColor": "ffffffff"
+                                },
+                                "hover": <span>{</span>
+                                    "backgroundColor": "033160ff",
+                                    "textColor": "ffffffff"
+                                }
+                            }
+                        },
+                        "secondaryButton": <span>{</span>
+                            "darkMode": <span>{</span>
+                                "active": <span>{</span>
+                                    "backgroundColor": "354150ff",
+                                    "borderColor": "89bdeeff",
+                                    "textColor": "89bdeeff"
+                                },
+                                "defaults": <span>{</span>
+                                    "backgroundColor": "0f1b2aff",
+                                    "borderColor": "539fe5ff",
+                                    "textColor": "539fe5ff"
+                                },
+                                "hover": <span>{</span>
+                                    "backgroundColor": "192534ff",
+                                    "borderColor": "89bdeeff",
+                                    "textColor": "89bdeeff"
+                                }
+                            },
+                            "lightMode": <span>{</span>
+                                "active": <span>{</span>
+                                    "backgroundColor": "d3e7f9ff",
+                                    "borderColor": "033160ff",
+                                    "textColor": "033160ff"
+                                },
+                                "defaults": <span>{</span>
+                                    "backgroundColor": "ffffffff",
+                                    "borderColor": "0972d3ff",
+                                    "textColor": "0972d3ff"
+                                },
+                                "hover": <span>{</span>
+                                    "backgroundColor": "f2f8fdff",
+                                    "borderColor": "033160ff",
+                                    "textColor": "033160ff"
+                                }
+                            }
+                        }
+                    }
+                },
+                "UseCognitoProvidedValues": false,
+                "UserPoolId": "ca-central-1_EXAMPLE"
+            },
+            "Type": "AWS::Cognito::ManagedLoginBranding"
+        }
+    }
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter"><h4 id="aws-resource-cognito-managedloginbranding--examples--Creating_a_new_branding_style_for_an_app_client--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">AWSTemplateFormatVersion: "2010-09-09"
+
+Description: |
+  Provision a managed login branding style to a user pool app client
+
+Resources:
+  ManagedLoginBranding:
+    Type: AWS::Cognito::ManagedLoginBranding
+    Properties:
+      Assets:
+        - Bytes: PHN2ZyB3aWR0aD0iMjAwMDAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjAwMDAgNDAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMTcyNTlfMjM2Njc0KSI+CjxyZWN0IHdpZHRoPSIyMDAwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl8xNzI1OV8yMzY2NzQpIi8+CjxwYXRoIGQ9Ik0wIDBIMjAwMDBWNDAwSDBWMFoiIGZpbGw9IiMxMjIwMzciIGZpbGwtb3BhY2l0eT0iMC41Ii8+CjwvZz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0icGFpbnQwX2xpbmVhcl8xNzI1OV8yMzY2NzQiIHgxPSItODk0LjI0OSIgeTE9IjE5OS45MzEiIHgyPSIxODAzNC41IiB5Mj0iLTU4OTkuNTciIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0JGODBGRiIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGRjhGQUIiLz4KPC9saW5lYXJHcmFkaWVudD4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xNzI1OV8yMzY2NzQiPgo8cmVjdCB3aWR0aD0iMjAwMDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=
+          Category: PAGE_FOOTER_BACKGROUND
+          ColorMode: DARK
+          Extension: SVG
+      ClientId: 1example23456789
+      ReturnMergedResources: false
+      Settings:
+        categories:
+          auth:
+            authMethodOrder:
+              - - display: BUTTON
+                  type: FEDERATED
+                - display: INPUT
+                  type: USERNAME_PASSWORD
+            federation:
+              interfaceStyle: BUTTON_LIST
+              order: []
+          form:
+            displayGraphics: true
+            instructions:
+              enabled: false
+            languageSelector:
+              enabled: false
+            location:
+              horizontal: CENTER
+              vertical: CENTER
+            sessionTimerDisplay: NONE
+          global:
+            colorSchemeMode: LIGHT
+            pageFooter:
+              enabled: false
+            pageHeader:
+              enabled: false
+            spacingDensity: REGULAR
+          signUp:
+            acceptanceElements:
+              - enforcement: NONE
+                textKey: en
+        componentClasses:
+          buttons:
+            borderRadius: 8.0
+          divider:
+            darkMode:
+              borderColor: 232b37ff
+            lightMode:
+              borderColor: ebebf0ff
+          dropDown:
+            borderRadius: 8.0
+            darkMode:
+              defaults:
+                itemBackgroundColor: 192534ff
+              hover:
+                itemBackgroundColor: 081120ff
+                itemBorderColor: 5f6b7aff
+                itemTextColor: e9ebedff
+              match:
+                itemBackgroundColor: d1d5dbff
+                itemTextColor: 89bdeeff
+            lightMode:
+              defaults:
+                itemBackgroundColor: ffffffff
+              hover:
+                itemBackgroundColor: f4f4f4ff
+                itemBorderColor: 7d8998ff
+                itemTextColor: 000716ff
+              match:
+                itemBackgroundColor: 414d5cff
+                itemTextColor: 0972d3ff
+          focusState:
+            darkMode:
+              borderColor: 539fe5ff
+            lightMode:
+              borderColor: 0972d3ff
+          idpButtons:
+            icons:
+              enabled: true
+          input:
+            borderRadius: 8.0
+            darkMode:
+              defaults:
+                backgroundColor: 0f1b2aff
+                borderColor: 5f6b7aff
+              placeholderColor: 8d99a8ff
+            lightMode:
+              defaults:
+                backgroundColor: ffffffff
+                borderColor: 7d8998ff
+              placeholderColor: 5f6b7aff
+          inputDescription:
+            darkMode:
+              textColor: 8d99a8ff
+            lightMode:
+              textColor: 5f6b7aff
+          inputLabel:
+            darkMode:
+              textColor: d1d5dbff
+            lightMode:
+              textColor: 000716ff
+          link:
+            darkMode:
+              defaults:
+                textColor: 539fe5ff
+              hover:
+                textColor: 89bdeeff
+            lightMode:
+              defaults:
+                textColor: 0972d3ff
+              hover:
+                textColor: 033160ff
+          optionControls:
+            darkMode:
+              defaults:
+                backgroundColor: 0f1b2aff
+                borderColor: 7d8998ff
+              selected:
+                backgroundColor: 539fe5ff
+                foregroundColor: 000716ff
+            lightMode:
+              defaults:
+                backgroundColor: ffffffff
+                borderColor: 7d8998ff
+              selected:
+                backgroundColor: 0972d3ff
+                foregroundColor: ffffffff
+          statusIndicator:
+            darkMode:
+              error:
+                backgroundColor: 1a0000ff
+                borderColor: eb6f6fff
+                indicatorColor: eb6f6fff
+              pending:
+                indicatorColor: AAAAAAAA
+              success:
+                backgroundColor: 001a02ff
+                borderColor: 29ad32ff
+                indicatorColor: 29ad32ff
+              warning:
+                backgroundColor: 1d1906ff
+                borderColor: e0ca57ff
+                indicatorColor: e0ca57ff
+            lightMode:
+              error:
+                backgroundColor: fff7f7ff
+                borderColor: d91515ff
+                indicatorColor: d91515ff
+              pending:
+                indicatorColor: AAAAAAAA
+              success:
+                backgroundColor: f2fcf3ff
+                borderColor: 037f0cff
+                indicatorColor: 037f0cff
+              warning:
+                backgroundColor: fffce9ff
+                borderColor: 8d6605ff
+                indicatorColor: 8d6605ff
+        components:
+          alert:
+            borderRadius: 12.0
+            darkMode:
+              error:
+                backgroundColor: 1a0000ff
+                borderColor: eb6f6fff
+            lightMode:
+              error:
+                backgroundColor: fff7f7ff
+                borderColor: d91515ff
+          favicon:
+            enabledTypes:
+              - ICO
+              - SVG
+          form:
+            backgroundImage:
+              enabled: false
+            borderRadius: 8.0
+            darkMode:
+              backgroundColor: 0f1b2aff
+              borderColor: 424650ff
+            lightMode:
+              backgroundColor: ffffffff
+              borderColor: c6c6cdff
+            logo:
+              enabled: false
+              formInclusion: IN
+              location: CENTER
+              position: TOP
+          idpButton:
+            custom: <span>{</span>}
+            standard:
+              darkMode:
+                active:
+                  backgroundColor: 354150ff
+                  borderColor: 89bdeeff
+                  textColor: 89bdeeff
+                defaults:
+                  backgroundColor: 0f1b2aff
+                  borderColor: c6c6cdff
+                  textColor: c6c6cdff
+                hover:
+                  backgroundColor: 192534ff
+                  borderColor: 89bdeeff
+                  textColor: 89bdeeff
+              lightMode:
+                active:
+                  backgroundColor: d3e7f9ff
+                  borderColor: 033160ff
+                  textColor: 033160ff
+                defaults:
+                  backgroundColor: ffffffff
+                  borderColor: 424650ff
+                  textColor: 424650ff
+                hover:
+                  backgroundColor: f2f8fdff
+                  borderColor: 033160ff
+                  textColor: 033160ff
+          pageBackground:
+            darkMode:
+              color: 0f1b2aff
+            image:
+              enabled: true
+            lightMode:
+              color: ffffffff
+          pageFooter:
+            backgroundImage:
+              enabled: false
+            darkMode:
+              background:
+                color: 0f141aff
+              borderColor: 424650ff
+            lightMode:
+              background:
+                color: fafafaff
+              borderColor: d5dbdbff
+            logo:
+              enabled: false
+              location: START
+          pageHeader:
+            backgroundImage:
+              enabled: false
+            darkMode:
+              background:
+                color: 0f141aff
+              borderColor: 424650ff
+            lightMode:
+              background:
+                color: fafafaff
+              borderColor: d5dbdbff
+            logo:
+              enabled: false
+              location: START
+          pageText:
+            darkMode:
+              bodyColor: b6bec9ff
+              descriptionColor: b6bec9ff
+              headingColor: d1d5dbff
+            lightMode:
+              bodyColor: 414d5cff
+              descriptionColor: 414d5cff
+              headingColor: 000716ff
+          phoneNumberSelector:
+            displayType: TEXT
+          primaryButton:
+            darkMode:
+              active:
+                backgroundColor: 539fe5ff
+                textColor: 000716ff
+              defaults:
+                backgroundColor: 539fe5ff
+                textColor: 000716ff
+              disabled:
+                backgroundColor: ffffffff
+                borderColor: ffffffff
+              hover:
+                backgroundColor: 89bdeeff
+                textColor: 000716ff
+            lightMode:
+              active:
+                backgroundColor: 033160ff
+                textColor: ffffffff
+              defaults:
+                backgroundColor: 0972d3ff
+                textColor: ffffffff
+              disabled:
+                backgroundColor: ffffffff
+                borderColor: ffffffff
+              hover:
+                backgroundColor: 033160ff
+                textColor: ffffffff
+          secondaryButton:
+            darkMode:
+              active:
+                backgroundColor: 354150ff
+                borderColor: 89bdeeff
+                textColor: 89bdeeff
+              defaults:
+                backgroundColor: 0f1b2aff
+                borderColor: 539fe5ff
+                textColor: 539fe5ff
+              hover:
+                backgroundColor: 192534ff
+                borderColor: 89bdeeff
+                textColor: 89bdeeff
+            lightMode:
+              active:
+                backgroundColor: d3e7f9ff
+                borderColor: 033160ff
+                textColor: 033160ff
+              defaults:
+                backgroundColor: ffffffff
+                borderColor: 0972d3ff
+                textColor: 0972d3ff
+              hover:
+                backgroundColor: f2f8fdff
+                borderColor: 033160ff
+                textColor: 033160ff
+      UseCognitoProvidedValues: false
+      UserPoolId: ca-central-1_EXAMPLE</code></pre></div>
+        <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./aws-properties-cognito-logdeliveryconfiguration-s3configuration.html">S3Configuration</div><div id="next" class="next-link" accesskey="n" href="./aws-properties-cognito-managedloginbranding-assettype.html">AssetType</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Amazon Cognito&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Amazon Cognito&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-cognito-managedloginbranding.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>
