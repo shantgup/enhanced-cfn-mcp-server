@@ -66,7 +66,7 @@ Create a parameters file (`parameters.json`):
   },
   {
     "ParameterKey": "TrustedAccountIds",
-    "ParameterValue": "123456789012,987654321098"
+    "ParameterValue": "ACCOUNT-ID,987654321098"
   },
   {
     "ParameterKey": "CrossAccountRoleName",

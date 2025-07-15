@@ -28,7 +28,7 @@ class TestStackManager:
         
         # Mock successful stack creation
         stack_manager.client.create_stack.return_value = {
-            'StackId': 'arn:aws:cloudformation:us-east-1:123456789012:stack/test-stack/12345'
+            'StackId': 'arn:aws:cloudformation:REGION:ACCOUNT-ID:stack/STACK-NAME/STACK-ID'
         }
         
         result = await stack_manager.deploy_stack(
@@ -52,7 +52,7 @@ class TestStackManager:
         
         # Mock successful stack update
         stack_manager.client.update_stack.return_value = {
-            'StackId': 'arn:aws:cloudformation:us-east-1:123456789012:stack/test-stack/12345'
+            'StackId': 'arn:aws:cloudformation:REGION:ACCOUNT-ID:stack/STACK-NAME/STACK-ID'
         }
         
         result = await stack_manager.deploy_stack(
@@ -181,7 +181,7 @@ class TestStackManager:
         )
         
         stack_manager.client.create_stack.return_value = {
-            'StackId': 'arn:aws:cloudformation:us-east-1:123456789012:stack/test-stack/12345'
+            'StackId': 'arn:aws:cloudformation:REGION:ACCOUNT-ID:stack/STACK-NAME/STACK-ID'
         }
         
         parameters = [{'ParameterKey': 'Environment', 'ParameterValue': 'test'}]
