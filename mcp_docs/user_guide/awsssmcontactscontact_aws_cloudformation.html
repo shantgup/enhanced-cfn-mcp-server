@@ -1,0 +1,336 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>AWS::SSMContacts::Contact - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="aws-resource-ssmcontacts-contact" /><meta name="default_state" content="aws-resource-ssmcontacts-contact" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" /><meta name="description" content="Use the AWS CloudFormation AWS::SSMContacts::Contact resource for SSMContacts." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="Template Reference" /><meta name="abstract" content="Describes the resource types, resource properties, resource attributes, intrinsic functions, and transforms that you can use in CloudFormation templates." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json;toc-AWS_SSMContacts.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" hreflang="x-default" /><meta name="feedback-item" content="Systems Manager" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="Template Reference" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="Template Reference" /><meta id="panorama-serviceConsolePage" value="AWS::SSMContacts::Contact" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>AWS::SSMContacts::Contact - AWS CloudFormation</title><meta name="rss" content="aws-cloudformation-template-reference-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Systems%20Manager&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,CloudFormation template reference" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "Template Reference",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "AWS Systems Manager Incident Manager Contacts resource type reference",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/AWS_SSMContacts.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "AWS::SSMContacts::Contact",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/AWS_SSMContacts.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="AWS_SSMContacts.html">Template Reference</a></div><div id="page-toc-src"><a href="#aws-resource-ssmcontacts-contact-syntax">Syntax</a><a href="#aws-resource-ssmcontacts-contact-properties">Properties</a><a href="#aws-resource-ssmcontacts-contact-return-values">Return values</a><a href="#aws-resource-ssmcontacts-contact--examples">Examples</a></div><div id="page-filters" style="display:none"><filter label="All" id="All"></filter><filter label="JSON" id="JSON"></filter><filter label="YAML" id="YAML"></filter></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><awsui-alert class="awsdocs-page-banner awsui-util-mb-l"><p>This is the new <em>AWS CloudFormation Template Reference Guide</em>.
+         Please update your bookmarks and links. For help getting started with CloudFormation, see the
+            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html">AWS CloudFormation User Guide</a>.</p></awsui-alert><h1 class="topictitle" id="aws-resource-ssmcontacts-contact">AWS::SSMContacts::Contact</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>The <code class="code">AWS::SSMContacts::Contact</code> resource specifies a contact or escalation
+         plan. Incident Manager contacts are a subset of actions and data types that you
+         can use for managing responder engagement and interaction.</p><h2 id="aws-resource-ssmcontacts-contact-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter"><h3 id="aws-resource-ssmcontacts-contact-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+  "Type" : "AWS::SSMContacts::Contact",
+  "Properties" : <span>{</span>
+      "<a href="#cfn-ssmcontacts-contact-alias">Alias</a>" : <code class="replaceable">String</code>,
+      "<a href="#cfn-ssmcontacts-contact-displayname">DisplayName</a>" : <code class="replaceable">String</code>,
+      "<a href="#cfn-ssmcontacts-contact-plan">Plan</a>" : <code class="replaceable">[ <a href="./aws-properties-ssmcontacts-contact-stage.html">Stage</a>, ... ]</code>,
+      "<a href="#cfn-ssmcontacts-contact-tags">Tags</a>" : <code class="replaceable">[ <a href="./aws-properties-ssmcontacts-contact-tag.html">Tag</a>, ... ]</code>,
+      "<a href="#cfn-ssmcontacts-contact-type">Type</a>" : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div><div id="YAML" name="YAML" class="section langfilter"><h3 id="aws-resource-ssmcontacts-contact-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">Type: AWS::SSMContacts::Contact
+Properties:
+  <a href="#cfn-ssmcontacts-contact-alias">Alias</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssmcontacts-contact-displayname">DisplayName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssmcontacts-contact-plan">Plan</a>: <code class="replaceable">
+    - <a href="./aws-properties-ssmcontacts-contact-stage.html">Stage</a></code>
+  <a href="#cfn-ssmcontacts-contact-tags">Tags</a>: <code class="replaceable">
+    - <a href="./aws-properties-ssmcontacts-contact-tag.html">Tag</a></code>
+  <a href="#cfn-ssmcontacts-contact-type">Type</a>: <code class="replaceable">String</code>
+</code></pre></div><h2 id="aws-resource-ssmcontacts-contact-properties">Properties</h2><div class="variablelist"><dl><dt id="cfn-ssmcontacts-contact-alias"><span class="term"><code class="code">Alias</code></span></dt><dd>
+                    <p>The unique and identifiable alias of the contact or escalation plan.</p>
+                <p><em>Required</em>: Yes</p><p><em>Type</em>: String</p><p><em>Pattern</em>: <code class="code">^[a-z0-9_\-\.]*$</code></p><p><em>Minimum</em>: <code class="code">1</code></p><p><em>Maximum</em>: <code class="code">255</code></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p></dd><dt id="cfn-ssmcontacts-contact-displayname"><span class="term"><code class="code">DisplayName</code></span></dt><dd>
+                    <p>The full name of the contact or escalation plan.</p>
+                <p><em>Required</em>: Yes</p><p><em>Type</em>: String</p><p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9_\-\s]*$</code></p><p><em>Minimum</em>: <code class="code">1</code></p><p><em>Maximum</em>: <code class="code">255</code></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-ssmcontacts-contact-plan"><span class="term"><code class="code">Plan</code></span></dt><dd>
+                    <p>A list of stages. A contact has an engagement plan with stages that contact specified
+         contact channels. An escalation plan uses stages that contact specified contacts.</p>
+                <p><em>Required</em>: No</p><p><em>Type</em>: Array of <a href="./aws-properties-ssmcontacts-contact-stage.html">Stage</a></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-ssmcontacts-contact-tags"><span class="term"><code class="code">Tags</code></span></dt><dd><p>Property description not available.</p><p><em>Required</em>: No</p><p><em>Type</em>: Array of <a href="./aws-properties-ssmcontacts-contact-tag.html">Tag</a></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p></dd><dt id="cfn-ssmcontacts-contact-type"><span class="term"><code class="code">Type</code></span></dt><dd>
+                    <p>The type of contact.</p>
+                    <div class="itemizedlist">
+                         
+                         
+                         
+                    <ul class="itemizedlist"><li class="listitem">
+                            <p><code class="code">PERSONAL</code>: A single, individual contact.</p>
+                        </li><li class="listitem">
+                            <p><code class="code">ESCALATION</code>: An escalation plan.</p>
+                        </li><li class="listitem">
+                            <p><code class="code">ONCALL_SCHEDULE</code>: An on-call schedule.</p>
+                        </li></ul></div>
+                <p><em>Required</em>: Yes</p><p><em>Type</em>: String</p><p><em>Allowed values</em>: <code class="code">PERSONAL | ESCALATION | ONCALL_SCHEDULE</code></p><p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p></dd></dl></div><h2 id="aws-resource-ssmcontacts-contact-return-values">Return values</h2><h3 id="aws-resource-ssmcontacts-contact-return-values-ref">Ref</h3><p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ARN of the resource.</p><p>For more information about using the <code class="code">Ref</code> function, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html"><code class="code">Ref</code></a>.</p><h3 id="aws-resource-ssmcontacts-contact-return-values-fn--getatt">Fn::GetAtt</h3><p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following are the available attributes and sample return values.</p>
+<p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html"><code class="code">Fn::GetAtt</code></a>.</p><h4 id="aws-resource-ssmcontacts-contact-return-values-fn--getatt-fn--getatt"></h4><div class="variablelist"><dl><dt id="Arn-fn::getatt"><span class="term"><code class="code">Arn</code></span></dt><dd>
+                            <p>The Amazon Resource Name (ARN) of the <code class="code">Contact</code> resource, such as
+            <code class="code">arn:aws:ssm-contacts:us-west-2:123456789012:contact/contactalias</code>.</p>
+                        </dd></dl></div><h2 id="aws-resource-ssmcontacts-contact--examples">Examples</h2><p></p>
+            
+            <h3 id="aws-resource-ssmcontacts-contact--examples--Create_resources">Create Incident Manager resources</h3><p>The following example demonstrates the creation of not only contacts, but also a
+               contact channel, a contact plan, and on-call rotation schedules. We recommend
+               creating all Incident Manager<code class="code">Contacts</code> resources using a single AWS CloudFormation
+               template.</p><div id="JSON" name="JSON" class="section langfilter"><h4 id="aws-resource-ssmcontacts-contact--examples--Create_resources--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": <span>{</span>
+        "MySSMContact": <span>{</span>
+            "Type": "AWS::SSMContacts::Contact",
+            "Properties": <span>{</span>
+                "Alias": "my-ssm-contact",
+                "DisplayName": "My_SSM_contact",
+                "Type": "PERSONAL"
+            }
+        },
+        "MyEscalationPlan": <span>{</span>
+            "Type": "AWS::SSMContacts::Contact",
+            "Properties": <span>{</span>
+                "Alias": "my-escalation-plan",
+                "DisplayName": "My_escalation_plan",
+                "Type": "ESCALATION"
+            }
+        },
+        "MyOncallScheduleContact": <span>{</span>
+            "Type": "AWS::SSMContacts::Contact",
+            "Properties": <span>{</span>
+                "Alias": "my-oncall-schedule",
+                "DisplayName": "My_on-call_schedule",
+                "Type": "ONCALL_SCHEDULE"
+            }
+        },
+        "MyContactChannelEmail": <span>{</span>
+            "Type": "AWS::SSMContacts::ContactChannel",
+            "Properties": <span>{</span>
+                "ContactId": <span>{</span>"Ref": "MySSMContact"},
+                "ChannelName": "MyEmailChannel",
+                "ChannelType": "EMAIL",
+                "ChannelAddress": "contact-email-channel@example.com"
+            }
+        },
+        "MySSMContactEngagementPlan": <span>{</span>
+            "Type": "AWS::SSMContacts::Plan",
+            "Properties": <span>{</span>
+                "ContactId": <span>{</span>"Ref": "MySSMContact"},
+                "Stages": [
+                    <span>{</span>
+                        "DurationInMinutes": 10,
+                        "Targets": [
+                            <span>{</span>
+                                "ChannelTargetInfo": <span>{</span>
+                                    "ChannelId": <span>{</span>"Ref": "MyContactChannelEmail"},
+                                    "RetryIntervalInMinutes": 3
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "MySSMContactEscalationPlan": <span>{</span>
+            "Type": "AWS::SSMContacts::Plan",
+            "Properties": <span>{</span>
+                "ContactId": <span>{</span>"Ref": "MyEscalationPlan"},
+                "Stages": [
+                    <span>{</span>
+                        "DurationInMinutes": 0,
+                        "Targets": [
+                            <span>{</span>
+                                "ContactTargetInfo": <span>{</span>
+                                    "ContactId": <span>{</span>"Ref": "MySSMContact"},
+                                    "IsEssential": true
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "MyDailyRotation": <span>{</span>
+            "Type": "AWS::SSMContacts::Rotation",
+            "Properties": <span>{</span>
+                "Name": "My_daily_rotation",
+                "ContactIds": [
+                    <span>{</span>"Ref": "MySSMContact"}
+                ],
+                "StartTime": "2025-03-03T20:20:39",
+                "TimeZoneId": "America/Los_Angeles",
+                "Recurrence": <span>{</span>
+                    "NumberOfOnCalls": 1,
+                    "RecurrenceMultiplier": 1,
+                    "DailySettings": ["13:00"]
+                }
+            }
+        },
+        "MyWeeklyRotation": <span>{</span>
+            "Type": "AWS::SSMContacts::Rotation",
+            "Properties": <span>{</span>
+                "Name": "My_weekly_rotation",
+                "ContactIds": [
+                    <span>{</span>"Ref": "MySSMContact"}
+                ],
+                "StartTime": "2025-03-03T20:20:39",
+                "TimeZoneId": "America/Los_Angeles",
+                "Recurrence": <span>{</span>
+                    "NumberOfOnCalls": 1,
+                    "RecurrenceMultiplier": 1,
+                    "WeeklySettings": [
+                        <span>{</span>
+                            "DayOfWeek": "MON",
+                            "HandOffTime": "13:00"
+                        }
+                    ]
+                }
+            }
+        },
+        "MyMonthlyRotation": <span>{</span>
+            "Type": "AWS::SSMContacts::Rotation",
+            "Properties": <span>{</span>
+                "Name": "My_monthly_rotation",
+                "ContactIds": [
+                    <span>{</span>"Ref": "MySSMContact"}
+                ],
+                "StartTime": "2025-03-03T20:20:39",
+                "TimeZoneId": "America/Los_Angeles",
+                "Recurrence": <span>{</span>
+                    "ShiftCoverages": [
+                        <span>{</span>
+                            "DayOfWeek": "MON",
+                            "CoverageTimes": [
+                                <span>{</span>
+                                    "StartTime": "10:00",
+                                    "EndTime": "18:00"
+                                }
+                            ]
+                        }
+                    ],
+                    "NumberOfOnCalls": 1,
+                    "RecurrenceMultiplier": 1,
+                    "MonthlySettings": [
+                        <span>{</span>
+                            "DayOfMonth": 10,
+                            "HandOffTime": "13:00"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter"><h4 id="aws-resource-ssmcontacts-contact--examples--Create_resources--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (yaml)--><code class="yaml ">AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MySSMContact:
+    Type: 'AWS::SSMContacts::Contact'
+    Properties:
+      Alias: my-ssm-contact
+      DisplayName: My_SSM_contact
+      Type: PERSONAL
+  MyEscalationPlan:
+    Type: 'AWS::SSMContacts::Contact'
+    Properties:
+      Alias: my-escalation-plan
+      DisplayName: My_escalation_plan
+      Type: ESCALATION
+  MyOncallScheduleContact:
+    Type: 'AWS::SSMContacts::Contact'
+    Properties:
+      Alias: my-oncall-schedule
+      DisplayName: My_on-call_schedule
+      Type: ONCALL_SCHEDULE
+  MyContactChannelEmail:
+    Type: 'AWS::SSMContacts::ContactChannel'
+    Properties:
+      ContactId:
+        Ref: MySSMContact
+      ChannelName: MyEmailChannel
+      ChannelType: EMAIL
+      ChannelAddress: contact-email-channel@example.com
+  MySSMContactEngagementPlan:
+    Type: 'AWS::SSMContacts::Plan'
+    Properties:
+      ContactId:
+        Ref: MySSMContact
+      Stages:
+        - DurationInMinutes: 10
+          Targets:
+            - ChannelTargetInfo:
+                ChannelId:
+                  Ref: MyContactChannelEmail
+                RetryIntervalInMinutes: 3
+  MySSMContactEscalationPlan:
+    Type: 'AWS::SSMContacts::Plan'
+    Properties:
+      ContactId:
+        Ref: MyEscalationPlan
+      Stages:
+        - DurationInMinutes: 0
+          Targets:
+            - ContactTargetInfo:
+                ContactId:
+                  Ref: MySSMContact
+                IsEssential: true
+  MyDailyRotation:
+    Type: 'AWS::SSMContacts::Rotation'
+    Properties:
+      Name: My_daily_rotation
+      ContactIds:
+        - Ref: MySSMContact
+      StartTime: '2025-03-03T20:20:39'
+      TimeZoneId: America/Los_Angeles
+      Recurrence:
+        NumberOfOnCalls: 1
+        RecurrenceMultiplier: 1
+        DailySettings:
+          - '13:00'
+  MyWeeklyRotation:
+    Type: 'AWS::SSMContacts::Rotation'
+    Properties:
+      Name: My_weekly_rotation
+      ContactIds:
+        - Ref: MySSMContact
+      StartTime: '2025-03-03T20:20:39'
+      TimeZoneId: America/Los_Angeles
+      Recurrence:
+        NumberOfOnCalls: 1
+        RecurrenceMultiplier: 1
+        WeeklySettings:
+          - DayOfWeek: MON
+            HandOffTime: '13:00'
+  MyMonthlyRotation:
+    Type: 'AWS::SSMContacts::Rotation'
+    Properties:
+      Name: My_monthly_rotation
+      ContactIds:
+        - Ref: MySSMContact
+      StartTime: '2025-03-03T20:20:39'
+      TimeZoneId: America/Los_Angeles
+      Recurrence:
+        ShiftCoverages:
+          - DayOfWeek: MON
+            CoverageTimes:
+              - StartTime: '10:00'
+                EndTime: '18:00'
+        NumberOfOnCalls: 1
+        RecurrenceMultiplier: 1
+        MonthlySettings:
+          - DayOfMonth: 10
+            HandOffTime: '13:00'
+</code></pre></div>
+        <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./AWS_SSMContacts.html">AWS Systems Manager Incident Manager Contacts</div><div id="next" class="next-link" accesskey="n" href="./aws-properties-ssmcontacts-contact-channeltargetinfo.html">ChannelTargetInfo</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Systems Manager&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Systems Manager&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/TemplateReference/aws-resource-ssmcontacts-contact.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

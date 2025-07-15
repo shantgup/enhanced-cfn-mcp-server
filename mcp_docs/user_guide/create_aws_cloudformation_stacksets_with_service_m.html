@@ -1,0 +1,474 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Create AWS CloudFormation StackSets with service-managed permissions - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="stacksets-orgs-associate-stackset-with-org" /><meta name="default_state" content="stacksets-orgs-associate-stackset-with-org" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" /><meta name="description" content="Learn how to create StackSets with service-managed permissions using either the CloudFormation console or the AWS CLI." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="Create AWS CloudFormation StackSets with service-managed permissions" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Create AWS CloudFormation StackSets with service-managed permissions - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#stacksets-orgs-associate-stackset-with-org" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Managing stacks across accounts and Regions with StackSets",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "Create AWS CloudFormation StackSets with service-managed permissions",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#stacksets-orgs-associate-stackset-with-org" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#stacksets-orgs-considerations">Considerations</a><a href="#stacksets-orgs-associate-stackset-with-org-console">Create a StackSet
+                    with service-managed permissions (console)</a><a href="#stacksets-orgs-associate-stackset-with-org-cli">Create a StackSet with
+                    service-managed permissions (AWS CLI)</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="stacksets-orgs-associate-stackset-with-org">Create AWS CloudFormation StackSets with
+                service-managed permissions</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>With <em>service-managed</em> permissions, you can deploy stacks to
+            accounts managed by AWS Organizations in specific Regions. With this model, you don't need to
+            create the necessary IAM roles; CloudFormation creates the IAM roles on your behalf. For
+            more information, see <a href="./stacksets-orgs-activate-trusted-access.html">Activate trusted
+                access</a>.</p><div class="highlights" id="inline-topiclist"><h6>Topics</h6><ul><li><p><a href="#stacksets-orgs-considerations">Considerations</a></p></li><li><p><a href="#stacksets-orgs-associate-stackset-with-org-console">Create a StackSet
+                    with service-managed permissions (console)</a></p></li><li><p><a href="#stacksets-orgs-associate-stackset-with-org-cli">Create a StackSet with
+                    service-managed permissions (AWS CLI)</a></p></li></ul></div>
+            <h2 id="stacksets-orgs-considerations">Considerations</h2>
+
+            <p>Before you create a StackSet with service-managed permissions, consider the
+                following:</p>
+
+            <div class="itemizedlist">
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+            <ul class="itemizedlist"><li class="listitem">
+                    <p>StackSets with service-managed permissions are created in the
+                        management account, including StackSets that are created by delegated
+                        administrators.</p>
+                </li><li class="listitem">
+                    <p>Your StackSet can target your entire organization (includes all accounts) or
+                        specified organizational units (OUs). If your StackSet targets a parent OU, it
+                        also targets any child OUs. When your StackSet targets specific OUs, all
+                        accounts within those OUs are included by default. However, you can target
+                        specific accounts using account filter options.</p>
+                </li><li class="listitem">
+                    <p>Multiple StackSets can target the same organization or OU.</p>
+                </li><li class="listitem">
+                    <p>Your StackSet can't target accounts outside your organization.</p>
+                </li><li class="listitem">
+                    <p>Your StackSet can't deploy nested stacks.</p>
+                </li><li class="listitem">
+                    <p>CloudFormation doesn't deploy stacks to the organization's management account,
+                        even if the management account is in your organization or in an OU in your
+                        organization.</p>
+                </li><li class="listitem">
+                    <p>Automatic deployment is set at the StackSet level. You can't adjust automatic
+                        deployments selectively for OUs, accounts, or Regions.</p>
+                </li><li class="listitem">
+                    <p>The permissions of the IAM principal entity (user, role, or group) that
+                        you use to sign in to the management account determine whether you are
+                        authorized to deploy with StackSets. For an example IAM policy that
+                        grants permissions to deploy to an organization, see <a href="./security_iam_id-based-policy-examples.html#resource-level-permissions-service-managed-stack-set">Restrict stack
+               set operations based on Region and resource types</a>.</p>
+                </li><li class="listitem">
+                    <p>Delegated administrators have full permissions to deploy to accounts in
+                        your organization. The management account can't limit delegated administrator
+                        permissions to deploy to specific OUs or to perform specific StackSet
+                        operations.</p>
+                </li></ul></div>
+         
+            <h2 id="stacksets-orgs-associate-stackset-with-org-console">Create a StackSet
+                    with service-managed permissions (console)</h2>
+
+            <div class="procedure"><h6>To create a StackSet</h6><ol><li> <p>Sign in to the AWS Management Console and open the AWS CloudFormation console at
+         <a href="https://console.aws.amazon.com/cloudformation/" rel="noopener noreferrer" target="_blank"><span>https://console.aws.amazon.com/cloudformation</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.</p> </li><li>
+                    <p>On the navigation bar at the top of the screen, choose the AWS Region
+                        that you want to manage the StackSet from.</p>
+                </li><li>
+                    <p>From the navigation pane, choose <b>StackSets</b>.</p>
+                </li><li>
+                    <p>From the top of the <b>StackSets</b> page, choose
+                            <b>Create StackSet</b>.</p>
+                </li><li>
+                    <p>Under <b>Permissions</b>, choose <b>Service-managed
+                            permissions</b>.</p>
+                    <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>If trusted access with AWS Organizations is disabled, a banner displays.
+                            Trusted access is required to create or update a StackSet with
+                            service-managed permissions. Only the administrator in the
+                            organization's management account has permissions to <a href="./stacksets-orgs-activate-trusted-access.html">Activate trusted access for
+                StackSets with AWS Organizations</a>.</p></div></div>
+                </li><li>
+                    <p>Under <b>Prerequisite - Prepare template</b>, choose
+                            <b>Template is ready</b>.</p>
+                </li><li>
+                    <p>Under <b>Specify template</b>, choose to either specify the
+                        URL for the S3 bucket that contains your stack template or upload a stack
+                        template file. Then, choose <b>Next</b>.</p>
+                </li><li>
+                    <p>On the <b>Specify StackSet details</b> page, provide a name
+                        for the StackSet, specify any parameters, and then choose
+                            <b>Next</b>.</p>
+                </li><li>
+                    <p>On the <b>Configure StackSet options</b> page, under
+                            <b>Tags</b>, specify any tags to apply to resources in
+                        your stack. For more information about how tags are used in AWS, see
+                            <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Organizing
+                            and tracking costs using AWS cost allocation tags</a> in the
+                            <em>AWS Billing and Cost Management User Guide</em>.</p>
+                </li><li>
+                    <p>For <b>Execution configuration</b>, choose
+                            <b>Active</b> to enable CloudFormation's optimized operation
+                        handling:</p>
+                    <div class="itemizedlist">
+                         
+                         
+                    <ul class="itemizedlist"><li class="listitem">
+                            <p>Non-conflicting operations run concurrently for faster deployment
+                                times.</p>
+                        </li><li class="listitem">
+                            <p>Conflicting operations are automatically queued and processed in
+                                the order they were requested.</p>
+                        </li></ul></div>
+                    <p>While operations are running or queued, CloudFormation queues all incoming
+                        operations even if they're non-conflicting. You can't change execution
+                        settings during this time.</p>
+                </li><li>
+                    <p>If your template contains IAM resources, for
+                            <b>Capabilities</b>, choose <b>I acknowledge that
+                            this template may create IAM resources</b> to specify that you
+                        want to use IAM resources in the template. For more information, see <a href="./control-access-with-iam.html#using-iam-capabilities">Acknowledging IAM resources in CloudFormation
+            templates</a>.</p>
+                </li><li>
+                    <p>Choose <b>Next</b> to proceed and to activate trusted access
+                        if not already activated.</p>
+                </li><li>
+                    <p>On the <b>Set deployment options</b> page, under
+                            <b>Deployment targets</b>, do one of the following:</p>
+                    <div class="itemizedlist">
+                         
+                         
+                    <ul class="itemizedlist"><li class="listitem">
+                            <p>To deploy to all accounts in your organization, choose
+                                    <b>Deploy to organization</b>.
+                                </p>
+                        </li><li class="listitem">
+                            <p>To deploy to all accounts in specific OUs, choose <b>Deploy
+                                    to organizational units (OUs)</b>. Choose <b>Add
+                                    an OU</b>, and then paste the target OU ID in the text
+                                box. Repeat for each new target OU.</p>
+                        </li></ul></div>
+                    <p>If you chose <b>Deploy to organizational units (OUs)</b>,
+                        for <b>Account filter type</b>, you can set your deployment
+                        targets to be specific individual accounts by choosing one of the following
+                        options and providing account numbers.</p>
+                    <div class="itemizedlist">
+                         
+                         
+                         
+                         
+                    <ul class="itemizedlist"><li class="listitem">
+                            <p><b>None</b> (default) â Deploy stacks to all
+                                accounts in the specified OUs.</p>
+                        </li><li class="listitem">
+                            <p><b>Intersection</b> â Deploy stacks to
+                                specific individual accounts within the selected OUs.</p>
+                        </li><li class="listitem">
+                            <p><b>Difference</b> â Deploy stacks to all
+                                accounts in the selected OUs except for specific accounts.</p>
+                        </li><li class="listitem">
+                            <p><b>Union</b> â Deploy stacks to the specified
+                                OUs plus additional individual accounts.</p>
+                        </li></ul></div>
+                </li><li>
+                    <p>Under <b>Automatic deployment</b>, choose whether to
+                        automatically deploy to accounts that are added to the target organization
+                        or OUs in the future. For more information, see <a href="./stacksets-orgs-manage-auto-deployment.html">Enable or disable automatic
+                deployments for StackSets in AWS Organizations</a>.</p>
+                </li><li>
+                    <p>If you enabled automatic deployment, under <b>Account removal
+                            behavior</b>, choose whether stack resources are retained or
+                        deleted when an account is removed from a target organization or OU.</p>
+                    <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>With <b>Retain stacks</b> selected, stacks are removed
+                            from your StackSet, but the stacks and their associated resources are
+                            retained. The resources stay in their current state, but will no longer
+                            be part of the StackSet.</p></div></div>
+                </li><li>
+                    <p>Under <b>Specify regions</b>, choose the Regions you want to
+                        deploy stacks in.</p>
+                </li><li>
+                    <p>For <b>Deployment options</b>, do the following:</p>
+                    <div class="itemizedlist">
+                         
+                         
+                         
+                         
+                    <ul class="itemizedlist"><li class="listitem">
+                            <p>For <b>Maximum concurrent accounts</b>, specify how
+                                many accounts are processed concurrently.</p>
+                        </li><li class="listitem">
+                            <p>For <b>Failure tolerance</b>, specify the maximum
+                                number of account failures allowed per Region. The operation will
+                                stop and won't proceed to other Regions once this limit is
+                                reached.</p>
+                        </li><li class="listitem">
+                            <p>For <b>Region concurrency</b>, choose how to process
+                                Regions: <b>Sequential</b> (one Region at a time) or
+                                    <b>Parallel</b> (multiple Regions
+                                concurrently).</p>
+                        </li><li class="listitem">
+                            <p>For <b>Concurrency mode</b>, choose how concurrency
+                                behaves during operation execution.</p>
+                            <div class="itemizedlist">
+                                 
+                                 
+                            <ul class="itemizedlist"><li class="listitem">
+                                    <p><b>Strict failure tolerance</b> â
+                                        Reduces account concurrency level when failures occur,
+                                        staying within <b>Failure tolerance</b>
+                                        +1.</p>
+                                </li><li class="listitem">
+                                    <p><b>Soft failure tolerance</b> â
+                                        Maintains your specified concurrency level (the value of
+                                            <b>Maximum concurrent accounts</b>)
+                                        regardless of failures. </p>
+                                </li></ul></div>
+                        </li></ul></div>
+                </li><li>
+                    <p>Choose <b>Next</b> to continue.</p>
+                </li><li>
+                    <p>On the <b>Review</b> page, verify that your StackSet will deploy
+                        to the correct accounts in the correct Regions, and then choose
+                            <b>Create StackSet</b>.</p>
+                    <p>The <b>StackSet details</b> page opens. You can view the
+                        progress and status of the creation of the stacks in your StackSet.</p>
+                </li></ol></div>
+         
+            <h2 id="stacksets-orgs-associate-stackset-with-org-cli">Create a StackSet with
+                    service-managed permissions (AWS CLI)</h2>
+            <p>Follow the steps in this section to use the AWS CLI to:</p>
+            <div class="itemizedlist">
+                 
+                 
+            <ul class="itemizedlist"><li class="listitem">
+                    <p>Create the StackSet container.</p>
+                </li><li class="listitem">
+                    <p>Deploy stack instances.</p>
+                </li></ul></div>
+            <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>When acting as a delegated administrator, you must include <code class="code">--call-as
+                        DELEGATED_ADMIN</code> in the command.</p></div></div>
+
+            <awsdocs-tabs><dl style="display: none">
+                <dt>Deploy to your organization</dt><dd tab-id="deploy-to-your-organization">
+                        <div class="procedure"><h6>To create a StackSet</h6><ol><li>
+                                <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack-set.html">create-stack-set</a> command to
+                                    create a new StackSet named
+                                            <code class="code"><code class="replaceable">my-stackset</code></code>. The
+                                    following example uses a template stored in an S3 bucket,
+                                    enables automatic deployments, and preserves stacks when
+                                    accounts are removed. For more information, see <a href="./stacksets-orgs-manage-auto-deployment.html">Enable or disable automatic
+                deployments for StackSets in AWS Organizations</a>.</p>
+                                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation create-stack-set \
+  --stack-set-name <code class="replaceable">my-stackset</code> \
+  --template-url <code class="replaceable">https://s3.region-code.amazonaws.com/amzn-s3-demo-bucket/MyApp.template</code> \
+  --permission-model <code class="replaceable">SERVICE_MANAGED</code> \
+  --auto-deployment Enabled=<code class="replaceable">true</code>,RetainStacksOnAccountRemoval=<code class="replaceable">true</code></code></pre>
+                            </li><li>
+                                <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/list-stack-sets.html">list-stack-sets</a> command to
+                                    confirm that your StackSet was created. Your new StackSet is listed in
+                                    the results.</p>
+                                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="untagged">aws cloudformation list-stack-sets</code></pre>
+                                <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                <ul class="itemizedlist"><li class="listitem">
+                                        <p>If you set the <code class="code">--call-as</code> option to
+                                                <code class="code">DELEGATED_ADMIN</code> while signed in to your
+                                            member account, <b>list-stack-sets</b>
+                                            returns all StackSets with service-managed
+                                            permissions in the organization's
+                                            management account.</p>
+                                    </li><li class="listitem">
+                                        <p>If you set the <code class="code">--call-as</code> option to
+                                                <code class="code">SELF</code> while signed in to your
+                                            AWS account, <b>list-stack-sets</b>
+                                            returns all self-managed StackSets in your
+                                            AWS account.</p>
+                                    </li><li class="listitem">
+                                        <p>If you set the <code class="code">--call-as</code> option to
+                                                <code class="code">SELF</code> while signed in to the
+                                            organization's management account,
+                                                <b>list-stack-sets</b> returns all
+                                            StackSets in the organization's
+                                            management account.</p>
+                                    </li></ul></div>
+                            </li><li>
+                                <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack-instances.html">create-stack-instances</a> command
+                                    to add stacks to your StackSet. For the
+                                        <code class="code">--deployment-targets</code> option, specify the
+                                    organization root ID to deploy to all accounts in your
+                                    organization. </p>
+                                <p>Set concurrent account processing and other deployment
+                                    preferences using the <code class="code">--operation-preferences</code>
+                                    option. This example uses count-based settings. Note that
+                                        <code class="code">MaxConcurrentCount</code> must not exceed
+                                        <code class="code">FailureToleranceCount</code> + 1. For percentage-based
+                                    settings, use <code class="code">FailureTolerancePercentage</code> or
+                                        <code class="code">MaxConcurrentPercentage</code> instead. </p>
+                                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation create-stack-instances --stack-set-name <code class="replaceable">my-stackset</code> \
+  --deployment-targets OrganizationalUnitIds=<code class="replaceable">r-a1b2c3d4e5</code> \
+  --regions <code class="replaceable">us-west-2 us-east-1</code> \
+  --operation-preferences <code class="replaceable">MaxConcurrentCount=1,FailureToleranceCount=0</code></code></pre>
+                                <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html">CreateStackInstances</a> in the
+                                        <em>AWS CloudFormation API Reference</em>.</p>
+                            </li><li>
+                                <p>Using the <code class="code">operation-id</code> that was returned as part
+                                    of the <b>create-stack-instances</b> output, use the
+                                    following <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-stack-set-operation.html">describe-stack-set-operation</a>
+                                    command to verify that your stacks were created
+                                    successfully.</p>
+                                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation describe-stack-set-operation \
+  --stack-set-name <code class="replaceable">my-stackset</code> \
+  --operation-id <code class="replaceable">operation_ID</code></code></pre>
+                            </li></ol></div>
+                    </dd>
+                <dt>Deploy to organizational units (OUs)</dt><dd tab-id="deploy-to-organizational-units-(ous)">
+                        <div class="procedure"><h6>To create a StackSet</h6><ol><li>
+                                <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack-set.html">create-stack-set</a> command to
+                                    create a new StackSet named
+                                            <code class="code"><code class="replaceable">my-stackset</code></code>. The
+                                    following example uses a template stored in an S3 bucket and
+                                    includes a parameter that sets a
+                                            <code class="code"><code class="replaceable">KeyPairName</code></code> with
+                                    the value <code class="code"><code class="replaceable">TestKey</code></code></p>
+                                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation create-stack-set \
+  --stack-set-name <code class="replaceable">my-stackset</code> \
+  --template-url <code class="replaceable">https://s3.region-code.amazonaws.com/amzn-s3-demo-bucket/MyApp.template</code> \
+  --permission-model <code class="replaceable">SERVICE_MANAGED</code> \
+  --parameters <code class="replaceable">ParameterKey=KeyPairName,ParameterValue=TestKey</code></code></pre>
+                            </li><li>
+                                <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/list-stack-sets.html">list-stack-sets</a> command to
+                                    confirm that your StackSet was created. Your new StackSet is listed in
+                                    the results.</p>
+                                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="untagged">aws cloudformation list-stack-sets</code></pre>
+                                <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                <ul class="itemizedlist"><li class="listitem">
+                                        <p>If you set the <code class="code">--call-as</code> option to
+                                                <code class="code">DELEGATED_ADMIN</code> while signed in to your
+                                            member account, <b>list-stack-sets</b>
+                                            returns all StackSets with service-managed
+                                            permissions in the organization's
+                                            management account.</p>
+                                    </li><li class="listitem">
+                                        <p>If you set the <code class="code">--call-as</code> option to
+                                                <code class="code">SELF</code> while signed in to your
+                                            AWS account, <b>list-stack-sets</b>
+                                            returns all self-managed StackSets in your
+                                            AWS account.</p>
+                                    </li><li class="listitem">
+                                        <p>If you set the <code class="code">--call-as</code> option to
+                                                <code class="code">SELF</code> while signed in to the
+                                            organization's management account,
+                                                <b>list-stack-sets</b> returns all
+                                            StackSets in the organization's
+                                            management account.</p>
+                                    </li></ul></div>
+                            </li><li>
+                                <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack-instances.html">create-stack-instances</a> command
+                                    to add stacks to your StackSet. For the
+                                        <code class="code">--deployment-targets</code> option, specify the OU IDs
+                                    to deploy to.</p>
+                                <p>Set concurrent account processing and other deployment
+                                    preferences using the <code class="code">--operation-preferences</code>
+                                    option. This example uses count-based settings. Note that
+                                        <code class="code">MaxConcurrentCount</code> must not exceed
+                                        <code class="code">FailureToleranceCount</code> + 1. For percentage-based
+                                    settings, use <code class="code">FailureTolerancePercentage</code> or
+                                        <code class="code">MaxConcurrentPercentage</code> instead. </p>
+                                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation create-stack-instances --stack-set-name <code class="replaceable">my-stackset</code> \
+  --deployment-targets OrganizationalUnitIds=<code class="replaceable">ou-rcuk-1x5j1lwo,ou-rcuk-slr5lh0a</code> \
+  --regions <code class="replaceable">us-west-2 us-east-1</code> \
+  --operation-preferences <code class="replaceable">MaxConcurrentCount=1,FailureToleranceCount=0</code></code></pre>
+                                <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html">CreateStackInstances</a> in the
+                                        <em>AWS CloudFormation API Reference</em>.</p>
+                            </li><li>
+                                <p>Using the <code class="code">operation-id</code> that was returned as part
+                                    of the <b>create-stack-instances</b> output, use the
+                                    following <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-stack-set-operation.html">describe-stack-set-operation</a>
+                                    command to verify that your stacks were created
+                                    successfully.</p>
+                                <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation describe-stack-set-operation \
+  --stack-set-name <code class="replaceable">my-stackset</code> \
+  --operation-id <code class="replaceable">operation_ID</code></code></pre>
+                            </li></ol></div>
+
+                    </dd>
+                <dt>Deploy to specific accounts in OUs</dt><dd tab-id="deploy-to-specific-accounts-in-ous">
+                        <p>You can target specific organizational units (OUs) and use account
+                            filtering to precisely control which accounts receive stack deployments.
+                            By default, stacks deploy to all accounts within specified OUs if no
+                            account filtering is specified.</p>
+                        <p>In the AWS CLI, you specify account filtering with the
+                                <code class="code">--deployment-targets</code> option. For more information, see
+                                <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.</p>
+                        <p>After you create the StackSet container with the
+                                <b>create-stack-set</b> command, use one of the
+                            following examples to deploy stacks to specific accounts.</p>
+                         
+                            <h6>Target specific accounts in
+                                an OU</h6>
+                            <p>The following example deploys stacks only to accounts A1 and A2 in
+                                OU1.</p>
+                         
+                        <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation create-stack-instances --stack-set-name <code class="replaceable">my-stackset</code> \
+  --deployment-targets OrganizationalUnitIds=<code class="replaceable">OU1,Accounts=A1,A2,AccountFilterType=INTERSECTION</code> \
+  --regions <code class="replaceable">us-west-2 us-east-1</code></code></pre>
+                         
+                            <h6>Exclude accounts from an
+                                OU</h6>
+                            <p>The following example deploys stacks to all accounts in OU1 except
+                                accounts A1 and A2.</p>
+                         
+                        <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation create-stack-instances --stack-set-name <code class="replaceable">my-stackset</code> \
+  --deployment-targets OrganizationalUnitIds=<code class="replaceable">OU1,Accounts=A1,A2,AccountFilterType=DIFFERENCE</code> \
+  --regions <code class="replaceable">us-west-2 us-east-1</code></code></pre>
+                         
+                            <h6>Include additional
+                                accounts</h6>
+                            <p>The following example deploys stacks to all accounts in OU1 plus
+                                an additional account A4 from another OU.</p>
+                         
+                        <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation create-stack-instances --stack-set-name <code class="replaceable">my-stackset</code> \
+  --deployment-targets OrganizationalUnitIds=<code class="replaceable">OU1,Accounts=A4,AccountFilterType=UNION</code> \
+  --regions <code class="replaceable">us-west-2 us-east-1</code></code></pre>
+
+                    </dd>
+            </dl></awsdocs-tabs>
+        <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./stacksets-getting-started-create-self-managed.html">Create
+                StackSets (self-managed permissions)</div><div id="next" class="next-link" accesskey="n" href="./stacksets-orgs-manage-auto-deployment.html">Enable-disable
+                automatic deployments</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

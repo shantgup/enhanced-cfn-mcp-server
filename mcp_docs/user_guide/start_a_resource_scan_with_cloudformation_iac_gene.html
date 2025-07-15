@@ -1,0 +1,217 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Start a resource scan with CloudFormation IaC generator - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="iac-generator-start-resource-scan" /><meta name="default_state" content="iac-generator-start-resource-scan" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" /><meta name="description" content="Learn how to start a resource scan with IaC generator." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="Start a resource scan with CloudFormation IaC generator" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Start a resource scan with CloudFormation IaC generator - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#iac-generator-start-resource-scan" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set,CloudFormation templates,define your infrastructure,IaC generator,AWS CloudFormation IaC generator,start a full scan,start a partial scan" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Working with CloudFormation templates",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "Generate templates from existing resources with IaC generator",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 6,
+        "name" : "Start a resource scan with CloudFormation IaC generator",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#iac-generator-start-resource-scan" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#start-resource-scan-console">Start a resource scan
+                    (console)</a><a href="#start-resource-scan-cli">Start a resource scan (AWS CLI)</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="iac-generator-start-resource-scan">Start a resource scan with
+                CloudFormation IaC generator</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>Before you create a template from existing resources, you first must initiate a
+            resource scan to discover your current resources and their relationships.</p><p>You can start a resource scan using one of the following options. For first-time users
+            of IaC generator, we recommend the first option.</p><div class="itemizedlist">
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p><span class="topcom">Scan all resources (full scan)</span> â Scans
+                    all existing resources in the current account and Region. This scanning process
+                    can take up to 10 minutes for 1,000 resources.</p>
+            </li><li class="listitem">
+                <p><span class="topcom">Scan specific resources (partial scan)</span> â
+                    Manually select which resource types to scan in the current account and Region.
+                    This option provides a faster and more focused scanning process, making it ideal
+                    for iterative template development.</p>
+            </li></ul></div><p>After the scan completes, you can choose which resources and their related resources
+            to include when generating your template. When using partial scanning, related resources
+            will only be available during template generation if either:</p><div class="itemizedlist">
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>You specifically selected them before starting the scan, or</p>
+            </li><li class="listitem">
+                <p>They were required to discover your selected resource types. </p>
+            </li></ul></div><p>For example, if you select <code class="code">AWS::EKS::Nodegroup</code> without selecting
+                <code class="code">AWS::EKS::Cluster</code>, IaC generator automatically includes
+                <code class="code">AWS::EKS::Cluster</code> resources in the scan because discovering the node
+            group requires discovering the cluster first. In all other cases, the scan will only
+            include the resources you specifically select.</p><div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>Before you continue, confirm that you have the permissions required to work with
+                IaC generator. For more information, see <a href="./generate-IaC.html#iac-generator-permissions">IAM permissions required for scanning
+                resources</a>.</p></div></div><div class="highlights" id="inline-topiclist"><h6>Topics</h6><ul><li><p><a href="#start-resource-scan-console">Start a resource scan
+                    (console)</a></p></li><li><p><a href="#start-resource-scan-cli">Start a resource scan (AWS CLI)</a></p></li></ul></div>
+            <h2 id="start-resource-scan-console">Start a resource scan
+                    (console)</h2>
+
+            <div class="procedure"><h6>To start a resource scan of all resource types (full scan)</h6><ol><li>
+                    <p>Open the <a href="https://console.aws.amazon.com/cloudformation/home?#iac-generator" rel="noopener noreferrer" target="_blank"><span>IaC
+                            generator page</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> of the CloudFormation console.</p>
+                </li><li>
+                    <p>On the navigation bar at the top of the screen, choose the AWS Region
+                        that contains the resources to scan.</p>
+                </li><li>
+                    <p>From the <b>Scans</b> panel, choose <b>Start a new
+                            scan</b> and then choose <b>Scan all resources</b>.
+                    </p>
+                </li></ol></div>
+            <div class="procedure"><h6>To start a resource scan of specific resource types (partial scan)</h6><ol><li>
+                    <p>Open the <a href="https://console.aws.amazon.com/cloudformation/home?#iac-generator" rel="noopener noreferrer" target="_blank"><span>IaC
+                            generator page</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> of the CloudFormation console.</p>
+                </li><li>
+                    <p>On the navigation bar at the top of the screen, choose the AWS Region
+                        that contains the resources to scan.</p>
+                </li><li>
+                    <p>From the <b>Scans</b> panel, choose <b>Start a new
+                            scan</b> and then choose <b>Scan specific
+                            resources</b>. </p>
+                </li><li>
+                    <p>In the <b>Start partial scan</b> dialog box, select up to
+                        100 resource types, and then choose <b>Start scan</b>. </p>
+                </li></ol></div>
+         
+            <h2 id="start-resource-scan-cli">Start a resource scan (AWS CLI)</h2>
+             
+                <h6>To start a resource scan of all resource types (full scan)</h6>
+                <p>Use the following <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/start-resource-scan.html">start-resource-scan</a> command. Replace
+                        <code class="replaceable">us-east-1</code> with the AWS Region that
+                    contains the resources to scan.</p>
+             
+            <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation start-resource-scan --region <code class="replaceable">us-east-1</code></code></pre>
+            <p>If successful, this command returns the ARN of the scan. Note the ARN in the
+                    <code class="code">ResourceScanId</code> property. You need it to create your
+                template.</p>
+            <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "ResourceScanId":
+      "arn:aws:cloudformation:<code class="replaceable">region</code>:<code class="replaceable">account-id</code>:resourceScan/<code class="replaceable">0a699f15-489c-43ca-a3ef-3e6ecfa5da60</code>"
+}</code></pre>
+            <div class="procedure"><h6>To start a resource scan of specific resource types (partial scan)</h6><ol><li>
+                    <p>Use the following <a href="https://en.wikipedia.org/wiki/Cat_(Unix)" rel="noopener noreferrer" target="_blank"><span>cat</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> command to store the resource types you want to scan in a
+                        JSON file named <code class="code">config.json</code> in your home directory. The
+                        following is an example scanning configuration that scans for Amazon EC2
+                        instances, security groups, and all Amazon S3 resources.</p>
+                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">$ cat &gt; <code class="replaceable">config.json</code>
+[
+  <span>{</span>
+    "Types":[
+      "<code class="replaceable">AWS::EC2::Instance</code>",
+      "<code class="replaceable">AWS::EC2::SecurityGroup</code>",
+      "<code class="replaceable">AWS::S3::*</code>"
+    ]
+  }
+]</code></pre>
+                </li><li>
+                    <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/start-resource-scan.html">start-resource-scan</a> command with the
+                            <code class="code">--scan-filters</code> option, along with the
+                            <code class="code">config.json</code> file you created, to start the partial scan.
+                        Replace <code class="replaceable">us-east-1</code> with the
+                        AWS Region that contains the resources to scan.</p>
+                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation start-resource-scan --scan-filters <code class="replaceable">file://config.json</code> --region <code class="replaceable">us-east-1</code></code></pre>
+                    <p>If successful, this command returns the ARN of the scan. Note the ARN in
+                        the <code class="code">ResourceScanId</code> property. You need it to create your
+                        template.</p>
+                    <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "ResourceScanId":
+      "arn:aws:cloudformation:<code class="replaceable">region</code>:<code class="replaceable">account-id</code>:resourceScan/<code class="replaceable">0a699f15-489c-43ca-a3ef-3e6ecfa5da60</code>"
+}</code></pre>
+                </li></ol></div>
+             
+                <h6>To monitor the progress of a resource scan</h6>
+                <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-resource-scan.html">describe-resource-scan</a> command. For the
+                        <code class="code">--resource-scan-id</code> option, replace the sample ARN with the
+                    actual ARN.</p>
+             
+            <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli (cli)--><code class="nohighlight " data-source="content">aws cloudformation describe-resource-scan --region <code class="replaceable">us-east-1</code> \
+  --resource-scan-id <code class="replaceable">arn:aws:cloudformation:us-east-1:123456789012:resourceScan/0a699f15-489c-43ca-a3ef-3e6ecfa5da60</code></code></pre>
+            <p>If successful, this command returns output similar to the following: </p>
+            <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "ResourceScanId": "arn:aws:cloudformation:<code class="replaceable">region</code>:<code class="replaceable">account-id</code>:resourceScan/<code class="replaceable">0a699f15-489c-43ca-a3ef-3e6ecfa5da60</code>",
+    "Status": "COMPLETE",
+    "StartTime": "2023-08-21T03:10:38.485000+00:00",
+    "EndTime": "2023-08-21T03:20:28.485000+00:00",
+    "PercentageCompleted": 100.0,
+    "ResourceTypes": [
+        "AWS::CloudFront::CachePolicy",
+        "AWS::CloudFront::OriginRequestPolicy",
+        "AWS::EC2::DHCPOptions",
+        "AWS::EC2::InternetGateway",
+        "AWS::EC2::KeyPair",
+        "AWS::EC2::NetworkAcl",
+        "AWS::EC2::NetworkInsightsPath",
+        "AWS::EC2::NetworkInterface",
+        "AWS::EC2::PlacementGroup",
+        "AWS::EC2::Route",
+        "AWS::EC2::RouteTable",
+        "AWS::EC2::SecurityGroup",
+        "AWS::EC2::Subnet",
+        "AWS::EC2::SubnetCidrBlock",
+        "AWS::EC2::SubnetNetworkAclAssociation",
+        "AWS::EC2::SubnetRouteTableAssociation",
+        ...
+    ],
+    "ResourcesRead": 676
+}</code></pre>
+            <p>For a partial scan, the output will look similar to the following: </p>
+            <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli (json)--><code class="json "><span>{</span>
+    "ResourceScanId": "arn:aws:cloudformation:<code class="replaceable">region</code>:<code class="replaceable">account-id</code>:resourceScan/<code class="replaceable">0a699f15-489c-43ca-a3ef-3e6ecfa5da60</code>",
+    "Status": "COMPLETE",
+    "StartTime": "2025-03-06T18:24:19.542000+00:00",
+    "EndTime": "2025-03-06T18:25:23.142000+00:00",
+    "PercentageCompleted": 100.0,
+    "ResourceTypes": [
+        "AWS::EC2::Instance",
+        "AWS::EC2::SecurityGroup",
+        "AWS::S3::Bucket",
+        "AWS::S3::BucketPolicy"
+    ],
+    "ResourcesRead": 65,
+    "ScanFilters": [
+        <span>{</span>
+            "Types": [
+                "AWS::EC2::Instance",
+                "AWS::EC2::SecurityGroup",
+                "AWS::S3::*"
+            ]
+        }
+    ]
+}</code></pre>
+            <p>For a description of the fields in the output, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeResourceScan.html">DescribeResourceScan</a> in the
+                <em>AWS CloudFormation API Reference</em>.</p>
+        <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./generate-IaC.html">IaC generator</div><div id="next" class="next-link" accesskey="n" href="./generate-IaC-view-scan-summary.html">View the scan
+                summary</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/iac-generator-start-resource-scan.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

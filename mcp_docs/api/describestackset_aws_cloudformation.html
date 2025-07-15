@@ -1,0 +1,290 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>DescribeStackSet - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="API_DescribeStackSet" /><meta name="default_state" content="API_DescribeStackSet" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" /><meta name="description" content="Returns the description of the specified StackSet." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="API Reference" /><meta name="abstract" content="AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can use CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service, Elastic Load Balancing, and Amazon EC2 Auto Scaling to build highly reliable, highly scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="API Reference" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="API Reference" /><meta id="panorama-serviceConsolePage" value="DescribeStackSet" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>DescribeStackSet - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/APIReference/cfn-api.pdf#API_DescribeStackSet" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html" /><meta name="keywords" content="API,requests,DescribeStackSet" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "API Reference",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Actions",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Operations.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "DescribeStackSet",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Operations.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/APIReference/cfn-api.pdf#API_DescribeStackSet" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">API Reference</a></div><div id="page-toc-src"><a href="#API_DescribeStackSet_RequestParameters">Request Parameters</a><a href="#API_DescribeStackSet_ResponseElements">Response Elements</a><a href="#API_DescribeStackSet_Errors">Errors</a><a href="#API_DescribeStackSet_Examples">Examples</a><a href="#API_DescribeStackSet_SeeAlso">See Also</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="API_DescribeStackSet">DescribeStackSet</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>Returns the description of the specified StackSet.</p><div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>This API provides <em>strongly consistent</em> reads meaning it will always
+        return the most up-to-date data.</p></div></div>
+      <h2 id="API_DescribeStackSet_RequestParameters">Request Parameters</h2>
+      <p> For information about the parameters that are common to all actions, see <a href="./CommonParameters.html">Common Parameters</a>.</p>
+      <div class="variablelist">
+          
+          
+      <dl>
+            <dt><span class="term">
+               <b>
+                  CallAs
+               </b>
+            </span></dt>
+            <dd>
+               <p>[Service-managed permissions] Specifies whether you are acting as an account administrator
+      in the organization's management account or as a delegated administrator in a
+      member account.</p>
+               <p>By default, <code class="code">SELF</code> is specified. Use <code class="code">SELF</code> for stack sets with
+      self-managed permissions.</p>
+               <div class="itemizedlist">
+                   
+                   
+               <ul class="itemizedlist"><li class="listitem">
+                     <p>If you are signed in to the management account, specify
+          <code class="code">SELF</code>.</p>
+                  </li><li class="listitem">
+                     <p>If you are signed in to a delegated administrator account, specify
+            <code class="code">DELEGATED_ADMIN</code>.</p>
+                     <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a
+            delegated administrator</a> in the <em>
+                           AWS CloudFormation User Guide</em>.</p>
+                  </li></ul></div>
+               <p>Type: String</p>
+               <p>Valid Values: <code class="code">SELF | DELEGATED_ADMIN</code>
+               </p>
+               <p>Required: No</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  StackSetName
+               </b>
+            </span></dt>
+            <dd>
+               <p>The name or unique ID of the stack set whose description you want.</p>
+               <p>Type: String</p>
+               <p>Required: Yes</p>
+            </dd>
+         </dl></div>
+    
+      <h2 id="API_DescribeStackSet_ResponseElements">Response Elements</h2>
+      <p>The following element is returned by the service.</p>
+      <div class="variablelist">
+          
+      <dl>
+            <dt><span class="term">
+               <b>
+                  StackSet
+               </b>
+            </span></dt>
+            <dd>
+               <p>The specified stack set.</p>
+               <p>Type: <a href="./API_StackSet.html">StackSet</a> object</p>
+            </dd>
+         </dl></div>
+    
+      <h2 id="API_DescribeStackSet_Errors">Errors</h2>
+      <p>For information about the errors that are common to all actions, see <a href="./CommonErrors.html">Common Errors</a>.</p>
+      <div class="variablelist">
+          
+      <dl>
+            <dt><span class="term">
+               <b>
+                  StackSetNotFound
+               </b>
+            </span></dt>
+            <dd>
+               <p>The specified stack set doesn't exist.</p>
+               <p>HTTP Status Code: 404</p>
+            </dd>
+         </dl></div>
+    
+      <h2 id="API_DescribeStackSet_Examples">Examples</h2>
+       
+         <h3 id="API_DescribeStackSet_Example_1">DescribeStackSet</h3>
+         <p>This example illustrates one usage of DescribeStackSet.</p>
+          
+            <h4 id="API_DescribeStackSet_Example_1_Request">Sample Request</h4>
+            <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli ()--><code class="">https://cloudformation.us-east-1.amazonaws.com/
+ ?Action=DescribeStackSet
+ &amp;Version=2010-05-15
+ &amp;StackSetName=stack-set-example
+ &amp;X-Amz-Algorithm=AWS4-HMAC-SHA256
+ &amp;X-Amz-Credential=[Access key ID and scope]
+ &amp;X-Amz-Date=20170810T233349Z
+ &amp;X-Amz-SignedHeaders=content-type;host
+ &amp;X-Amz-Signature=[Signature]</code></pre>
+          
+          
+            <h4 id="API_DescribeStackSet_Example_1_Response">Sample Response</h4>
+            <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli ()--><code class="">
+&lt;DescribeStackSetResponse xmlns="http://internal.amazon.com/coral/com.amazonaws.maestro.service.v20160713/"&gt;
+  &lt;DescribeStackSetResult&gt;
+    &lt;StackSet&gt;
+      &lt;Capabilities&gt;
+        &lt;member&gt;CAPABILITY_IAM&lt;/member&gt;
+      &lt;/Capabilities&gt;
+      &lt;StackSetId&gt;stack-set-example:c14cd6d1-cd17-40bd-82ed-ff97example&lt;/StackSetId&gt;
+      &lt;TemplateBody&gt;
+        [details omitted]
+      &lt;/TemplateBody&gt;
+      &lt;StackSetName&gt;stack-set-example&lt;/StackSetName&gt;
+      &lt;Description&gt;Enable AWS Config&lt;/Description&gt;
+      &lt;Parameters&gt;
+        &lt;member&gt;
+          &lt;ParameterKey&gt;AllSupported&lt;/ParameterKey&gt;
+          &lt;UsePreviousValue&gt;false&lt;/UsePreviousValue&gt;
+          &lt;ParameterValue&gt;true&lt;/ParameterValue&gt;
+        &lt;/member&gt;
+        &lt;member&gt;
+          &lt;ParameterKey&gt;DeliveryChannelName&lt;/ParameterKey&gt;
+          &lt;UsePreviousValue&gt;false&lt;/UsePreviousValue&gt;
+          &lt;ParameterValue&gt;&lt;Generated&gt;&lt;/ParameterValue&gt;
+        &lt;/member&gt;
+        &lt;member&gt;
+          &lt;ParameterKey&gt;Frequency&lt;/ParameterKey&gt;
+          &lt;UsePreviousValue&gt;false&lt;/UsePreviousValue&gt;
+          &lt;ParameterValue&gt;24hours&lt;/ParameterValue&gt;
+        &lt;/member&gt;
+        &lt;member&gt;
+          &lt;ParameterKey&gt;IncludeGlobalResourceTypes&lt;/ParameterKey&gt;
+          &lt;UsePreviousValue&gt;false&lt;/UsePreviousValue&gt;
+          &lt;ParameterValue&gt;true&lt;/ParameterValue&gt;
+        &lt;/member&gt;
+        &lt;member&gt;
+          &lt;ParameterKey&gt;NotificationEmail&lt;/ParameterKey&gt;
+          &lt;UsePreviousValue&gt;false&lt;/UsePreviousValue&gt;
+          &lt;ParameterValue&gt;&lt;None&gt;&lt;/ParameterValue&gt;
+        &lt;/member&gt;
+        &lt;member&gt;
+          &lt;ParameterKey&gt;ResourceTypes&lt;/ParameterKey&gt;
+          &lt;UsePreviousValue&gt;false&lt;/UsePreviousValue&gt;
+          &lt;ParameterValue&gt;&lt;All&gt;&lt;/ParameterValue&gt;
+        &lt;/member&gt;
+        &lt;member&gt;
+          &lt;ParameterKey&gt;TopicArn&lt;/ParameterKey&gt;
+          &lt;UsePreviousValue&gt;false&lt;/UsePreviousValue&gt;
+          &lt;ParameterValue&gt;&lt;New Topic&gt;&lt;/ParameterValue&gt;
+        &lt;/member&gt;
+      &lt;/Parameters&gt;
+      &lt;Tags&gt;
+        &lt;member&gt;
+          &lt;Value&gt;marketing&lt;/Value&gt;
+          &lt;Key&gt;business-unit&lt;/Key&gt;
+        &lt;/member&gt;
+      &lt;/Tags&gt;
+      &lt;StackSetDriftDetectionDetails&gt;
+        &lt;DriftDetectionStatus&gt;COMPLETED&lt;/DriftDetectionStatus&gt;
+        &lt;InSyncStackInstancesCount&gt;5&lt;/InSyncStackInstancesCount&gt;
+        &lt;FailedStackInstancesCount&gt;0&lt;/FailedStackInstancesCount&gt;
+        &lt;DriftStatus&gt;IN_SYNC&lt;/DriftStatus&gt;
+        &lt;TotalStackInstancesCount&gt;5&lt;/TotalStackInstancesCount&gt;
+        &lt;DriftedStackInstancesCount&gt;0&lt;/DriftedStackInstancesCount&gt;
+        &lt;InProgressStackInstancesCount&gt;0&lt;/InProgressStackInstancesCount&gt;
+        &lt;LastDriftCheckTimestamp&gt;2019-12-03T20:00:27.877Z&lt;/LastDriftCheckTimestamp&gt;
+      &lt;/StackSetDriftDetectionDetails&gt;
+      &lt;Status&gt;ACTIVE&lt;/Status&gt;
+    &lt;/StackSet&gt;
+  &lt;/DescribeStackSetResult&gt;
+  &lt;ResponseMetadata&gt;
+    &lt;RequestId&gt;48d13e76-794b-11e7-95e6-f946example&lt;/RequestId&gt;
+  &lt;/ResponseMetadata&gt;
+&lt;/DescribeStackSetResponse&gt;</code></pre>
+          
+       
+       
+         <h3 id="API_DescribeStackSet_Example_2">How to view which Regions a StackSet has stack instances deployed to.</h3>
+         <p>Use the <code class="code">DescribeStackSets</code> API to output a list of Regions. This list
+          consists of Regions where a given StackSet has stack instances deployed.</p>
+         <p>In the following example, the StackSet named "MyStackSet" has stack instances deployed
+          in Regions "us-east-1" and "us-west-2":</p>
+          
+            <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><!--DEBUG: cli ()--><code class=""><span>{</span>
+    "StackSet": <span>{</span>
+        "StackSetName": "MyStackSet",
+        //...
+        "Regions": [
+            "us-east-1",
+            "us-west-2"
+        ]
+    }
+}</code></pre>
+          
+       
+    
+      <h2 id="API_DescribeStackSet_SeeAlso">See Also</h2>
+      <p>For more information about using this API in one of the language-specific AWS SDKs, see the following:</p>
+      <div class="itemizedlist">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      <ul class="itemizedlist"><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/aws-cli/cloudformation-2010-05-15/DescribeStackSet">AWS Command Line Interface</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/DotNetSDKV3/cloudformation-2010-05-15/DescribeStackSet">AWS SDK for .NET</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForCpp/cloudformation-2010-05-15/DescribeStackSet">AWS SDK for C++</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForGoV2/cloudformation-2010-05-15/DescribeStackSet">AWS SDK for Go v2</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForJavaV2/cloudformation-2010-05-15/DescribeStackSet">AWS SDK for Java V2</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForJavaScriptV3/cloudformation-2010-05-15/DescribeStackSet">AWS SDK for JavaScript V3</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForKotlin/cloudformation-2010-05-15/DescribeStackSet">AWS SDK for Kotlin</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForPHPV3/cloudformation-2010-05-15/DescribeStackSet">AWS SDK for PHP V3</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/boto3/cloudformation-2010-05-15/DescribeStackSet">AWS SDK for Python</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForRubyV3/cloudformation-2010-05-15/DescribeStackSet">AWS SDK for Ruby V3</a>
+            </p>
+         </li></ul></div>
+   <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./API_DescribeStacks.html">DescribeStacks</div><div id="next" class="next-link" accesskey="n" href="./API_DescribeStackSetOperation.html">DescribeStackSetOperation</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_DescribeStackSet.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

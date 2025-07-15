@@ -1,0 +1,481 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Get started with StackSets using a sample template - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="stacksets-getting-started" /><meta name="default_state" content="stacksets-getting-started" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" /><meta name="description" content="Walk through the process of creating your first StackSet using a sample template from the AWS Management Console. Learn how to deploy stacks across multiple Regions in your account." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="Get started with StackSets using a sample template" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Get started with StackSets using a sample template - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#stacksets-getting-started" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Managing stacks across accounts and Regions with StackSets",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "Get started with StackSets using a sample template",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#stacksets-getting-started" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#stacksets-tutorial-prerequisites">Prerequisites</a><a href="#stacksets-tutorial-create-stackset">Create a StackSet with self-managed
+                permissions</a><a href="#stacksets-tutorial-monitor-creation">Monitor StackSet creation</a><a href="#stacksets-tutorial-view-results">View StackSet results</a><a href="#stacksets-tutorial-update-stackset">Update your StackSet</a><a href="#stacksets-tutorial-add-stacks">Add stacks to your StackSet</a><a href="#stacksets-tutorial-clean-up">Clean up</a><a href="#stacksets-tutorial-next-steps">Next steps</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="stacksets-getting-started">Get started with StackSets using a sample
+            template</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>This tutorial will help you get started with StackSets using the AWS Management Console. It guides
+        you through creating a StackSet using a sample template. You'll learn how to deploy stacks
+        across multiple Regions, monitor StackSet operations, and view the results.</p><p>In this tutorial, you'll create a StackSet that enables AWS Config in your AWS account within the
+        US West (Oregon) Region (<code class="code">us-west-2</code>) and US East (N. Virginia) Region (<code class="code">us-east-1</code>). With
+        StackSets, you can create, update, or delete stacks across multiple accounts and Regions
+        with a single operation, making it an ideal solution for managing infrastructure at scale.
+        While this tutorial uses a single account for simplicity, it effectively demonstrates the
+        multi-region capabilities of StackSets. </p><p>The sample template is available in the following S3 bucket: <a href="https://s3.amazonaws.com/cloudformation-stackset-sample-templates-us-east-1/EnableAWSConfig.yml" rel="noopener noreferrer" target="_blank"><span>https://s3.amazonaws.com/cloudformation-stackset-sample-templates-us-east-1/EnableAWSConfig.yml</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.</p><div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>StackSets is free, but you'll be charged for the AWS resources you create with
+            it, such as AWS Config in this tutorial. For more information, see <a href="https://aws.amazon.com/config/pricing/" rel="noopener noreferrer" target="_blank"><span>AWS Config pricing</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.</p></div></div><div class="highlights" id="inline-topiclist"><h6>Topics</h6><ul><li><p><a href="#stacksets-tutorial-prerequisites">Prerequisites</a></p></li><li><p><a href="#stacksets-tutorial-create-stackset">Create a StackSet with self-managed
+                permissions</a></p></li><li><p><a href="#stacksets-tutorial-monitor-creation">Monitor StackSet creation</a></p></li><li><p><a href="#stacksets-tutorial-view-results">View StackSet results</a></p></li><li><p><a href="#stacksets-tutorial-update-stackset">Update your StackSet</a></p></li><li><p><a href="#stacksets-tutorial-add-stacks">Add stacks to your StackSet</a></p></li><li><p><a href="#stacksets-tutorial-clean-up">Clean up</a></p></li><li><p><a href="#stacksets-tutorial-next-steps">Next steps</a></p></li></ul></div>
+        <h2 id="stacksets-tutorial-prerequisites">Prerequisites</h2>
+        <p>Before you begin this tutorial, make sure you have completed the following
+            prerequisites:</p>
+        <div class="itemizedlist">
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>You must have set up the required IAM roles for self-managed permissions. To
+                    create a StackSet and deploy stacks within a single account, you need the following
+                    roles in your account:</p>
+                <div class="itemizedlist">
+                     
+                     
+                <ul class="itemizedlist"><li class="listitem">
+                        <p><code class="code">AWSCloudFormationStackSetAdministrationRole</code></p>
+                    </li><li class="listitem">
+                        <p><code class="code">AWSCloudFormationStackSetExecutionRole</code></p>
+                    </li></ul></div>
+                <p>For detailed instructions on setting up these roles, see <a href="./stacksets-prereqs-self-managed.html">Grant self-managed
+                permissions</a>.</p>
+            </li></ul></div>
+     
+        <h2 id="stacksets-tutorial-create-stackset">Create a StackSet with self-managed
+                permissions</h2>
+        <div class="procedure"><h6>To create a StackSet that enables AWS Config</h6><ol><li>
+                <p>Open the <a href="https://console.aws.amazon.com/cloudformation/" rel="noopener noreferrer" target="_blank"><span>CloudFormation
+                        console</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.</p>
+            </li><li>
+                <p>On the navigation bar at the top of the screen, choose the AWS Region that
+                    you want to manage the StackSet from.</p>
+                <p>You can choose any Region that supports StackSets. The Region you select
+                    doesn't affect which Regions you can deploy to with your StackSet.</p>
+            </li><li>
+                <p>From the navigation pane, choose <b>StackSets</b>.</p>
+            </li><li>
+                <p>From the top of the <b>StackSets</b> page, choose
+                        <b>Create StackSet</b>.</p>
+            </li><li>
+                <p>Under <b>Permissions</b>, choose <b>Self-service
+                        permissions</b> and choose the IAM roles you created in the
+                    prerequisites.</p>
+                <div class="itemizedlist">
+                     
+                     
+                <ul class="itemizedlist"><li class="listitem">
+                        <p>For IAM admin role, choose
+                                <b>AWSCloudFormationStackSetAdministrationRole</b>.</p>
+                    </li><li class="listitem">
+                        <p>For IAM execution role name, choose
+                                <b>AWSCloudFormationStackSetExecutionRole</b>. </p>
+                    </li></ul></div>
+            </li><li>
+                <p>Under <b>Prerequisite - Prepare template</b>, choose
+                        <b>Use a sample template</b>.</p>
+            </li><li>
+                <p>Under <b>Select a sample template</b>, choose the
+                        <b>Enable AWS Config</b> template. Then, choose
+                        <b>Next</b>.</p>
+                <p>This template creates the necessary resources to enable AWS Config in your account,
+                    including a configuration recorder and delivery channel.</p>
+            </li><li>
+                <p>On the <b>Specify StackSet details</b> page, for
+                        <b>StackSet name</b>, enter
+                        <code class="userinput">my-awsconfig-stackset</code>.</p>
+            </li><li>
+                <p>For <b>StackSet description</b>, enter <code class="userinput">A StackSet that
+                        enables Config across multiple Regions</code>.</p>
+            </li><li>
+                <p>Under <b>Parameters</b>, configure the AWS Config settings as
+                    follows:</p>
+                <ol><li>
+                        <p>For <b>Support all resource types</b>, keep the default
+                            value, <b>true</b>, to record all supported resource
+                            types.</p>
+                    </li><li>
+                        <p>For <b>Include global resource types</b>, keep the
+                            default value, <b>false</b>, to exclude global resources
+                            like IAM roles.</p>
+                    </li><li>
+                        <p>Leave <b>List of resource types if not all supported</b>
+                            set to <b>&lt;All&gt;</b>.</p>
+                    </li><li>
+                        <p>For <b>The region containing the Config service-linked role
+                                resource</b>, replace
+                                <b>&lt;DeployToAnyRegion&gt;</b> with
+                                <code class="userinput">us-west-2</code>.</p>
+                        <p>This means that the service-linked role named
+                                <code class="code">AWSServiceRoleForConfig</code> will only be created if a stack
+                            is deployed to the US West (Oregon) Region. You'll choose the deployment Regions
+                            later in this procedure.</p>
+                    </li><li>
+                        <p>For <b>Configuration recorder recording frequency</b>,
+                            choose <b>DAILY</b> recording.</p>
+                    </li></ol>
+            </li><li>
+                <p>Choose <b>Next</b> to continue.</p>
+            </li><li>
+                <p>On the <b>Configure StackSet options</b> page, choose
+                        <b>Add new tag</b> and add a tag by specifying a key and value
+                    pair:</p>
+                <ol><li>
+                        <p>For <b>Key</b>, enter
+                            <code class="userinput">Stage</code>.</p>
+                    </li><li>
+                        <p>For <b>Value</b>, enter
+                            <code class="userinput">Test</code>.</p>
+                    </li></ol>
+                <p>Tags that you apply to StackSets are applied to resources that are created
+                    by your stacks.</p>
+            </li><li>
+                <p>For <b>Execution configuration</b>, choose
+                    <b>Active</b> to enable CloudFormation's optimized operation
+                    handling:</p>
+                <div class="itemizedlist">
+                     
+                     
+                <ul class="itemizedlist"><li class="listitem">
+                        <p>Non-conflicting operations run concurrently for faster deployment
+                            times.</p>
+                    </li><li class="listitem">
+                        <p>Conflicting operations are automatically queued and processed in
+                            the order they were requested.</p>
+                    </li></ul></div>
+                <p>While operations are running or queued, CloudFormation queues all incoming
+                    operations even if they're non-conflicting. You can't change execution
+                    settings during this time.</p>
+            </li><li>
+                <p>Choose <b>Next</b>.</p>
+            </li><li>
+                <p>On the <b>Set deployment options</b> page, for <b>Add
+                        stacks to StackSet</b>, choose <b>Deploy new
+                    stacks</b>.</p>
+            </li><li>
+                <p>For <b>Accounts</b>, choose <b>Deploy stacks in
+                        accounts</b>.</p>
+            </li><li>
+                <p>In the text box, enter your AWS account ID.</p>
+
+            </li><li>
+                <p>For <b>Specify regions</b>, select the following Regions in this
+                    order:</p>
+                <div class="orderedlist">
+                     
+                     
+                <ol><li>
+                        <p>US West (Oregon) Region (<code class="code">us-west-2</code>)</p>
+                    </li><li>
+                        <p>US East (N. Virginia) Region (<code class="code">us-east-1</code>)</p>
+                    </li></ol></div>
+                <p>Use the up arrow next to US West (Oregon) Region to move it to be the first entry in
+                    the list if needed. The order of the Regions determines their deployment
+                    order.</p>
+            </li><li>
+                <p>For <b>Deployment options</b>, configure the following
+                    settings:</p>
+                <ol><li>
+                        <p>For <b>Maximum concurrent accounts</b>, keep the
+                            defaults of <b>Number</b> and
+                            <b>1</b>.</p>
+                        <p>For multi-account deployments, this setting means that CloudFormation
+                            deploys your stack in only one account at a time.</p>
+                    </li><li>
+                        <p>For <b>Failure tolerance</b>, keep the defaults of
+                                <b>Number</b> and <b>0</b>.</p>
+                        <p>This means that a maximum of zero stack deployments can fail in one of
+                            your specified Regions before CloudFormation stops deployment in the current
+                            Region and cancels deployments in remaining Regions.</p>
+                    </li><li>
+                        <p>For <b>Region concurrency</b>, choose
+                                <b>Sequential</b> (default).</p>
+                        <p>This setting ensures that CloudFormation completes deployments in one
+                            Region before moving to the next.</p>
+                    </li><li>
+                        <p>For <b>Concurrency mode</b>, keep the default of
+                                <b>Strict failure tolerance</b>.</p>
+                        <p>For multi-account deployments, this reduces the account concurrency
+                            level when failures occur, staying within <b>Failure
+                                tolerance</b> +1.</p>
+                    </li></ol>
+            </li><li>
+                <p>Choose <b>Next</b>.</p>
+            </li><li>
+                <p>On the <b>Review</b> page, review your choices. To make changes,
+                    choose <b>Edit</b> on the related section.</p>
+            </li><li>
+                <p>When you are ready to create your StackSet, choose
+                    <b>Submit</b>.</p>
+            </li></ol></div>
+     
+        <h2 id="stacksets-tutorial-monitor-creation">Monitor StackSet creation</h2>
+        <p>After you choose <b>Submit</b>, CloudFormation begins creating your StackSet and
+            deploying stacks to the specified Regions in your account. The StackSet details page opens
+            automatically, where you can monitor the progress of the operation.</p>
+        <div class="procedure"><h6>To monitor the StackSet creation</h6><ol><li>
+                <p>On the StackSet details page, the <b>Operations</b> tab is displayed
+                    by default, showing the current operation in progress.</p>
+            </li><li>
+                <p>The operation status should be <code class="code">RUNNING</code> initially. CloudFormation
+                    creates stacks in the Regions you specified according to the deployment options
+                    you configured.</p>
+            </li><li>
+                <p>To see more details about the operation, select the operation ID in the
+                    list.</p>
+            </li><li>
+                <p>On the operation details page, you can view the status of stack instances
+                    being created in each Region.</p>
+            </li><li>
+                <p>Wait for the operation status to change to <code class="code">SUCCEEDED</code>, which
+                    indicates that the StackSet and all its stack instances were created
+                    successfully.</p>
+            </li></ol></div>
+     
+        <h2 id="stacksets-tutorial-view-results">View StackSet results</h2>
+        <p>After the StackSet creation is complete, you can view the deployed stack instances and
+            verify that AWS Config has been enabled in your account across the specified Regions.</p>
+        <div class="procedure"><h6>To view the StackSet results</h6><ol><li>
+                <p>On the StackSet details page, choose the <b>Stack instances</b>
+                    tab.</p>
+            </li><li>
+                <p>You should see a list of stack instances that were created in your account
+                    across the specified Regions. Each stack instance should have a status of
+                        <code class="code">SUCCEEDED</code>, indicating that it was successfully deployed.</p>
+            </li><li>
+                <p>To verify that AWS Config is enabled in your account, you can check the AWS Config console
+                    in each of the deployed Regions.</p>
+            </li></ol></div>
+     
+        <h2 id="stacksets-tutorial-update-stackset">Update your StackSet</h2>
+        <p>After creating your StackSet, you might want to update it to modify parameter values or
+            add more Regions. This section shows you how to update the AWS Config recording frequency
+            parameter.</p>
+        <div class="procedure"><h6>To update your StackSet</h6><ol><li>
+                <p>On the <b>StackSets</b> page, select your
+                        <code class="userinput">my-awsconfig-stackset</code>.</p>
+            </li><li>
+                <p>With the StackSet selected, choose <b>Edit StackSet details</b> from
+                    the <b>Actions</b> menu.</p>
+            </li><li>
+                <p>On the <b>Choose a template</b> page, for <b>Prerequisite
+                        - Prepare template</b>, choose <b>Use current
+                        template</b>.</p>
+            </li><li>
+                <p>Choose <b>Next</b>.</p>
+            </li><li>
+                <p>On the <b>Specify StackSet details</b> page, under
+                        <b>Parameters</b>, find <b>Configuration recorder
+                        recording frequency</b> and change it from <b>DAILY</b>
+                    to <b>CONTINUOUS</b>.</p>
+            </li><li>
+                <p>Choose <b>Next</b>.</p>
+            </li><li>
+                <p>On the <b>Configure StackSet options</b> page, leave the
+                    settings as they are and choose <b>Next</b>.</p>
+            </li><li>
+                <p>On the <b>Set deployment options</b> page, specify your account
+                    ID and the same Regions that you used when creating the StackSet.</p>
+            </li><li>
+                <p>For <b>Deployment options</b>, keep the same settings as
+                    before.</p>
+            </li><li>
+                <p>Choose <b>Next</b>.</p>
+            </li><li>
+                <p>On the <b>Review</b> page, review your changes and choose
+                        <b>Submit</b>.</p>
+            </li><li>
+                <p>CloudFormation starts updating your StackSet. You can monitor the progress on the
+                        <b>Operations</b> tab of the StackSet details page.</p>
+            </li></ol></div>
+     
+        <h2 id="stacksets-tutorial-add-stacks">Add stacks to your StackSet</h2>
+        <p>You can add more stacks to your StackSet by deploying to additional Regions. This section
+            shows you how to add stacks to a new Region.</p>
+        <div class="procedure"><h6>To add stacks to your StackSet</h6><ol><li>
+                <p>On the <b>StackSets</b> page, select your
+                        <code class="userinput">my-awsconfig-stackset</code>.</p>
+            </li><li>
+                <p>With the StackSet selected, choose <b>Add stacks to StackSet</b>
+                    from the <b>Actions</b> menu.</p>
+            </li><li>
+                <p>On the <b>Set deployment options</b> page, for <b>Add
+                        stacks to StackSet</b>, choose <b>Deploy new
+                    stacks</b>.</p>
+            </li><li>
+                <p>For <b>Accounts</b>, choose <b>Deploy stacks in
+                        accounts</b> and enter your account ID.</p>
+            </li><li>
+                <p>For <b>Specify regions</b>, select a new Region, such as
+                        <b>Europe (Ireland)</b> (<code class="code">eu-west-1</code>).</p>
+            </li><li>
+                <p>For <b>Deployment options</b>, keep the same settings as
+                    before.</p>
+            </li><li>
+                <p>Choose <b>Next</b>.</p>
+            </li><li>
+                <p>On the <b>Specify Overrides</b> page, leave the property values
+                    as specified and choose <b>Next</b>.</p>
+            </li><li>
+                <p>On the <b>Review</b> page, review your choices and choose
+                        <b>Submit</b>.</p>
+            </li><li>
+                <p>CloudFormation starts creating new stacks in the specified Region. You can monitor
+                    the progress on the <b>Operations</b> tab of the StackSet details
+                    page.</p>
+            </li></ol></div>
+     
+        <h2 id="stacksets-tutorial-clean-up">Clean up</h2>
+        <p>To avoid incurring charges for unwanted AWS Config resources, you should clean up by
+            deleting the stacks from your StackSet, deleting the StackSet itself, and removing the IAM
+            roles you created for this tutorial. Since all resources are deployed within your
+            account, cleanup is straightforward.</p>
+        <div class="procedure"><h6>To delete stacks from your StackSet</h6><ol><li>
+                <p>On the <b>StackSets</b> page, select your
+                        <code class="userinput">my-awsconfig-stackset</code>.</p>
+            </li><li>
+                <p>With the StackSet selected, choose <b>Delete stacks from
+                        StackSet</b> from the <b>Actions</b> menu.</p>
+            </li><li>
+                <p>On the <b>Set deployment options</b> page, for
+                        <b>Accounts</b>, choose <b>Deploy stacks in
+                        accounts</b> and enter your account ID.</p>
+            </li><li>
+                <p>For <b>Specify regions</b>, select all the Regions where you
+                    deployed stacks.</p>
+            </li><li>
+                <p>For <b>Deployment options</b>, keep the default settings.</p>
+            </li><li>
+                <p>Make sure <b>Retain stacks</b> is <em>not</em>
+                    turned on, so that the stacks and their resources are deleted.</p>
+            </li><li>
+                <p>Choose <b>Next</b>.</p>
+            </li><li>
+                <p>On the <b>Review</b> page, review your choices and choose
+                        <b>Submit</b>.</p>
+            </li><li>
+                <p>CloudFormation starts deleting the stacks from your StackSet. You can monitor the
+                    progress on the <b>Operations</b> tab of the StackSet details
+                    page.</p>
+            </li></ol></div>
+        <div class="procedure"><h6>To delete your StackSet</h6><ol><li>
+                <p>After all stacks have been deleted, on the <b>StackSets</b>
+                    page, select your <code class="userinput">my-awsconfig-stackset</code>.</p>
+            </li><li>
+                <p>With the StackSet selected, choose <b>Delete StackSet</b> from the
+                        <b>Actions</b> menu.</p>
+            </li><li>
+                <p>When prompted to confirm, choose <b>Delete</b>.</p>
+            </li></ol></div>
+        <div class="procedure"><h6>To delete the IAM service roles</h6><p>Since you deployed only to your account, you only need to delete the IAM roles
+                from this single account, making cleanup much simpler than multi-account
+                deployments.</p><ol><li>
+                <p>Open the <a href="https://console.aws.amazon.com/iam/" rel="noopener noreferrer" target="_blank"><span>IAM console</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.</p>
+            </li><li>
+                <p>From the navigation pane, choose <b>Roles</b>.</p>
+            </li><li>
+                <p>In the search box, enter <code class="userinput">AWSCloudFormationStackSet</code> to
+                    find the roles you created for this tutorial.</p>
+            </li><li>
+                <p>Select the checkbox next to
+                        <b>AWSCloudFormationStackSetAdministrationRole</b>.</p>
+            </li><li>
+                <p>Choose <b>Delete</b> from the top of the page.</p>
+            </li><li>
+                <p>In the confirmation dialog box, enter <code class="userinput">delete</code> and choose
+                        <b>Delete</b>.</p>
+            </li><li>
+                <p>Repeat the same process to delete the
+                        <b>AWSCloudFormationStackSetExecutionRole</b>.</p>
+            </li></ol></div>
+        <p>After deleting the StackSet, an Amazon S3 bucket will remain in each AWS Region due to the
+                <code class="code">DeletionPolicy</code> attribute on the <code class="code">AWS::S3::Bucket</code> resource.
+            This preserves your AWS Config history data. If you no longer need this data, you can safely
+            delete the bucket manually. Before you can delete a bucket, you must first empty it.
+            Emptying a bucket deletes all objects in it.</p>
+        <div class="procedure"><h6>To empty and delete the Amazon S3 buckets</h6><ol><li>
+                <p>Open the <a href="https://console.aws.amazon.com/s3/" rel="noopener noreferrer" target="_blank"><span>Amazon S3 console</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.</p>
+            </li><li>
+                <p>In the navigation pane on the left side of the console, choose
+                        <b>Buckets</b>.</p>
+            </li><li>
+                <p>In the <b>Buckets</b> list, you'll see buckets created for this
+                    StackSet in each Region where you deployed. Select the option next to the name of
+                    the bucket created for this StackSet, and then choose
+                    <b>Empty</b>.</p>
+            </li><li>
+                <p>On the <b>Empty bucket</b> page, confirm that you want to empty
+                    the bucket by typing <code class="userinput">permanently delete</code> into the text
+                    field, and then choose <b>Empty</b>.</p>
+            </li><li>
+                <p>Monitor the progress of the bucket emptying process on the <b>Empty
+                        bucket: Status</b> page. </p>
+            </li><li>
+                <p>To return to your bucket list, choose <b>Exit</b>.</p>
+            </li><li>
+                <p>Select the option next to the name of the bucket, and then choose
+                        <b>Delete</b>.</p>
+            </li><li>
+                <p>When prompted for confirmation, type the name of the bucket and then choose
+                        <b>Delete bucket</b>.</p>
+            </li><li>
+                <p>Monitor the progress of the bucket deletion process from the
+                        <b>Buckets</b> list. When Amazon S3 completes the deletion of the
+                    bucket, it removes the bucket from the list.</p>
+            </li><li>
+                <p>Repeat this process for each bucket created by the StackSet in the different
+                    Regions.</p>
+            </li></ol></div>
+     
+        <h2 id="stacksets-tutorial-next-steps">Next steps</h2>
+        <p>Congratulations! You've successfully created a StackSet using a sample template, deployed
+            stacks to multiple Regions within your account, updated the StackSet, added more stacks, and
+            cleaned up your resources. By focusing on single-account deployment, you've simplified
+            the cleanup process while still learning the core multi-region capabilities of
+            StackSets.</p>
+        <p>To learn more about StackSets, explore the following topics:</p>
+        <div class="itemizedlist">
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p><a href="./stackinstances-override.html">Override parameter values on stacks within
+                your CloudFormation StackSet</a> â Learn how to override
+                    parameter values for specific accounts and Regions.</p>
+            </li><li class="listitem">
+                <p><a href="./stacksets-orgs-associate-stackset-with-org.html">Create AWS CloudFormation StackSets with
+                service-managed permissions</a> â
+                    Explore creating StackSets for multi-account deployments with
+                    AWS Organizations.</p>
+            </li></ul></div>
+    <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./stacksets-orgs-delegated-admin.html">Register a delegated
+                    administrator</div><div id="next" class="next-link" accesskey="n" href="./stacksets-getting-started-create-self-managed.html">Create
+                StackSets (self-managed permissions)</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/stacksets-getting-started.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

@@ -1,0 +1,188 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Working with CloudFormation templates - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="template-guide" /><meta name="default_state" content="template-guide" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html" /><meta name="description" content="Use CloudFormation templates as blueprints for defining and provisioning your infrastructure as code." /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Create and manage AWS infrastructure deployments predictably and repeatedly using AWS CloudFormation with this User Guide." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="Working with CloudFormation templates" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>Working with CloudFormation templates - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#template-guide" /><meta name="rss" content="aws-cloudformation-user-guide-updates.rss" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-guide.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-guide.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-guide.html" /><meta name="keywords" content="CloudFormation,AWSCloudFormation,resource provisioning,resource configuration,infrastructure management,CloudFormer,CloudFormation stack,CloudFormation stackset,CloudFormation template,change set,CloudFormation templates,define your infrastructure" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Working with CloudFormation templates",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/UserGuide/cfn-ug.pdf#template-guide" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">User Guide</a></div><div id="page-toc-src"><a href="#where-they-get-stored">Where templates get stored</a><a href="#template-validation">Validating templates</a><a href="#getting-started">Getting started with templates</a><a href="#sample-templates">Sample templates</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="template-guide">Working with CloudFormation templates</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>An AWS CloudFormation template defines the AWS resources you want to create, update, or delete as
+    part of a stack. It consists of several sections, but the only required section is the <a href="./resources-section-structure.html">Resources</a>
+    section, which must declare at least one resource. </p><p>You can create templates using the following methods:</p><div class="itemizedlist">
+     
+    
+    
+    
+     
+     
+  <ul class="itemizedlist"><li class="listitem">
+      <p><span class="topcom">AWS Infrastructure Composer</span> â A visual interface for designing
+        templates.</p>
+    </li><li class="listitem">
+      <p><span class="topcom">Text Editor</span> â Write templates directly in JSON or
+        YAML syntax.</p>
+    </li><li class="listitem">
+      <p><span class="topcom">IaC generator</span> â Generate templates from resources
+        provisioned in your account that are not currently managed by CloudFormation. The IaC generator
+        works with a wide range of resource types that are supported by the Cloud Control API in your
+        Region.</p>
+    </li></ul></div><p>This section provides a comprehensive guide on how to use the different sections of a
+    CloudFormation template and how to start creating stack templates. It covers the following
+    topics:</p><div class="highlights"><h6>Topics</h6><ul><li><p><a href="#where-they-get-stored">Where templates get stored</a></p></li><li><p><a href="#template-validation">Validating templates</a></p></li><li><p><a href="#getting-started">Getting started with templates</a></p></li><li><p><a href="#sample-templates">Sample templates</a></p></li><li><p><a href="./template-formats.html">Template format</a></p></li><li><p><a href="./template-anatomy.html">Template sections</a></p></li><li><p><a href="./infrastructure-composer-for-cloudformation.html">Infrastructure Composer</a></p></li><li><p><a href="./generate-IaC.html">IaC generator</a></p></li><li><p><a href="./dynamic-references.html">Get values stored in other
+            services</a></p></li><li><p><a href="./pseudo-parameter-reference.html">Get AWS values</a></p></li><li><p><a href="./using-cfn-stack-exports.html">Get stack outputs</a></p></li><li><p><a href="./cloudformation-supplied-parameter-types.html">Specify existing
+            resources at runtime</a></p></li><li><p><a href="./walkthroughs.html">Walkthroughs</a></p></li><li><p><a href="./template-snippets.html">Template snippets</a></p></li><li><p><a href="./cfn-windows-stacks.html">Windows-based stacks</a></p></li><li><p><a href="./cloudformation-supplied-resource-types.html">Use CloudFormation-supplied
+            resource types</a></p></li><li><p><a href="./modules.html">Create reusable resource configurations with modules</a></p></li></ul></div>
+    <h2 id="where-they-get-stored">Where templates get stored</h2>
+     
+      <h6>Amazon S3 bucket</h6>
+      <p>You can store CloudFormation templates in an Amazon S3 bucket. When creating or updating a stack,
+        you can specify the S3 URL of the template instead of uploading it directly.</p>
+     
+    <p>If you upload templates directly through the AWS Management Console or AWS CLI, an S3 bucket is
+      automatically created for you. For more information, see <a href="./cfn-console-create-stack.html">Create a stack from the CloudFormation console</a>.</p>
+     
+      <h6>Git repository</h6>
+      <p>With <a href="./git-sync.html">Git sync</a>, you can store templates in a Git
+        repository. When creating or updating a stack, you can specify the Git repository location
+        and branch containing the template instead of uploading it directly or referencing an S3
+        URL. CloudFormation automatically monitors the specified repository and branch for template
+        changes. For more information, see <a href="./git-sync-create-stack-from-repository-source-code.html">Create a stack from repository source code with
+            Git sync</a>.</p>
+     
+   
+    <h2 id="template-validation">Validating templates</h2>
+     
+      <h6>Syntax validation</h6>
+      <p>You can verify the JSON or YAML syntax of your template by using the <a href="./service_code_examples.html#validate-template-sdk">validate-template</a> CLI command or by
+        specifying your template on the console. The console performs validation automatically. For
+        more information, see <a href="./cfn-console-create-stack.html">Create a stack from the CloudFormation console</a>. </p>
+     
+    <p>However, these methods only verify the syntax of your template and don't validate the
+      property values that you specified for a resource.</p>
+     
+      <h6>Additional validation tools</h6>
+      <p>For more complex validations and best practice checks, you can use additional tools
+        like:</p>
+     
+    <div class="itemizedlist">
+       
+       
+    <ul class="itemizedlist"><li class="listitem">
+        <p><a href="https://github.com/aws-cloudformation/cfn-lint" rel="noopener noreferrer" target="_blank"><span>CloudFormation Linter
+            (cfn-lint)</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> â Validate templates against the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/resource-type-schemas.html">CloudFormation resource provider schemas</a>.
+          Includes checking valid values for resource properties and best practices.</p>
+      </li><li class="listitem">
+        <p><a href="https://github.com/aws-cloudformation/rain" rel="noopener noreferrer" target="_blank"><span>CloudFormation Rain (rain
+            fmt)</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> â Format your CloudFormation templates to a consistent standard or
+          reformat a template from JSON to YAML (or YAML to JSON). It preserves comments when using
+          YAML and switches the use of intrinsic functions to the short syntax where
+          possible.</p>
+      </li></ul></div>
+   
+    <h2 id="getting-started">Getting started with templates</h2>
+    <p>To get started with creating a CloudFormation template, follow these steps:</p>
+    <div class="procedure"><ol><li>
+        <p><span class="topcom">Choose resources</span> â Identify the AWS resources
+          you want to include in your stack, such as EC2 instances, VPCs, security groups, and
+          more.</p>
+      </li><li>
+        <p><span class="topcom">Write the template</span> â Write the template in JSON
+          or YAML format, defining the resources and their properties.</p>
+      </li><li>
+        <p><span class="topcom">Save the template</span> â Save the template locally
+          with a file extension like: <code class="code">.json</code>, <code class="code">.yaml</code>, or
+          <code class="code">.txt</code>.</p>
+      </li><li>
+        <p><span class="topcom">Validate the template</span> â Validate the template
+          using the methods described in the <a href="#template-validation">Validating templates</a> section.</p>
+      </li><li>
+        <p><span class="topcom">Create a stack</span> â Create a stack using the
+          validated template. </p>
+      </li></ol></div>
+
+     
+      <h3 id="additional-resources">Plan to use the CloudFormation template reference</h3>
+
+      <p>As you write your templates, you can find documentation for the detailed syntax for
+        different resource types in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-template-resource-type-ref.html">AWS resource and property types reference</a>.</p>
+      <p>Often, your stack templates will require intrinsic functions to assign property values
+        that are not available until runtime and special attributes to control the behavior of
+        resources. As you write your template, refer to the following resources for guidance:</p>
+      <div class="itemizedlist">
+         
+         
+      <ul class="itemizedlist"><li class="listitem">
+          <p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference.html">Intrinsic function reference</a> â Some commonly used intrinsic functions
+            include:</p>
+          <div class="itemizedlist">
+             
+             
+             
+             
+          <ul class="itemizedlist"><li class="listitem">
+              <p><code class="code">Ref</code> â Retrieves the value of a parameter or the physical ID
+                of a resource.</p>
+            </li><li class="listitem">
+              <p><code class="code">Sub</code> â Substitutes placeholders in strings with actual
+                values.</p>
+            </li><li class="listitem">
+              <p><code class="code">GetAtt</code> â Returns the value of an attribute from a resource
+                in the template.</p>
+            </li><li class="listitem">
+              <p><code class="code">Join</code> â Joins a set of values into a single string.</p>
+            </li></ul></div>
+        </li><li class="listitem">
+          <p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-product-attribute-reference.html">Resource attribute reference</a> â Some commonly used special attributes
+            include:</p>
+          <div class="itemizedlist">
+             
+             
+          <ul class="itemizedlist"><li class="listitem">
+              <p><code class="code">DependsOn</code> â Use this attribute to specify that one resource
+                must be created after another.</p>
+            </li><li class="listitem">
+              <p><code class="code">DeletionPolicy</code> â Use this attribute to specify how
+                CloudFormation should handle the deletion of a resource.</p>
+            </li></ul></div>
+        </li></ul></div>
+     
+   
+    <h2 id="sample-templates">Sample templates</h2>
+    
+    <p>CloudFormation provides open-source stack templates that you can use to get started. For more
+      information, see <a href="https://github.com/aws-cloudformation/aws-cloudformation-templates" rel="noopener noreferrer" target="_blank"><span>AWS CloudFormation Sample
+        Templates</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> on the GitHub website.</p>
+    <p>Keep in mind that these templates are not meant to be production-ready. You should take
+      the time to learn how they work, adapt them to your needs, and make sure that they meet your
+      company's compliance standards.</p>
+    <p>Each template in this repository passes <a href="https://github.com/aws-cloudformation/cfn-lint" rel="noopener noreferrer" target="_blank"><span>CloudFormation Linter</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>
+      (cfn-lint) checks, and also a basic set of AWS CloudFormation Guard rules based on the Center for
+        Internet Security (CIS) Top 20, with exceptions for some rules where it made sense
+      to keep the sample focused on a single use case.</p>
+  <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./best-practices.html">Best practices</div><div id="next" class="next-link" accesskey="n" href="./template-formats.html">Template format</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-guide.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/UserGuide/template-guide.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>

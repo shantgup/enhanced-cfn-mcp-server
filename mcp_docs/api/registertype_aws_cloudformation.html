@@ -1,0 +1,349 @@
+<!-- Source URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html -->
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>RegisterType - AWS CloudFormation</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="API_RegisterType" /><meta name="default_state" content="API_RegisterType" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html" /><meta name="description" content="Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:" /><meta name="deployment_region" content="IAD" /><meta name="product" content="AWS CloudFormation" /><meta name="guide" content="API Reference" /><meta name="abstract" content="AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can use CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service, Elastic Load Balancing, and Amazon EC2 Auto Scaling to build highly reliable, highly scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="id-id" /><link rel="alternative" href="https://docs.aws.amazon.com/id_id/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="id" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="de-de" /><link rel="alternative" href="https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="de" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="en-us" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="en" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="es-es" /><link rel="alternative" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="es" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="fr-fr" /><link rel="alternative" href="https://docs.aws.amazon.com/fr_fr/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="fr" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="it-it" /><link rel="alternative" href="https://docs.aws.amazon.com/it_it/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="it" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="ja-jp" /><link rel="alternative" href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="ja" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="ko-kr" /><link rel="alternative" href="https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="ko" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="pt-br" /><link rel="alternative" href="https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="pt" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="zh-cn" /><link rel="alternative" href="https://docs.aws.amazon.com/zh_tw/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="zh-tw" /><link rel="alternative" href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html" hreflang="x-default" /><meta name="feedback-item" content="CloudFormation" /><meta name="this_doc_product" content="AWS CloudFormation" /><meta name="this_doc_guide" content="API Reference" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'cloudformation'}"></script><meta id="panorama-serviceSubSection" value="API Reference" /><meta id="panorama-serviceConsolePage" value="RegisterType" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>RegisterType - AWS CloudFormation</title><meta name="pdf" content="/pdfs/AWSCloudFormation/latest/APIReference/cfn-api.pdf#API_RegisterType" /><meta name="forums" content="https://repost.aws/tags/TAm3R3LNU3RfSX9L23YIpo3w" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_RegisterType.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_RegisterType.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_RegisterType.html" /><meta name="keywords" content="API,requests,RegisterType" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "AWS CloudFormation",
+        "item" : "https://docs.aws.amazon.com/cloudformation/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "API Reference",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "Actions",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Operations.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "RegisterType",
+        "item" : "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Operations.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/AWSCloudFormation/latest/APIReference/cfn-api.pdf#API_RegisterType" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/cloudformation/index.html">AWS CloudFormation</a><a href="Welcome.html">API Reference</a></div><div id="page-toc-src"><a href="#API_RegisterType_RequestParameters">Request Parameters</a><a href="#API_RegisterType_ResponseElements">Response Elements</a><a href="#API_RegisterType_Errors">Errors</a><a href="#API_RegisterType_Examples">Examples</a><a href="#API_RegisterType_SeeAlso">See Also</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="API_RegisterType">RegisterType</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>Registers an extension with the CloudFormation service. Registering an extension makes it
+      available for use in CloudFormation templates in your AWS account, and includes:</p><div class="itemizedlist">
+       
+       
+       
+   <ul class="itemizedlist"><li class="listitem">
+         <p>Validating the extension schema.</p>
+      </li><li class="listitem">
+         <p>Determining which handlers, if any, have been specified for the extension.</p>
+      </li><li class="listitem">
+         <p>Making the extension available for use in your account.</p>
+      </li></ul></div><p>For more information about how to develop extensions and ready them for registration, see
+        <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html">Creating resource types using the CloudFormation CLI</a> in the
+        <em>
+         AWS CloudFormation Command Line Interface (CLI) User Guide</em>.</p><p>You can have a maximum of 50 resource extension versions registered at a time. This
+      maximum is per account and per Region. Use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html">DeregisterType</a>
+      to deregister specific extension versions if necessary.</p><p>Once you have initiated a registration request using RegisterType, you
+      can use <a href="./API_DescribeTypeRegistration.html">DescribeTypeRegistration</a> to monitor the progress of the registration
+      request.</p><p>Once you have registered a private extension in your account and Region, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html">SetTypeConfiguration</a> to specify configuration properties for the extension. For
+      more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html">Edit configuration
+        data for extensions in your account</a> in the
+      <em>
+         AWS CloudFormation User Guide</em>.</p>
+      <h2 id="API_RegisterType_RequestParameters">Request Parameters</h2>
+      <p> For information about the parameters that are common to all actions, see <a href="./CommonParameters.html">Common Parameters</a>.</p>
+      <div class="variablelist">
+          
+          
+          
+          
+          
+          
+      <dl>
+            <dt><span class="term">
+               <b>
+                  ClientRequestToken
+               </b>
+            </span></dt>
+            <dd>
+               <p>A unique identifier that acts as an idempotency key for this registration request.
+      Specifying a client request token prevents CloudFormation from generating more than one version of
+      an extension from the same registration request, even if the request is submitted multiple
+      times.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1. Maximum length of 128.</p>
+               <p>Pattern: <code class="code">[a-zA-Z0-9][-a-zA-Z0-9]*</code>
+               </p>
+               <p>Required: No</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  ExecutionRoleArn
+               </b>
+            </span></dt>
+            <dd>
+               <p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking
+      the extension.</p>
+               <p>For CloudFormation to assume the specified execution role, the role must contain a trust
+      relationship with the CloudFormation service principal
+        (<code class="code">resources.cloudformation.amazonaws.com</code>). For more information about adding
+      trust relationships, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy">Modifying a role trust policy</a> in the <em>
+                     AWS Identity and Access Management User
+      Guide</em>.</p>
+               <p>If your extension calls AWS APIs in any of its handlers, you must create an
+          <em>
+                     <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
+          execution role</a>
+                  </em> that includes the necessary permissions to call those
+      AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke
+      the resource type handler, CloudFormation assumes this execution role to create a temporary
+      session token, which it then passes to the resource type handler, thereby supplying your
+      resource type with the appropriate credentials.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1. Maximum length of 256.</p>
+               <p>Pattern: <code class="code">arn:.+:iam::[0-9]<span>{</span>12}:role/.+</code>
+               </p>
+               <p>Required: No</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  LoggingConfig
+               </b>
+            </span></dt>
+            <dd>
+               <p>Specifies logging configuration information for an extension.</p>
+               <p>Type: <a href="./API_LoggingConfig.html">LoggingConfig</a> object</p>
+               <p>Required: No</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  SchemaHandlerPackage
+               </b>
+            </span></dt>
+            <dd>
+               <p>A URL to the S3 bucket that contains the extension project package that contains the
+      necessary files for the extension you want to register.</p>
+               <p>For information about generating a schema handler package for the extension you want to
+      register, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html">submit</a> in
+      the <em>
+                     AWS CloudFormation Command Line Interface (CLI) User Guide</em>.</p>
+               <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>The user registering the extension must be able to access the package in the S3 bucket.
+        That's, the user needs to have <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> permissions for the schema
+        handler package. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html">Actions, Resources, and Condition Keys for
+          Amazon S3</a> in the <em>
+                        AWS Identity and Access Management User Guide</em>.</p></div></div>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1. Maximum length of 4096.</p>
+               <p>Required: Yes</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  Type
+               </b>
+            </span></dt>
+            <dd>
+               <p>The kind of extension.</p>
+               <p>Type: String</p>
+               <p>Valid Values: <code class="code">RESOURCE | MODULE | HOOK</code>
+               </p>
+               <p>Required: No</p>
+            </dd>
+          
+            <dt><span class="term">
+               <b>
+                  TypeName
+               </b>
+            </span></dt>
+            <dd>
+               <p>The name of the extension being registered.</p>
+               <p>We suggest that extension names adhere to the following patterns:</p>
+               <div class="itemizedlist">
+                   
+                   
+                   
+               <ul class="itemizedlist"><li class="listitem">
+                     <p>For resource types, <code class="code">company_or_organization::service::type</code>.</p>
+                  </li><li class="listitem">
+                     <p>For modules, <code class="code">company_or_organization::service::type::MODULE</code>.</p>
+                  </li><li class="listitem">
+                     <p>For Hooks, <code class="code">MyCompany::Testing::MyTestHook</code>.</p>
+                  </li></ul></div>
+               <div class="awsdocs-note"><div class="awsdocs-note-title"><awsui-icon name="status-info" variant="link"></awsui-icon><h6>Note</h6></div><div class="awsdocs-note-text"><p>The following organization namespaces are reserved and can't be used in your extension
+        names:</p><div class="itemizedlist">
+                      
+                      
+                      
+                      
+                      
+                      
+                  <ul class="itemizedlist"><li class="listitem">
+                        <p>
+                           <code class="code">Alexa</code>
+                        </p>
+                     </li><li class="listitem">
+                        <p>
+                           <code class="code">AMZN</code>
+                        </p>
+                     </li><li class="listitem">
+                        <p>
+                           <code class="code">Amazon</code>
+                        </p>
+                     </li><li class="listitem">
+                        <p>
+                           <code class="code">AWS</code>
+                        </p>
+                     </li><li class="listitem">
+                        <p>
+                           <code class="code">Custom</code>
+                        </p>
+                     </li><li class="listitem">
+                        <p>
+                           <code class="code">Dev</code>
+                        </p>
+                     </li></ul></div></div></div>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 10. Maximum length of 204.</p>
+               <p>Pattern: <code class="code">[A-Za-z0-9]<span>{</span>2,64}::[A-Za-z0-9]<span>{</span>2,64}::[A-Za-z0-9]<span>{</span>2,64}(::MODULE)<span>{</span>0,1}</code>
+               </p>
+               <p>Required: Yes</p>
+            </dd>
+         </dl></div>
+    
+      <h2 id="API_RegisterType_ResponseElements">Response Elements</h2>
+      <p>The following element is returned by the service.</p>
+      <div class="variablelist">
+          
+      <dl>
+            <dt><span class="term">
+               <b>
+                  RegistrationToken
+               </b>
+            </span></dt>
+            <dd>
+               <p>The identifier for this registration request.</p>
+               <p>Use this registration token when calling <a href="./API_DescribeTypeRegistration.html">DescribeTypeRegistration</a>, which
+      returns information about the status and IDs of the extension registration.</p>
+               <p>Type: String</p>
+               <p>Length Constraints: Minimum length of 1. Maximum length of 128.</p>
+               <p>Pattern: <code class="code">[a-zA-Z0-9][-a-zA-Z0-9]*</code>
+               </p>
+            </dd>
+         </dl></div>
+    
+      <h2 id="API_RegisterType_Errors">Errors</h2>
+      <p>For information about the errors that are common to all actions, see <a href="./CommonErrors.html">Common Errors</a>.</p>
+      <div class="variablelist">
+          
+      <dl>
+            <dt><span class="term">
+               <b>
+                  CFNRegistry
+               </b>
+            </span></dt>
+            <dd>
+               <p>An error occurred during a CloudFormation registry operation.</p>
+               <p>HTTP Status Code: 400</p>
+            </dd>
+         </dl></div>
+    
+      <h2 id="API_RegisterType_Examples">Examples</h2>
+       
+         <h3 id="API_RegisterType_Example_1">RegisterType</h3>
+         <p>This example illustrates one usage of RegisterType.</p>
+          
+            <h4 id="API_RegisterType_Example_1_Request">Sample Request</h4>
+            <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli ()--><code class="">https://cloudformation.us-east-1.amazonaws.com/
+ ?Action=RegisterType
+ &amp;Version=2010-05-15
+ &amp;TypeName=My::Resource::Example
+ &amp;SchemaHandlerPackage=[s3 url]
+ &amp;Type=RESOURCE
+ &amp;X-Amz-Algorithm=AWS4-HMAC-SHA256
+ &amp;X-Amz-Credential=[Access key ID and scope]
+ &amp;X-Amz-Date=20171211T230005Z
+ &amp;X-Amz-SignedHeaders=content-type;host
+ &amp;X-Amz-Signature=[Signature]</code></pre>
+          
+          
+            <h4 id="API_RegisterType_Example_1_Response">Sample Response</h4>
+            <pre class="programlisting"><div class="code-btn-container"></div><!--DEBUG: cli ()--><code class="">&lt;RegisterTypeResponse xmlns="http://cloudformation.amazonaws.com/doc/2010-05-15/"&gt;
+  &lt;RegisterTypeResult&gt;
+    &lt;RegistrationToken&gt;f5525280-104e-4d35-bef5-8f1f1example&lt;/RegistrationToken&gt;
+  &lt;/RegisterTypeResult&gt;
+  &lt;ResponseMetadata&gt;
+    &lt;RequestId&gt;4d121847-1d2b-4ebe-8ca5-499405example&lt;/RequestId&gt;
+  &lt;/ResponseMetadata&gt;
+&lt;/RegisterTypeResponse&gt;</code></pre>
+          
+       
+    
+      <h2 id="API_RegisterType_SeeAlso">See Also</h2>
+      <p>For more information about using this API in one of the language-specific AWS SDKs, see the following:</p>
+      <div class="itemizedlist">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+      <ul class="itemizedlist"><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/aws-cli/cloudformation-2010-05-15/RegisterType">AWS Command Line Interface</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/DotNetSDKV3/cloudformation-2010-05-15/RegisterType">AWS SDK for .NET</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForCpp/cloudformation-2010-05-15/RegisterType">AWS SDK for C++</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForGoV2/cloudformation-2010-05-15/RegisterType">AWS SDK for Go v2</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForJavaV2/cloudformation-2010-05-15/RegisterType">AWS SDK for Java V2</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForJavaScriptV3/cloudformation-2010-05-15/RegisterType">AWS SDK for JavaScript V3</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForKotlin/cloudformation-2010-05-15/RegisterType">AWS SDK for Kotlin</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForPHPV3/cloudformation-2010-05-15/RegisterType">AWS SDK for PHP V3</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/boto3/cloudformation-2010-05-15/RegisterType">AWS SDK for Python</a>
+            </p>
+         </li><li class="listitem">
+            <p>
+               <a href="https://docs.aws.amazon.com/goto/SdkForRubyV3/cloudformation-2010-05-15/RegisterType">AWS SDK for Ruby V3</a>
+            </p>
+         </li></ul></div>
+   <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./API_RegisterPublisher.html">RegisterPublisher</div><div id="next" class="next-link" accesskey="n" href="./API_RollbackStack.html">RollbackStack</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_RegisterType.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=CloudFormation&amp;topic_url=https://docs.aws.amazon.com/en_us/AWSCloudFormation/latest/APIReference/API_RegisterType.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>
