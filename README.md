@@ -278,30 +278,6 @@ ENABLE_SECURITY_ANALYSIS=true
 MAX_FIX_ITERATIONS=5
 ```
 
-### Advanced Configuration
-
-Create a `config.yaml` file:
-
-```yaml
-aws:
-  region: us-east-1
-  profile: default
-  
-server:
-  port: 3000
-  log_level: INFO
-  
-features:
-  auto_fix: true
-  security_analysis: true
-  max_fix_iterations: 5
-  
-templates:
-  default_capabilities:
-    - CAPABILITY_IAM
-    - CAPABILITY_NAMED_IAM
-```
-
 ## 🧪 Development
 
 ### Setup Development Environment
