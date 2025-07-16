@@ -499,20 +499,32 @@ async def generate_cloudformation_template(
         
         if conversation_stage == "DISCOVERY":
             # Generate intelligent discovery questions
-            from intelligent_question_generator import IntelligentQuestionGenerator
-            question_gen = IntelligentQuestionGenerator()
-            
-            discovery_prompt = question_gen.create_discovery_prompt_with_questions(
-                description, analysis
-            )
-            
-            result = {
-                "conversation_stage": "DISCOVERY",
-                "expert_prompt_for_claude": discovery_prompt,
-                "analysis": analysis,
-                "next_stage": "REFINEMENT",
-                "instructions": "Please answer the questions in the prompt, then call this tool again with conversation_stage='REFINEMENT' and include your responses in previous_response."
-            }
+            try:
+                from .intelligent_question_generator import IntelligentQuestionGenerator
+                question_gen = IntelligentQuestionGenerator()
+                
+                discovery_prompt = question_gen.create_discovery_prompt_with_questions(
+                    description, analysis
+                )
+                
+                result = {
+                    "conversation_stage": "DISCOVERY",
+                    "expert_prompt_for_claude": discovery_prompt,
+                    "analysis": analysis,
+                    "next_stage": "REFINEMENT",
+                    "instructions": "Please answer the questions in the prompt, then call this tool again with conversation_stage='REFINEMENT' and include your responses in previous_response."
+                }
+            except ImportError as ie:
+                return {
+                    "error": f"Import error: {str(ie)}",
+                    "conversation_stage": "DISCOVERY",
+                    "fallback": "Using basic template generation instead"
+                }
+            except Exception as e:
+                return {
+                    "error": f"Error in discovery stage: {str(e)}",
+                    "conversation_stage": "DISCOVERY"
+                }
             
         elif conversation_stage == "REFINEMENT" and previous_response:
             # Create refinement prompt based on discovery responses
@@ -580,7 +592,13 @@ async def generate_cloudformation_template(
         return result
         
     except Exception as e:
-        return handle_aws_api_error(e, 'generate_expert_cloudformation_prompts')
+        import traceback
+        error_details = traceback.format_exc()
+        return {
+            "error": f"An error occurred in generate_cloudformation_template: {str(e)}",
+            "error_details": error_details,
+            "conversation_stage": conversation_stage
+        }
 
 
 @mcp.tool()
