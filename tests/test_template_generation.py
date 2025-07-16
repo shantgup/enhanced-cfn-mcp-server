@@ -4,7 +4,7 @@ import pytest
 import json
 import yaml
 import asyncio
-from awslabs.cfn_mcp_server.server_robust import generate_cloudformation_template
+from awslabs.cfn_mcp_server.server import generate_cloudformation_template
 from awslabs.cfn_mcp_server.resource_mapping import identify_resources_from_description
 
 

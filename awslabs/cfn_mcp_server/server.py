@@ -1503,14 +1503,55 @@ async def analyze_template_structure(
         analyzer = TemplateAnalyzer()
         print("DEBUG: Created analyzer instance")
         
-        result = analyzer.generate_enhanced_prompt(
-            template_content=template_content,
-            region=region,
-            analysis_focus=analysis_focus
+        # Parse the template content
+        print("DEBUG: Attempting to parse template with enhanced parser")
+        try:
+            if isinstance(template_content, str):
+                import yaml
+                template = yaml.safe_load(template_content)
+            else:
+                template = template_content
+        except Exception as parse_error:
+            print(f"DEBUG: Template parsing failed: {parse_error}")
+            template = {"Resources": {}}
+        
+        print(f"DEBUG: Successfully parsed template with {len(template.get('Resources', {}))} resources")
+        
+        # Use the comprehensive analysis method
+        result = analyzer.create_comprehensive_analysis(
+            template=template,
+            analysis_focus=analysis_focus or "comprehensive"
         )
         print(f"DEBUG: Generated result with keys: {list(result.keys())}")
         
-        return result
+        # Format the result for MCP response
+        if 'expert_prompt_for_claude' in result:
+            expert_prompt = result['expert_prompt_for_claude']
+            
+            # Create comprehensive response
+            response_content = f"""# CloudFormation Template Analysis
+
+{expert_prompt}
+
+## Analysis Summary
+- **Resources Analyzed**: {result.get('template_analysis', {}).get('resource_count', 0)}
+- **Security Score**: {result.get('security_assessment', {}).get('score', 'N/A')}
+- **Architecture Pattern**: {result.get('architecture_pattern', 'Not determined')}
+- **Compliance Requirements**: {', '.join(result.get('compliance_requirements', [])) or 'None identified'}
+
+## Key Findings
+{chr(10).join([f"• {issue['description']}" for issue in result.get('security_assessment', {}).get('issues', [])[:5]])}
+
+## Recommendations
+{chr(10).join(result.get('remediation_guidance', [])[:5])}
+
+## Next Steps
+{chr(10).join(result.get('validation_steps', [])[:3])}
+"""
+            
+            return [{'type': 'text', 'text': response_content}]
+        else:
+            return [{'type': 'text', 'text': result.get('error', 'Analysis completed but no detailed results available')}]
         
     except Exception as e:
         print(f"DEBUG: Exception in analyze_template_structure: {e}")

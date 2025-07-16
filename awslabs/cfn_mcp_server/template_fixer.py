@@ -960,3 +960,264 @@ class TemplateFixer:
                 }]
             }
         }
+    def generate_comprehensive_fixes(self, template: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Generate comprehensive fixes for a CloudFormation template.
+        
+        Args:
+            template: The CloudFormation template to analyze and fix
+            
+        Returns:
+            Dict containing identified issues, fixes, and expert prompt
+        """
+        try:
+            # Identify issues in the template
+            issues = self.identify_issues(template)
+            
+            # Generate fixes for identified issues
+            recommended_fixes = []
+            fixed_template = template.copy()
+            
+            for issue in issues:
+                fix = self._generate_fix_for_issue(issue, fixed_template)
+                if fix:
+                    recommended_fixes.append(fix)
+                    fixed_template = self._apply_fix_to_template(fixed_template, fix)
+            
+            # Generate expert prompt for Claude
+            expert_prompt = self._generate_expert_fixing_prompt(issues, recommended_fixes)
+            
+            return {
+                'expert_prompt_for_claude': expert_prompt,
+                'identified_issues': issues,
+                'recommended_fixes': recommended_fixes,
+                'fixed_template': fixed_template,
+                'fix_summary': {
+                    'total_issues': len(issues),
+                    'fixes_applied': len(recommended_fixes),
+                    'fix_categories': list(set(fix.get('category', 'general') for fix in recommended_fixes))
+                }
+            }
+            
+        except Exception as e:
+            return {
+                'expert_prompt_for_claude': f"Error analyzing template for fixes: {str(e)}",
+                'error': str(e),
+                'identified_issues': [],
+                'recommended_fixes': []
+            }
+
+    def identify_issues(self, template: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Identify issues in a CloudFormation template.
+        
+        Args:
+            template: The CloudFormation template to analyze
+            
+        Returns:
+            List of identified issues
+        """
+        issues = []
+        resources = template.get('Resources', {})
+        
+        for resource_name, resource in resources.items():
+            resource_type = resource.get('Type', '')
+            properties = resource.get('Properties', {})
+            
+            # Check for missing required properties
+            if resource_type == 'AWS::EC2::Instance':
+                if not properties.get('ImageId'):
+                    issues.append({
+                        'type': 'missing_required_property',
+                        'resource': resource_name,
+                        'property': 'ImageId',
+                        'severity': 'HIGH',
+                        'description': 'EC2 Instance missing required ImageId property'
+                    })
+                if not properties.get('InstanceType'):
+                    issues.append({
+                        'type': 'missing_required_property',
+                        'resource': resource_name,
+                        'property': 'InstanceType',
+                        'severity': 'HIGH',
+                        'description': 'EC2 Instance missing required InstanceType property'
+                    })
+            
+            elif resource_type == 'AWS::S3::Bucket':
+                # Check for missing encryption
+                if not properties.get('BucketEncryption'):
+                    issues.append({
+                        'type': 'security_issue',
+                        'resource': resource_name,
+                        'property': 'BucketEncryption',
+                        'severity': 'MEDIUM',
+                        'description': 'S3 Bucket missing encryption configuration'
+                    })
+                
+                # Check for missing public access block
+                if not properties.get('PublicAccessBlockConfiguration'):
+                    issues.append({
+                        'type': 'security_issue',
+                        'resource': resource_name,
+                        'property': 'PublicAccessBlockConfiguration',
+                        'severity': 'HIGH',
+                        'description': 'S3 Bucket missing public access block configuration'
+                    })
+            
+            elif resource_type == 'AWS::Lambda::Function':
+                if not properties.get('Runtime'):
+                    issues.append({
+                        'type': 'missing_required_property',
+                        'resource': resource_name,
+                        'property': 'Runtime',
+                        'severity': 'HIGH',
+                        'description': 'Lambda Function missing required Runtime property'
+                    })
+                
+                # Check for missing timeout
+                if not properties.get('Timeout'):
+                    issues.append({
+                        'type': 'best_practice',
+                        'resource': resource_name,
+                        'property': 'Timeout',
+                        'severity': 'LOW',
+                        'description': 'Lambda Function should specify timeout'
+                    })
+            
+            # Check for missing tags
+            if not properties.get('Tags') and resource_type in ['AWS::EC2::Instance', 'AWS::S3::Bucket', 'AWS::Lambda::Function']:
+                issues.append({
+                    'type': 'best_practice',
+                    'resource': resource_name,
+                    'property': 'Tags',
+                    'severity': 'LOW',
+                    'description': f'{resource_type} should include tags for resource management'
+                })
+        
+        return issues
+
+    def _generate_fix_for_issue(self, issue: Dict[str, Any], template: Dict[str, Any]) -> Dict[str, Any]:
+        """Generate a specific fix for an identified issue."""
+        resource_name = issue.get('resource')
+        property_name = issue.get('property')
+        issue_type = issue.get('type')
+        
+        fix = {
+            'issue': issue,
+            'category': issue_type,
+            'action': 'add_property',
+            'resource': resource_name,
+            'property': property_name
+        }
+        
+        # Generate specific fix based on issue type and resource
+        resource = template.get('Resources', {}).get(resource_name, {})
+        resource_type = resource.get('Type', '')
+        
+        if property_name == 'ImageId' and resource_type == 'AWS::EC2::Instance':
+            fix['value'] = 'ami-0abcdef1234567890'  # Placeholder AMI ID
+            fix['description'] = 'Added placeholder AMI ID - replace with appropriate AMI for your region'
+        
+        elif property_name == 'InstanceType' and resource_type == 'AWS::EC2::Instance':
+            fix['value'] = 't3.micro'
+            fix['description'] = 'Added t3.micro instance type for cost-effective development'
+        
+        elif property_name == 'Runtime' and resource_type == 'AWS::Lambda::Function':
+            fix['value'] = 'python3.9'
+            fix['description'] = 'Added Python 3.9 runtime - adjust based on your code requirements'
+        
+        elif property_name == 'Timeout' and resource_type == 'AWS::Lambda::Function':
+            fix['value'] = 30
+            fix['description'] = 'Added 30-second timeout - adjust based on function requirements'
+        
+        elif property_name == 'BucketEncryption' and resource_type == 'AWS::S3::Bucket':
+            fix['value'] = self.best_practices['s3_encryption']
+            fix['description'] = 'Added AES256 encryption for S3 bucket'
+        
+        elif property_name == 'PublicAccessBlockConfiguration' and resource_type == 'AWS::S3::Bucket':
+            fix['value'] = {
+                'BlockPublicAcls': True,
+                'BlockPublicPolicy': True,
+                'IgnorePublicAcls': True,
+                'RestrictPublicBuckets': True
+            }
+            fix['description'] = 'Added public access block configuration for security'
+        
+        elif property_name == 'Tags':
+            fix['value'] = self.best_practices['default_tags']
+            fix['description'] = 'Added default tags for resource management'
+        
+        return fix
+
+    def _apply_fix_to_template(self, template: Dict[str, Any], fix: Dict[str, Any]) -> Dict[str, Any]:
+        """Apply a fix to the template."""
+        fixed_template = template.copy()
+        resource_name = fix.get('resource')
+        property_name = fix.get('property')
+        value = fix.get('value')
+        
+        if resource_name and property_name and value is not None:
+            if 'Resources' not in fixed_template:
+                fixed_template['Resources'] = {}
+            
+            if resource_name not in fixed_template['Resources']:
+                return fixed_template
+            
+            if 'Properties' not in fixed_template['Resources'][resource_name]:
+                fixed_template['Resources'][resource_name]['Properties'] = {}
+            
+            fixed_template['Resources'][resource_name]['Properties'][property_name] = value
+        
+        return fixed_template
+
+    def _generate_expert_fixing_prompt(self, issues: List[Dict[str, Any]], fixes: List[Dict[str, Any]]) -> str:
+        """Generate an expert prompt for Claude about template fixing."""
+        return f"""
+# CloudFormation Template Analysis and Fixing Report
+
+## Issues Identified: {len(issues)}
+
+### High Priority Issues:
+{chr(10).join([f"- {issue['description']}" for issue in issues if issue.get('severity') == 'HIGH'])}
+
+### Medium Priority Issues:
+{chr(10).join([f"- {issue['description']}" for issue in issues if issue.get('severity') == 'MEDIUM'])}
+
+### Best Practice Improvements:
+{chr(10).join([f"- {issue['description']}" for issue in issues if issue.get('severity') == 'LOW'])}
+
+## Recommended Fixes Applied: {len(fixes)}
+
+### Security Fixes:
+{chr(10).join([f"- {fix['description']}" for fix in fixes if fix.get('category') == 'security_issue'])}
+
+### Required Property Fixes:
+{chr(10).join([f"- {fix['description']}" for fix in fixes if fix.get('category') == 'missing_required_property'])}
+
+### Best Practice Improvements:
+{chr(10).join([f"- {fix['description']}" for fix in fixes if fix.get('category') == 'best_practice'])}
+
+## Expert Guidance:
+
+As a CloudFormation expert, I've analyzed your template and applied the following improvements:
+
+1. **Security Enhancements**: Added encryption and access controls where missing
+2. **Required Properties**: Added mandatory properties with sensible defaults
+3. **Best Practices**: Implemented tagging and configuration best practices
+
+## Next Steps:
+
+1. Review the fixed template and adjust placeholder values (AMI IDs, etc.)
+2. Test the template in a development environment
+3. Validate security configurations meet your requirements
+4. Consider additional optimizations based on your specific use case
+
+## Validation Commands:
+
+```bash
+aws cloudformation validate-template --template-body file://fixed-template.yaml
+cfn-lint fixed-template.yaml
+```
+
+The fixed template follows AWS best practices and should deploy successfully after you customize the placeholder values.
+"""

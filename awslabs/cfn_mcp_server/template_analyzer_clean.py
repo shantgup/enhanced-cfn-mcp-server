@@ -630,3 +630,243 @@ Please analyze the error and provide:
 
 Focus on actionable solutions to resolve the analysis failure.
 """
+
+    def create_comprehensive_analysis(self, template: Dict[str, Any], analysis_focus: str = "comprehensive") -> Dict[str, Any]:
+        """
+        Create a comprehensive analysis of the CloudFormation template.
+        
+        Args:
+            template: The CloudFormation template to analyze
+            analysis_focus: Focus area for analysis (security, performance, compliance, comprehensive)
+            
+        Returns:
+            Dict containing comprehensive analysis with expert prompt
+        """
+        try:
+            # Parse template and extract information
+            resources = template.get('Resources', {})
+            parameters = template.get('Parameters', {})
+            outputs = template.get('Outputs', {})
+            
+            # Perform security analysis
+            security_assessment = self._analyze_security_patterns(template)
+            
+            # Identify architecture patterns
+            architecture_pattern = self._identify_architecture_pattern(resources)
+            
+            # Generate compliance requirements
+            compliance_requirements = self._assess_compliance_requirements(template)
+            
+            # Create performance assessment
+            performance_assessment = self._assess_performance_patterns(resources)
+            
+            # Generate best practices checklist
+            best_practices_checklist = self._generate_best_practices_checklist(template)
+            
+            # Create remediation guidance
+            remediation_guidance = self._generate_remediation_guidance(security_assessment, performance_assessment)
+            
+            # Generate expert prompt for Claude
+            expert_prompt = self.generate_enhanced_prompt(
+                template=template,
+                analysis_focus=analysis_focus,
+                security_issues=security_assessment.get('issues', []),
+                architecture_pattern=architecture_pattern,
+                compliance_reqs=compliance_requirements
+            )
+            
+            return {
+                'expert_prompt_for_claude': expert_prompt,
+                'template_analysis': {
+                    'resource_count': len(resources),
+                    'parameter_count': len(parameters),
+                    'output_count': len(outputs),
+                    'architecture_pattern': architecture_pattern
+                },
+                'security_assessment': security_assessment,
+                'compliance_requirements': compliance_requirements,
+                'architecture_pattern': architecture_pattern,
+                'performance_assessment': performance_assessment,
+                'analysis_workflow': self._create_analysis_workflow(),
+                'investigation_commands': self._generate_investigation_commands(),
+                'best_practices_checklist': best_practices_checklist,
+                'remediation_guidance': remediation_guidance,
+                'validation_steps': self._generate_validation_steps(),
+                'region': 'us-east-1',  # Default region
+                'timestamp': datetime.utcnow().isoformat()
+            }
+            
+        except Exception as e:
+            return {
+                'expert_prompt_for_claude': f"Error analyzing template: {str(e)}. Please provide the template content for analysis.",
+                'error': str(e),
+                'timestamp': datetime.utcnow().isoformat()
+            }
+    
+    def _analyze_security_patterns(self, template: Dict[str, Any]) -> Dict[str, Any]:
+        """Analyze template for security patterns and issues."""
+        template_str = json.dumps(template)
+        issues = []
+        
+        for pattern_type, patterns in self.security_patterns.items():
+            for pattern in patterns:
+                if re.search(pattern, template_str, re.IGNORECASE):
+                    issues.append({
+                        'type': pattern_type,
+                        'pattern': pattern,
+                        'severity': 'HIGH' if pattern_type == 'hardcoded_secrets' else 'MEDIUM'
+                    })
+        
+        return {
+            'issues': issues,
+            'score': max(0, 100 - len(issues) * 10),
+            'recommendations': self._get_security_recommendations(issues)
+        }
+    
+    def _identify_architecture_pattern(self, resources: Dict[str, Any]) -> str:
+        """Identify the architecture pattern from resources."""
+        resource_types = [res.get('Type', '') for res in resources.values()]
+        resource_str = ' '.join(resource_types).lower()
+        
+        for pattern, keywords in self.architecture_patterns.items():
+            if any(keyword in resource_str for keyword in keywords):
+                return pattern
+        
+        return 'custom'
+    
+    def _assess_compliance_requirements(self, template: Dict[str, Any]) -> List[str]:
+        """Assess compliance requirements based on template content."""
+        template_str = json.dumps(template).lower()
+        requirements = []
+        
+        for compliance_type, indicators in self.compliance_indicators.items():
+            if any(indicator in template_str for indicator in indicators):
+                requirements.append(compliance_type.upper())
+        
+        return requirements
+    
+    def _assess_performance_patterns(self, resources: Dict[str, Any]) -> Dict[str, Any]:
+        """Assess performance patterns in the template."""
+        performance_issues = []
+        recommendations = []
+        
+        for resource_name, resource in resources.items():
+            resource_type = resource.get('Type', '')
+            properties = resource.get('Properties', {})
+            
+            # Check for common performance issues
+            if resource_type == 'AWS::RDS::DBInstance':
+                if not properties.get('MultiAZ'):
+                    performance_issues.append(f"{resource_name}: Consider enabling MultiAZ for high availability")
+                    
+            elif resource_type == 'AWS::Lambda::Function':
+                memory = properties.get('MemorySize', 128)
+                if memory < 256:
+                    recommendations.append(f"{resource_name}: Consider increasing memory for better performance")
+        
+        return {
+            'issues': performance_issues,
+            'recommendations': recommendations,
+            'score': max(0, 100 - len(performance_issues) * 15)
+        }
+    
+    def _generate_best_practices_checklist(self, template: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Generate a best practices checklist for the template."""
+        checklist = [
+            {
+                'category': 'Security',
+                'items': [
+                    'All storage resources have encryption enabled',
+                    'IAM roles follow least privilege principle',
+                    'No hardcoded secrets in template',
+                    'Security groups have minimal required access'
+                ]
+            },
+            {
+                'category': 'Performance',
+                'items': [
+                    'Resources are right-sized for workload',
+                    'Auto Scaling is configured where appropriate',
+                    'Caching is implemented for frequently accessed data',
+                    'Multi-AZ deployment for critical resources'
+                ]
+            },
+            {
+                'category': 'Cost Optimization',
+                'items': [
+                    'Lifecycle policies configured for storage',
+                    'Reserved instances considered for predictable workloads',
+                    'Unused resources are cleaned up',
+                    'Resource tagging for cost allocation'
+                ]
+            }
+        ]
+        return checklist
+    
+    def _generate_remediation_guidance(self, security_assessment: Dict[str, Any], performance_assessment: Dict[str, Any]) -> List[str]:
+        """Generate remediation guidance based on assessments."""
+        guidance = []
+        
+        # Security remediation
+        for issue in security_assessment.get('issues', []):
+            if issue['type'] == 'hardcoded_secrets':
+                guidance.append("Replace hardcoded secrets with AWS Secrets Manager or Parameter Store references")
+            elif issue['type'] == 'overly_permissive':
+                guidance.append("Restrict overly permissive security group rules and IAM policies")
+            elif issue['type'] == 'unencrypted_storage':
+                guidance.append("Enable encryption for all storage resources")
+        
+        # Performance remediation
+        for issue in performance_assessment.get('issues', []):
+            guidance.append(f"Performance: {issue}")
+        
+        return guidance
+    
+    def _create_analysis_workflow(self) -> List[str]:
+        """Create analysis workflow steps."""
+        return [
+            "1. Parse and validate CloudFormation template syntax",
+            "2. Identify all resources and their configurations",
+            "3. Analyze security patterns and potential vulnerabilities",
+            "4. Assess compliance requirements based on resource types",
+            "5. Evaluate architecture patterns and best practices",
+            "6. Generate recommendations and remediation guidance",
+            "7. Create comprehensive analysis report"
+        ]
+    
+    def _generate_investigation_commands(self) -> List[str]:
+        """Generate investigation commands for further analysis."""
+        return [
+            "aws cloudformation validate-template --template-body file://template.yaml",
+            "cfn-lint template.yaml",
+            "aws cloudformation estimate-template-cost --template-body file://template.yaml",
+            "aws cloudformation create-change-set --stack-name test-stack --template-body file://template.yaml --change-set-name analysis-changeset"
+        ]
+    
+    def _generate_validation_steps(self) -> List[str]:
+        """Generate validation steps for the template."""
+        return [
+            "Validate template syntax with AWS CLI",
+            "Run security analysis with cfn-nag or similar tools",
+            "Test deployment in development environment",
+            "Verify resource configurations match requirements",
+            "Check IAM permissions and security group rules",
+            "Validate compliance with organizational policies"
+        ]
+    
+    def _get_security_recommendations(self, issues: List[Dict[str, Any]]) -> List[str]:
+        """Get security recommendations based on identified issues."""
+        recommendations = []
+        
+        issue_types = [issue['type'] for issue in issues]
+        
+        if 'hardcoded_secrets' in issue_types:
+            recommendations.append("Use AWS Secrets Manager or Systems Manager Parameter Store for sensitive data")
+        
+        if 'overly_permissive' in issue_types:
+            recommendations.append("Apply principle of least privilege to IAM policies and security groups")
+        
+        if 'unencrypted_storage' in issue_types:
+            recommendations.append("Enable encryption at rest for all storage services")
+        
+        return recommendations

@@ -40,6 +40,26 @@
       "last_updated": "2025-07-15T17:09:48.332941",
       "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_DynamoDB_Table.json",
       "source": "cloudformation_api"
+    },
+    "AWS::Fake::ECY0M": {
+      "last_updated": "2025-07-15T20:51:24.206541",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_Fake_ECY0M.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::Fake::HUZA5": {
+      "last_updated": "2025-07-15T20:51:24.212021",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_Fake_HUZA5.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::Fake::SMGWK": {
+      "last_updated": "2025-07-15T20:51:35.459369",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_Fake_SMGWK.json",
+      "source": "cloudformation_api"
+    },
+    "AWS::Fake::4B0D1": {
+      "last_updated": "2025-07-15T20:51:35.462679",
+      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_Fake_4B0D1.json",
+      "source": "cloudformation_api"
     }
   }
 }
