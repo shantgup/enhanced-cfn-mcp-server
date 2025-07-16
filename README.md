@@ -188,7 +188,7 @@ q chat
 - EKS cluster with worker nodes
 - real-time data streaming architecture
 - multi-region active-active setup
-
+```
 
 ### Basic Resource Management
 
