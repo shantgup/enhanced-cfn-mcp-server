@@ -165,7 +165,8 @@ q chat
 
 ## 💡 Usage Examples
 
-### One-shot Prompt - Generate template, deploy, troubleshoot, fix and redeploy until successful
+### 🔥 One-shot Prompt
+Generate template, deploy, troubleshoot, fix and redeploy until successful
 
 ```bash
 # Generate template, deploy, troubleshoot, fix and redeploy until successful
