@@ -105,8 +105,6 @@ cd enhanced-cfn-mcp-server
 # Install the package
 pip install -e .
 
-# Or install from PyPI (when published)
-pip install enhanced-cfn-mcp-server
 ```
 
 ### 2. Configure AWS Credentials
@@ -123,16 +121,9 @@ export AWS_DEFAULT_REGION=us-east-1
 
 ### 3. Integration with Amazon Q CLI
 
-Add the MCP server to your Q CLI configuration:
+If you run q in the root directory of this project, the enhanced_cfn_mcp_server should be loaded automatically, it's configured in the .amazonq directory. 
 
-```bash
-# Edit your Q CLI configuration
-q configure
-
-# Add MCP server configuration
-```
-
-Or manually add to your Q CLI config file (`~/.config/q/config.json`):
+Optionally, you can add the MCP server to your Q CLI configuration like below:
 
 ```json
 {
