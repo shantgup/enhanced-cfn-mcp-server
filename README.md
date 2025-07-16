@@ -140,12 +140,9 @@ Optionally, you can add the MCP server to your Q CLI configuration like below:
 ### 4. Verify Installation
 
 ```bash
-# Test the server directly
-enhanced-cfn-mcp-server
-
-# Or test through Q CLI
+# Test through Q CLI
 q chat
-# Then ask: "List my S3 buckets"
+# Then ask: "Use the enhanced cfn mcp server to create a robust web server architecture cloudformation template. Then deploy it, and if it fails, troubleshoot it, fix the template and redeploy until successful."
 ```
 
 ## 💡 Usage Examples
