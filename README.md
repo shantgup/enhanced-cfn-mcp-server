@@ -147,6 +147,30 @@ q chat
 
 ## 💡 Usage Examples
 
+### One-shot Prompt - Generate template, deploy, troubleshoot, fix and redeploy until successful
+
+```bash
+# Generate template, deploy, troubleshoot, fix and redeploy until successful
+"Use the enhanced cfn mcp server to create a <INSERT USE CASE HERE>. Then deploy it, and if it fails, troubleshoot it, fix the template and redeploy until successful."
+
+# Use case examples:
+- robust web server architecture
+- secure VPC with public and private subnets
+- serverless API with Lambda and API Gateway
+- multi-AZ RDS database setup
+- static website hosting with S3 and CloudFront
+- auto-scaling application with ALB
+- containerized application using ECS
+- serverless data processing pipeline
+- high-availability WordPress site
+- CI/CD pipeline with CodePipeline
+- cross-region backup solution
+- ElasticSearch cluster
+- EKS cluster with worker nodes
+- real-time data streaming architecture
+- multi-region active-active setup
+
+
 ### Basic Resource Management
 
 ```bash
@@ -191,6 +215,7 @@ q chat
 # Get best practices guidance
 "I need to implement a HIPAA-compliant data processing pipeline. What are the best practices?"
 ```
+
 
 ## 🏗️ Architecture
 
