@@ -2,6 +2,24 @@
 
 An enhanced AWS CloudFormation Model Context Protocol (MCP) server that provides intelligent prompting, autonomous fixing, and comprehensive AWS resource management capabilities for AI assistants like Amazon Q.
 
+## Table of Contents
+
+- [🚀 What is this?](#-what-is-this)
+- [✨ Key Features & Differentiators](#-key-features--differentiators)
+- [🛠️ Available Tools](#️-available-tools)
+- [📋 Prerequisites](#-prerequisites)
+- [🚀 Installation & Setup](#-installation--setup)
+- [💡 Usage Examples](#-usage-examples)
+- [🏗️ Architecture](#️-architecture)
+- [🔧 Configuration](#-configuration)
+- [🧪 Development](#-development)
+- [📚 Examples](#-examples)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [🆘 Support](#-support)
+- [🙏 Acknowledgments](#-acknowledgments)
+- [🗺️ Roadmap](#️-roadmap)
+
 ## 🚀 What is this?
 
 This is an enhanced version of the AWS CloudFormation MCP server that extends the original functionality with:
