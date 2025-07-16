@@ -343,3 +343,257 @@ class IntelligentTemplateGenerator:
             from awslabs.cfn_mcp_server.resource_generator import ResourceGenerator
             resource_gen = ResourceGenerator(self.config)
             return resource_gen.generate_resources(analysis)
+    def create_discovery_prompt(self, description: str) -> Dict[str, Any]:
+        """
+        Create a discovery prompt for template generation.
+        
+        Args:
+            description: Natural language description of the infrastructure
+            
+        Returns:
+            Dict containing discovery prompt and analysis
+        """
+        try:
+            # Analyze the description
+            analysis = self.analyze_description(description)
+            
+            # Generate discovery questions
+            discovery_questions = self._generate_discovery_questions(analysis)
+            
+            # Identify architecture patterns
+            architecture_patterns = self._suggest_architecture_patterns(analysis)
+            
+            # Create requirements analysis
+            requirements_analysis = self._analyze_requirements(description, analysis)
+            
+            # Generate expert prompt for Claude
+            expert_prompt = self._create_expert_discovery_prompt(
+                description, analysis, discovery_questions, architecture_patterns
+            )
+            
+            return {
+                'expert_prompt_for_claude': expert_prompt,
+                'discovery_questions': discovery_questions,
+                'architecture_patterns': architecture_patterns,
+                'requirements_analysis': requirements_analysis,
+                'initial_analysis': analysis
+            }
+            
+        except Exception as e:
+            return {
+                'expert_prompt_for_claude': f"Error creating discovery prompt: {str(e)}",
+                'error': str(e),
+                'discovery_questions': [],
+                'architecture_patterns': [],
+                'requirements_analysis': {}
+            }
+
+    def _generate_discovery_questions(self, analysis: Dict[str, Any]) -> List[str]:
+        """Generate discovery questions based on initial analysis."""
+        questions = []
+        
+        # Base questions
+        questions.extend([
+            "What is the expected scale and traffic volume for this application?",
+            "What are your availability and disaster recovery requirements?",
+            "Are there specific compliance requirements (HIPAA, PCI, SOX, GDPR)?",
+            "What is your preferred deployment model (single region, multi-region)?",
+            "What are your security requirements and constraints?"
+        ])
+        
+        # Resource-specific questions
+        resources = analysis.get('resources', [])
+        
+        if 'database' in str(resources).lower():
+            questions.extend([
+                "What type of database workload (OLTP, OLAP, mixed)?",
+                "What are your backup and retention requirements?",
+                "Do you need read replicas or multi-master setup?"
+            ])
+        
+        if 'web' in str(resources).lower() or 'api' in str(resources).lower():
+            questions.extend([
+                "What is the expected request rate and response time requirements?",
+                "Do you need CDN or edge caching?",
+                "What authentication and authorization mechanisms are required?"
+            ])
+        
+        if 'storage' in str(resources).lower():
+            questions.extend([
+                "What are your data retention and lifecycle requirements?",
+                "Do you need cross-region replication?",
+                "What are your data access patterns (frequent, infrequent, archive)?"
+            ])
+        
+        return questions[:10]  # Limit to 10 questions
+
+    def _suggest_architecture_patterns(self, analysis: Dict[str, Any]) -> List[Dict[str, str]]:
+        """Suggest architecture patterns based on analysis."""
+        patterns = []
+        
+        architecture_pattern = analysis.get('architecture_pattern', '')
+        resources = analysis.get('resources', [])
+        
+        if architecture_pattern == 'web-application':
+            patterns.append({
+                'name': '3-Tier Web Application',
+                'description': 'Classic web application with presentation, application, and data tiers',
+                'components': 'ALB + ECS/EC2 + RDS'
+            })
+            patterns.append({
+                'name': 'Serverless Web Application',
+                'description': 'Serverless architecture with API Gateway and Lambda',
+                'components': 'CloudFront + API Gateway + Lambda + DynamoDB'
+            })
+        
+        elif architecture_pattern == 'microservices':
+            patterns.append({
+                'name': 'Container-based Microservices',
+                'description': 'Microservices using containers with service mesh',
+                'components': 'EKS/ECS + Service Mesh + API Gateway'
+            })
+            patterns.append({
+                'name': 'Serverless Microservices',
+                'description': 'Event-driven serverless microservices',
+                'components': 'API Gateway + Lambda + EventBridge + DynamoDB'
+            })
+        
+        elif architecture_pattern == 'data-processing':
+            patterns.append({
+                'name': 'Batch Processing Pipeline',
+                'description': 'Scheduled batch processing with data lake',
+                'components': 'S3 + Glue + EMR + Redshift'
+            })
+            patterns.append({
+                'name': 'Real-time Streaming',
+                'description': 'Real-time data processing and analytics',
+                'components': 'Kinesis + Lambda + ElasticSearch + S3'
+            })
+        
+        # Default patterns if none match
+        if not patterns:
+            patterns.append({
+                'name': 'Simple Web Application',
+                'description': 'Basic web application with load balancer and database',
+                'components': 'ALB + EC2 + RDS'
+            })
+        
+        return patterns
+
+    def _analyze_requirements(self, description: str, analysis: Dict[str, Any]) -> Dict[str, Any]:
+        """Analyze requirements from description and initial analysis."""
+        return {
+            'functional_requirements': self._extract_functional_requirements(description),
+            'non_functional_requirements': self._extract_non_functional_requirements(description),
+            'constraints': self._identify_constraints(description),
+            'assumptions': self._identify_assumptions(analysis)
+        }
+
+    def _extract_functional_requirements(self, description: str) -> List[str]:
+        """Extract functional requirements from description."""
+        requirements = []
+        desc_lower = description.lower()
+        
+        if 'web' in desc_lower or 'website' in desc_lower:
+            requirements.append("Serve web content to users")
+        
+        if 'api' in desc_lower:
+            requirements.append("Provide API endpoints for data access")
+        
+        if 'database' in desc_lower or 'data' in desc_lower:
+            requirements.append("Store and retrieve application data")
+        
+        if 'auth' in desc_lower or 'login' in desc_lower:
+            requirements.append("Authenticate and authorize users")
+        
+        if 'upload' in desc_lower or 'file' in desc_lower:
+            requirements.append("Handle file uploads and storage")
+        
+        return requirements
+
+    def _extract_non_functional_requirements(self, description: str) -> List[str]:
+        """Extract non-functional requirements from description."""
+        requirements = []
+        desc_lower = description.lower()
+        
+        if 'scale' in desc_lower or 'high traffic' in desc_lower:
+            requirements.append("Handle high traffic and scale automatically")
+        
+        if 'secure' in desc_lower or 'security' in desc_lower:
+            requirements.append("Implement security best practices")
+        
+        if 'fast' in desc_lower or 'performance' in desc_lower:
+            requirements.append("Provide fast response times")
+        
+        if 'available' in desc_lower or 'uptime' in desc_lower:
+            requirements.append("Maintain high availability")
+        
+        return requirements
+
+    def _identify_constraints(self, description: str) -> List[str]:
+        """Identify constraints from description."""
+        constraints = []
+        desc_lower = description.lower()
+        
+        if 'budget' in desc_lower or 'cost' in desc_lower:
+            constraints.append("Cost optimization required")
+        
+        if 'region' in desc_lower:
+            constraints.append("Specific region requirements")
+        
+        if 'compliance' in desc_lower:
+            constraints.append("Compliance requirements must be met")
+        
+        return constraints
+
+    def _identify_assumptions(self, analysis: Dict[str, Any]) -> List[str]:
+        """Identify assumptions based on analysis."""
+        assumptions = [
+            "AWS services are available in the target region",
+            "Appropriate IAM permissions will be configured",
+            "Network connectivity requirements will be met"
+        ]
+        
+        if analysis.get('architecture_pattern') == 'web-application':
+            assumptions.append("Internet-facing application with public access")
+        
+        return assumptions
+
+    def _create_expert_discovery_prompt(self, description: str, analysis: Dict[str, Any], 
+                                      questions: List[str], patterns: List[Dict[str, str]]) -> str:
+        """Create expert discovery prompt for Claude."""
+        return f"""
+# CloudFormation Template Generation - Discovery Phase
+
+## Initial Request
+**Description**: {description}
+
+## Initial Analysis
+- **Architecture Pattern**: {analysis.get('architecture_pattern', 'Not determined')}
+- **Identified Resources**: {', '.join(analysis.get('resources', []))}
+- **Scale Requirements**: {analysis.get('scale_requirements', 'Not specified')}
+- **Security Requirements**: {analysis.get('security_requirements', 'Standard')}
+
+## Discovery Questions
+
+To create the most appropriate CloudFormation template, I need to understand your requirements better. Please answer the following questions:
+
+{chr(10).join([f"{i+1}. {q}" for i, q in enumerate(questions)])}
+
+## Suggested Architecture Patterns
+
+Based on your description, here are some architecture patterns to consider:
+
+{chr(10).join([f"### {p['name']}{chr(10)}{p['description']}{chr(10)}**Components**: {p['components']}{chr(10)}" for p in patterns])}
+
+## Next Steps
+
+Once you provide answers to the discovery questions and select an architecture pattern, I will:
+
+1. **Refine Requirements**: Create detailed technical specifications
+2. **Design Architecture**: Develop comprehensive architecture diagrams
+3. **Generate Template**: Create production-ready CloudFormation templates
+4. **Provide Guidance**: Include deployment and operational guidance
+
+Please answer the questions above, and let me know which architecture pattern best fits your needs, or if you'd like to explore other options.
+"""

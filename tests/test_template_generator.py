@@ -4,7 +4,7 @@ import pytest
 import json
 import yaml
 from unittest.mock import Mock, patch
-from awslabs.cfn_mcp_server.template_generator import TemplateGenerator
+from awslabs.cfn_mcp_server.template_generator_clean import TemplateGenerator
 
 
 class TestTemplateGenerator:

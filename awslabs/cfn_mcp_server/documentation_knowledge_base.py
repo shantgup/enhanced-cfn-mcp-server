@@ -542,6 +542,72 @@ class DocumentationKnowledgeBase:
         
         return unique_guidance[:15]  # Limit to top 15 scenarios
 
+    def enhance_template_response(self, description: str, resource_info: Dict[str, Any]) -> str:
+        """
+        Enhance a template response with documentation knowledge.
+        
+        Args:
+            description: Description of what the user wants to create
+            resource_info: Information about the resource being created
+            
+        Returns:
+            Enhanced response with best practices and guidance
+        """
+        try:
+            resource_type = resource_info.get('Type', '')
+            
+            # Extract resource service (e.g., S3 from AWS::S3::Bucket)
+            service = resource_type.split('::')[1] if '::' in resource_type else ''
+            
+            # Get best practices for the service
+            best_practices = self.get_best_practices(service)
+            
+            # Get troubleshooting guidance
+            troubleshooting = self.get_troubleshooting_guidance(service)
+            
+            # Create enhanced response
+            enhanced_response = f"""
+# Enhanced CloudFormation Guidance for {resource_type}
+
+## Description
+{description}
+
+## Best Practices
+{chr(10).join([f"• {bp}" for bp in best_practices[:5]]) if best_practices else "• Follow AWS Well-Architected Framework principles"}
+
+## Security Considerations
+• Enable encryption at rest and in transit
+• Apply least privilege access policies
+• Use IAM roles instead of hardcoded credentials
+• Implement proper network security controls
+
+## Performance Optimization
+• Right-size resources based on workload requirements
+• Implement caching where appropriate
+• Use Auto Scaling for variable workloads
+• Monitor performance metrics and set up alarms
+
+## Cost Optimization
+• Use appropriate instance types and storage classes
+• Implement lifecycle policies for data management
+• Monitor costs with AWS Cost Explorer
+• Consider Reserved Instances for predictable workloads
+
+## Troubleshooting Tips
+{chr(10).join([f"• {tip}" for tip in troubleshooting[:3]]) if troubleshooting else "• Check CloudFormation events for deployment issues"}
+
+## Additional Resources
+• AWS Documentation: https://docs.aws.amazon.com/
+• AWS Well-Architected Framework
+• AWS CloudFormation Best Practices Guide
+"""
+            
+            return enhanced_response.strip()
+            
+        except Exception as e:
+            return f"Enhanced guidance for {resource_info.get('Type', 'resource')}: Follow AWS best practices for security, performance, and cost optimization. Error: {str(e)}"
+
+
 # Singleton instance
 _knowledge_base = None
 
@@ -556,3 +622,4 @@ def get_knowledge_base() -> DocumentationKnowledgeBase:
         logger.error(f"Error creating knowledge base: {e}")
         # Return a minimal knowledge base that won't crash the server
         return DocumentationKnowledgeBase(docs_path="/tmp")
+
