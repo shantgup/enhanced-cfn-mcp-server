@@ -667,12 +667,12 @@ Focus on actionable solutions to resolve the analysis failure.
             remediation_guidance = self._generate_remediation_guidance(security_assessment, performance_assessment)
             
             # Generate expert prompt for Claude
+            # Convert template dict back to string for generate_enhanced_prompt
+            import json
+            template_content_str = json.dumps(template, indent=2)
             expert_prompt = self.generate_enhanced_prompt(
-                template=template,
-                analysis_focus=analysis_focus,
-                security_issues=security_assessment.get('issues', []),
-                architecture_pattern=architecture_pattern,
-                compliance_reqs=compliance_requirements
+                template_content=template_content_str,
+                analysis_focus=analysis_focus
             )
             
             return {
