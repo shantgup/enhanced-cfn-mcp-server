@@ -120,9 +120,6 @@ Your AWS credentials need permissions for:
 git clone https://github.com/shantgup/enhanced-cfn-mcp-server.git
 cd enhanced-cfn-mcp-server
 
-# Install the package
-pip install -e .
-
 ```
 
 ### 2. Configure AWS Credentials
