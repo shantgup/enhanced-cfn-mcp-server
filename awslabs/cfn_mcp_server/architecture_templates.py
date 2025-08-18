@@ -17,12 +17,7 @@
 from typing import Dict, List, Any, Optional
 
 # Import config_manager only when needed to avoid circular dependencies
-import importlib
-
-# Get config_manager lazily
-def get_config():
-    from awslabs.cfn_mcp_server.config import config_manager
-    return config_manager
+from awslabs.cfn_mcp_server.config import config_manager
 
 
 def generate_web_application_architecture(analysis: Dict[str, Any], config=None) -> Dict[str, Dict[str, Any]]:
@@ -104,7 +99,7 @@ def _generate_vpc_with_subnets(analysis: Dict[str, Any]) -> Dict[str, Dict[str, 
     resources = {}
     
     # Get configuration
-    config = get_config()
+    config = config or config_manager
     vpc_cidr = config.get_config('networking.vpc_cidr', '10.0.0.0/16')
     subnet_cidrs = config.get_config('networking.subnet_cidrs', ['10.0.1.0/24', '10.0.2.0/24', '10.0.3.0/24'])
     
@@ -381,13 +376,12 @@ def _generate_launch_template(analysis: Dict[str, Any]) -> Dict[str, Dict[str, A
     perf_tier = analysis.get('scale_requirements', {}).get('performance_tier', 'standard')
     
     # Get configuration
-    config = get_config()
+    config = config or config_manager
     
     # Get instance type from configuration
     instance_type = config.get_resource_config('ec2', perf_tier, 'performance_tiers', 't3.small')
     
-    # Get configuration
-    config = get_config()
+    # Use existing config
     
     # Get the latest AMI for the region
     region = analysis.get('region', config.get_config('aws.default_region'))
@@ -567,6 +561,30 @@ def _generate_load_balancer_resources(analysis: Dict[str, Any]) -> Dict[str, Dic
     return resources
 
 
+def _generate_database_parameters() -> Dict[str, Dict[str, Any]]:
+    """Generate CloudFormation parameters for database resources."""
+    return {
+        "DBUsername": {
+            "Type": "String",
+            "Description": "Database administrator username",
+            "Default": "dbadmin",
+            "MinLength": "1",
+            "MaxLength": "16",
+            "AllowedPattern": "[a-zA-Z][a-zA-Z0-9]*",
+            "ConstraintDescription": "Must begin with a letter and contain only alphanumeric characters"
+        },
+        "DBPassword": {
+            "Type": "String",
+            "Description": "Database administrator password",
+            "NoEcho": True,
+            "MinLength": "8",
+            "MaxLength": "41",
+            "AllowedPattern": "[a-zA-Z0-9]*",
+            "ConstraintDescription": "Must contain only alphanumeric characters"
+        }
+    }
+
+
 def _generate_database_resources(analysis: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
     """Generate RDS database resources."""
     resources = {}
@@ -575,7 +593,7 @@ def _generate_database_resources(analysis: Dict[str, Any]) -> Dict[str, Dict[str
     perf_tier = analysis.get('scale_requirements', {}).get('performance_tier', 'standard')
     
     # Get configuration
-    config = get_config()
+    config = config or config_manager
     
     # Get instance class from configuration
     instance_class = config.get_resource_config('rds', perf_tier, 'performance_tiers', 'db.t3.small')
@@ -654,7 +672,7 @@ def _generate_database_resources(analysis: Dict[str, Any]) -> Dict[str, Dict[str
             "DBInstanceClass": instance_class,
             "Engine": engine,
             "EngineVersion": engine_version,
-            "MasterUsername": "admin",
+            "MasterUsername": {"Ref": "DBUsername"},
             "MasterUserPassword": {"Ref": "DBPassword"},
             "AllocatedStorage": allocated_storage,
             "StorageType": "gp3",
@@ -686,7 +704,7 @@ def _generate_database_resources(analysis: Dict[str, Any]) -> Dict[str, Dict[str
             "Name": {"Fn::Sub": "${AWS::StackName}-db-password"},
             "Description": {"Fn::Sub": "Password for ${AWS::StackName} database"},
             "GenerateSecretString": {
-                "SecretStringTemplate": '{"username": "admin"}',
+                "SecretStringTemplate": {"Fn::Sub": '{"username": "${DBUsername}"}'},
                 "GenerateStringKey": "password",
                 "PasswordLength": 16,
                 "ExcludeCharacters": "\"@/\\"

@@ -34,16 +34,43 @@ template_generator = None
 troubleshooting_enhancer = None
 
 def initialize_components():
-    """Initialize the prompt enhancement components."""
+    """Initialize the prompt enhancement components.
+    
+    Raises:
+        RuntimeError: If critical components fail to initialize
+    """
     global template_generator, troubleshooting_enhancer
+    
+    initialization_errors = []
     
     try:
         template_generator = TemplateGenerator()
-        troubleshooting_enhancer = TroubleshootingEnhancer()
-        print("✅ Prompt enhancement components initialized successfully")
+        if not hasattr(template_generator, 'architecture_patterns'):
+            initialization_errors.append("TemplateGenerator missing architecture patterns")
     except Exception as e:
-        print(f"⚠️ Warning: Could not initialize some components: {e}")
-        # Continue with limited functionality
+        initialization_errors.append(f"TemplateGenerator initialization failed: {e}")
+        template_generator = None
+    
+    try:
+        troubleshooting_enhancer = TroubleshootingEnhancer()
+        if not hasattr(troubleshooting_enhancer, 'error_patterns'):
+            initialization_errors.append("TroubleshootingEnhancer missing error patterns")
+    except Exception as e:
+        initialization_errors.append(f"TroubleshootingEnhancer initialization failed: {e}")
+        troubleshooting_enhancer = None
+    
+    if initialization_errors:
+        error_msg = "; ".join(initialization_errors)
+        raise RuntimeError(f"Component initialization failed: {error_msg}")
+    
+    print("✅ Prompt enhancement components initialized successfully")
+
+def is_components_initialized() -> bool:
+    """Check if all components are properly initialized."""
+    return (template_generator is not None and 
+            troubleshooting_enhancer is not None and
+            hasattr(template_generator, 'architecture_patterns') and
+            hasattr(troubleshooting_enhancer, 'error_patterns'))
 
 # =============================================================================
 # CORE PROMPT ENHANCEMENT TOOLS (ONLY 3)
@@ -74,6 +101,14 @@ def generate_cloudformation_template_enhancement(
                 "success": False,
                 "error": "Template generator not initialized",
                 "expert_prompt_for_claude": f"Create a CloudFormation template for: {description}"
+            }
+        # Check if components are initialized
+        if not is_components_initialized():
+            return {
+                "success": False,
+                "error": "Template generator components not properly initialized",
+                "enhanced_prompt": "",
+                "conversation_stage": "ERROR"
             }
         
         # Generate the enhanced expert prompt

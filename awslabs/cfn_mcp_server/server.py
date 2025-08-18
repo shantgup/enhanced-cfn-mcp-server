@@ -19,13 +19,15 @@ import json
 import time
 import yaml
 from typing import Dict, List, Any, Optional
-from awslabs.cfn_mcp_server.aws_client import get_aws_client
-from awslabs.cfn_mcp_server.cloud_control_utils import progress_event, validate_patch
+import botocore.exceptions
+from awslabs.cfn_mcp_server.resource_operations import ResourceOperations
+from awslabs.cfn_mcp_server.stack_operations import StackOperations
+from awslabs.cfn_mcp_server.template_operations import TemplateOperations
 from awslabs.cfn_mcp_server.context import Context
+from awslabs.cfn_mcp_server.aws_client import get_aws_client, get_actual_region
 from awslabs.cfn_mcp_server.errors import ClientError, handle_aws_api_error
-from awslabs.cfn_mcp_server.iac_generator import create_template as create_template_impl
-from awslabs.cfn_mcp_server.schema_manager import schema_manager
 from awslabs.cfn_mcp_server.stack_manager import StackManager
+from awslabs.cfn_mcp_server.iac_generator import create_template as create_template_impl
 from mcp.server.fastmcp import FastMCP
 from pydantic import Field
 
@@ -69,9 +71,7 @@ async def get_resource_schema_information(
     if not resource_type:
         raise ClientError('Please provide a resource type (e.g., AWS::S3::Bucket)')
 
-    sm = schema_manager()
-    schema = await sm.get_schema(resource_type, region)
-    return schema
+    return await ResourceOperations.get_resource_schema(resource_type, region)
 
 
 @mcp.tool()
@@ -92,21 +92,7 @@ async def list_resources(
     Returns:
         A list of resource identifiers
     """
-    if not resource_type:
-        raise ClientError('Please provide a resource type (e.g., AWS::S3::Bucket)')
-
-    cloudcontrol = get_aws_client('cloudcontrol', region)
-    paginator = cloudcontrol.get_paginator('list_resources')
-
-    results = []
-    page_iterator = paginator.paginate(TypeName=resource_type)
-    try:
-        for page in page_iterator:
-            results.extend(page['ResourceDescriptions'])
-    except Exception as e:
-        raise handle_aws_api_error(e)
-
-    return [response['Identifier'] for response in results]
+    return ResourceOperations.list_resources(resource_type, region)
 
 
 @mcp.tool()
@@ -135,21 +121,7 @@ async def get_resource(
             "properties": The detailed information about the resource
         }
     """
-    if not resource_type:
-        raise ClientError('Please provide a resource type (e.g., AWS::S3::Bucket)')
-
-    if not identifier:
-        raise ClientError('Please provide a resource identifier')
-
-    cloudcontrol = get_aws_client('cloudcontrol', region)
-    try:
-        result = cloudcontrol.get_resource(TypeName=resource_type, Identifier=identifier)
-        return {
-            'identifier': result['ResourceDescription']['Identifier'],
-            'properties': result['ResourceDescription']['Properties'],
-        }
-    except Exception as e:
-        raise handle_aws_api_error(e)
+    return ResourceOperations.get_resource(resource_type, identifier, region)
 
 
 @mcp.tool()
@@ -196,26 +168,7 @@ async def update_resource(
     if not patch_document:
         raise ClientError('Please provide a patch document for the update')
 
-    if Context.readonly_mode():
-        raise ClientError(
-            'You have configured this tool in readonly mode. To make this change you will have to update your configuration.'
-        )
-
-    validate_patch(patch_document)
-    cloudcontrol_client = get_aws_client('cloudcontrol', region)
-
-    # Convert patch document to JSON string for the API
-    patch_document_str = json.dumps(patch_document)
-
-    # Update the resource
-    try:
-        response = cloudcontrol_client.update_resource(
-            TypeName=resource_type, Identifier=identifier, PatchDocument=patch_document_str
-        )
-    except Exception as e:
-        raise handle_aws_api_error(e)
-
-    return progress_event(response['ProgressEvent'], None)
+    return ResourceOperations.update_resource(resource_type, identifier, patch_document, region)
 
 
 @mcp.tool()
@@ -247,26 +200,7 @@ async def create_resource(
             "resource_info": Optional information about the resource properties
         }
     """
-    if not resource_type:
-        raise ClientError('Please provide a resource type (e.g., AWS::S3::Bucket)')
-
-    if not properties:
-        raise ClientError('Please provide the properties for the desired resource')
-
-    if Context.readonly_mode():
-        raise ClientError(
-            'You have configured this tool in readonly mode. To make this change you will have to update your configuration.'
-        )
-
-    cloudcontrol_client = get_aws_client('cloudcontrol', region)
-    try:
-        response = cloudcontrol_client.create_resource(
-            TypeName=resource_type, DesiredState=json.dumps(properties)
-        )
-    except Exception as e:
-        raise handle_aws_api_error(e)
-
-    return progress_event(response['ProgressEvent'], None)
+    return ResourceOperations.create_resource(resource_type, properties, region)
 
 
 @mcp.tool()
@@ -299,26 +233,7 @@ async def delete_resource(
             "request_token": A token that allows you to track long running operations via the get_resource_request_status tool
         }
     """
-    if not resource_type:
-        raise ClientError('Please provide a resource type (e.g., AWS::S3::Bucket)')
-
-    if not identifier:
-        raise ClientError('Please provide a resource identifier')
-
-    if Context.readonly_mode():
-        raise ClientError(
-            'You have configured this tool in readonly mode. To make this change you will have to update your configuration.'
-        )
-
-    cloudcontrol_client = get_aws_client('cloudcontrol', region)
-    try:
-        response = cloudcontrol_client.delete_resource(
-            TypeName=resource_type, Identifier=identifier
-        )
-    except Exception as e:
-        raise handle_aws_api_error(e)
-
-    return progress_event(response['ProgressEvent'], None)
+    return ResourceOperations.delete_resource(resource_type, identifier, region)
 
 
 @mcp.tool()
@@ -349,18 +264,7 @@ async def get_resource_request_status(
             "retry_after": A duration to wait before retrying the request
         }
     """
-    if not request_token:
-        raise ClientError('Please provide a request token to track the request')
-
-    cloudcontrol_client = get_aws_client('cloudcontrol', region)
-    try:
-        response = cloudcontrol_client.get_resource_request_status(
-            RequestToken=request_token,
-        )
-    except Exception as e:
-        raise handle_aws_api_error(e)
-
-    return progress_event(response['ProgressEvent'], response.get('HooksProgressEvent', None))
+    return ResourceOperations.get_resource_request_status(request_token, region)
 
 
 @mcp.tool()
@@ -653,7 +557,10 @@ async def deploy_cloudformation_stack(
        )
     """
     try:
-        stack_manager = StackManager(region or 'us-east-1')
+        from awslabs.cfn_mcp_server.stack_manager import StackManager
+        from awslabs.cfn_mcp_server.aws_client import get_actual_region
+        
+        stack_manager = StackManager(get_actual_region(region))
         result = await stack_manager.deploy_stack(
             stack_name=stack_name,
             template_body=template_body,
@@ -726,9 +633,11 @@ async def troubleshoot_cloudformation_stack(
     """
     try:
         from awslabs.cfn_mcp_server.troubleshooting_enhancer_clean import TroubleshootingEnhancer
+        from awslabs.cfn_mcp_server.stack_manager import StackManager
+        from awslabs.cfn_mcp_server.aws_client import get_actual_region
         
         # Get stack information for context
-        stack_manager = StackManager(region or 'us-east-1')
+        stack_manager = StackManager(get_actual_region(region))
         stack_info = await stack_manager.get_stack_status(stack_name, include_events=True)
         
         # Extract error information from stack events
@@ -756,7 +665,7 @@ async def troubleshoot_cloudformation_stack(
         enhancer = TroubleshootingEnhancer()
         result = enhancer.create_enhanced_troubleshooting_prompt(
             stack_name=stack_name,
-            region=region or 'us-east-1',
+            region=get_actual_region(region),
             include_logs=include_logs,
             include_cloudtrail=include_cloudtrail,
             time_window_hours=time_window_hours,
@@ -767,7 +676,7 @@ async def troubleshoot_cloudformation_stack(
         # Add stack context
         result['stack_context'] = {
             'stack_name': stack_name,
-            'region': region or 'us-east-1',
+            'region': get_actual_region(region),
             'include_logs': include_logs,
             'include_cloudtrail': include_cloudtrail,
             'time_window_hours': time_window_hours,
@@ -830,9 +739,11 @@ async def fix_and_retry_cloudformation_stack(
     """
     try:
         from awslabs.cfn_mcp_server.troubleshooting_enhancer_clean import TroubleshootingEnhancer
+        from awslabs.cfn_mcp_server.stack_manager import StackManager
+        from awslabs.cfn_mcp_server.aws_client import get_actual_region
         
         # Get stack information and template
-        stack_manager = StackManager(region or 'us-east-1')
+        stack_manager = StackManager(get_actual_region(region))
         stack_info = await stack_manager.get_stack_status(stack_name, include_events=True)
         
         # Get the current template
@@ -856,7 +767,7 @@ async def fix_and_retry_cloudformation_stack(
         enhancer = TroubleshootingEnhancer()
         result = enhancer.enhance_troubleshooting_request(
             stack_name=stack_name,
-            region=region or 'us-east-1',
+            region=get_actual_region(region),
             include_logs=True,
             include_cloudtrail=True,
             time_window_hours=48,
@@ -875,7 +786,7 @@ async def fix_and_retry_cloudformation_stack(
         # Add configuration context
         result['fix_configuration'] = {
             'stack_name': stack_name,
-            'region': region or 'us-east-1',
+            'region': get_actual_region(region),
             'auto_fix': auto_fix,
             'max_retries': max_retries,
             'backup_template': backup_template,
@@ -991,7 +902,10 @@ async def delete_cloudformation_stack(
        )
     """
     try:
-        stack_manager = StackManager(region or 'us-east-1')
+        from awslabs.cfn_mcp_server.stack_manager import StackManager
+        from awslabs.cfn_mcp_server.aws_client import get_actual_region
+        
+        stack_manager = StackManager(get_actual_region(region))
         result = await stack_manager.delete_stack(
             stack_name=stack_name,
             retain_resources=retain_resources or [],
@@ -1015,6 +929,9 @@ async def detect_template_capabilities(
         import re
         
         capabilities = []
+        
+        # TEST: Add debug message to verify changes are picked up
+        print("DEBUG: detect_template_capabilities called - changes are working!")
         
         # Parse template using enhanced CloudFormation parser
         try:
@@ -1370,8 +1287,9 @@ async def enhanced_troubleshoot_cloudformation_stack(
     """
     try:
         from awslabs.cfn_mcp_server.enhanced_troubleshooter import EnhancedCloudFormationTroubleshooter
+        from awslabs.cfn_mcp_server.aws_client import get_actual_region
         
-        troubleshooter = EnhancedCloudFormationTroubleshooter(region or 'us-east-1')
+        troubleshooter = EnhancedCloudFormationTroubleshooter(get_actual_region(region))
         result = await troubleshooter.comprehensive_analysis(
             stack_name=stack_name,
             include_template_analysis=include_template_analysis,
@@ -1455,8 +1373,9 @@ async def autonomous_fix_and_deploy_stack(
     """
     try:
         from awslabs.cfn_mcp_server.enhanced_troubleshooter import EnhancedCloudFormationTroubleshooter
+        from awslabs.cfn_mcp_server.aws_client import get_actual_region
         
-        troubleshooter = EnhancedCloudFormationTroubleshooter(region or 'us-east-1')
+        troubleshooter = EnhancedCloudFormationTroubleshooter(get_actual_region(region))
         result = await troubleshooter.fix_and_deploy(
             stack_name=stack_name,
             auto_apply_fixes=auto_apply_fixes,
@@ -1671,6 +1590,50 @@ async def generate_template_fixes(
         }
     except Exception as e:
         return handle_aws_api_error(e, 'generate_template_fixes')
+
+
+@mcp.tool()
+def system_health_check(region: str = "us-east-1") -> Dict[str, Any]:
+    """
+    Perform comprehensive health checks on all system components.
+    
+    This tool verifies that all critical components are working properly:
+    - AWS connectivity and permissions
+    - Configuration management
+    - Schema manager functionality
+    - File system access
+    - Context initialization
+    
+    Args:
+        region: AWS region to test connectivity (default: us-east-1)
+    
+    Returns:
+        Comprehensive health status with detailed component information
+    """
+    try:
+        from awslabs.cfn_mcp_server.health_check import get_health_checker
+        
+        health_checker = get_health_checker()
+        return health_checker.run_all_checks(region)
+        
+    except Exception as e:
+        return {
+            "overall_status": "UNHEALTHY",
+            "overall_message": f"Health check system failed: {str(e)}",
+            "timestamp": "unknown",
+            "checks": [],
+            "summary": {"total": 0, "healthy": 0, "warning": 0, "unhealthy": 1}
+        }
+
+
+@mcp.tool()
+async def test_server_updates() -> dict:
+    """Test function to verify server is picking up code changes."""
+    return {
+        "status": "success", 
+        "message": "Server is picking up code changes!",
+        "timestamp": "2025-08-15T20:32:00Z"
+    }
 
 
 def main():

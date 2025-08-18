@@ -688,7 +688,7 @@ Focus on actionable solutions to resolve the analysis failure.
                 'architecture_pattern': architecture_pattern,
                 'performance_assessment': performance_assessment,
                 'analysis_workflow': self._create_analysis_workflow(),
-                'investigation_commands': self._generate_investigation_commands(),
+                'investigation_commands': self._generate_basic_investigation_commands(),
                 'best_practices_checklist': best_practices_checklist,
                 'remediation_guidance': remediation_guidance,
                 'validation_steps': self._generate_validation_steps(),
@@ -834,7 +834,7 @@ Focus on actionable solutions to resolve the analysis failure.
             "7. Create comprehensive analysis report"
         ]
     
-    def _generate_investigation_commands(self) -> List[str]:
+    def _generate_basic_investigation_commands(self) -> List[str]:
         """Generate investigation commands for further analysis."""
         return [
             "aws cloudformation validate-template --template-body file://template.yaml",

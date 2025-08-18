@@ -36,13 +36,13 @@ def parse_cloudformation_template(template_content: str) -> Dict[str, Any]:
     # Strategy 2: Try enhanced YAML parser with CloudFormation intrinsic functions
     try:
         return parse_cloudformation_yaml_with_intrinsics(template_content)
-    except Exception:
+    except (yaml.YAMLError, ValueError, TypeError):
         pass
     
     # Strategy 3: Try fallback YAML parser with preprocessing
     try:
         return parse_cloudformation_yaml_fallback(template_content)
-    except Exception:
+    except (yaml.YAMLError, ValueError, TypeError):
         pass
     
     # Strategy 4: Try basic YAML parsing (ignoring intrinsic functions)
@@ -50,17 +50,17 @@ def parse_cloudformation_template(template_content: str) -> Dict[str, Any]:
         result = yaml.safe_load(template_content)
         if isinstance(result, dict):
             return result
-    except Exception:
+    except yaml.YAMLError:
         pass
     
     # Strategy 5: Try to extract basic structure even from malformed templates
     try:
         return extract_basic_template_structure(template_content)
-    except Exception:
+    except (ValueError, TypeError, AttributeError):
         pass
     
     # If all strategies fail, raise an exception
-    raise Exception("Failed to parse CloudFormation template with all available strategies")
+    raise ValueError("Failed to parse CloudFormation template with all available strategies")
 
 
 def parse_cloudformation_yaml_with_intrinsics(template_content: str) -> Dict[str, Any]:
@@ -198,13 +198,13 @@ def parse_cloudformation_yaml_fallback(template_content: str) -> Dict[str, Any]:
     try:
         # First, try the intrinsic function parser
         return parse_cloudformation_yaml_with_intrinsics(template_content)
-    except Exception:
+    except (yaml.YAMLError, ValueError, TypeError):
         # If that fails, try the preprocessing approach
         try:
             processed_content = preprocess_cloudformation_yaml(template_content)
             template_dict = yaml.safe_load(processed_content)
             return postprocess_cloudformation_dict(template_dict)
-        except Exception:
+        except (yaml.YAMLError, ValueError, TypeError):
             # Last resort: try to parse as regular YAML and ignore intrinsic functions
             return yaml.safe_load(template_content)
 

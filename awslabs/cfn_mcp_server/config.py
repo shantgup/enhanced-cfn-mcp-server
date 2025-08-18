@@ -16,11 +16,18 @@
 
 import os
 import json
+import ipaddress
+import re
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 
 # Import boto3 only when needed to avoid circular imports
 import importlib
+
+
+class ConfigValidationError(Exception):
+    """Raised when configuration validation fails."""
+    pass
 
 
 class ConfigManager:
@@ -31,20 +38,56 @@ class ConfigManager:
         
         Args:
             config_file: Optional path to a configuration file
+            
+        Raises:
+            ConfigValidationError: If configuration is invalid
         """
-        self.config = self._load_default_config()
+        self._initialized = False
+        try:
+            self.config = self._load_default_config()
+            
+            # Load from config file if provided
+            if config_file and os.path.exists(config_file):
+                try:
+                    with open(config_file, 'r') as f:
+                        file_config = json.load(f)
+                        self.config.update(file_config)
+                except (json.JSONDecodeError, IOError) as e:
+                    raise ConfigValidationError(f"Failed to load config file {config_file}: {e}")
+            
+            # Override with environment variables
+            self._override_from_env()
+            
+            # Validate configuration
+            self.validate_config()
+            
+            # Cache for AMI IDs
+            self._ami_cache = {}
+            
+            self._initialized = True
+        except Exception as e:
+            self._initialized = False
+            raise ConfigValidationError(f"Failed to initialize configuration: {e}")
+    
+    def is_initialized(self) -> bool:
+        """Check if the configuration manager is properly initialized."""
+        return getattr(self, '_initialized', False)
+    
+    def health_check(self) -> Dict[str, Any]:
+        """Perform a health check on the configuration manager."""
+        if not self.is_initialized():
+            return {"status": "UNHEALTHY", "message": "Not initialized"}
         
-        # Load from config file if provided
-        if config_file and os.path.exists(config_file):
-            with open(config_file, 'r') as f:
-                file_config = json.load(f)
-                self.config.update(file_config)
-        
-        # Override with environment variables
-        self._override_from_env()
-        
-        # Cache for AMI IDs
-        self._ami_cache = {}
+        try:
+            # Test basic config access
+            region = self.get_config('aws.default_region', 'us-east-1')
+            return {
+                "status": "HEALTHY", 
+                "message": "Configuration operational",
+                "details": {"default_region": region}
+            }
+        except Exception as e:
+            return {"status": "UNHEALTHY", "message": f"Config access failed: {e}"}
     
     def _load_default_config(self) -> Dict[str, Any]:
         """Load default configuration values."""
@@ -183,6 +226,9 @@ class ConfigManager:
             
         Returns:
             Configuration value or default
+            
+        Raises:
+            ConfigValidationError: If the configuration value is invalid
         """
         parts = path.split('.')
         value = self.config
@@ -192,7 +238,21 @@ class ConfigManager:
                 return default
             value = value[part]
         
+        # Validate specific config paths
+        self._validate_config_value(path, value)
+        
         return value
+    
+    def _validate_config_value(self, path: str, value: Any) -> None:
+        """Validate a specific configuration value."""
+        if path == "networking.vpc_cidr" and value:
+            try:
+                ipaddress.IPv4Network(value, strict=False)
+            except ipaddress.AddressValueError:
+                raise ConfigValidationError(f"Invalid VPC CIDR: {value}")
+        elif path == "aws.default_region" and value:
+            if not re.match(r'^[a-z]{2}-[a-z]+-\d+$', value):
+                raise ConfigValidationError(f"Invalid AWS region: {value}")
     
     def get_latest_ami(self, region: str, os_type: str = "amazon-linux-2") -> str:
         """Get the latest AMI ID for the specified region and OS type.
@@ -302,7 +362,77 @@ class ConfigManager:
             return self.config["resources"][resource_type][config_key][tier]
         except (KeyError, TypeError):
             return default
+    
+    def validate_config(self) -> None:
+        """Validate the entire configuration."""
+        self._validate_aws_config()
+        self._validate_network_config()
+        self._validate_resource_config()
+    
+    def _validate_aws_config(self) -> None:
+        """Validate AWS configuration."""
+        aws_config = self.config.get("aws", {})
+        
+        # Validate region
+        region = aws_config.get("default_region")
+        if region and not re.match(r'^[a-z]{2}-[a-z]+-\d+$', region):
+            raise ConfigValidationError(f"Invalid AWS region format: {region}")
+    
+    def _validate_network_config(self) -> None:
+        """Validate network configuration."""
+        network_config = self.config.get("networking", {})
+        
+        # Validate VPC CIDR
+        vpc_cidr = network_config.get("vpc_cidr")
+        if vpc_cidr:
+            try:
+                ipaddress.IPv4Network(vpc_cidr, strict=False)
+            except ipaddress.AddressValueError:
+                raise ConfigValidationError(f"Invalid VPC CIDR: {vpc_cidr}")
+        
+        # Validate subnet CIDRs
+        subnet_cidrs = network_config.get("subnet_cidrs", [])
+        for cidr in subnet_cidrs:
+            try:
+                ipaddress.IPv4Network(cidr, strict=False)
+            except ipaddress.AddressValueError:
+                raise ConfigValidationError(f"Invalid subnet CIDR: {cidr}")
+    
+    def _validate_resource_config(self) -> None:
+        """Validate resource configuration."""
+        resources_config = self.config.get("resources", {})
+        
+        # Validate EC2 instance types
+        ec2_config = resources_config.get("ec2", {})
+        performance_tiers = ec2_config.get("performance_tiers", {})
+        for tier, instance_type in performance_tiers.items():
+            if not re.match(r'^[a-z]\d+\.[a-z]+$', instance_type):
+                raise ConfigValidationError(f"Invalid EC2 instance type: {instance_type}")
+        
+        # Validate RDS instance classes
+        rds_config = resources_config.get("rds", {})
+        rds_tiers = rds_config.get("performance_tiers", {})
+        for tier, instance_class in rds_tiers.items():
+            if not re.match(r'^db\.[a-z]\d+\.[a-z]+$', instance_class):
+                raise ConfigValidationError(f"Invalid RDS instance class: {instance_class}")
 
 
-# Create a singleton instance
-config_manager = ConfigManager()
+# Create a singleton instance with error handling
+_config_manager_instance = None
+
+def get_config_manager() -> ConfigManager:
+    """Get the singleton config manager instance."""
+    global _config_manager_instance
+    if _config_manager_instance is None:
+        try:
+            _config_manager_instance = ConfigManager()
+        except ConfigValidationError as e:
+            raise ConfigValidationError(f"Failed to initialize config manager: {e}")
+    
+    if not _config_manager_instance.is_initialized():
+        raise ConfigValidationError("Config manager is not properly initialized")
+    
+    return _config_manager_instance
+
+# Backward compatibility
+config_manager = get_config_manager()

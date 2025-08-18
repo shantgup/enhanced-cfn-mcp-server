@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "enhanced-cfn-mcp-server": {
-      "command": "enhanced-cfn-mcp-server",
+      "command": "./awslabs/run_server.sh",
       "args": [],
       "env": {},
       "timeout": 120000,

@@ -21,12 +21,7 @@ from typing import Dict, List, Any, Optional, Tuple
 from awslabs.cfn_mcp_server.aws_client import get_aws_client
 
 # Import config_manager only when needed to avoid circular dependencies
-import importlib
-
-# Get config_manager lazily
-def get_config():
-    from awslabs.cfn_mcp_server.config import config_manager
-    return config_manager
+from awslabs.cfn_mcp_server.config import config_manager
 from awslabs.cfn_mcp_server.architecture_templates import (
     generate_web_application_architecture,
     generate_serverless_api_architecture,
@@ -44,7 +39,7 @@ class IntelligentTemplateGenerator:
             region: AWS region for the template (defaults to configured default)
             config: Optional configuration manager instance
         """
-        self.config = config or get_config()
+        self.config = config or config_manager
         self.region = region or self.config.get_config('aws.default_region')
         self.client = get_aws_client('cloudformation', self.region)
         

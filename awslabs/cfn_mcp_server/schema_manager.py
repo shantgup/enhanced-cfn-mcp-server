@@ -32,16 +32,27 @@ class SchemaManager:
 
     def __init__(self):
         """Initialize the schema manager with the cache directory."""
-        cache_dir = os.path.join(os.path.dirname(__file__), '.schemas')
-        self.cache_dir = Path(cache_dir)
-        self.metadata_file = self.cache_dir / SCHEMA_METADATA_FILE
-        self.schema_registry: Dict[str, dict] = {}
+        self._initialized = False
+        try:
+            cache_dir = os.path.join(os.path.dirname(__file__), '.schemas')
+            self.cache_dir = Path(cache_dir)
+            self.metadata_file = self.cache_dir / SCHEMA_METADATA_FILE
+            self.schema_registry: Dict[str, dict] = {}
 
-        # Ensure cache directory exists
-        self.cache_dir.mkdir(exist_ok=True)
+            # Ensure cache directory exists
+            self.cache_dir.mkdir(exist_ok=True)
 
-        # Load metadata if it exists
-        self.metadata = self._load_metadata()
+            # Load metadata if it exists
+            self.metadata = self._load_metadata()
+            
+            self._initialized = True
+        except Exception as e:
+            self._initialized = False
+            raise ClientError(f"Failed to initialize schema manager: {e}")
+    
+    def is_initialized(self) -> bool:
+        """Check if the schema manager is properly initialized."""
+        return getattr(self, '_initialized', False)
 
         # Load cached schemas into registry
         self._load_cached_schemas()
@@ -157,10 +168,24 @@ class SchemaManager:
             raise ClientError(f'Error downloading the schema for {resource_type}: {str(e)}')
 
 
-_schema_manager_instance = SchemaManager()
+# Safe singleton creation
+_schema_manager_instance = None
 
+def get_schema_manager() -> SchemaManager:
+    """Get the singleton schema manager instance."""
+    global _schema_manager_instance
+    if _schema_manager_instance is None:
+        try:
+            _schema_manager_instance = SchemaManager()
+        except ClientError as e:
+            raise ClientError(f"Failed to initialize schema manager: {e}")
+    
+    if not _schema_manager_instance.is_initialized():
+        raise ClientError("Schema manager is not properly initialized")
+    
+    return _schema_manager_instance
 
 # used to load a single instance of the schema manager
 def schema_manager() -> SchemaManager:
     """Loads a singleton of the resource."""
-    return _schema_manager_instance
+    return get_schema_manager()

@@ -12,8 +12,8 @@
       "source": "cloudformation_api"
     },
     "AWS::S3::Bucket": {
-      "last_updated": "2025-07-14T16:01:00.785466",
-      "file_path": "/Users/shantgup/Projects/cfn-mcp-server-2/awslabs/cfn_mcp_server/.schemas/AWS_S3_Bucket.json",
+      "last_updated": "2025-08-18T12:15:43.286784",
+      "file_path": "/Users/shantgup/enhanced-cfn-mcp-server/awslabs/cfn_mcp_server/.schemas/AWS_S3_Bucket.json",
       "source": "cloudformation_api"
     },
     "AWS::Lambda::Function": {

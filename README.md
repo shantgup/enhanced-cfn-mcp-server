@@ -2,6 +2,18 @@
 
 An enhanced AWS CloudFormation Model Context Protocol (MCP) server that provides intelligent prompting, autonomous fixing, and comprehensive AWS resource management capabilities for AI assistants like Amazon Q.
 
+## 🚀 Quick Start
+
+```bash
+git clone https://github.com/shantgup/enhanced-cfn-mcp-server.git
+cd enhanced-cfn-mcp-server
+q chat
+```
+
+That's it! The MCP server will automatically load and you can start using it.
+
+**Prerequisites:** Python 3.9+ and AWS CLI configured with credentials.
+
 ## Table of Contents
 
 - [🚀 What is this?](#-what-is-this)

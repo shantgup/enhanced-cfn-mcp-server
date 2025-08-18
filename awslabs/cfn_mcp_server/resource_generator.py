@@ -17,13 +17,7 @@
 from typing import Dict, List, Any, Optional
 import uuid
 
-# Import config_manager only when needed to avoid circular dependencies
-import importlib
-
-# Get config_manager lazily
-def get_config():
-    from awslabs.cfn_mcp_server.config import config_manager
-    return config_manager
+from awslabs.cfn_mcp_server.config import config_manager
 
 class ResourceGenerator:
     """Generates CloudFormation resources with intelligent configurations."""
@@ -34,7 +28,7 @@ class ResourceGenerator:
         Args:
             config: Optional configuration manager instance
         """
-        self.config = config or get_config()
+        self.config = config or config_manager
     
     def generate_resources(
         self, 
@@ -74,8 +68,35 @@ class ResourceGenerator:
         # Add IAM roles where needed
         resources.update(self._generate_iam_resources(analysis))
         
-        return resources
+        # Generate parameters for resources that need them
+        if any('AWS::RDS::DBInstance' in str(v) for v in analysis.get('resources', {}).values()):
+            parameters.update(self._generate_database_parameters())
+        
+        return {"resources": resources, "parameters": parameters}
     
+    def _generate_database_parameters(self) -> Dict[str, Dict[str, Any]]:
+        """Generate CloudFormation parameters for database resources."""
+        return {
+            "DatabaseUsername": {
+                "Type": "String",
+                "Description": "Database administrator username",
+                "Default": "dbadmin",
+                "MinLength": "1",
+                "MaxLength": "16",
+                "AllowedPattern": "[a-zA-Z][a-zA-Z0-9]*",
+                "ConstraintDescription": "Must begin with a letter and contain only alphanumeric characters"
+            },
+            "DatabasePassword": {
+                "Type": "String",
+                "Description": "Database administrator password",
+                "NoEcho": True,
+                "MinLength": "8",
+                "MaxLength": "41",
+                "AllowedPattern": "[a-zA-Z0-9]*",
+                "ConstraintDescription": "Must contain only alphanumeric characters"
+            }
+        }
+
     def _generate_s3_bucket(self, key: str, analysis: Dict[str, Any]) -> Dict[str, Any]:
         """Generate S3 bucket configuration."""
         bucket_name = f"{key.title()}Bucket"
@@ -438,7 +459,7 @@ class ResourceGenerator:
                 "DBInstanceClass": instance_class,
                 "Engine": engine,
                 "EngineVersion": engine_version,
-                "MasterUsername": "admin",
+                "MasterUsername": {"Ref": "DatabaseUsername"},
                 "MasterUserPassword": {"Ref": "DatabasePassword"},
                 "AllocatedStorage": allocated_storage,
                 "StorageType": "gp3",
