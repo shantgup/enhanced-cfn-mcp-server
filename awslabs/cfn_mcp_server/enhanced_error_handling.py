@@ -73,7 +73,7 @@ def enhanced_error_handling(error: Exception, operation: str, context: Optional[
             'https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html'
         ]
     
-    elif operation == 'troubleshoot_cloudformation_stack':
+    elif operation == 'enhanced_troubleshoot_cloudformation_stack':
         response['suggestions'] = [
             'Verify the stack name is correct',
             'Ensure you have permissions to view stack resources',
@@ -223,7 +223,7 @@ def _get_recovery_steps(error_message: str, operation: str) -> List[str]:
                 }
             ]
     
-    elif operation == 'troubleshoot_cloudformation_stack':
+    elif operation == 'enhanced_troubleshoot_cloudformation_stack':
         recovery_steps = [
             {
                 'step': 'Check stack status',
@@ -308,7 +308,7 @@ def _get_user_friendly_message(error_message: str, operation: str) -> str:
     if operation == 'deploy_cloudformation_stack':
         return "Failed to deploy CloudFormation stack. Please check the template for errors and ensure you have the necessary permissions."
     
-    if operation == 'troubleshoot_cloudformation_stack':
+    if operation == 'enhanced_troubleshoot_cloudformation_stack':
         return "Failed to troubleshoot CloudFormation stack. Please check that the stack exists and that you have permission to access it."
     
     # Generic message

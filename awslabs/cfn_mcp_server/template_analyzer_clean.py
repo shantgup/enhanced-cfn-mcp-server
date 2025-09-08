@@ -107,7 +107,7 @@ class TemplateAnalyzer:
                 'performance_assessment': performance_issues,
                 'analysis_workflow': self._generate_analysis_workflow(analysis_focus),
                 'investigation_commands': self._generate_investigation_commands(template_data, region),
-                'best_practices_checklist': self._generate_best_practices_checklist(
+                'best_practices_checklist': self._generate_best_practices_checklist_v2(
                     security_issues, compliance_requirements, architecture_pattern
                 ),
                 'remediation_guidance': self._generate_remediation_guidance(
@@ -131,10 +131,48 @@ class TemplateAnalyzer:
             from awslabs.cfn_mcp_server.cloudformation_yaml import parse_cloudformation_template
             print(f"DEBUG: Attempting to parse template with enhanced parser")
             result = parse_cloudformation_template(template_content)
+            
+            # Handle case where parser returns a list instead of dict
+            if isinstance(result, list):
+                print(f"DEBUG: Parser returned list, converting to dict")
+                if len(result) > 0 and isinstance(result[0], dict):
+                    result = result[0]
+                else:
+                    print(f"DEBUG: Invalid list format, falling back to YAML parser")
+                    return None
+            
+            if not isinstance(result, dict):
+                print(f"DEBUG: Parser returned {type(result)}, expected dict")
+                return None
+                
             print(f"DEBUG: Successfully parsed template with {len(result.get('Resources', {}))} resources")
             return result
         except Exception as e:
             print(f"DEBUG: Enhanced parser failed with error: {e}")
+            
+        # Fallback to standard YAML parser
+        try:
+            print(f"DEBUG: Falling back to standard YAML parser")
+            import yaml
+            result = yaml.safe_load(template_content)
+            
+            # Handle case where YAML parser returns a list
+            if isinstance(result, list):
+                print(f"DEBUG: YAML parser returned list, converting to dict")
+                if len(result) > 0 and isinstance(result[0], dict):
+                    result = result[0]
+                else:
+                    print(f"DEBUG: Invalid YAML list format")
+                    return None
+            
+            if not isinstance(result, dict):
+                print(f"DEBUG: YAML parser returned {type(result)}, expected dict")
+                return None
+                
+            print(f"DEBUG: Successfully parsed template with YAML parser")
+            return result
+        except Exception as e:
+            print(f"DEBUG: YAML parser also failed: {e}")
             return None
 
     def _analyze_template_structure(self, template_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -463,13 +501,13 @@ Focus on production-ready solutions that follow AWS best practices and industry 
         
         return commands
 
-    def _generate_best_practices_checklist(
+    def _generate_best_practices_checklist_v2(
         self,
         security_issues: List[Dict[str, Any]],
         compliance_requirements: List[str],
         architecture_pattern: str
     ) -> List[str]:
-        """Generate best practices checklist based on analysis."""
+        """Generate best practices checklist based on analysis. Fixed method signature."""
         checklist = [
             "✓ All resources have appropriate tags for governance",
             "✓ IAM roles follow least privilege principle",
@@ -661,7 +699,7 @@ Focus on actionable solutions to resolve the analysis failure.
             performance_assessment = self._assess_performance_patterns(resources)
             
             # Generate best practices checklist
-            best_practices_checklist = self._generate_best_practices_checklist(template)
+            best_practices_checklist = self._generate_template_best_practices_checklist(template)
             
             # Create remediation guidance
             remediation_guidance = self._generate_remediation_guidance(security_assessment, performance_assessment)
@@ -770,7 +808,7 @@ Focus on actionable solutions to resolve the analysis failure.
             'score': max(0, 100 - len(performance_issues) * 15)
         }
     
-    def _generate_best_practices_checklist(self, template: Dict[str, Any]) -> List[Dict[str, Any]]:
+    def _generate_template_best_practices_checklist(self, template: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Generate a best practices checklist for the template."""
         checklist = [
             {

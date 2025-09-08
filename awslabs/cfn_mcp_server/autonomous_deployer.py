@@ -73,7 +73,12 @@ class AutonomousDeployer:
                 'error_message': None
             }
             
-            current_template = template.copy()
+            # Handle both string and dict templates
+            if isinstance(template, str):
+                import json
+                current_template = json.loads(template)
+            else:
+                current_template = template.copy()
             
             for iteration in range(max_iterations):
                 logger.info(f"Starting deployment iteration {iteration + 1}/{max_iterations}")

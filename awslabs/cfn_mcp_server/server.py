@@ -575,228 +575,7 @@ async def deploy_cloudformation_stack(
         return handle_aws_api_error(e, 'deploy_cloudformation_stack')
 
 
-@mcp.tool()
-async def troubleshoot_cloudformation_stack(
-    stack_name: str = Field(
-        description='Name of the CloudFormation stack to troubleshoot'
-    ),
-    region: str | None = Field(
-        description='The AWS region where the stack is located', default=None
-    ),
-    include_logs: bool = Field(
-        description='Whether to include CloudWatch logs analysis',
-        default=True
-    ),
-    include_cloudtrail: bool = Field(
-        description='Whether to include CloudTrail API call analysis for root cause investigation',
-        default=True
-    ),
-    time_window_hours: int = Field(
-        description='Time window in hours to look back for CloudTrail events and logs (default: 24)',
-        default=24
-    ),
-    max_events: int = Field(
-        description='Maximum number of stack events to analyze',
-        default=50
-    ),
-) -> dict:
-    """Generate expert troubleshooting prompts and guidance for CloudFormation stack issues.
-    
-    This tool creates comprehensive troubleshooting prompts that guide Claude to provide
-    systematic, expert-level analysis of CloudFormation stack failures. Instead of 
-    analyzing directly, it provides:
-    
-    - Expert troubleshooting prompts with structured investigation plans
-    - Step-by-step diagnostic workflows with specific CLI commands
-    - Context-aware analysis based on stack events and error patterns
-    - Comprehensive solution strategies ranked by likelihood of success
-    - Prevention measures and monitoring recommendations
-    
-    The enhanced prompts help Claude provide:
-    - Root cause analysis with specific error pattern recognition
-    - Detailed investigation procedures with exact commands to run
-    - Multiple solution approaches with implementation guidance
-    - Verification steps and rollback procedures
-    - Long-term prevention strategies
-    
-    Examples:
-    1. Generate troubleshooting guidance:
-       troubleshoot_cloudformation_stack(stack_name="failed-stack")
-    
-    2. Deep analysis with full context:
-       troubleshoot_cloudformation_stack(
-           stack_name="my-app-stack",
-           include_logs=True,
-           include_cloudtrail=True,
-           time_window_hours=48
-       )
-    """
-    try:
-        from awslabs.cfn_mcp_server.troubleshooting_enhancer_clean import TroubleshootingEnhancer
-        from awslabs.cfn_mcp_server.stack_manager import StackManager
-        from awslabs.cfn_mcp_server.aws_client import get_actual_region
-        
-        # Get stack information for context
-        stack_manager = StackManager(get_actual_region(region))
-        stack_info = await stack_manager.get_stack_status(stack_name, include_events=True)
-        
-        # Extract error information from stack events
-        error_description = "Stack analysis requested"
-        stack_events = []
-        
-        if stack_info.get('success') and 'events' in stack_info:
-            stack_events = stack_info['events'][:max_events]
-            # Find the most recent error event
-            for event in stack_events:
-                if event.get('ResourceStatusReason') and 'failed' in event.get('ResourceStatus', '').lower():
-                    error_description = event['ResourceStatusReason']
-                    break
-        
-        # Get template content if available
-        template_content = None
-        try:
-            template_info = await stack_manager.get_template(stack_name)
-            if template_info.get('success'):
-                template_content = template_info.get('template_body')
-        except:
-            pass
-        
-        # Generate enhanced troubleshooting prompts
-        enhancer = TroubleshootingEnhancer()
-        result = enhancer.create_enhanced_troubleshooting_prompt(
-            stack_name=stack_name,
-            region=get_actual_region(region),
-            include_logs=include_logs,
-            include_cloudtrail=include_cloudtrail,
-            time_window_hours=time_window_hours,
-            symptoms_description=error_description,
-            max_events=max_events
-        )
-        
-        # Add stack context
-        result['stack_context'] = {
-            'stack_name': stack_name,
-            'region': get_actual_region(region),
-            'include_logs': include_logs,
-            'include_cloudtrail': include_cloudtrail,
-            'time_window_hours': time_window_hours,
-            'stack_info': stack_info
-        }
-        
-        return result
-        
-    except Exception as e:
-        return handle_aws_api_error(e, 'troubleshoot_cloudformation_stack')
 
-
-@mcp.tool()
-async def fix_and_retry_cloudformation_stack(
-    stack_name: str = Field(
-        description='Name of the CloudFormation stack to fix and retry'
-    ),
-    region: str | None = Field(
-        description='The AWS region where the stack is located', default=None
-    ),
-    auto_fix: bool = Field(
-        description='Whether to automatically apply common fixes',
-        default=True
-    ),
-    max_retries: int = Field(
-        description='Maximum number of retry attempts',
-        default=3
-    ),
-    backup_template: bool = Field(
-        description='Whether to backup the original template before modifications',
-        default=True
-    ),
-) -> dict:
-    """Generate expert fix-and-retry prompts for failed CloudFormation deployments.
-    
-    This tool creates comprehensive fix-and-retry prompts that guide Claude to:
-    - Analyze the root cause of deployment failures
-    - Provide corrected CloudFormation templates with explanations
-    - Create step-by-step retry strategies with validation
-    - Offer rollback plans and risk mitigation approaches
-    - Suggest prevention measures for future deployments
-    
-    The enhanced prompts help Claude provide:
-    - Detailed error analysis with specific line-by-line template fixes
-    - Complete corrected templates with highlighted changes
-    - Deployment strategies with prerequisites and validation steps
-    - Monitoring guidance during retry attempts
-    - Post-deployment verification procedures
-    
-    Examples:
-    1. Generate fix-and-retry guidance:
-       fix_and_retry_cloudformation_stack(stack_name="failed-deployment")
-    
-    2. Conservative approach with detailed analysis:
-       fix_and_retry_cloudformation_stack(
-           stack_name="critical-stack",
-           auto_fix=False,
-           max_retries=1
-       )
-    """
-    try:
-        from awslabs.cfn_mcp_server.troubleshooting_enhancer_clean import TroubleshootingEnhancer
-        from awslabs.cfn_mcp_server.stack_manager import StackManager
-        from awslabs.cfn_mcp_server.aws_client import get_actual_region
-        
-        # Get stack information and template
-        stack_manager = StackManager(get_actual_region(region))
-        stack_info = await stack_manager.get_stack_status(stack_name, include_events=True)
-        
-        # Get the current template
-        template_content = ""
-        try:
-            template_info = await stack_manager.get_template(stack_name)
-            if template_info.get('success'):
-                template_content = template_info.get('template_body', "")
-        except:
-            pass
-        
-        # Extract error information
-        original_error = "Stack deployment failed"
-        if stack_info.get('success') and 'events' in stack_info:
-            for event in stack_info['events']:
-                if event.get('ResourceStatusReason') and 'failed' in event.get('ResourceStatus', '').lower():
-                    original_error = event['ResourceStatusReason']
-                    break
-        
-        # Generate enhanced fix-and-retry prompts using troubleshooting enhancer
-        enhancer = TroubleshootingEnhancer()
-        result = enhancer.enhance_troubleshooting_request(
-            stack_name=stack_name,
-            region=get_actual_region(region),
-            include_logs=True,
-            include_cloudtrail=True,
-            time_window_hours=48,
-            symptoms_description=f"Fix and retry deployment. Original error: {original_error}"
-        )
-        
-        # Add fix-and-retry specific context
-        result['fix_retry_context'] = {
-            'max_retries': max_retries,
-            'auto_fix': auto_fix,
-            'backup_template': backup_template,
-            'original_error': original_error,
-            'template_content': template_content
-        }
-        
-        # Add configuration context
-        result['fix_configuration'] = {
-            'stack_name': stack_name,
-            'region': get_actual_region(region),
-            'auto_fix': auto_fix,
-            'max_retries': max_retries,
-            'backup_template': backup_template,
-            'stack_info': stack_info
-        }
-        
-        return result
-        
-    except Exception as e:
-        return handle_aws_api_error(e, 'fix_and_retry_cloudformation_stack')
 
 
 @mcp.tool()
@@ -1087,8 +866,8 @@ async def cloudformation_best_practices_guide(
     # Generate context-aware step-by-step solutions
     step_by_step_solutions = {
         "performance": [
-            "1. ANALYZE: Use troubleshoot_cloudformation_stack to identify performance bottlenecks",
-            "2. DIAGNOSE: Use enhanced_troubleshoot_stack for comprehensive performance analysis", 
+            "1. ANALYZE: Use enhanced_troubleshoot_cloudformation_stack to identify performance bottlenecks",
+            "2. DIAGNOSE: Use analyze_template_structure for comprehensive performance analysis", 
             "3. OPTIMIZE: Use generate_template_fixes to automatically identify performance improvements",
             "4. IMPLEMENT: Update CloudFormation template with optimized resource configurations",
             "5. DEPLOY: Use deploy_cloudformation_stack with performance monitoring enabled",
@@ -1103,10 +882,10 @@ async def cloudformation_best_practices_guide(
             "6. MONITOR: Set up CloudTrail and Config for ongoing security monitoring"
         ],
         "deployment": [
-            "1. ANALYZE: Use troubleshoot_cloudformation_stack to understand the current state",
-            "2. DIAGNOSE: Use enhanced_troubleshoot_stack for comprehensive issue analysis",
+            "1. ANALYZE: Use enhanced_troubleshoot_cloudformation_stack to understand the current state",
+            "2. DIAGNOSE: Use analyze_template_structure for comprehensive issue analysis",
             "3. FIX: Use generate_template_fixes to automatically identify and apply fixes",
-            "4. RETRY: Use fix_and_retry_stack to automatically fix and redeploy",
+            "4. RETRY: Use autonomous_fix_and_deploy_stack to get guided deployment coaching",
             "5. VERIFY: Use get_stack_status to confirm successful deployment",
             "6. MONITOR: Use detect_stack_drift to ensure no out-of-band changes"
         ]
@@ -1115,10 +894,10 @@ async def cloudformation_best_practices_guide(
     # Generate context-aware tool recommendations
     tools_by_category = {
         "performance": [
-            "troubleshoot_cloudformation_stack - Analyze current infrastructure state",
-            "enhanced_troubleshoot_stack - Deep performance analysis with metrics",
+            "enhanced_troubleshoot_cloudformation_stack - Analyze current infrastructure state",
+            "analyze_template_structure - Deep performance analysis with metrics",
             "generate_template_fixes - Identify performance optimization opportunities",
-            "analyze_template_structure - Review resource configurations for efficiency"
+            "get_stack_status - Review resource configurations for efficiency"
         ],
         "security": [
             "analyze_template_structure - Security vulnerability assessment",
@@ -1127,11 +906,11 @@ async def cloudformation_best_practices_guide(
             "prevent_out_of_band_changes - Maintain security through IaC consistency"
         ],
         "deployment": [
-            "troubleshoot_cloudformation_stack - Analyze current infrastructure state",
+            "enhanced_troubleshoot_cloudformation_stack - Analyze current infrastructure state",
             "get_stack_status - Monitor deployment progress",
             "detect_stack_drift - Verify infrastructure consistency",
             "generate_template_fixes - Automatically identify and fix template issues",
-            "fix_and_retry_stack - Automatically fix and retry failed deployments"
+            "autonomous_fix_and_deploy_stack - Get guided deployment coaching"
         ]
     }
     
@@ -1331,23 +1110,24 @@ async def autonomous_fix_and_deploy_stack(
         description='Stack tags as list of {"Key": "key", "Value": "value"}',
         default=None
     ),
-) -> dict:
-    """Autonomously fix template issues and deploy CloudFormation stack until successful.
+) -> str:
+    """Provides expert guidance for autonomous CloudFormation deployment with interactive coaching.
     
-    This tool provides fully autonomous deployment with iterative fixing:
-    - Analyzes template for issues, security vulnerabilities, and missing components
-    - Automatically applies fixes based on AWS best practices
-    - Deploys stack with automatic failure analysis and retry
-    - Continues fixing and redeploying until successful or max iterations reached
-    - Maintains complete audit trail of all changes made
+    This tool acts as an intelligent deployment coach that guides you through:
+    - Step-by-step autonomous deployment process
+    - Interactive problem-solving and decision-making
+    - Adaptive guidance based on stack state and results
+    - Comprehensive error recovery strategies
+    - Best practices coaching throughout the process
     
-    The process includes three phases:
-    1. Analysis Phase: Deep template analysis and issue identification
-    2. Fixing Phase: Automatic application of template fixes
-    3. Deployment Phase: Autonomous deployment with failure handling
+    The guidance includes:
+    1. Initial stack assessment and template analysis
+    2. Intelligent fixing recommendations with explanations
+    3. Deployment monitoring and failure analysis
+    4. Iterative problem-solving until success
     
     Examples:
-    1. Basic autonomous deployment:
+    1. Basic autonomous deployment guidance:
        autonomous_fix_and_deploy_stack(stack_name="my-app-stack")
     
     2. Conservative approach with limited iterations:
@@ -1356,37 +1136,68 @@ async def autonomous_fix_and_deploy_stack(
            auto_apply_fixes=False,
            max_iterations=2
        )
-    
-    3. Full deployment with parameters:
-       autonomous_fix_and_deploy_stack(
-           stack_name="web-app",
-           parameters=[
-               {"ParameterKey": "Environment", "ParameterValue": "production"},
-               {"ParameterKey": "InstanceType", "ParameterValue": "t3.medium"}
-           ],
-           capabilities=["CAPABILITY_IAM"],
-           tags=[
-               {"Key": "Project", "Value": "WebApp"},
-               {"Key": "Environment", "Value": "Production"}
-           ]
-       )
     """
     try:
-        from awslabs.cfn_mcp_server.enhanced_troubleshooter import EnhancedCloudFormationTroubleshooter
         from awslabs.cfn_mcp_server.aws_client import get_actual_region
         
-        troubleshooter = EnhancedCloudFormationTroubleshooter(get_actual_region(region))
-        result = await troubleshooter.fix_and_deploy(
-            stack_name=stack_name,
-            auto_apply_fixes=auto_apply_fixes,
-            max_iterations=max_iterations,
-            parameters=parameters,
-            capabilities=capabilities,
-            tags=tags
-        )
-        return result
+        actual_region = get_actual_region(region)
+        
+        # Handle parameter counts safely
+        param_count = len(parameters) if parameters and isinstance(parameters, list) else 0
+        cap_list = ', '.join(capabilities) if capabilities and isinstance(capabilities, list) else 'None specified'
+        tag_count = len(tags) if tags and isinstance(tags, list) else 0
+        
+        return f"""# 🚀 Autonomous CloudFormation Deployment Coach
+
+I'll guide you through an autonomous deployment process for stack **{stack_name}** in region **{actual_region}**.
+
+## 📋 Configuration Summary
+- **Auto-apply fixes**: {auto_apply_fixes}
+- **Max iterations**: {max_iterations}
+- **Parameters**: {param_count} provided
+- **Capabilities**: {cap_list}
+- **Tags**: {tag_count} provided
+
+## 🎯 Step 1: Initial Assessment
+Let's start by checking the current state of your stack:
+
+**Action Required**: Run this command first:
+```
+get_stack_status(stack_name="{stack_name}", region="{actual_region}")
+```
+
+**What to expect**:
+- If stack exists: We'll analyze its current state and template
+- If stack doesn't exist: We'll need to create a template first
+- If stack is in failed state: We'll begin troubleshooting immediately
+
+## 🔄 Next Steps (I'll guide you through these based on the results):
+
+### If Stack Exists:
+2. **Template Analysis**: `analyze_template_structure(template_content=current_template)`
+3. **Generate Fixes**: `generate_template_fixes(template_content=template, auto_apply={auto_apply_fixes})`
+4. **Deploy Updates**: `deploy_cloudformation_stack(...)`
+
+### If Stack Doesn't Exist:
+2. **Template Creation**: Use `generate_cloudformation_template(description="your requirements")`
+3. **Template Analysis**: Analyze the generated template
+4. **Initial Deployment**: Deploy with monitoring
+
+### If Deployment Fails:
+2. **Troubleshoot**: `enhanced_troubleshoot_cloudformation_stack(stack_name="{stack_name}")`
+3. **Apply Fixes**: Based on troubleshooting results
+4. **Retry**: Up to {max_iterations} iterations until success
+
+## 🎓 Coaching Notes:
+- I'll provide specific guidance after each step
+- Ask questions if you're unsure about any recommendations
+- I'll adapt the process based on what we discover
+- We'll maintain an audit trail of all changes
+
+**Ready to begin?** Please run the initial stack status check and share the results with me.
+"""
     except Exception as e:
-        return handle_aws_api_error(e, 'autonomous_fix_and_deploy_stack')
+        return f"Error initializing autonomous deployment coach: {str(e)}"
 
 
 @mcp.tool()
@@ -1433,62 +1244,19 @@ async def analyze_template_structure(
        )
     """
     try:
-        print("DEBUG: Starting analyze_template_structure")
-        from awslabs.cfn_mcp_server.template_analyzer_clean import TemplateAnalyzer
-        print("DEBUG: Imported TemplateAnalyzer successfully")
+        from awslabs.cfn_mcp_server.intelligent_template_analyzer import IntelligentTemplateAnalyzer
         
-        analyzer = TemplateAnalyzer()
-        print("DEBUG: Created analyzer instance")
+        # Create intelligent analyzer
+        analyzer = IntelligentTemplateAnalyzer()
         
-        # Parse the template content
-        print("DEBUG: Attempting to parse template with enhanced parser")
-        try:
-            if isinstance(template_content, str):
-                import yaml
-                template = yaml.safe_load(template_content)
-            else:
-                template = template_content
-        except Exception as parse_error:
-            print(f"DEBUG: Template parsing failed: {parse_error}")
-            template = {"Resources": {}}
-        
-        print(f"DEBUG: Successfully parsed template with {len(template.get('Resources', {}))} resources")
-        
-        # Use the comprehensive analysis method
-        result = analyzer.create_comprehensive_analysis(
-            template=template,
-            analysis_focus=analysis_focus or "comprehensive"
+        # Generate expert analysis prompt with advanced pattern recognition
+        result = analyzer.generate_intelligent_analysis_prompt(
+            template_content=template_content,
+            analysis_focus=analysis_focus,
+            region=region
         )
-        print(f"DEBUG: Generated result with keys: {list(result.keys())}")
         
-        # Format the result for MCP response
-        if 'expert_prompt_for_claude' in result:
-            expert_prompt = result['expert_prompt_for_claude']
-            
-            # Create comprehensive response
-            response_content = f"""# CloudFormation Template Analysis
-
-{expert_prompt}
-
-## Analysis Summary
-- **Resources Analyzed**: {result.get('template_analysis', {}).get('resource_count', 0)}
-- **Security Score**: {result.get('security_assessment', {}).get('score', 'N/A')}
-- **Architecture Pattern**: {result.get('architecture_pattern', 'Not determined')}
-- **Compliance Requirements**: {', '.join(result.get('compliance_requirements', [])) or 'None identified'}
-
-## Key Findings
-{chr(10).join([f"• {issue['description']}" for issue in result.get('security_assessment', {}).get('issues', [])[:5]])}
-
-## Recommendations
-{chr(10).join(result.get('remediation_guidance', [])[:5])}
-
-## Next Steps
-{chr(10).join(result.get('validation_steps', [])[:3])}
-"""
-            
-            return [{'type': 'text', 'text': response_content}]
-        else:
-            return [{'type': 'text', 'text': result.get('error', 'Analysis completed but no detailed results available')}]
+        return result
         
     except Exception as e:
         print(f"DEBUG: Exception in analyze_template_structure: {e}")
