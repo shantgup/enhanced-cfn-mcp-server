@@ -7,10 +7,11 @@ An enhanced AWS CloudFormation Model Context Protocol (MCP) server that provides
 ```bash
 git clone https://github.com/shantgup/enhanced-cfn-mcp-server.git
 cd enhanced-cfn-mcp-server
+./setup.sh
 q chat
 ```
 
-That's it! The MCP server will automatically load and you can start using it.
+That's it! The setup script will install required packages and the MCP server will automatically load.
 
 **Prerequisites:** Python 3.9+ and AWS CLI configured with credentials.
 
@@ -132,6 +133,8 @@ Your AWS credentials need permissions for:
 git clone https://github.com/shantgup/enhanced-cfn-mcp-server.git
 cd enhanced-cfn-mcp-server
 
+# Run setup script (installs required packages)
+./setup.sh
 ```
 
 ### 2. Configure AWS Credentials
@@ -148,15 +151,15 @@ export AWS_DEFAULT_REGION=us-east-1
 
 ### 3. Integration with Amazon Q CLI
 
-If you run q in the root directory of this project, the enhanced_cfn_mcp_server should be loaded automatically, it's configured in the .amazonq directory. 
+If you run `q chat` in the root directory of this project, the enhanced_cfn_mcp_server will be loaded automatically (configured in the .amazonq directory). 
 
-Optionally, you can add the MCP server to your Q CLI configuration like below:
+The setup script ensures the correct Python version and packages are used. If you need to manually configure it elsewhere:
 
 ```json
 {
   "mcpServers": {
     "enhanced-cfn": {
-      "command": "enhanced-cfn-mcp-server",
+      "command": "./awslabs/run_server.sh",
       "args": [],
       "env": {}
     }
@@ -170,6 +173,7 @@ Optionally, you can add the MCP server to your Q CLI configuration like below:
 # Test through Q CLI
 q chat
 # Then ask: "Use the enhanced cfn mcp server to create a robust web server architecture cloudformation template. Then deploy it, and if it fails, troubleshoot it, fix the template and redeploy until successful."
+```
 ```
 
 ## 💡 Usage Examples
