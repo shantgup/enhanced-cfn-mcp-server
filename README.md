@@ -7,7 +7,7 @@ An AWS CloudFormation MCP server that combines real AWS operations with expert g
 ```bash
 git clone https://github.com/shantgup/enhanced-cfn-mcp-server.git
 cd enhanced-cfn-mcp-server
-pip install -e .
+./setup.sh
 q chat
 ```
 
