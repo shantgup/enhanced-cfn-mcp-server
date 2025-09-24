@@ -1,386 +1,244 @@
 # Enhanced CloudFormation MCP Server
 
-An enhanced AWS CloudFormation Model Context Protocol (MCP) server that provides intelligent prompting, autonomous fixing, and comprehensive AWS resource management capabilities for AI assistants like Amazon Q.
+An AWS CloudFormation MCP server that combines real AWS operations with expert guidance prompts. Works with AI assistants like Amazon Q to provide both immediate technical capability and expert-level CloudFormation guidance.
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 git clone https://github.com/shantgup/enhanced-cfn-mcp-server.git
 cd enhanced-cfn-mcp-server
-./setup.sh
+pip install -e .
 q chat
 ```
 
-That's it! The setup script will install required packages and the MCP server will automatically load.
+**Requirements:** Python 3.10+ and AWS CLI configured with credentials.
 
-**Prerequisites:** Python 3.9+ and AWS CLI configured with credentials.
+## What This Does
 
-## Table of Contents
+This MCP server has 22 tools that do two main things:
 
-- [🚀 What is this?](#-what-is-this)
-- [✨ Key Features & Differentiators](#-key-features--differentiators)
-- [🛠️ Available Tools](#️-available-tools)
-- [📋 Prerequisites](#-prerequisites)
-- [🚀 Installation & Setup](#-installation--setup)
-- [💡 Usage Examples](#-usage-examples)
-- [🏗️ Architecture](#️-architecture)
-- [🔧 Configuration](#-configuration)
-- [🧪 Development](#-development)
-- [📚 Examples](#-examples)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [🆘 Support](#-support)
-- [🙏 Acknowledgments](#-acknowledgments)
-- [🗺️ Roadmap](#️-roadmap)
+1. **Make real AWS API calls** - Create, read, update, delete AWS resources and CloudFormation stacks
+2. **Generate expert prompts** - Create structured guidance that helps AI assistants provide expert-level CloudFormation advice
 
-## 🚀 What is this?
+Instead of just basic CloudFormation operations, you get expert troubleshooting workflows, security analysis, and best practices guidance.
 
-This is an enhanced version of the AWS CloudFormation MCP server that extends the original functionality with:
+## Available Tools
 
-- **Intelligent Prompt Generation**: Creates expert-level prompts that guide AI assistants to provide comprehensive CloudFormation analysis and solutions
-- **Autonomous Template Fixing**: Automatically detects and fixes common CloudFormation template issues
-- **Enhanced Troubleshooting**: Provides detailed error analysis with step-by-step resolution guidance
-- **Best Practices Integration**: Built-in AWS best practices and security recommendations
-- **Comprehensive Resource Management**: Full CRUD operations for AWS resources via CloudFormation types
-
-## ✨ Key Features & Differentiators
-
-### 🧠 Intelligent AI Guidance
-- **Expert Prompt Engineering**: Transforms simple requests into comprehensive, expert-level prompts
-- **Context-Aware Analysis**: Provides detailed investigation workflows with specific CLI commands
-- **Multi-Stage Conversations**: Guides through discovery, refinement, validation, and generation phases
-
-### 🔧 Autonomous Problem Solving
-- **Auto-Fix Templates**: Automatically identifies and fixes common CloudFormation issues
-- **Iterative Deployment**: Continues fixing and redeploying until successful
-- **Smart Error Recovery**: Analyzes failures and applies appropriate fixes
-
-### 📊 Enhanced Troubleshooting
-- **Root Cause Analysis**: Deep investigation of CloudFormation failures
-- **CloudWatch Integration**: Automatic log analysis and error correlation
-- **CloudTrail Analysis**: API call investigation for comprehensive debugging
-
-### 🛡️ Security & Best Practices
-- **Security Vulnerability Detection**: Identifies potential security issues in templates
-- **Compliance Framework Alignment**: Supports HIPAA, PCI, SOX, GDPR compliance checks
-- **Cost Optimization**: Provides cost-aware recommendations
-
-## 🛠️ Available Tools
-
-### Core Resource Management
-| Tool | Description |
+### AWS Resource Management
+| Tool | What It Does |
 |------|-------------|
-| `get_resource_schema_information` | Get schema information for AWS resource types |
-| `list_resources` | List AWS resources of a specified type |
-| `get_resource` | Get detailed information about a specific resource |
-| `create_resource` | Create new AWS resources |
-| `update_resource` | Update existing AWS resources using JSON Patch |
+| `get_resource_schema_information` | Get AWS resource type schemas |
+| `list_resources` | List AWS resources by type |
+| `get_resource` | Get details of specific resources |
+| `create_resource` | Create AWS resources |
+| `update_resource` | Update resources using JSON Patch |
 | `delete_resource` | Delete AWS resources |
 | `get_resource_request_status` | Check status of long-running operations |
 
-### CloudFormation Stack Management
-| Tool | Description |
+### CloudFormation Stack Operations
+| Tool | What It Does |
 |------|-------------|
-| `deploy_cloudformation_stack` | Deploy stacks with comprehensive configuration |
-| `get_stack_status` | Get detailed stack status with operational analysis |
-| `delete_cloudformation_stack` | Safely delete stacks with resource retention options |
-| `detect_stack_drift` | Detect and analyze configuration drift |
+| `deploy_cloudformation_stack` | Deploy stacks with parameters and tags |
+| `get_stack_status` | Get stack status with expert analysis prompts |
+| `delete_cloudformation_stack` | Delete stacks with resource retention options |
+| `detect_stack_drift` | Check for configuration drift with analysis prompts |
 
 ### Template Generation & Analysis
-| Tool | Description |
+| Tool | What It Does |
 |------|-------------|
-| `generate_cloudformation_template` | Generate templates from natural language with intelligent conversation flow |
+| `generate_cloudformation_template` | Generate templates from natural language with multi-stage conversation |
 | `create_template` | Generate templates from existing AWS resources |
-| `analyze_template_structure` | Comprehensive template analysis with security and compliance checks |
-| `detect_template_capabilities` | Analyze templates for required IAM capabilities |
+| `analyze_template_structure` | Analyze templates for security, compliance, and best practices |
+| `detect_template_capabilities` | Check what IAM capabilities templates need |
+| `generate_template_fixes` | Find and fix template issues automatically |
 
-### Enhanced Troubleshooting & Fixing
-| Tool | Description |
+### Enhanced Troubleshooting
+| Tool | What It Does |
 |------|-------------|
-| `troubleshoot_cloudformation_stack` | Expert troubleshooting with systematic investigation |
-| `fix_and_retry_cloudformation_stack` | Intelligent fix-and-retry with detailed guidance |
+| `troubleshoot_cloudformation_stack` | Basic troubleshooting with expert guidance prompts |
+| `enhanced_troubleshoot_cloudformation_stack` | Advanced troubleshooting with AWS data collection and expert analysis |
+| `fix_and_retry_cloudformation_stack` | Fix templates and retry deployment with guidance |
 | `autonomous_fix_and_deploy_stack` | Fully autonomous deployment with iterative fixing |
-| `generate_template_fixes` | Generate and optionally apply template fixes |
 
 ### Best Practices & Guidance
-| Tool | Description |
+| Tool | What It Does |
 |------|-------------|
-| `cloudformation_best_practices_guide` | Expert best practices guidance for infrastructure issues |
+| `cloudformation_best_practices_guide` | Expert best practices guidance for any infrastructure scenario |
 | `prevent_out_of_band_changes` | Prevent manual changes to CloudFormation-managed resources |
 
-## 📋 Prerequisites
-
-- **Python 3.10+**
-- **AWS CLI configured** with appropriate credentials
-- **Amazon Q CLI** (for integration)
-- **AWS Account** with necessary permissions
-
-### Required AWS Permissions
-
-Your AWS credentials need permissions for:
-- CloudFormation operations (`cloudformation:*`)
-- CloudControl API operations (`cloudcontrol:*`)
-- Resource-specific permissions (e.g., `s3:*`, `ec2:*`)
-- CloudWatch Logs access (`logs:*`)
-- CloudTrail access (`cloudtrail:LookupEvents`)
-
-## 🚀 Installation & Setup
+## Installation
 
 ### 1. Install the Package
 
 ```bash
-# Clone the repository
 git clone https://github.com/shantgup/enhanced-cfn-mcp-server.git
 cd enhanced-cfn-mcp-server
-
-# Run setup script (installs required packages)
-./setup.sh
+pip install -e .
 ```
 
-### 2. Configure AWS Credentials
+### 2. Configure AWS
 
 ```bash
-# Configure AWS CLI
 aws configure
-
-# Or set environment variables
-export AWS_ACCESS_KEY_ID=your_access_key
-export AWS_SECRET_ACCESS_KEY=your_secret_key
-export AWS_DEFAULT_REGION=us-east-1
+# Or set environment variables:
+# export AWS_ACCESS_KEY_ID=your_key
+# export AWS_SECRET_ACCESS_KEY=your_secret
+# export AWS_DEFAULT_REGION=us-east-1
 ```
 
-### 3. Integration with Amazon Q CLI
+### 3. Use with Amazon Q CLI
 
-If you run `q chat` in the root directory of this project, the enhanced_cfn_mcp_server will be loaded automatically (configured in the .amazonq directory). 
+If you run `q chat` in the project directory, the server loads automatically (configured in `.amazonq/mcp_servers.json`).
 
-The setup script ensures the correct Python version and packages are used. If you need to manually configure it elsewhere:
+For manual configuration elsewhere:
 
 ```json
 {
   "mcpServers": {
     "enhanced-cfn": {
-      "command": "./awslabs/run_server.sh",
-      "args": [],
+      "command": "python",
+      "args": ["-m", "awslabs.cfn_mcp_server.server"],
       "env": {}
     }
   }
 }
 ```
 
-### 4. Verify Installation
+## Usage Examples
 
-```bash
-# Test through Q CLI
-q chat
-# Then ask: "Use the enhanced cfn mcp server to create a robust web server architecture cloudformation template. Then deploy it, and if it fails, troubleshoot it, fix the template and redeploy until successful."
+### One-Shot Deployment
 ```
+"Use the enhanced cfn mcp server to create a robust web server architecture cloudformation template. Then deploy it, and if it fails, troubleshoot it, fix the template and redeploy until successful."
 ```
 
-## 💡 Usage Examples
-
-### 🔥 One-shot Prompt
-🌟 **Generate template, deploy, troubleshoot, fix and redeploy until successful** 🌟
-
+### Basic Operations
 ```bash
-# Generate template, deploy, troubleshoot, fix and redeploy until successful
-"Use the enhanced cfn mcp server to create a <INSERT USE CASE HERE>. Then deploy it, and if it fails, troubleshoot it, fix the template and redeploy until successful."
-
-# Use case examples:
-- robust web server architecture
-- secure VPC with public and private subnets
-- serverless API with Lambda and API Gateway
-- multi-AZ RDS database setup
-- static website hosting with S3 and CloudFront
-- auto-scaling application with ALB
-- containerized application using ECS
-- serverless data processing pipeline
-- high-availability WordPress site
-- CI/CD pipeline with CodePipeline
-- cross-region backup solution
-- ElasticSearch cluster
-- EKS cluster with worker nodes
-- real-time data streaming architecture
-- multi-region active-active setup
-```
-
-### Basic Resource Management
-
-```bash
-# In Q CLI chat
-q chat
-
-# List all S3 buckets
+# List S3 buckets
 "List all my S3 buckets"
 
-# Get details of a specific bucket
-"Show me details of my bucket named 'my-app-bucket'"
-
-# Create a new S3 bucket
-"Create an S3 bucket named 'my-new-bucket' with versioning enabled"
-```
-
-### CloudFormation Operations
-
-```bash
-# Generate a template from description
-"Create a CloudFormation template for a web application with ALB, ECS, and RDS"
+# Create a bucket
+"Create an S3 bucket named 'my-app-bucket' with versioning enabled"
 
 # Deploy a stack
-"Deploy a CloudFormation stack named 'my-web-app' using the template in ./template.yaml"
-
-# Troubleshoot a failed deployment
-"My CloudFormation stack 'my-app-stack' failed to deploy. Help me troubleshoot it."
-
-# Autonomous fixing and deployment
-"Automatically fix and deploy my CloudFormation stack 'problematic-stack'"
+"Deploy a CloudFormation stack named 'web-app' using template.yaml"
 ```
 
-### Advanced Analysis
+### Advanced Operations
+```bash
+# Troubleshoot failures
+"My CloudFormation stack 'app-stack' failed. Help me troubleshoot it."
+
+# Autonomous fixing
+"Automatically fix and deploy my CloudFormation stack 'broken-stack'"
+
+# Security analysis
+"Analyze my template for security vulnerabilities and compliance issues"
+```
+
+## How It Works
+
+### Real AWS Operations (60-90% per tool)
+- Makes actual AWS API calls (`describe_stacks`, `create_stack`, `get_template`, etc.)
+- Collects CloudWatch logs and CloudTrail events
+- Parses and validates CloudFormation templates
+- Applies automated fixes based on 50+ validation rules
+- Manages deployments with waiters and error handling
+
+### Expert Prompt Enhancement (10-40% per tool)
+- Generates structured troubleshooting workflows
+- Creates expert-level guidance prompts
+- Provides step-by-step investigation procedures
+- Offers multiple solution approaches with trade-offs
+- Includes AWS CLI commands for verification
+
+### Example: Enhanced vs Basic Troubleshooting
+
+**Basic request:**
+```
+"Help me troubleshoot my CloudFormation stack"
+```
+
+**Enhanced prompt generated:**
+```
+You are a CloudFormation expert with 10+ years of AWS experience. 
+
+INVESTIGATION WORKFLOW:
+1. Check stack events for failure patterns
+2. Analyze resource dependencies and circular references
+3. Review CloudWatch logs for error messages
+4. Examine CloudTrail for API call failures
+5. Validate template syntax and resource properties
+
+COMMON FAILURE PATTERNS:
+- Resource limit exceeded: Check service quotas
+- Permission denied: Verify IAM roles and policies
+- Resource conflicts: Check for naming collisions
+- Timeout issues: Review resource creation times
+
+DIAGNOSTIC COMMANDS:
+aws cloudformation describe-stack-events --stack-name {stack_name}
+aws logs filter-log-events --log-group-name /aws/lambda/{function_name}
+
+REMEDIATION STRATEGIES:
+[Specific fixes based on actual failure analysis]
+```
+
+## AWS Permissions Required
+
+Your AWS credentials need:
+- CloudFormation operations (`cloudformation:*`)
+- CloudControl API operations (`cloudcontrol:*`)
+- Resource-specific permissions (`s3:*`, `ec2:*`, etc.)
+- CloudWatch Logs access (`logs:*`)
+- CloudTrail access (`cloudtrail:LookupEvents`)
+
+## Development
 
 ```bash
-# Analyze template for issues
-"Analyze my CloudFormation template for security vulnerabilities and best practices"
-
-# Detect stack drift
-"Check if my production stack has any configuration drift"
-
-# Get best practices guidance
-"I need to implement a HIPAA-compliant data processing pipeline. What are the best practices?"
-```
-
-
-## 🏗️ Architecture
-
-```
-Enhanced CFN MCP Server
-├── Core MCP Server (FastMCP)
-├── AWS Client Management
-├── CloudFormation Stack Manager
-├── Resource Schema Manager
-├── Intelligent Prompt Generator
-├── Template Analysis Engine
-├── Autonomous Fixing Engine
-└── Best Practices Database
-```
-
-### Key Components
-
-- **FastMCP Framework**: Provides the MCP server foundation
-- **AWS Integration**: Boto3-based AWS service clients
-- **CloudControl API**: Unified resource management interface
-- **Template Generator**: Natural language to CloudFormation conversion
-- **Error Analysis**: Comprehensive failure analysis and resolution
-- **Prompt Engineering**: Expert-level prompt generation for AI guidance
-
-## 🔧 Configuration
-
-### Environment Variables
-
-```bash
-# AWS Configuration
-AWS_REGION=us-east-1
-AWS_PROFILE=default
-
-# Server Configuration
-MCP_SERVER_PORT=3000
-LOG_LEVEL=INFO
-
-# Feature Flags
-ENABLE_AUTO_FIX=true
-ENABLE_SECURITY_ANALYSIS=true
-MAX_FIX_ITERATIONS=5
-```
-
-## 🧪 Development
-
-### Setup Development Environment
-
-```bash
-# Clone and setup
-git clone https://github.com/shantgup/enhanced-cfn-mcp-server.git
-cd enhanced-cfn-mcp-server
-
-# Install development dependencies
+# Install for development
 pip install -e ".[dev]"
 
-# Setup pre-commit hooks
-pre-commit install
-```
-
-### Running Tests
-
-```bash
-# Run all tests
+# Run tests
 pytest
 
-# Run with coverage
-pytest --cov=awslabs
-
-# Run only unit tests (skip live AWS tests)
-pytest -m "not live"
-```
-
-### Code Quality
-
-```bash
 # Format code
 ruff format .
-
-# Lint code
-ruff check .
 
 # Type checking
 pyright
 ```
 
-## 📚 Examples
+## Architecture
 
-See the [examples/](examples/) directory for comprehensive usage examples:
+```
+Enhanced CFN MCP Server
+├── FastMCP Framework (MCP server foundation)
+├── AWS Client Management (Boto3 integration)
+├── Resource Operations (CloudControl API)
+├── Stack Operations (CloudFormation API)
+├── Template Operations (Generation & analysis)
+├── Enhanced Troubleshooter (Data collection + analysis)
+├── Autonomous Deployer (Iterative fix-and-deploy)
+├── Template Fixer (Automated issue resolution)
+└── Prompt Generator (Expert guidance creation)
+```
 
-- [Basic Usage](examples/basic-usage/) - Simple resource management
-- [Advanced Workflows](examples/advanced-workflows/) - Complex deployment scenarios
-- [Q CLI Integration](examples/q-cli-integration/) - Amazon Q specific examples
-- [Template Generation](examples/template-generation/) - Natural language to CloudFormation
-- [Troubleshooting](examples/troubleshooting/) - Error resolution workflows
+## Key Files
 
-## 🤝 Contributing
+- `server.py` - Main MCP server with 22 tools
+- `enhanced_troubleshooter.py` - Advanced stack analysis with AWS data collection
+- `autonomous_deployer.py` - Iterative deployment with automatic fixing
+- `template_fixer.py` - Automated template issue detection and fixing
+- `template_analyzer.py` - Template structure analysis and validation
+- `stack_manager.py` - CloudFormation stack operations
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+## License
 
-### Development Workflow
+Apache License 2.0 - see [LICENSE](LICENSE) file.
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Run the test suite
-6. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
+## Support
 
 - **Issues**: [GitHub Issues](https://github.com/shantgup/enhanced-cfn-mcp-server/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/shantgup/enhanced-cfn-mcp-server/discussions)
 - **Documentation**: [Project Wiki](https://github.com/shantgup/enhanced-cfn-mcp-server/wiki)
 
-## 🙏 Acknowledgments
-
-- Built on the foundation of [AWS Labs MCP](https://github.com/awslabs/mcp)
-- Powered by the [Model Context Protocol](https://modelcontextprotocol.io/)
-- Enhanced for [Amazon Q Developer](https://aws.amazon.com/q/developer/)
-
-## 🗺️ Roadmap
-
-- [ ] **Enhanced Template Generation**: More sophisticated natural language processing
-- [ ] **Multi-Account Support**: Cross-account resource management
-- [ ] **Advanced Security Analysis**: Integration with AWS Security Hub
-- [ ] **Cost Optimization**: Real-time cost analysis and recommendations
-- [ ] **Infrastructure Visualization**: Automatic architecture diagram generation
-- [ ] **Compliance Automation**: Automated compliance checking and reporting
-
----
-
-**Made with ❤️ for the AWS community**
+Built on [AWS Labs MCP](https://github.com/awslabs/mcp) and the [Model Context Protocol](https://modelcontextprotocol.io/).
