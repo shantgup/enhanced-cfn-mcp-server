@@ -716,51 +716,6 @@ async def detect_template_capabilities(
         }
 
 
-@mcp.tool()
-async def detect_stack_drift(
-    stack_name: str = Field(
-        description='CloudFormation stack name to check for drift'
-    ),
-    region: str | None = Field(
-        description='The AWS region where the stack is located', default=None
-    ),
-) -> dict:
-    """Generate expert CloudFormation stack drift analysis prompts and guidance.
-    
-    This tool transforms your drift detection request into comprehensive, expert-level prompts
-    that help Claude perform master-level drift analysis and remediation. Instead of just 
-    detecting drift, it provides:
-    
-    - Enhanced prompts with drift impact assessment
-    - Root cause analysis of configuration changes
-    - Comprehensive remediation strategies
-    - Change management improvement recommendations
-    - Drift prevention measures and best practices
-    - Investigation commands and monitoring setup
-    
-    Examples:
-    1. Comprehensive drift analysis:
-       detect_stack_drift(stack_name="production-stack")
-    
-    2. Regional drift detection:
-       detect_stack_drift(
-           stack_name="multi-region-stack",
-           region="us-west-2"
-       )
-    """
-    try:
-        from awslabs.cfn_mcp_server.stack_operations_enhancer_clean import StackOperationsEnhancer
-        
-        enhancer = StackOperationsEnhancer()
-        result = await enhancer.generate_stack_drift_prompt(
-            stack_name=stack_name,
-            region=region
-        )
-        
-        return result
-        
-    except Exception as e:
-        return handle_aws_api_error(e, 'detect_stack_drift')
 
 
 @mcp.tool()
@@ -816,7 +771,7 @@ async def cloudformation_best_practices_guide(
             "3. FIX: Use generate_template_fixes to automatically identify and apply fixes",
             "4. RETRY: Use autonomous_fix_and_deploy_stack to get guided deployment coaching",
             "5. VERIFY: Use enhanced_troubleshoot_cloudformation_stack to confirm successful deployment",
-            "6. MONITOR: Use detect_stack_drift to ensure no out-of-band changes"
+            "6. MONITOR: Use enhanced_troubleshoot_cloudformation_stack to ensure infrastructure consistency"
         ]
     }
     
@@ -837,7 +792,7 @@ async def cloudformation_best_practices_guide(
         "deployment": [
             "enhanced_troubleshoot_cloudformation_stack - Analyze current infrastructure state",
             "enhanced_troubleshoot_cloudformation_stack - Monitor deployment progress",
-            "detect_stack_drift - Verify infrastructure consistency",
+            "enhanced_troubleshoot_cloudformation_stack - Verify infrastructure consistency",
             "generate_template_fixes - Automatically identify and fix template issues",
             "autonomous_fix_and_deploy_stack - Get guided deployment coaching"
         ]
@@ -991,6 +946,12 @@ async def enhanced_troubleshoot_cloudformation_stack(
     - Missing component identification and recommendations
     - Template best practices alignment
     
+    🔄 DRIFT DETECTION GUIDANCE:
+    - Smart resource-specific drift checking for failed resources
+    - Out-of-band change detection with service-specific API guidance
+    - Manual verification commands for suspected configuration drift
+    - Integration with AWS CLI/API MCP Server for resource validation
+    
     PARAMETER USAGE GUIDE:
     
     📈 For Stack Status Monitoring:
@@ -1018,12 +979,12 @@ async def enhanced_troubleshoot_cloudformation_stack(
            symptoms_description="Security review of template configuration"
        )
     
-    🔍 For Template Validation:
+    🔍 For Template Validation & Drift Check:
        enhanced_troubleshoot_cloudformation_stack(
            stack_name="template-review",
            include_logs=False,
            include_cloudtrail=False,
-           symptoms_description="Validate template structure and dependencies"
+           symptoms_description="Validate template structure and check for out-of-band changes"
        )
     """
     try:
