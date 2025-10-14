@@ -18,6 +18,7 @@ import argparse
 import json
 import time
 import yaml
+from datetime import datetime
 from typing import Dict, List, Any, Optional
 import botocore.exceptions
 from awslabs.cfn_mcp_server.resource_operations import ResourceOperations
@@ -709,9 +710,6 @@ async def detect_template_capabilities(
         
         capabilities = []
         
-        # TEST: Add debug message to verify changes are picked up
-        print("DEBUG: detect_template_capabilities called - changes are working!")
-        
         # Parse template using enhanced CloudFormation parser
         try:
             from awslabs.cfn_mcp_server.cloudformation_yaml import parse_cloudformation_template
@@ -1400,7 +1398,7 @@ async def test_server_updates() -> dict:
     return {
         "status": "success", 
         "message": "Server is picking up code changes!",
-        "timestamp": "2025-08-15T20:32:00Z"
+        "timestamp": datetime.utcnow().isoformat() + "Z"
     }
 
 
