@@ -578,74 +578,6 @@ async def deploy_cloudformation_stack(
 
 
 
-@mcp.tool()
-async def get_stack_status(
-    stack_name: str = Field(
-        description='Name of the CloudFormation stack'
-    ),
-    region: str | None = Field(
-        description='The AWS region where the stack is located', default=None
-    ),
-    include_resources: bool = Field(
-        description='Whether to include detailed resource information',
-        default=True
-    ),
-    include_events: bool = Field(
-        description='Whether to include recent stack events',
-        default=True
-    ),
-    analysis_focus: str | None = Field(
-        description='Specific analysis focus: deployment, monitoring, troubleshooting, optimization, security', default=None
-    ),
-) -> dict:
-    """Generate expert CloudFormation stack status analysis prompts and guidance.
-    
-    This tool transforms your stack status request into comprehensive, expert-level prompts
-    that help Claude perform master-level stack operational analysis. Instead of just 
-    returning stack status, it provides:
-    
-    - Enhanced prompts with operational health assessment
-    - Deployment progress monitoring and guidance
-    - Error analysis and troubleshooting workflows
-    - Performance optimization recommendations
-    - Security and compliance posture review
-    - Comprehensive monitoring and alerting strategies
-    - Investigation commands and next actions
-    
-    Examples:
-    1. Comprehensive status analysis:
-       get_stack_status(stack_name="my-app-stack")
-    
-    2. Deployment-focused monitoring:
-       get_stack_status(
-           stack_name="production-stack",
-           include_resources=True,
-           include_events=True,
-           analysis_focus="deployment"
-       )
-    
-    3. Troubleshooting analysis:
-       get_stack_status(
-           stack_name="failed-stack",
-           analysis_focus="troubleshooting"
-       )
-    """
-    try:
-        from awslabs.cfn_mcp_server.stack_operations_enhancer_clean import StackOperationsEnhancer
-        
-        enhancer = StackOperationsEnhancer()
-        result = await enhancer.generate_stack_status_prompt(
-            stack_name=stack_name,
-            region=region,
-            include_resources=include_resources,
-            include_events=include_events,
-            analysis_focus=analysis_focus
-        )
-        
-        return result
-        
-    except Exception as e:
-        return handle_aws_api_error(e, 'get_stack_status')
 
 
 @mcp.tool()
@@ -868,7 +800,7 @@ async def cloudformation_best_practices_guide(
             "3. OPTIMIZE: Use generate_template_fixes to automatically identify performance improvements",
             "4. IMPLEMENT: Update CloudFormation template with optimized resource configurations",
             "5. DEPLOY: Use deploy_cloudformation_stack with performance monitoring enabled",
-            "6. VALIDATE: Use get_stack_status and monitor CloudWatch metrics for improvements"
+            "6. VALIDATE: Use enhanced_troubleshoot_cloudformation_stack to monitor and verify improvements"
         ],
         "security": [
             "1. AUDIT: Use analyze_template_structure to identify security vulnerabilities",
@@ -883,7 +815,7 @@ async def cloudformation_best_practices_guide(
             "2. DIAGNOSE: Use analyze_template_structure for comprehensive issue analysis",
             "3. FIX: Use generate_template_fixes to automatically identify and apply fixes",
             "4. RETRY: Use autonomous_fix_and_deploy_stack to get guided deployment coaching",
-            "5. VERIFY: Use get_stack_status to confirm successful deployment",
+            "5. VERIFY: Use enhanced_troubleshoot_cloudformation_stack to confirm successful deployment",
             "6. MONITOR: Use detect_stack_drift to ensure no out-of-band changes"
         ]
     }
@@ -894,7 +826,7 @@ async def cloudformation_best_practices_guide(
             "enhanced_troubleshoot_cloudformation_stack - Analyze current infrastructure state",
             "analyze_template_structure - Deep performance analysis with metrics",
             "generate_template_fixes - Identify performance optimization opportunities",
-            "get_stack_status - Review resource configurations for efficiency"
+            "enhanced_troubleshoot_cloudformation_stack - Review resource configurations for efficiency"
         ],
         "security": [
             "analyze_template_structure - Security vulnerability assessment",
@@ -904,7 +836,7 @@ async def cloudformation_best_practices_guide(
         ],
         "deployment": [
             "enhanced_troubleshoot_cloudformation_stack - Analyze current infrastructure state",
-            "get_stack_status - Monitor deployment progress",
+            "enhanced_troubleshoot_cloudformation_stack - Monitor deployment progress",
             "detect_stack_drift - Verify infrastructure consistency",
             "generate_template_fixes - Automatically identify and fix template issues",
             "autonomous_fix_and_deploy_stack - Get guided deployment coaching"
@@ -989,7 +921,7 @@ Update your CloudFormation template instead and redeploy the stack.
             "2. 📝 Update your CloudFormation template instead",
             "3. 🔍 Use detect_template_capabilities to validate the template",
             "4. 🚀 Use deploy_cloudformation_stack to apply the changes",
-            "5. ✅ Use get_stack_status to verify the deployment"
+            "5. ✅ Use enhanced_troubleshoot_cloudformation_stack to verify the deployment"
         ]
     else:
         response['alternative_approach'] = '''
@@ -1033,32 +965,65 @@ async def enhanced_troubleshoot_cloudformation_stack(
         default=None
     ),
 ) -> dict:
-    """Perform comprehensive CloudFormation troubleshooting with deep template analysis.
+    """Perform comprehensive CloudFormation analysis - replaces get_stack_status with enhanced capabilities.
     
-    This enhanced troubleshooter provides:
-    - Deep template structure analysis and validation
-    - Resource configuration analysis and dependency mapping
-    - Correlation between template issues and deployment failures
-    - Automated fix recommendations with confidence levels
-    - Security vulnerability detection
-    - Best practices compliance checking
-    - Deployment readiness assessment
+    🎯 USE THIS TOOL FOR ALL STACK ANALYSIS NEEDS:
     
-    Examples:
-    1. Full analysis:
-       enhanced_troubleshoot_cloudformation_stack(stack_name="my-stack")
+    📊 STACK STATUS & MONITORING:
+    - Real-time stack health assessment and operational status
+    - Resource state analysis and dependency mapping
+    - Deployment progress tracking and validation
     
-    2. Quick template-only analysis:
+    🔍 TROUBLESHOOTING & DEBUGGING:
+    - Automated failure root cause analysis
+    - CloudWatch logs correlation and error pattern detection
+    - CloudTrail event analysis for change tracking
+    - Resource-level failure diagnosis with fix recommendations
+    
+    🛡️ SECURITY ANALYSIS:
+    - Security vulnerability scanning in templates
+    - IAM policy analysis and recommendations
+    - Basic security best practices assessment
+    
+    🔧 TEMPLATE ANALYSIS & VALIDATION:
+    - Deep template structure analysis and syntax validation
+    - Resource dependency cycle detection
+    - Missing component identification and recommendations
+    - Template best practices alignment
+    
+    PARAMETER USAGE GUIDE:
+    
+    📈 For Stack Status Monitoring:
        enhanced_troubleshoot_cloudformation_stack(
-           stack_name="my-stack",
-           include_logs=False,
-           include_cloudtrail=False
+           stack_name="production-app",
+           include_template_analysis=True,
+           include_logs=True,
+           symptoms_description="Monitor deployment health"
        )
     
-    3. Focused troubleshooting with symptoms:
+    🚨 For Failure Troubleshooting:
        enhanced_troubleshoot_cloudformation_stack(
-           stack_name="failing-stack",
-           symptoms_description="Lambda functions timing out after deployment"
+           stack_name="failed-stack", 
+           include_logs=True,
+           include_cloudtrail=True,
+           time_window_hours=6,
+           symptoms_description="Stack creation failed with timeout errors"
+       )
+    
+    🔒 For Security Analysis:
+       enhanced_troubleshoot_cloudformation_stack(
+           stack_name="security-stack",
+           include_template_analysis=True,
+           include_logs=False,
+           symptoms_description="Security review of template configuration"
+       )
+    
+    🔍 For Template Validation:
+       enhanced_troubleshoot_cloudformation_stack(
+           stack_name="template-review",
+           include_logs=False,
+           include_cloudtrail=False,
+           symptoms_description="Validate template structure and dependencies"
        )
     """
     try:
@@ -1160,7 +1125,7 @@ Let's start by checking the current state of your stack:
 
 **Action Required**: Run this command first:
 ```
-get_stack_status(stack_name="{stack_name}", region="{actual_region}")
+enhanced_troubleshoot_cloudformation_stack(stack_name="{stack_name}", region="{actual_region}")
 ```
 
 **What to expect**:
