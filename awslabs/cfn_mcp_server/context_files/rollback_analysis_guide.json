@@ -1,0 +1,246 @@
+{
+  "scenario": "rollback_analysis_guide",
+  "title": "CloudFormation Rollback Analysis and Recovery Guide",
+  "description": "Comprehensive guide for understanding, analyzing, and recovering from CloudFormation rollback scenarios",
+  
+  "when_to_use": [
+    "Stack status shows ROLLBACK_COMPLETE",
+    "Stack status shows ROLLBACK_FAILED", 
+    "UPDATE_ROLLBACK_COMPLETE scenarios",
+    "Stack stuck in rollback state",
+    "Understanding why a rollback was triggered",
+    "Planning recovery from failed deployments"
+  ],
+  
+  "diagnosis_steps": [
+    {
+      "step": 1,
+      "action": "Identify the rollback trigger",
+      "details": "Find the original failure that caused CloudFormation to initiate rollback",
+      "what_to_look_for": "First CREATE_FAILED or UPDATE_FAILED event in the stack events timeline"
+    },
+    {
+      "step": 2,
+      "action": "Analyze the rollback sequence",
+      "details": "Trace through the rollback events to understand what was cleaned up",
+      "what_to_look_for": "DELETE_IN_PROGRESS and DELETE_COMPLETE events during rollback phase"
+    },
+    {
+      "step": 3,
+      "action": "Check for rollback failures",
+      "details": "Identify any resources that failed to delete during rollback",
+      "what_to_look_for": "DELETE_FAILED events, resources stuck in DELETE_IN_PROGRESS state"
+    },
+    {
+      "step": 4,
+      "action": "Assess current resource state",
+      "details": "Determine what resources remain and their current configuration",
+      "what_to_look_for": "Resources that weren't created, partially created resources, or resources that failed to delete"
+    }
+  ],
+  
+  "common_causes": [
+    {
+      "cause": "Resource creation failure",
+      "description": "One or more resources failed to create, triggering automatic rollback",
+      "indicators": ["CREATE_FAILED", "Resource limit exceeded", "Invalid configuration"],
+      "likelihood": "HIGH"
+    },
+    {
+      "cause": "Dependency resolution failure",
+      "description": "CloudFormation couldn't resolve resource dependencies or circular references",
+      "indicators": ["Circular dependency", "Unresolved resource dependencies", "Template format error"],
+      "likelihood": "MEDIUM"
+    },
+    {
+      "cause": "Timeout during creation",
+      "description": "Resource creation exceeded CloudFormation timeout limits",
+      "indicators": ["Resource creation timeout", "Stack timeout", "Long-running operations"],
+      "likelihood": "MEDIUM"
+    },
+    {
+      "cause": "Manual rollback request",
+      "description": "User or automation explicitly requested stack rollback",
+      "indicators": ["User initiated", "Rollback requested by user", "API call to cancel stack"],
+      "likelihood": "LOW"
+    },
+    {
+      "cause": "Rollback deletion failures",
+      "description": "Resources couldn't be deleted during rollback due to dependencies or policies",
+      "indicators": ["DELETE_FAILED", "Resource has dependencies", "Deletion policy prevents removal"],
+      "likelihood": "MEDIUM"
+    }
+  ],
+  
+  "data_collection_steps": [
+    {
+      "priority": "HIGH",
+      "action": "Get complete stack event timeline",
+      "aws_cli": "aws cloudformation describe-stack-events --stack-name {stack_name} --query 'StackEvents[*].{Time:Timestamp,Resource:LogicalResourceId,Type:ResourceType,Status:ResourceStatus,Reason:ResourceStatusReason}' --output table",
+      "description": "Get chronological view of all stack events to understand the failure and rollback sequence."
+    },
+    {
+      "priority": "HIGH",
+      "action": "Identify the root cause failure",
+      "aws_cli": "aws cloudformation describe-stack-events --stack-name {stack_name} --query 'StackEvents[?ResourceStatus==`CREATE_FAILED` || ResourceStatus==`UPDATE_FAILED`] | [0]'",
+      "description": "Find the first failure event that triggered the rollback to understand the root cause."
+    },
+    {
+      "priority": "HIGH",
+      "action": "Check for rollback failures",
+      "aws_cli": "aws cloudformation describe-stack-events --stack-name {stack_name} --query 'StackEvents[?ResourceStatus==`DELETE_FAILED`]'",
+      "description": "Identify any resources that failed to delete during rollback, which may require manual cleanup."
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Get current stack resources",
+      "aws_cli": "aws cloudformation list-stack-resources --stack-name {stack_name}",
+      "description": "See what resources currently exist in the stack after rollback completion."
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Check stack template",
+      "aws_cli": "aws cloudformation get-template --stack-name {stack_name}",
+      "description": "Review the template that was being deployed to understand intended vs actual state."
+    }
+  ],
+  
+  "investigation_commands": [
+    {
+      "command": "aws cloudformation describe-stacks --stack-name {stack_name} --query 'Stacks[0].{Status:StackStatus,Reason:StackStatusReason,CreationTime:CreationTime}'",
+      "purpose": "Get current stack status and basic information",
+      "parameters_needed": ["stack_name"]
+    },
+    {
+      "command": "aws cloudformation describe-stack-events --stack-name {stack_name} --query 'StackEvents[?contains(ResourceStatus, `FAILED`)]'",
+      "purpose": "Find all failed events in the stack history",
+      "parameters_needed": ["stack_name"]
+    },
+    {
+      "command": "aws cloudformation list-stack-resources --stack-name {stack_name} --query 'StackResourceSummaries[?ResourceStatus!=`DELETE_COMPLETE`]'",
+      "purpose": "List resources that still exist after rollback",
+      "parameters_needed": ["stack_name"]
+    },
+    {
+      "command": "aws logs filter-log-events --log-group-name /aws/cloudformation/{stack_name} --start-time {start_time}",
+      "purpose": "Get CloudFormation service logs if available",
+      "parameters_needed": ["stack_name", "start_time"]
+    }
+  ],
+  
+  "resolution_strategies": [
+    {
+      "scenario": "Clean rollback with identifiable root cause",
+      "steps": [
+        "Fix the root cause issue identified in the failure events",
+        "Update the CloudFormation template to address the problem",
+        "Delete the failed stack if it's in ROLLBACK_COMPLETE state",
+        "Redeploy with the corrected template"
+      ],
+      "aws_commands": [
+        "aws cloudformation delete-stack --stack-name {stack_name}",
+        "aws cloudformation wait stack-delete-complete --stack-name {stack_name}",
+        "aws cloudformation create-stack --stack-name {stack_name} --template-body file://fixed-template.yaml"
+      ]
+    },
+    {
+      "scenario": "Rollback with deletion failures",
+      "steps": [
+        "Identify resources that failed to delete during rollback",
+        "Manually clean up stuck resources using service-specific APIs",
+        "Use retain-resources option when deleting the stack",
+        "Clean up retained resources manually after stack deletion"
+      ],
+      "aws_commands": [
+        "aws cloudformation delete-stack --stack-name {stack_name} --retain-resources {resource_logical_id}",
+        "aws ec2 terminate-instances --instance-ids {instance_id}",
+        "aws s3 rb s3://{bucket_name} --force"
+      ]
+    },
+    {
+      "scenario": "Stack stuck in rollback state",
+      "steps": [
+        "Contact AWS Support if stack is genuinely stuck",
+        "Try canceling the rollback if it's an update rollback",
+        "Use continue-update-rollback if rollback can be resumed",
+        "Consider manual resource cleanup and stack deletion as last resort"
+      ],
+      "aws_commands": [
+        "aws cloudformation cancel-update-stack --stack-name {stack_name}",
+        "aws cloudformation continue-update-rollback --stack-name {stack_name}",
+        "aws cloudformation describe-stack-events --stack-name {stack_name} --query 'StackEvents[?ResourceStatus==`UPDATE_ROLLBACK_FAILED`]'"
+      ]
+    },
+    {
+      "scenario": "Partial resource recovery needed",
+      "steps": [
+        "Identify which resources were successfully created before failure",
+        "Export data or configurations from successfully created resources",
+        "Plan new template that imports existing resources where possible",
+        "Use CloudFormation import operations for resource adoption"
+      ],
+      "aws_commands": [
+        "aws cloudformation create-change-set --change-set-type IMPORT --stack-name {stack_name} --template-body file://import-template.yaml --resources-to-import file://resources.json",
+        "aws ec2 describe-instances --instance-ids {instance_id} --query 'Reservations[0].Instances[0]'"
+      ]
+    }
+  ],
+  
+  "prevention_tips": [
+    "Test templates in development environments before production deployment",
+    "Use CloudFormation drift detection to catch configuration changes",
+    "Implement proper resource naming to avoid conflicts",
+    "Set appropriate DeletionPolicy and UpdateReplacePolicy for critical resources",
+    "Use stack policies to protect critical resources during updates",
+    "Implement proper error handling in custom resources",
+    "Monitor stack events during deployment for early failure detection",
+    "Use nested stacks to isolate failure domains and reduce rollback scope"
+  ],
+  
+  "rollback_types": {
+    "CREATE_ROLLBACK": {
+      "description": "Stack creation failed and is rolling back",
+      "typical_end_state": "ROLLBACK_COMPLETE",
+      "recovery": "Fix issues and create new stack"
+    },
+    "UPDATE_ROLLBACK": {
+      "description": "Stack update failed and is rolling back to previous state",
+      "typical_end_state": "UPDATE_ROLLBACK_COMPLETE", 
+      "recovery": "Fix issues and retry update"
+    },
+    "ROLLBACK_FAILED": {
+      "description": "Rollback itself failed, stack is in inconsistent state",
+      "typical_end_state": "ROLLBACK_FAILED",
+      "recovery": "Manual cleanup required, contact AWS Support if needed"
+    }
+  },
+  
+  "recovery_decision_matrix": {
+    "ROLLBACK_COMPLETE + Root cause identified": "Fix template and redeploy",
+    "ROLLBACK_COMPLETE + Template issues": "Validate and fix template syntax",
+    "ROLLBACK_FAILED + Deletion failures": "Manual cleanup then stack deletion",
+    "UPDATE_ROLLBACK_COMPLETE + Configuration drift": "Check for manual changes, fix drift",
+    "Stuck in rollback > 1 hour": "Contact AWS Support"
+  },
+  
+  "related_contexts": [
+    "drift_detection_guide",
+    "permission_issues_guide",
+    "custom_resource_debugging"
+  ],
+  
+  "additional_resources": [
+    {
+      "title": "CloudFormation Stack Failure Options",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-failure-options.html"
+    },
+    {
+      "title": "Continue Rolling Back an Update",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html"
+    },
+    {
+      "title": "DeletionPolicy Attribute",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html"
+    }
+  ]
+}

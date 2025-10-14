@@ -35,9 +35,6 @@ class EnhancedCloudFormationTroubleshooter(CloudFormationTroubleshooter):
         self,
         stack_name: str,
         include_template_analysis: bool = True,
-        include_logs: bool = True,
-        include_cloudtrail: bool = True,
-        time_window_hours: int = 24,
         symptoms_description: Optional[str] = None
     ) -> Dict[str, Any]:
         """
@@ -46,21 +43,18 @@ class EnhancedCloudFormationTroubleshooter(CloudFormationTroubleshooter):
         Args:
             stack_name: CloudFormation stack name
             include_template_analysis: Whether to perform deep template analysis
-            include_logs: Whether to include CloudWatch logs
-            include_cloudtrail: Whether to include CloudTrail events
-            time_window_hours: Time window for log/event collection
             symptoms_description: Optional description of observed symptoms
             
         Returns:
             Comprehensive analysis results with actionable recommendations
         """
         try:
-            # Start with base troubleshooting analysis
+            # Start with base troubleshooting analysis (CloudFormation events only)
             base_analysis = await self.analyze_stack(
                 stack_name=stack_name,
-                include_logs=include_logs,
-                include_cloudtrail=include_cloudtrail,
-                time_window_hours=time_window_hours,
+                include_logs=False,
+                include_cloudtrail=False,
+                time_window_hours=24,
                 symptoms_description=symptoms_description
             )
             

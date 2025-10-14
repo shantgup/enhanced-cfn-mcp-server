@@ -903,18 +903,6 @@ async def enhanced_troubleshoot_cloudformation_stack(
         description='Whether to perform deep template analysis',
         default=True
     ),
-    include_logs: bool = Field(
-        description='Whether to analyze CloudWatch logs',
-        default=False
-    ),
-    include_cloudtrail: bool = Field(
-        description='Whether to include CloudTrail events',
-        default=False
-    ),
-    time_window_hours: int = Field(
-        description='Time window in hours for log/event collection',
-        default=24
-    ),
     symptoms_description: str | None = Field(
         description='Optional description of observed symptoms',
         default=None
@@ -923,6 +911,11 @@ async def enhanced_troubleshoot_cloudformation_stack(
     """Perform comprehensive CloudFormation analysis - replaces get_stack_status with enhanced capabilities.
     
     🎯 USE THIS TOOL FOR ALL STACK ANALYSIS NEEDS:
+    
+    ⚡ IMPORTANT: When analysis identifies issues matching available contexts (permission errors, custom resources, 
+    drift detection, rollback scenarios, nested stacks), automatically call get_cloudformation_context() with the 
+    relevant context_name before providing recommendations. The context_system field lists available contexts and 
+    their triggers to help you determine which context to retrieve.
     
     📊 STACK STATUS & MONITORING:
     - Real-time stack health assessment and operational status
@@ -952,22 +945,26 @@ async def enhanced_troubleshoot_cloudformation_stack(
     - Manual verification commands for suspected configuration drift
     - Integration with AWS CLI/API MCP Server for resource validation
     
+    🔄 RECOMMENDED WORKFLOW:
+    1. Call enhanced_troubleshoot_cloudformation_stack() to get initial analysis
+    2. Review the context_system field to see available troubleshooting contexts
+    3. Match failure patterns to context triggers (e.g., "already exists" → drift_detection_guide)
+    4. Call get_cloudformation_context(context_name) for detailed guidance
+    5. Follow the context's data_collection_steps and investigation_commands
+    6. Apply resolution_strategies from the context
+    
     PARAMETER USAGE GUIDE:
     
     📈 For Stack Status Monitoring:
        enhanced_troubleshoot_cloudformation_stack(
            stack_name="production-app",
            include_template_analysis=True,
-           include_logs=True,
            symptoms_description="Monitor deployment health"
        )
     
     🚨 For Failure Troubleshooting:
        enhanced_troubleshoot_cloudformation_stack(
            stack_name="failed-stack", 
-           include_logs=True,
-           include_cloudtrail=True,
-           time_window_hours=6,
            symptoms_description="Stack creation failed with timeout errors"
        )
     
@@ -975,17 +972,26 @@ async def enhanced_troubleshoot_cloudformation_stack(
        enhanced_troubleshoot_cloudformation_stack(
            stack_name="security-stack",
            include_template_analysis=True,
-           include_logs=False,
            symptoms_description="Security review of template configuration"
        )
     
     🔍 For Template Validation & Drift Check:
        enhanced_troubleshoot_cloudformation_stack(
            stack_name="template-review",
-           include_logs=False,
-           include_cloudtrail=False,
+           include_template_analysis=False,
            symptoms_description="Validate template structure and check for out-of-band changes"
        )
+    
+    📋 EXAMPLE WORKFLOW WITH CONTEXT:
+    # Step 1: Get initial analysis
+    result = enhanced_troubleshoot_cloudformation_stack(stack_name="my-stack")
+    
+    # Step 2: Check if failure matches context triggers
+    # If error contains "already exists" → call get_cloudformation_context("drift_detection_guide")
+    # If custom resource failed → call get_cloudformation_context("custom_resource_debugging")
+    # If nested stack failed → call get_cloudformation_context("nested_stack_troubleshooting")
+    # If permission denied → call get_cloudformation_context("permission_issues_guide")
+    # If rollback occurred → call get_cloudformation_context("rollback_analysis_guide")
     """
     try:
         from awslabs.cfn_mcp_server.enhanced_troubleshooter import EnhancedCloudFormationTroubleshooter
@@ -995,9 +1001,6 @@ async def enhanced_troubleshoot_cloudformation_stack(
         result = await troubleshooter.comprehensive_analysis(
             stack_name=stack_name,
             include_template_analysis=include_template_analysis,
-            include_logs=include_logs,
-            include_cloudtrail=include_cloudtrail,
-            time_window_hours=time_window_hours,
             symptoms_description=symptoms_description
         )
         return result
@@ -1132,9 +1135,12 @@ async def get_cloudformation_context(
     """
     Get structured troubleshooting context for specific CloudFormation scenarios.
     
+    🎯 WHEN TO USE: Call this tool immediately after enhanced_troubleshoot_cloudformation_stack() 
+    when the analysis identifies failure patterns that match available context triggers.
+    
     This tool provides detailed guidance for common CloudFormation troubleshooting scenarios.
     Each context includes diagnosis steps, common causes, data collection guidance, 
-    and resolution strategies.
+    and resolution strategies with specific AWS CLI commands.
     
     Available contexts:
     - custom_resource_debugging: For Lambda-backed custom resource failures

@@ -1,0 +1,212 @@
+{
+  "scenario": "nested_stack_troubleshooting",
+  "title": "Nested CloudFormation Stack Troubleshooting Guide",
+  "description": "Comprehensive guide for diagnosing and resolving nested CloudFormation stack failures",
+  
+  "when_to_use": [
+    "AWS::CloudFormation::Stack resource shows CREATE_FAILED or UPDATE_FAILED",
+    "Nested stack deployment failures",
+    "Cross-stack parameter passing issues",
+    "Parent-child stack dependency problems",
+    "Template URL access issues for nested stacks",
+    "Circular dependency errors between parent and child stacks"
+  ],
+  
+  "diagnosis_steps": [
+    {
+      "step": 1,
+      "action": "Identify the nested stack resource",
+      "details": "Look for AWS::CloudFormation::Stack resources in the failed events",
+      "what_to_look_for": "ResourceType: AWS::CloudFormation::Stack with CREATE_FAILED or UPDATE_FAILED status"
+    },
+    {
+      "step": 2,
+      "action": "Check the nested stack's own events",
+      "details": "Get the nested stack ID from the parent stack events and examine its events",
+      "what_to_look_for": "Nested stack ID in PhysicalResourceId, then check that stack's events"
+    },
+    {
+      "step": 3,
+      "action": "Verify template URL accessibility",
+      "details": "Ensure the TemplateURL is accessible and points to a valid CloudFormation template",
+      "what_to_look_for": "TemplateURL in resource properties, S3 bucket permissions, object existence"
+    },
+    {
+      "step": 4,
+      "action": "Validate parameter passing",
+      "details": "Check that parameters passed from parent to child match the child template's requirements",
+      "what_to_look_for": "Parameters section in nested stack properties vs child template parameters"
+    }
+  ],
+  
+  "common_causes": [
+    {
+      "cause": "Template URL inaccessible",
+      "description": "The S3 URL for the nested template cannot be accessed due to permissions or missing object",
+      "indicators": ["Access denied", "NoSuchKey", "NoSuchBucket", "403 Forbidden"],
+      "likelihood": "HIGH"
+    },
+    {
+      "cause": "Parameter mismatch",
+      "description": "Parameters passed from parent don't match child template requirements",
+      "indicators": ["Parameter validation failed", "Missing required parameter", "Invalid parameter value"],
+      "likelihood": "HIGH"
+    },
+    {
+      "cause": "Circular dependency",
+      "description": "Parent stack depends on outputs from child stack that depends on parent resources",
+      "indicators": ["Circular dependency", "Template format error", "Invalid template"],
+      "likelihood": "MEDIUM"
+    },
+    {
+      "cause": "Resource limits exceeded",
+      "description": "Child stack creation fails due to AWS service limits or quotas",
+      "indicators": ["Limit exceeded", "Quota exceeded", "Too many resources"],
+      "likelihood": "MEDIUM"
+    },
+    {
+      "cause": "Child stack template errors",
+      "description": "The nested template itself has syntax or logical errors",
+      "indicators": ["Template format error", "Invalid template", "Unresolved resource dependencies"],
+      "likelihood": "MEDIUM"
+    }
+  ],
+  
+  "data_collection_steps": [
+    {
+      "priority": "HIGH",
+      "action": "Get nested stack details",
+      "aws_cli": "aws cloudformation describe-stacks --stack-name {nested_stack_id}",
+      "description": "Get the nested stack's status, events, and outputs. Use the nested stack ID from the parent stack's PhysicalResourceId."
+    },
+    {
+      "priority": "HIGH",
+      "action": "Get nested stack events",
+      "aws_cli": "aws cloudformation describe-stack-events --stack-name {nested_stack_id}",
+      "description": "Examine the nested stack's own events to see what specifically failed within the child stack."
+    },
+    {
+      "priority": "HIGH",
+      "action": "Verify template URL access",
+      "aws_cli": "aws s3 ls {template_s3_url}",
+      "description": "Check if the nested template URL is accessible. Extract the S3 URL from the parent stack's TemplateURL property."
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Get nested template content",
+      "aws_cli": "aws s3 cp {template_s3_url} nested-template.yaml",
+      "description": "Download the nested template to examine its structure and parameter requirements."
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Check S3 bucket permissions",
+      "aws_cli": "aws s3api get-bucket-policy --bucket {template_bucket_name}",
+      "description": "Verify that CloudFormation has permissions to access the template bucket."
+    }
+  ],
+  
+  "investigation_commands": [
+    {
+      "command": "aws cloudformation describe-stacks --stack-name {nested_stack_id} --query 'Stacks[0].{Status:StackStatus,Reason:StackStatusReason}'",
+      "purpose": "Get the nested stack's current status and failure reason",
+      "parameters_needed": ["nested_stack_id"]
+    },
+    {
+      "command": "aws cloudformation describe-stack-events --stack-name {nested_stack_id} --query 'StackEvents[?ResourceStatus==`CREATE_FAILED` || ResourceStatus==`UPDATE_FAILED`]'",
+      "purpose": "Find all failed resources within the nested stack",
+      "parameters_needed": ["nested_stack_id"]
+    },
+    {
+      "command": "aws cloudformation get-template --stack-name {parent_stack_name} --query 'TemplateBody.Resources.{nested_resource_name}'",
+      "purpose": "Get the nested stack resource definition from parent template",
+      "parameters_needed": ["parent_stack_name", "nested_resource_name"]
+    },
+    {
+      "command": "aws s3api head-object --bucket {template_bucket} --key {template_key}",
+      "purpose": "Verify the nested template exists and is accessible",
+      "parameters_needed": ["template_bucket", "template_key"]
+    }
+  ],
+  
+  "resolution_strategies": [
+    {
+      "scenario": "Template URL access issues",
+      "steps": [
+        "Verify the S3 bucket and object exist",
+        "Check CloudFormation service role has s3:GetObject permission",
+        "Ensure bucket policy allows CloudFormation access",
+        "Verify the template URL format is correct"
+      ],
+      "aws_commands": [
+        "aws s3api put-bucket-policy --bucket {bucket} --policy file://cf-access-policy.json",
+        "aws iam attach-role-policy --role-name {cf-role} --policy-arn arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+      ]
+    },
+    {
+      "scenario": "Parameter validation failures",
+      "steps": [
+        "Compare parent stack parameters with child template requirements",
+        "Check parameter types and allowed values match",
+        "Verify all required parameters are provided",
+        "Update parent template parameter passing if needed"
+      ],
+      "aws_commands": [
+        "aws cloudformation validate-template --template-url {nested_template_url}",
+        "aws cloudformation describe-stacks --stack-name {parent_stack} --query 'Stacks[0].Parameters'"
+      ]
+    },
+    {
+      "scenario": "Circular dependencies",
+      "steps": [
+        "Identify the dependency cycle between parent and child",
+        "Refactor to use stack outputs and imports instead of direct references",
+        "Consider splitting into multiple independent stacks",
+        "Use CloudFormation exports for cross-stack references"
+      ],
+      "aws_commands": [
+        "aws cloudformation list-exports",
+        "aws cloudformation list-imports --export-name {export_name}"
+      ]
+    },
+    {
+      "scenario": "Child stack template errors",
+      "steps": [
+        "Validate the nested template syntax independently",
+        "Test deploy the nested template as a standalone stack",
+        "Fix template errors in the nested template",
+        "Update the template in S3 and retry parent stack deployment"
+      ],
+      "aws_commands": [
+        "aws cloudformation validate-template --template-body file://nested-template.yaml",
+        "aws cloudformation create-stack --stack-name test-nested --template-body file://nested-template.yaml"
+      ]
+    }
+  ],
+  
+  "prevention_tips": [
+    "Always validate nested templates independently before using them",
+    "Use CloudFormation exports/imports for cross-stack references instead of hard-coding values",
+    "Implement proper S3 bucket policies for template access",
+    "Test nested stack deployments in isolation first",
+    "Use consistent parameter naming between parent and child templates",
+    "Implement proper error handling and rollback policies",
+    "Document parameter requirements and dependencies clearly",
+    "Use stack sets for deploying similar nested stacks across accounts/regions"
+  ],
+  
+  "related_contexts": [
+    "permission_issues_guide",
+    "rollback_analysis_guide"
+  ],
+  
+  "additional_resources": [
+    {
+      "title": "Working with Nested Stacks",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html"
+    },
+    {
+      "title": "CloudFormation Cross-Stack References",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthrough-crossstackref.html"
+    }
+  ]
+}

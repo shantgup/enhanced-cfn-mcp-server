@@ -75,11 +75,7 @@
     {
       "priority": "HIGH",
       "action": "Get Lambda function logs",
-      "mcp_tool": "enhanced_troubleshoot_cloudformation_stack",
-      "parameters": {
-        "include_logs": true,
-        "time_window_hours": 2
-      },
+      "aws_cli": "aws logs filter-log-events --log-group-name /aws/lambda/{function_name} --start-time {start_time} --end-time {end_time}",
       "description": "Collect CloudWatch logs for the Lambda function during the failure window"
     },
     {

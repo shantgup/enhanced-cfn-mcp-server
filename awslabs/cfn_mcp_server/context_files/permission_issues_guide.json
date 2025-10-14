@@ -1,0 +1,248 @@
+{
+  "scenario": "permission_issues_guide",
+  "title": "CloudFormation Permission Issues Troubleshooting Guide",
+  "description": "Comprehensive guide for diagnosing and resolving IAM and permission-related CloudFormation failures",
+  
+  "when_to_use": [
+    "Access denied errors during stack operations",
+    "Insufficient permissions for resource creation",
+    "Cross-account role assumption failures",
+    "Service-linked role creation issues",
+    "IAM policy validation failures",
+    "CloudFormation service role permission problems"
+  ],
+  
+  "diagnosis_steps": [
+    {
+      "step": 1,
+      "action": "Identify the permission error",
+      "details": "Look for access denied, unauthorized, or forbidden errors in stack events",
+      "what_to_look_for": "Error messages containing 'Access denied', 'UnauthorizedOperation', 'Forbidden', or specific IAM errors"
+    },
+    {
+      "step": 2,
+      "action": "Determine the acting principal",
+      "details": "Identify whether CloudFormation is using your user credentials or a service role",
+      "what_to_look_for": "Stack role ARN in stack details, or if empty, it's using your user credentials"
+    },
+    {
+      "step": 3,
+      "action": "Identify the failed action and resource",
+      "details": "Extract the specific AWS API action and resource from the error message",
+      "what_to_look_for": "API action (e.g., 'ec2:CreateInstance') and resource ARN or identifier in error details"
+    },
+    {
+      "step": 4,
+      "action": "Check the resource's service and region",
+      "details": "Verify the permission is needed in the correct region and for the right service",
+      "what_to_look_for": "Resource region, service-specific permission requirements, global vs regional services"
+    }
+  ],
+  
+  "common_causes": [
+    {
+      "cause": "Missing IAM permissions",
+      "description": "The CloudFormation execution role or user lacks required permissions for the AWS service",
+      "indicators": ["Access denied", "UnauthorizedOperation", "User is not authorized"],
+      "likelihood": "HIGH"
+    },
+    {
+      "cause": "Service-linked role issues",
+      "description": "Required service-linked roles don't exist or can't be created automatically",
+      "indicators": ["Service role does not exist", "Cannot create service-linked role", "AWSServiceRoleFor"],
+      "likelihood": "HIGH"
+    },
+    {
+      "cause": "Cross-account permission problems",
+      "description": "Issues with cross-account role assumption or resource access",
+      "indicators": ["AssumeRole failed", "Cross-account access denied", "Invalid principal"],
+      "likelihood": "MEDIUM"
+    },
+    {
+      "cause": "Resource-based policy restrictions",
+      "description": "Target resource has policies that deny the CloudFormation operation",
+      "indicators": ["Resource policy denies access", "Bucket policy", "KMS key policy"],
+      "likelihood": "MEDIUM"
+    },
+    {
+      "cause": "Conditional policy restrictions",
+      "description": "IAM policies have conditions that aren't met (IP, MFA, time-based, etc.)",
+      "indicators": ["Condition not satisfied", "IP address not allowed", "MFA required"],
+      "likelihood": "MEDIUM"
+    }
+  ],
+  
+  "data_collection_steps": [
+    {
+      "priority": "HIGH",
+      "action": "Get CloudFormation service role details",
+      "aws_cli": "aws cloudformation describe-stacks --stack-name {stack_name} --query 'Stacks[0].RoleArn'",
+      "description": "Identify if CloudFormation is using a service role or user credentials for the stack operations."
+    },
+    {
+      "priority": "HIGH",
+      "action": "Get IAM role or user policies",
+      "aws_cli": "aws iam get-role --role-name {role_name} && aws iam list-attached-role-policies --role-name {role_name}",
+      "description": "Examine the policies attached to the CloudFormation execution role. Use get-user and list-attached-user-policies if no service role."
+    },
+    {
+      "priority": "HIGH",
+      "action": "Simulate the failed policy",
+      "aws_cli": "aws iam simulate-principal-policy --policy-source-arn {principal_arn} --action-names {failed_action} --resource-arns {resource_arn}",
+      "description": "Test if the principal has permission for the specific action that failed."
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Check CloudTrail for detailed error",
+      "aws_cli": "aws cloudtrail lookup-events --lookup-attributes AttributeKey=EventName,AttributeValue={api_action} --start-time {start_time} --end-time {end_time}",
+      "description": "Get detailed CloudTrail events for the failed API call to see exact error details."
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "List service-linked roles",
+      "aws_cli": "aws iam list-roles --path-prefix /aws-service-role/ --query 'Roles[?contains(RoleName, `{service_name}`)]'",
+      "description": "Check if required service-linked roles exist for the AWS service being used."
+    }
+  ],
+  
+  "investigation_commands": [
+    {
+      "command": "aws sts get-caller-identity",
+      "purpose": "Identify the current AWS identity and account",
+      "parameters_needed": []
+    },
+    {
+      "command": "aws iam simulate-principal-policy --policy-source-arn {principal_arn} --action-names {action} --resource-arns {resource}",
+      "purpose": "Test specific permissions for the failed action",
+      "parameters_needed": ["principal_arn", "action", "resource"]
+    },
+    {
+      "command": "aws iam get-role-policy --role-name {role_name} --policy-name {policy_name}",
+      "purpose": "Get inline policy details for a role",
+      "parameters_needed": ["role_name", "policy_name"]
+    },
+    {
+      "command": "aws iam get-policy-version --policy-arn {policy_arn} --version-id {version_id}",
+      "purpose": "Get managed policy document details",
+      "parameters_needed": ["policy_arn", "version_id"]
+    },
+    {
+      "command": "aws logs filter-log-events --log-group-name CloudTrail/{trail_name} --filter-pattern '{error_pattern}' --start-time {start_time}",
+      "purpose": "Search CloudTrail logs for specific permission errors",
+      "parameters_needed": ["trail_name", "error_pattern", "start_time"]
+    }
+  ],
+  
+  "resolution_strategies": [
+    {
+      "scenario": "Missing basic service permissions",
+      "steps": [
+        "Identify the required AWS service permissions from the error",
+        "Add the necessary IAM policy to the CloudFormation execution role",
+        "Use AWS managed policies when available for common services",
+        "Test permissions with IAM policy simulator before redeploying"
+      ],
+      "aws_commands": [
+        "aws iam attach-role-policy --role-name {cf_role} --policy-arn arn:aws:iam::aws:policy/{managed_policy}",
+        "aws iam put-role-policy --role-name {cf_role} --policy-name {policy_name} --policy-document file://policy.json"
+      ]
+    },
+    {
+      "scenario": "Service-linked role creation",
+      "steps": [
+        "Create the required service-linked role manually",
+        "Ensure CloudFormation role has iam:CreateServiceLinkedRole permission",
+        "Add service-specific permissions for service-linked role management",
+        "Retry stack operation after role creation"
+      ],
+      "aws_commands": [
+        "aws iam create-service-linked-role --aws-service-name {service_name}.amazonaws.com",
+        "aws iam list-roles --path-prefix /aws-service-role/ --query 'Roles[?contains(RoleName, `{service}`)]'"
+      ]
+    },
+    {
+      "scenario": "Cross-account access issues",
+      "steps": [
+        "Verify the cross-account role trust policy allows assumption",
+        "Check that the assuming principal has sts:AssumeRole permission",
+        "Ensure external ID matches if required",
+        "Verify MFA requirements are met if configured"
+      ],
+      "aws_commands": [
+        "aws sts assume-role --role-arn {cross_account_role} --role-session-name test-session",
+        "aws iam get-role --role-name {role_name} --query 'Role.AssumeRolePolicyDocument'"
+      ]
+    },
+    {
+      "scenario": "Resource-based policy conflicts",
+      "steps": [
+        "Review the target resource's policy (S3 bucket, KMS key, etc.)",
+        "Add explicit allow statements for CloudFormation operations",
+        "Check for deny statements that might override allows",
+        "Ensure resource policies don't conflict with IAM policies"
+      ],
+      "aws_commands": [
+        "aws s3api get-bucket-policy --bucket {bucket_name}",
+        "aws kms get-key-policy --key-id {key_id} --policy-name default"
+      ]
+    }
+  ],
+  
+  "prevention_tips": [
+    "Use AWS managed policies when available instead of custom policies",
+    "Follow the principle of least privilege - grant only necessary permissions",
+    "Test CloudFormation templates with IAM policy simulator before deployment",
+    "Create service-linked roles proactively for services that require them",
+    "Use CloudFormation service roles instead of user credentials for production",
+    "Implement proper cross-account role trust relationships",
+    "Document required permissions for each CloudFormation template",
+    "Use CloudFormation drift detection to catch manual permission changes"
+  ],
+  
+  "common_permission_patterns": {
+    "EC2": [
+      "ec2:CreateInstance",
+      "ec2:DescribeInstances", 
+      "ec2:CreateSecurityGroup",
+      "ec2:AuthorizeSecurityGroupIngress"
+    ],
+    "S3": [
+      "s3:CreateBucket",
+      "s3:PutBucketPolicy",
+      "s3:GetBucketLocation",
+      "s3:ListBucket"
+    ],
+    "IAM": [
+      "iam:CreateRole",
+      "iam:AttachRolePolicy",
+      "iam:PassRole",
+      "iam:CreateServiceLinkedRole"
+    ],
+    "Lambda": [
+      "lambda:CreateFunction",
+      "lambda:GetFunction",
+      "iam:PassRole",
+      "logs:CreateLogGroup"
+    ]
+  },
+  
+  "related_contexts": [
+    "custom_resource_debugging",
+    "nested_stack_troubleshooting"
+  ],
+  
+  "additional_resources": [
+    {
+      "title": "CloudFormation Service Role",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-servicerole.html"
+    },
+    {
+      "title": "IAM Policy Simulator",
+      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html"
+    },
+    {
+      "title": "Service-Linked Roles",
+      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html"
+    }
+  ]
+}

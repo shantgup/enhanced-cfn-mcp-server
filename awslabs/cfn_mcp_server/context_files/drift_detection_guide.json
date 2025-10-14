@@ -87,12 +87,8 @@
     {
       "priority": "MEDIUM",
       "action": "Check CloudTrail for manual changes",
-      "mcp_tool": "enhanced_troubleshoot_cloudformation_stack",
-      "parameters": {
-        "include_cloudtrail": true,
-        "time_window_hours": 168
-      },
-      "description": "Look for API calls made outside CloudFormation"
+      "aws_cli": "aws cloudtrail lookup-events --lookup-attributes AttributeKey=ResourceName,AttributeValue={resource_name} --start-time {start_time} --end-time {end_time}",
+      "description": "Look for API calls made outside CloudFormation. Use the resource name from failed events and a time window of 7 days before the failure."
     }
   ],
   
