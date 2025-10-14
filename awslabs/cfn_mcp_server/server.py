@@ -905,11 +905,11 @@ async def enhanced_troubleshoot_cloudformation_stack(
     ),
     include_logs: bool = Field(
         description='Whether to analyze CloudWatch logs',
-        default=True
+        default=False
     ),
     include_cloudtrail: bool = Field(
         description='Whether to include CloudTrail events',
-        default=True
+        default=False
     ),
     time_window_hours: int = Field(
         description='Time window in hours for log/event collection',
@@ -1121,6 +1121,48 @@ enhanced_troubleshoot_cloudformation_stack(stack_name="{stack_name}", region="{a
 """
     except Exception as e:
         return f"Error initializing autonomous deployment coach: {str(e)}"
+
+
+@mcp.tool()
+async def get_cloudformation_context(
+    context_name: str = Field(
+        description='Name of the context file to retrieve (e.g., "custom_resource_debugging", "nested_stack_troubleshooting")'
+    )
+) -> dict:
+    """
+    Get structured troubleshooting context for specific CloudFormation scenarios.
+    
+    This tool provides detailed guidance for common CloudFormation troubleshooting scenarios.
+    Each context includes diagnosis steps, common causes, data collection guidance, 
+    and resolution strategies.
+    
+    Available contexts:
+    - custom_resource_debugging: For Lambda-backed custom resource failures
+    - nested_stack_troubleshooting: For nested CloudFormation stack issues  
+    - drift_detection_guide: For out-of-band resource modifications
+    - permission_issues_guide: For IAM and access-related problems
+    - rollback_analysis_guide: For rollback scenarios and recovery
+    
+    Returns structured JSON with:
+    - Scenario description and when to use
+    - Step-by-step diagnosis procedures
+    - Common causes and indicators
+    - Data collection recommendations
+    - AWS CLI commands for investigation
+    - Resolution strategies and prevention tips
+    """
+    try:
+        from awslabs.cfn_mcp_server.context_loader import CloudFormationContextLoader
+        
+        loader = CloudFormationContextLoader()
+        return loader.get_context(context_name)
+        
+    except Exception as e:
+        return {
+            "error": f"Error loading context: {str(e)}",
+            "context_name": context_name,
+            "available_contexts": ["custom_resource_debugging", "nested_stack_troubleshooting", "drift_detection_guide", "permission_issues_guide", "rollback_analysis_guide"]
+        }
 
 
 @mcp.tool()

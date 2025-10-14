@@ -1,0 +1,208 @@
+{
+  "scenario": "drift_detection_guide",
+  "title": "CloudFormation Drift Detection Guide", 
+  "description": "Guide for detecting and resolving out-of-band changes to CloudFormation-managed resources",
+  
+  "when_to_use": [
+    "UPDATE_FAILED with no template changes",
+    "Resource already exists errors during stack operations",
+    "Unexpected resource states or configurations",
+    "Manual changes made outside CloudFormation",
+    "Stack shows successful deployment but resources don't match template",
+    "Intermittent deployment failures on previously working stacks"
+  ],
+  
+  "diagnosis_steps": [
+    {
+      "step": 1,
+      "action": "Identify the affected resource",
+      "details": "Look for the specific resource mentioned in the failure event",
+      "what_to_look_for": "LogicalResourceId and ResourceType in failed events"
+    },
+    {
+      "step": 2,
+      "action": "Check the error message pattern",
+      "details": "Look for indicators of existing resources or configuration conflicts",
+      "what_to_look_for": "Messages containing 'already exists', 'conflict', 'invalid state'"
+    },
+    {
+      "step": 3,
+      "action": "Compare template vs actual resource",
+      "details": "Use service-specific APIs to check current resource configuration",
+      "what_to_look_for": "Differences between template properties and actual resource settings"
+    },
+    {
+      "step": 4,
+      "action": "Check for manual modifications",
+      "details": "Look for recent changes made outside CloudFormation",
+      "what_to_look_for": "CloudTrail events showing direct API calls to the resource"
+    }
+  ],
+  
+  "common_causes": [
+    {
+      "cause": "Manual resource modifications",
+      "description": "Someone modified the resource directly through AWS Console, CLI, or API",
+      "indicators": ["Configuration mismatch", "Unexpected property values", "Manual CloudTrail events"],
+      "likelihood": "HIGH"
+    },
+    {
+      "cause": "Resource name conflicts",
+      "description": "Another resource with the same name exists outside the stack",
+      "indicators": ["already exists", "name conflict", "duplicate identifier"],
+      "likelihood": "HIGH"
+    },
+    {
+      "cause": "Cross-stack dependencies",
+      "description": "Resource is referenced or managed by another CloudFormation stack",
+      "indicators": ["managed by another stack", "cross-stack reference", "shared resource"],
+      "likelihood": "MEDIUM"
+    },
+    {
+      "cause": "Service-specific constraints",
+      "description": "AWS service has specific rules about resource modifications",
+      "indicators": ["service limitation", "immutable property", "requires replacement"],
+      "likelihood": "MEDIUM"
+    }
+  ],
+  
+  "data_collection_steps": [
+    {
+      "priority": "HIGH",
+      "action": "Run CloudFormation drift detection",
+      "aws_cli": "aws cloudformation detect-stack-drift --stack-name {stack_name}",
+      "description": "Use CloudFormation's built-in drift detection to identify changes"
+    },
+    {
+      "priority": "HIGH",
+      "action": "Get current resource configuration",
+      "description": "Use service-specific APIs to get actual resource state",
+      "service_commands": {
+        "S3": "aws s3api get-bucket-versioning --bucket {bucket_name}",
+        "EC2": "aws ec2 describe-instances --instance-ids {instance_id}",
+        "RDS": "aws rds describe-db-instances --db-instance-identifier {db_identifier}",
+        "Lambda": "aws lambda get-function-configuration --function-name {function_name}"
+      }
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Check CloudTrail for manual changes",
+      "mcp_tool": "enhanced_troubleshoot_cloudformation_stack",
+      "parameters": {
+        "include_cloudtrail": true,
+        "time_window_hours": 168
+      },
+      "description": "Look for API calls made outside CloudFormation"
+    }
+  ],
+  
+  "investigation_commands": [
+    {
+      "command": "aws cloudformation detect-stack-drift --stack-name {stack_name}",
+      "purpose": "Initiate drift detection for the entire stack",
+      "parameters_needed": ["stack_name"]
+    },
+    {
+      "command": "aws cloudformation describe-stack-drift-detection-status --stack-drift-detection-id {detection_id}",
+      "purpose": "Check the status of drift detection operation",
+      "parameters_needed": ["detection_id"]
+    },
+    {
+      "command": "aws cloudformation describe-stack-resource-drifts --stack-name {stack_name}",
+      "purpose": "Get detailed drift information for each resource",
+      "parameters_needed": ["stack_name"]
+    },
+    {
+      "command": "aws cloudtrail lookup-events --lookup-attributes AttributeKey=ResourceName,AttributeValue={resource_name} --start-time {start_time}",
+      "purpose": "Find manual changes to specific resources",
+      "parameters_needed": ["resource_name", "start_time"]
+    }
+  ],
+  
+  "resolution_strategies": [
+    {
+      "scenario": "Resource configuration drift",
+      "steps": [
+        "Update CloudFormation template to match current resource state",
+        "Or revert manual changes to match template",
+        "Use import operations if resource was created outside CloudFormation",
+        "Deploy updated template to bring stack into compliance"
+      ],
+      "decision_matrix": {
+        "keep_manual_changes": "Update template to match current state",
+        "revert_to_template": "Use service APIs to restore template configuration",
+        "resource_outside_cf": "Use CloudFormation import to bring under management"
+      }
+    },
+    {
+      "scenario": "Resource name conflicts",
+      "steps": [
+        "Rename the conflicting resource in template",
+        "Delete the external conflicting resource if safe",
+        "Use import to bring existing resource under CloudFormation management",
+        "Modify template to use unique naming patterns"
+      ],
+      "aws_commands": [
+        "aws cloudformation create-change-set --change-set-type IMPORT --resources-to-import file://resources.json"
+      ]
+    },
+    {
+      "scenario": "Cross-stack resource conflicts",
+      "steps": [
+        "Identify which stack should own the resource",
+        "Remove resource from one stack's template",
+        "Use cross-stack references (Exports/Imports) if sharing is needed",
+        "Coordinate deployment order between stacks"
+      ]
+    }
+  ],
+  
+  "prevention_tips": [
+    "Implement strict access controls to prevent manual resource modifications",
+    "Use CloudFormation drift detection regularly as part of monitoring",
+    "Set up CloudWatch alarms for drift detection results",
+    "Use resource-level tags to identify CloudFormation-managed resources",
+    "Implement change management processes that require template updates",
+    "Use CloudFormation StackSets for multi-account resource management",
+    "Regular audits of resource configurations vs templates",
+    "Train team members on Infrastructure as Code principles"
+  ],
+  
+  "drift_detection_workflow": [
+    {
+      "step": "Detect",
+      "command": "aws cloudformation detect-stack-drift --stack-name {stack_name}",
+      "description": "Start drift detection process"
+    },
+    {
+      "step": "Monitor", 
+      "command": "aws cloudformation describe-stack-drift-detection-status --stack-drift-detection-id {id}",
+      "description": "Wait for detection to complete"
+    },
+    {
+      "step": "Analyze",
+      "command": "aws cloudformation describe-stack-resource-drifts --stack-name {stack_name}",
+      "description": "Review detailed drift results"
+    },
+    {
+      "step": "Resolve",
+      "description": "Choose resolution strategy based on drift type and business requirements"
+    }
+  ],
+  
+  "related_contexts": [
+    "permission_issues_guide",
+    "rollback_analysis_guide"
+  ],
+  
+  "additional_resources": [
+    {
+      "title": "CloudFormation Drift Detection",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html"
+    },
+    {
+      "title": "Importing Existing Resources",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html"
+    }
+  ]
+}

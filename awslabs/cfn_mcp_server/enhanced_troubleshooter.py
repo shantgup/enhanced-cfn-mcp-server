@@ -121,6 +121,9 @@ class EnhancedCloudFormationTroubleshooter(CloudFormationTroubleshooter):
             # Create comprehensive summary
             enhanced_analysis['comprehensive_summary'] = self._create_comprehensive_summary(enhanced_analysis)
             
+            # Add context system metadata
+            enhanced_analysis['context_system'] = self._get_available_contexts()
+            
             return enhanced_analysis
             
         except Exception as e:
@@ -131,6 +134,65 @@ class EnhancedCloudFormationTroubleshooter(CloudFormationTroubleshooter):
                 'stack_name': stack_name,
                 'analysis_timestamp': datetime.utcnow().isoformat()
             }
+    
+    def _get_available_contexts(self) -> Dict[str, Any]:
+        """Return metadata about available context files for Q CLI"""
+        return {
+            "description": "CloudFormation troubleshooting context files are available to help diagnose specific scenarios",
+            "usage_instructions": "Analyze the stack events and failure patterns to determine which scenarios might apply, then call get_cloudformation_context(context_name) for detailed guidance",
+            "available_contexts": [
+                {
+                    "name": "custom_resource_debugging",
+                    "description": "For failures involving custom resources or Lambda-backed resources",
+                    "triggers": [
+                        "Custom resource failures", 
+                        "ServiceToken present in failed resources", 
+                        "Lambda timeout errors",
+                        "Custom resource response format issues"
+                    ]
+                },
+                {
+                    "name": "nested_stack_troubleshooting",
+                    "description": "For failures in nested CloudFormation stacks",
+                    "triggers": [
+                        "AWS::CloudFormation::Stack resource failures", 
+                        "Nested stack CREATE_FAILED or UPDATE_FAILED",
+                        "Cross-stack parameter issues",
+                        "Parent-child stack dependency problems"
+                    ]
+                },
+                {
+                    "name": "drift_detection_guide",
+                    "description": "For suspected out-of-band changes to stack resources",
+                    "triggers": [
+                        "UPDATE_FAILED with no template changes", 
+                        "Resource already exists errors", 
+                        "Unexpected resource states",
+                        "Manual changes outside CloudFormation"
+                    ]
+                },
+                {
+                    "name": "permission_issues_guide",
+                    "description": "For IAM and permission-related failures",
+                    "triggers": [
+                        "Access denied errors",
+                        "Insufficient permissions",
+                        "Cross-account role issues",
+                        "Service-linked role problems"
+                    ]
+                },
+                {
+                    "name": "rollback_analysis_guide",
+                    "description": "For understanding and recovering from rollback scenarios",
+                    "triggers": [
+                        "ROLLBACK_COMPLETE status",
+                        "ROLLBACK_FAILED status", 
+                        "UPDATE_ROLLBACK scenarios",
+                        "Stack stuck in rollback"
+                    ]
+                }
+            ]
+        }
     
     async def fix_and_deploy(
         self,

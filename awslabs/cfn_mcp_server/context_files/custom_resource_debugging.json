@@ -1,0 +1,207 @@
+{
+  "scenario": "custom_resource_debugging",
+  "title": "Custom Resource Troubleshooting Guide",
+  "description": "Comprehensive guide for diagnosing and resolving custom resource failures in CloudFormation stacks",
+  
+  "when_to_use": [
+    "Custom resource shows CREATE_FAILED or UPDATE_FAILED status",
+    "Error mentions ServiceToken or Lambda function",
+    "Custom resource timeout errors occur",
+    "Invalid response format from custom resource",
+    "Resources with Type: AWS::CloudFormation::CustomResource or Custom::*"
+  ],
+  
+  "diagnosis_steps": [
+    {
+      "step": 1,
+      "action": "Identify the custom resource",
+      "details": "Look for resources with Type: AWS::CloudFormation::CustomResource or Custom::* in the failed events",
+      "what_to_look_for": "Resource type starting with 'Custom::' or exact type 'AWS::CloudFormation::CustomResource'"
+    },
+    {
+      "step": 2, 
+      "action": "Extract the ServiceToken",
+      "details": "Find the Lambda function ARN or SNS topic ARN in the ServiceToken property",
+      "what_to_look_for": "ServiceToken property containing arn:aws:lambda: or arn:aws:sns:"
+    },
+    {
+      "step": 3,
+      "action": "Check the resource status reason",
+      "details": "The ResourceStatusReason often contains the actual error from the custom resource",
+      "what_to_look_for": "Specific error messages, timeout indicators, or response format issues"
+    },
+    {
+      "step": 4,
+      "action": "Determine the request type",
+      "details": "Identify if this was a Create, Update, or Delete operation",
+      "what_to_look_for": "RequestType in the custom resource event or stack operation context"
+    }
+  ],
+  
+  "common_causes": [
+    {
+      "cause": "Lambda function timeout",
+      "description": "Custom resource Lambda exceeds the 15-minute maximum execution time",
+      "indicators": ["Task timed out", "Lambda timeout", "2025-01-01T00:15:00.000Z"],
+      "likelihood": "HIGH"
+    },
+    {
+      "cause": "Invalid response format", 
+      "description": "Lambda doesn't return proper SUCCESS/FAILED response to CloudFormation",
+      "indicators": ["Invalid response", "Missing Status", "Malformed response", "Expected string"],
+      "likelihood": "HIGH"
+    },
+    {
+      "cause": "Permission issues",
+      "description": "Lambda execution role lacks necessary permissions for the operation",
+      "indicators": ["Access denied", "Forbidden", "UnauthorizedOperation", "is not authorized"],
+      "likelihood": "MEDIUM"
+    },
+    {
+      "cause": "Resource dependency failure",
+      "description": "Custom resource depends on other AWS resources that failed or don't exist",
+      "indicators": ["does not exist", "not found", "InvalidParameterValue"],
+      "likelihood": "MEDIUM"
+    },
+    {
+      "cause": "Lambda function error",
+      "description": "Unhandled exception or error in the Lambda function code",
+      "indicators": ["Runtime.HandlerNotFound", "syntax error", "module not found"],
+      "likelihood": "MEDIUM"
+    }
+  ],
+  
+  "data_collection_steps": [
+    {
+      "priority": "HIGH",
+      "action": "Get Lambda function logs",
+      "mcp_tool": "enhanced_troubleshoot_cloudformation_stack",
+      "parameters": {
+        "include_logs": true,
+        "time_window_hours": 2
+      },
+      "description": "Collect CloudWatch logs for the Lambda function during the failure window"
+    },
+    {
+      "priority": "HIGH", 
+      "action": "Check Lambda function configuration",
+      "aws_cli": "aws lambda get-function-configuration --function-name {function_name}",
+      "description": "Review timeout, memory, and execution role settings"
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Get Lambda function code",
+      "aws_cli": "aws lambda get-function --function-name {function_name}",
+      "description": "Review the Lambda function implementation for common issues"
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Check execution role permissions",
+      "aws_cli": "aws iam get-role --role-name {execution_role_name}",
+      "description": "Verify the Lambda execution role has necessary permissions"
+    }
+  ],
+  
+  "investigation_commands": [
+    {
+      "command": "aws logs filter-log-events --log-group-name /aws/lambda/{function_name} --start-time {start_time} --end-time {end_time}",
+      "purpose": "Get Lambda execution logs for the failure timeframe",
+      "parameters_needed": ["function_name", "start_time", "end_time"]
+    },
+    {
+      "command": "aws lambda get-function-configuration --function-name {function_name}",
+      "purpose": "Check Lambda timeout, memory, and execution role settings",
+      "parameters_needed": ["function_name"]
+    },
+    {
+      "command": "aws iam simulate-principal-policy --policy-source-arn {execution_role_arn} --action-names {action} --resource-arns {resource_arn}",
+      "purpose": "Test if the execution role has required permissions",
+      "parameters_needed": ["execution_role_arn", "action", "resource_arn"]
+    },
+    {
+      "command": "aws logs describe-log-streams --log-group-name /aws/lambda/{function_name} --order-by LastEventTime --descending",
+      "purpose": "Find the most recent log streams for the Lambda function",
+      "parameters_needed": ["function_name"]
+    }
+  ],
+  
+  "resolution_strategies": [
+    {
+      "scenario": "Lambda timeout",
+      "steps": [
+        "Increase Lambda timeout setting (maximum 15 minutes for custom resources)",
+        "Optimize Lambda code for better performance", 
+        "Consider breaking work into smaller chunks with continuation patterns",
+        "Use asynchronous operations where possible"
+      ],
+      "aws_commands": [
+        "aws lambda update-function-configuration --function-name {function_name} --timeout 900"
+      ]
+    },
+    {
+      "scenario": "Invalid response format",
+      "steps": [
+        "Ensure Lambda returns Status: SUCCESS or FAILED",
+        "Include required fields: Status, RequestId, LogicalResourceId, StackId",
+        "Use CloudFormation response helper functions",
+        "Validate JSON response format"
+      ],
+      "code_example": {
+        "language": "python",
+        "snippet": "import json\nimport urllib3\n\ndef send_response(event, context, response_status, response_data={}):\n    response_body = {\n        'Status': response_status,\n        'Reason': f'See CloudWatch Log Stream: {context.log_stream_name}',\n        'PhysicalResourceId': event.get('PhysicalResourceId', context.log_stream_name),\n        'StackId': event['StackId'],\n        'RequestId': event['RequestId'],\n        'LogicalResourceId': event['LogicalResourceId'],\n        'Data': response_data\n    }\n    \n    http = urllib3.PoolManager()\n    response = http.request('PUT', event['ResponseURL'], \n                          body=json.dumps(response_body),\n                          headers={'Content-Type': 'application/json'})\n    return response"
+      }
+    },
+    {
+      "scenario": "Permission issues",
+      "steps": [
+        "Review Lambda execution role permissions",
+        "Add necessary IAM policies for the operations being performed",
+        "Check resource-based policies on target services",
+        "Verify cross-account permissions if applicable"
+      ],
+      "aws_commands": [
+        "aws iam attach-role-policy --role-name {role_name} --policy-arn {policy_arn}",
+        "aws iam put-role-policy --role-name {role_name} --policy-name {policy_name} --policy-document file://policy.json"
+      ]
+    },
+    {
+      "scenario": "Function code errors",
+      "steps": [
+        "Review CloudWatch logs for specific error messages",
+        "Test Lambda function independently with sample events",
+        "Add proper error handling and logging",
+        "Validate all required dependencies are included"
+      ],
+      "aws_commands": [
+        "aws lambda invoke --function-name {function_name} --payload file://test-event.json response.json"
+      ]
+    }
+  ],
+  
+  "prevention_tips": [
+    "Always test custom resources independently before stack deployment",
+    "Implement comprehensive error handling and logging in Lambda functions",
+    "Use CloudFormation response helpers for consistent response format",
+    "Set appropriate timeouts based on expected execution time",
+    "Follow the principle of least privilege for execution role permissions",
+    "Include detailed logging for troubleshooting purposes",
+    "Test with all three request types: Create, Update, Delete",
+    "Validate input parameters and handle edge cases gracefully"
+  ],
+  
+  "related_contexts": [
+    "permission_issues_guide",
+    "rollback_analysis_guide"
+  ],
+  
+  "additional_resources": [
+    {
+      "title": "AWS CloudFormation Custom Resource Reference",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/custom-resource.html"
+    },
+    {
+      "title": "Lambda-backed Custom Resources",
+      "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html"
+    }
+  ]
+}
