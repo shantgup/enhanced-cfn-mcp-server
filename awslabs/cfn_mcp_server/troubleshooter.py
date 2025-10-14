@@ -581,18 +581,42 @@ class CloudFormationTroubleshooter:
             
             # Analyze template for dependencies and patterns
             if stack_data.get('stack_template'):
-                template = stack_data['stack_template']
-                context['template_analysis'] = {
-                    'resource_count': len(template.get('Resources', {})),
-                    'parameter_count': len(template.get('Parameters', {})),
-                    'output_count': len(template.get('Outputs', {})),
-                    'has_conditions': bool(template.get('Conditions')),
-                    'has_mappings': bool(template.get('Mappings')),
-                    'resource_types': list(set(
-                        resource.get('Type', '') 
-                        for resource in template.get('Resources', {}).values()
-                    ))
-                }
+                template_str = stack_data['stack_template']
+                try:
+                    # Parse template string to dictionary
+                    if isinstance(template_str, str):
+                        try:
+                            import yaml
+                            template = yaml.safe_load(template_str)
+                        except (ImportError, yaml.YAMLError):
+                            try:
+                                import json
+                                template = json.loads(template_str)
+                            except json.JSONDecodeError:
+                                template = {}
+                    else:
+                        template = template_str
+                    
+                    if isinstance(template, dict):
+                        context['template_analysis'] = {
+                            'resource_count': len(template.get('Resources', {})),
+                            'parameter_count': len(template.get('Parameters', {})),
+                            'output_count': len(template.get('Outputs', {})),
+                            'has_conditions': bool(template.get('Conditions')),
+                            'has_mappings': bool(template.get('Mappings')),
+                            'resource_types': list(set(
+                                resource.get('Type', '') 
+                                for resource in template.get('Resources', {}).values()
+                            ))
+                        }
+                    else:
+                        context['template_analysis'] = {
+                            'error': 'Could not parse template as YAML or JSON'
+                        }
+                except Exception as e:
+                    context['template_analysis'] = {
+                        'error': f'Template parsing error: {str(e)}'
+                    }
             
             # Look for related stacks (same prefix)
             try:

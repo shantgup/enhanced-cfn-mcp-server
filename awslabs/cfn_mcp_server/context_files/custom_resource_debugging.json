@@ -25,6 +25,12 @@
       "what_to_look_for": "ServiceToken property containing arn:aws:lambda: or arn:aws:sns:"
     },
     {
+      "step": 2.5,
+      "action": "Extract RequestId from CloudFormation error",
+      "details": "Find the RequestId in the ResourceStatusReason (e.g., 'requestId [c718b62b-b361-4a4e-bbb8-6b4cbc41c08b]')",
+      "what_to_look_for": "RequestId UUID that links CloudFormation events to Lambda executions"
+    },
+    {
       "step": 3,
       "action": "Check the resource status reason",
       "details": "The ResourceStatusReason often contains the actual error from the custom resource",
@@ -35,10 +41,26 @@
       "action": "Determine the request type",
       "details": "Identify if this was a Create, Update, or Delete operation",
       "what_to_look_for": "RequestType in the custom resource event or stack operation context"
+    },
+    {
+      "step": 5,
+      "action": "Check for retry patterns",
+      "details": "Look for multiple Lambda executions with the same RequestId",
+      "what_to_look_for": "Same RequestId appearing in multiple log entries indicates CloudFormation retries"
     }
   ],
   
   "common_causes": [
+    {
+      "cause": "No response sent to CloudFormation",
+      "description": "Lambda function exits without calling the CloudFormation ResponseURL",
+      "indicators": [
+        "CloudFormation did not receive a response",
+        "Please check your logs for requestId",
+        "Custom resource timeout"
+      ],
+      "likelihood": "VERY_HIGH"
+    },
     {
       "cause": "Lambda function timeout",
       "description": "Custom resource Lambda exceeds the 15-minute maximum execution time",
@@ -79,6 +101,12 @@
       "description": "Collect CloudWatch logs for the Lambda function during the failure window"
     },
     {
+      "priority": "HIGH",
+      "action": "Validate response format in logs",
+      "description": "Check if Lambda sends proper JSON response with Status, RequestId, StackId, LogicalResourceId",
+      "what_to_look_for": "PUT request to ResponseURL with proper JSON structure"
+    },
+    {
       "priority": "HIGH", 
       "action": "Check Lambda function configuration",
       "aws_cli": "aws lambda get-function-configuration --function-name {function_name}",
@@ -103,6 +131,12 @@
       "command": "aws logs filter-log-events --log-group-name /aws/lambda/{function_name} --start-time {start_time} --end-time {end_time}",
       "purpose": "Get Lambda execution logs for the failure timeframe",
       "parameters_needed": ["function_name", "start_time", "end_time"]
+    },
+    {
+      "command": "aws logs filter-log-events --log-group-name /aws/lambda/{function_name} --filter-pattern 'RequestId: {request_id}'",
+      "purpose": "Find specific Lambda execution using CloudFormation RequestId",
+      "parameters_needed": ["function_name", "request_id"],
+      "example": "aws logs filter-log-events --log-group-name /aws/lambda/my-function --filter-pattern 'RequestId: c718b62b-b361-4a4e-bbb8-6b4cbc41c08b'"
     },
     {
       "command": "aws lambda get-function-configuration --function-name {function_name}",
@@ -144,7 +178,7 @@
       ],
       "code_example": {
         "language": "python",
-        "snippet": "import json\nimport urllib3\n\ndef send_response(event, context, response_status, response_data={}):\n    response_body = {\n        'Status': response_status,\n        'Reason': f'See CloudWatch Log Stream: {context.log_stream_name}',\n        'PhysicalResourceId': event.get('PhysicalResourceId', context.log_stream_name),\n        'StackId': event['StackId'],\n        'RequestId': event['RequestId'],\n        'LogicalResourceId': event['LogicalResourceId'],\n        'Data': response_data\n    }\n    \n    http = urllib3.PoolManager()\n    response = http.request('PUT', event['ResponseURL'], \n                          body=json.dumps(response_body),\n                          headers={'Content-Type': 'application/json'})\n    return response"
+        "snippet": "import json\nimport urllib3\n\ndef send_response(event, context, response_status, response_data={}):\n    response_body = {\n        'Status': response_status,\n        'Reason': f'See CloudWatch Log Stream: {context.log_stream_name}',\n        'PhysicalResourceId': event.get('PhysicalResourceId', context.log_stream_name),\n        'StackId': event['StackId'],\n        'RequestId': event['RequestId'],\n        'LogicalResourceId': event['LogicalResourceId'],\n        'Data': response_data\n    }\n    \n    http = urllib3.PoolManager()\n    response = http.request('PUT', event['ResponseURL'], \n                          body=json.dumps(response_body),\n                          headers={'Content-Type': 'application/json'})\n    return response\n\ndef lambda_handler(event, context):\n    try:\n        # Your logic here\n        send_response(event, context, 'SUCCESS', {'key': 'value'})\n    except Exception as e:\n        # CRITICAL: Always send FAILED response\n        send_response(event, context, 'FAILED', {}, str(e))\n        return  # Don't re-raise after sending response"
       }
     },
     {

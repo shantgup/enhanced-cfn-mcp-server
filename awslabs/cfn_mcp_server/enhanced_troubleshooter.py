@@ -74,19 +74,36 @@ class EnhancedCloudFormationTroubleshooter(CloudFormationTroubleshooter):
             # Get stack template for analysis
             stack_template = base_analysis.get('raw_data', {}).get('stack_info', {}).get('stack_template')
             
+            # Initialize template_analysis with default empty structure
+            template_analysis = {
+                'template_valid': False,
+                'issues': [],
+                'dependencies': [],
+                'resource_analysis': {},
+                'security_issues': [],
+                'best_practice_violations': [],
+                'recommendations': []
+            }
+            
             if stack_template and include_template_analysis:
-                # Deep template analysis
-                template_analysis = self.template_analyzer.analyze_template(stack_template)
-                enhanced_analysis['template_analysis'] = template_analysis
-                
-                # Correlate template issues with stack events
-                stack_events = base_analysis.get('raw_data', {}).get('stack_info', {}).get('stack_events', [])
-                if stack_events:
-                    correlation = self.template_analyzer.correlate_with_stack_events(
-                        template_analysis, 
-                        stack_events
-                    )
-                    enhanced_analysis['issue_correlation'] = correlation
+                # Simple pass-through - let Q CLI handle template analysis
+                template_analysis = {
+                    'template_valid': True,
+                    'raw_template': stack_template,
+                    'message': 'Template provided for Q CLI analysis'
+                }
+            
+            # Store template analysis results
+            enhanced_analysis['template_analysis'] = template_analysis
+            
+            # Correlate template issues with stack events
+            stack_events = base_analysis.get('raw_data', {}).get('stack_info', {}).get('stack_events', [])
+            if stack_events and template_analysis.get('template_valid'):
+                correlation = self.template_analyzer.correlate_with_stack_events(
+                    template_analysis, 
+                    stack_events
+                )
+                enhanced_analysis['issue_correlation'] = correlation
                 
                 # Generate fix recommendations
                 fix_recommendations = self._generate_comprehensive_fix_recommendations(
@@ -187,6 +204,8 @@ class EnhancedCloudFormationTroubleshooter(CloudFormationTroubleshooter):
                 }
             ]
         }
+    
+
     
     async def fix_and_deploy(
         self,
