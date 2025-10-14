@@ -18,7 +18,6 @@ import argparse
 import json
 import time
 import yaml
-from datetime import datetime
 from typing import Dict, List, Any, Optional
 import botocore.exceptions
 from awslabs.cfn_mcp_server.resource_operations import ResourceOperations
@@ -1358,48 +1357,6 @@ async def generate_template_fixes(
         return handle_aws_api_error(e, 'generate_template_fixes')
 
 
-@mcp.tool()
-def system_health_check(region: str = "us-east-1") -> Dict[str, Any]:
-    """
-    Perform comprehensive health checks on all system components.
-    
-    This tool verifies that all critical components are working properly:
-    - AWS connectivity and permissions
-    - Configuration management
-    - Schema manager functionality
-    - File system access
-    - Context initialization
-    
-    Args:
-        region: AWS region to test connectivity (default: us-east-1)
-    
-    Returns:
-        Comprehensive health status with detailed component information
-    """
-    try:
-        from awslabs.cfn_mcp_server.health_check import get_health_checker
-        
-        health_checker = get_health_checker()
-        return health_checker.run_all_checks(region)
-        
-    except Exception as e:
-        return {
-            "overall_status": "UNHEALTHY",
-            "overall_message": f"Health check system failed: {str(e)}",
-            "timestamp": "unknown",
-            "checks": [],
-            "summary": {"total": 0, "healthy": 0, "warning": 0, "unhealthy": 1}
-        }
-
-
-@mcp.tool()
-async def test_server_updates() -> dict:
-    """Test function to verify server is picking up code changes."""
-    return {
-        "status": "success", 
-        "message": "Server is picking up code changes!",
-        "timestamp": datetime.utcnow().isoformat() + "Z"
-    }
 
 
 def main():
