@@ -1,6 +1,17 @@
 # Enhanced CloudFormation MCP Server
 
-An AWS CloudFormation MCP server that combines real AWS operations with expert guidance prompts. Works with AI assistants like Amazon Q to provide both immediate technical capability and expert-level CloudFormation guidance.
+An AWS CloudFormation MCP server that **automatically troubleshoots stack failures** using real AWS data and expert guidance. When your CloudFormation stack fails, this server collects AWS logs, analyzes the failure, and provides step-by-step fix instructions.
+
+## What This Actually Does
+
+This MCP server has 22 tools, but the core value is **automated CloudFormation troubleshooting**:
+
+1. **Collects real AWS data** - Stack events, CloudWatch logs, CloudTrail events, resource states
+2. **Analyzes failure patterns** - Correlates errors across AWS services to find root causes  
+3. **Provides expert guidance** - Gives you specific AWS CLI commands and fix instructions
+4. **Fixes issues automatically** - Can apply template fixes and retry deployments
+
+Everything else (basic CRUD operations, template generation) supports this core troubleshooting workflow.
 
 ## Quick Start
 
@@ -13,20 +24,140 @@ q chat
 
 **Requirements:** Python 3.10+ and AWS CLI configured with credentials.
 
-## What This Does
+## Core Troubleshooting Workflow
 
-This MCP server has 22 tools that do two main things:
+### 1. Enhanced Stack Analysis
+The `enhanced_troubleshoot_cloudformation_stack` tool does the heavy lifting:
 
-1. **Make real AWS API calls** - Create, read, update, delete AWS resources and CloudFormation stacks
-2. **Generate expert prompts** - Create structured guidance that helps AI assistants provide expert-level CloudFormation advice
+```
+User: "My CloudFormation stack failed, help me troubleshoot it"
+↓
+Tool collects AWS data:
+- Stack events (describe-stack-events)
+- Resource states (describe-stack-resources) 
+- CloudWatch logs (filter-log-events)
+- CloudTrail events (lookup-events)
+- Template analysis (get-template)
+↓
+Tool analyzes failure patterns:
+- Correlates errors across resources
+- Identifies root causes
+- Matches patterns to known scenarios
+↓
+Tool provides context recommendations:
+- "This looks like a custom resource failure"
+- "Call get_cloudformation_context('custom_resource_debugging')"
+```
 
-Instead of just basic CloudFormation operations, you get expert troubleshooting workflows, security analysis, and best practices guidance.
+### 2. Context-Driven Guidance
+The context system provides expert troubleshooting workflows:
 
-## Available Tools
+**Context Files Available:**
+- `custom_resource_debugging.json` - Lambda-backed custom resource failures
+- `nested_stack_troubleshooting.json` - Nested CloudFormation stack issues
+- `drift_detection_guide.json` - Out-of-band resource modifications
+- `permission_issues_guide.json` - IAM and access problems
+- `rollback_analysis_guide.json` - Rollback scenarios and recovery
+
+**Each context includes:**
+- Step-by-step diagnosis procedures
+- Common failure causes with likelihood ratings
+- Specific AWS CLI commands to run
+- Code examples for fixes
+- Prevention strategies
+
+### 3. Autonomous Fixing
+The `autonomous_fix_and_deploy_stack` tool can fix and redeploy automatically:
+
+```
+Tool analyzes template → Identifies issues → Applies fixes → Redeploys → Monitors → Repeats if needed
+```
+
+## Real Example: Custom Resource Failure
+
+Here's how the server handled an actual custom resource failure:
+
+### The Problem
+Stack `failing-custom-resource-test` failed with:
+```
+ResourceStatusReason: "CloudFormation did not receive a response from your Custom Resource. 
+Please check your logs for requestId [c718b62b-b361-4a4e-bbb8-6b4cbc41c08b]"
+```
+
+### What The Server Did
+
+**Step 1: Data Collection**
+```
+enhanced_troubleshoot_cloudformation_stack() called
+↓ 
+Collected stack events, found failed resource: FailingCustomResource
+↓
+Extracted ServiceToken: arn:aws:lambda:us-east-1:285005585511:function:failing-custom-resource-test-failing-custom-resource
+↓
+Found RequestId in error message: c718b62b-b361-4a4e-bbb8-6b4cbc41c08b
+```
+
+**Step 2: Pattern Matching**
+```
+Analysis detected: "Custom resource failures" trigger
+↓
+Recommended context: custom_resource_debugging
+↓
+get_cloudformation_context('custom_resource_debugging') called
+```
+
+**Step 3: Expert Guidance Provided**
+```
+Context provided:
+- Diagnosis steps: "Extract RequestId from CloudFormation error"
+- Investigation command: aws logs filter-log-events --log-group-name /aws/lambda/failing-custom-resource-test-failing-custom-resource
+- Root cause identified: "Lambda throws exception without sending response to CloudFormation"
+- Fix provided: Complete Python code with proper error handling
+```
+
+**Step 4: AWS CLI Execution**
+```
+Server executed: aws logs get-log-events --log-group-name /aws/lambda/failing-custom-resource-test-failing-custom-resource
+↓
+Found Lambda logs showing: Exception thrown, no response sent to ResponseURL
+↓
+Confirmed root cause: Lambda needs to call CloudFormation ResponseURL even on failure
+```
+
+**Result:** Complete diagnosis with specific fix code in under 2 minutes.
+
+## Tool Categories
+
+### Core Troubleshooting Tools
+| Tool | Purpose |
+|------|---------|
+| `enhanced_troubleshoot_cloudformation_stack` | **Primary troubleshooter** - Collects AWS data, analyzes failures, provides context recommendations |
+| `get_cloudformation_context` | **Expert guidance** - Returns step-by-step troubleshooting workflows for specific scenarios |
+| `autonomous_fix_and_deploy_stack` | **Autonomous fixing** - Iteratively fixes templates and redeploys until successful |
+
+### Supporting Analysis Tools  
+| Tool | Purpose |
+|------|---------|
+| `analyze_template_structure` | Deep template analysis for security, compliance, best practices |
+| `generate_template_fixes` | Automated template issue detection and fixing |
+| `detect_template_capabilities` | Determines required IAM capabilities |
+| `prevent_out_of_band_changes` | Prevents manual changes to CloudFormation-managed resources |
+
+### Stack Operations
+| Tool | Purpose |
+|------|---------|
+| `deploy_cloudformation_stack` | Deploy stacks with comprehensive monitoring |
+| `delete_cloudformation_stack` | Delete stacks with resource retention options |
+
+### Template Generation
+| Tool | Purpose |
+|------|---------|
+| `generate_cloudformation_template` | Multi-stage conversation for template creation |
+| `create_template` | Generate templates from existing AWS resources |
 
 ### AWS Resource Management
-| Tool | What It Does |
-|------|-------------|
+| Tool | Purpose |
+|------|---------|
 | `get_resource_schema_information` | Get AWS resource type schemas |
 | `list_resources` | List AWS resources by type |
 | `get_resource` | Get details of specific resources |
@@ -35,41 +166,87 @@ Instead of just basic CloudFormation operations, you get expert troubleshooting 
 | `delete_resource` | Delete AWS resources |
 | `get_resource_request_status` | Check status of long-running operations |
 
-### CloudFormation Stack Operations
-| Tool | What It Does |
-|------|-------------|
-| `deploy_cloudformation_stack` | Deploy stacks with parameters and tags |
-| `get_stack_status` | Get stack status with expert analysis prompts |
-| `delete_cloudformation_stack` | Delete stacks with resource retention options |
-| `detect_stack_drift` | Check for configuration drift with analysis prompts |
-
-### Template Generation & Analysis
-| Tool | What It Does |
-|------|-------------|
-| `generate_cloudformation_template` | Generate templates from natural language with multi-stage conversation |
-| `create_template` | Generate templates from existing AWS resources |
-| `analyze_template_structure` | Analyze templates for security, compliance, and best practices |
-| `detect_template_capabilities` | Check what IAM capabilities templates need |
-| `generate_template_fixes` | Find and fix template issues automatically |
-
-### Enhanced Troubleshooting
-| Tool | What It Does |
-|------|-------------|
-| `troubleshoot_cloudformation_stack` | Basic troubleshooting with expert guidance prompts |
-| `enhanced_troubleshoot_cloudformation_stack` | Advanced troubleshooting with AWS data collection and expert analysis |
-| `fix_and_retry_cloudformation_stack` | Fix templates and retry deployment with guidance |
-| `autonomous_fix_and_deploy_stack` | Fully autonomous deployment with iterative fixing |
-
 ### Best Practices & Guidance
-| Tool | What It Does |
-|------|-------------|
+| Tool | Purpose |
+|------|---------|
 | `cloudformation_best_practices_guide` | Expert best practices guidance for any infrastructure scenario |
-| `prevent_out_of_band_changes` | Prevent manual changes to CloudFormation-managed resources |
 
-## Installation
+## How Tool Chaining Works
 
-### 1. Install the Package
+Tools are designed to work together in troubleshooting workflows:
 
+```
+1. enhanced_troubleshoot_cloudformation_stack
+   ↓ (identifies failure pattern)
+2. get_cloudformation_context  
+   ↓ (provides specific guidance)
+3. AWS CLI commands (via context instructions)
+   ↓ (collects additional data)
+4. generate_template_fixes (if template issues found)
+   ↓ (applies fixes)
+5. deploy_cloudformation_stack (redeploy with fixes)
+```
+
+## Context System Deep Dive
+
+### Context File Structure
+Each context file is a JSON document with this structure:
+
+```json
+{
+  "scenario": "custom_resource_debugging",
+  "when_to_use": ["Custom resource shows CREATE_FAILED", "Error mentions ServiceToken"],
+  "diagnosis_steps": [
+    {
+      "step": 1,
+      "action": "Identify the custom resource", 
+      "details": "Look for resources with Type: Custom::*",
+      "what_to_look_for": "Resource type starting with 'Custom::'"
+    }
+  ],
+  "common_causes": [
+    {
+      "cause": "No response sent to CloudFormation",
+      "likelihood": "VERY_HIGH",
+      "indicators": ["CloudFormation did not receive a response"]
+    }
+  ],
+  "investigation_commands": [
+    {
+      "command": "aws logs filter-log-events --log-group-name /aws/lambda/{function_name}",
+      "purpose": "Get Lambda execution logs",
+      "parameters_needed": ["function_name"]
+    }
+  ],
+  "resolution_strategies": [
+    {
+      "scenario": "Invalid response format",
+      "steps": ["Ensure Lambda returns Status: SUCCESS or FAILED"],
+      "code_example": { "language": "python", "snippet": "..." }
+    }
+  ]
+}
+```
+
+### Trigger Matching Algorithm
+The enhanced troubleshooter matches failures to contexts using:
+
+1. **Resource Type Patterns** - `Custom::*` → custom_resource_debugging
+2. **Error Message Keywords** - "already exists" → drift_detection_guide  
+3. **Stack Status Patterns** - `ROLLBACK_COMPLETE` → rollback_analysis_guide
+4. **Service Indicators** - IAM errors → permission_issues_guide
+
+### Adding New Contexts
+To add a new troubleshooting scenario:
+
+1. Create JSON file in `awslabs/cfn_mcp_server/context_files/`
+2. Follow the structure above
+3. Add trigger patterns to `enhanced_troubleshooter.py`
+4. Context automatically loads via `context_loader.py`
+
+## Installation & Configuration
+
+### 1. Install Package
 ```bash
 git clone https://github.com/shantgup/enhanced-cfn-mcp-server.git
 cd enhanced-cfn-mcp-server
@@ -77,21 +254,18 @@ pip install -e .
 ```
 
 ### 2. Configure AWS
-
 ```bash
 aws configure
 # Or set environment variables:
 # export AWS_ACCESS_KEY_ID=your_key
-# export AWS_SECRET_ACCESS_KEY=your_secret
+# export AWS_SECRET_ACCESS_KEY=your_secret  
 # export AWS_DEFAULT_REGION=us-east-1
 ```
 
 ### 3. Use with Amazon Q CLI
-
-If you run `q chat` in the project directory, the server loads automatically (configured in `.amazonq/mcp_servers.json`).
+Auto-loads when you run `q chat` in the project directory (configured in `.amazonq/mcp_servers.json`).
 
 For manual configuration elsewhere:
-
 ```json
 {
   "mcpServers": {
@@ -106,91 +280,130 @@ For manual configuration elsewhere:
 
 ## Usage Examples
 
-### One-Shot Deployment
+### Troubleshoot Any Stack Failure
 ```
-"Use the enhanced cfn mcp server to create a robust web server architecture cloudformation template. Then deploy it, and if it fails, troubleshoot it, fix the template and redeploy until successful."
-```
-
-### Basic Operations
-```bash
-# List S3 buckets
-"List all my S3 buckets"
-
-# Create a bucket
-"Create an S3 bucket named 'my-app-bucket' with versioning enabled"
-
-# Deploy a stack
-"Deploy a CloudFormation stack named 'web-app' using template.yaml"
+"My CloudFormation stack 'production-app' failed during deployment. Help me troubleshoot it."
 ```
 
-### Advanced Operations
-```bash
-# Troubleshoot failures
-"My CloudFormation stack 'app-stack' failed. Help me troubleshoot it."
-
-# Autonomous fixing
-"Automatically fix and deploy my CloudFormation stack 'broken-stack'"
-
-# Security analysis
-"Analyze my template for security vulnerabilities and compliance issues"
+### Autonomous Fix and Deploy
+```
+"Automatically fix and deploy my CloudFormation stack 'broken-stack' until it succeeds."
 ```
 
-## How It Works
-
-### Real AWS Operations (60-90% per tool)
-- Makes actual AWS API calls (`describe_stacks`, `create_stack`, `get_template`, etc.)
-- Collects CloudWatch logs and CloudTrail events
-- Parses and validates CloudFormation templates
-- Applies automated fixes based on 50+ validation rules
-- Manages deployments with waiters and error handling
-
-### Expert Prompt Enhancement (10-40% per tool)
-- Generates structured troubleshooting workflows
-- Creates expert-level guidance prompts
-- Provides step-by-step investigation procedures
-- Offers multiple solution approaches with trade-offs
-- Includes AWS CLI commands for verification
-
-### Example: Enhanced vs Basic Troubleshooting
-
-**Basic request:**
+### Security Analysis
 ```
-"Help me troubleshoot my CloudFormation stack"
+"Analyze my CloudFormation template for security vulnerabilities and compliance issues."
 ```
 
-**Enhanced prompt generated:**
+### Template Generation
 ```
-You are a CloudFormation expert with 10+ years of AWS experience. 
-
-INVESTIGATION WORKFLOW:
-1. Check stack events for failure patterns
-2. Analyze resource dependencies and circular references
-3. Review CloudWatch logs for error messages
-4. Examine CloudTrail for API call failures
-5. Validate template syntax and resource properties
-
-COMMON FAILURE PATTERNS:
-- Resource limit exceeded: Check service quotas
-- Permission denied: Verify IAM roles and policies
-- Resource conflicts: Check for naming collisions
-- Timeout issues: Review resource creation times
-
-DIAGNOSTIC COMMANDS:
-aws cloudformation describe-stack-events --stack-name {stack_name}
-aws logs filter-log-events --log-group-name /aws/lambda/{function_name}
-
-REMEDIATION STRATEGIES:
-[Specific fixes based on actual failure analysis]
+"Create a CloudFormation template for a web application with ALB, ECS, and RDS."
 ```
 
 ## AWS Permissions Required
 
 Your AWS credentials need:
-- CloudFormation operations (`cloudformation:*`)
-- CloudControl API operations (`cloudcontrol:*`)
-- Resource-specific permissions (`s3:*`, `ec2:*`, etc.)
-- CloudWatch Logs access (`logs:*`)
-- CloudTrail access (`cloudtrail:LookupEvents`)
+- **CloudFormation operations**: `cloudformation:*`
+- **CloudControl API**: `cloudcontrol:*` 
+- **Resource-specific permissions**: `s3:*`, `ec2:*`, etc.
+- **CloudWatch Logs**: `logs:*`
+- **CloudTrail access**: `cloudtrail:LookupEvents`
+
+## Limitations & Gotchas
+
+### What This Tool Can't Do
+- **Fix infrastructure-level issues** - Can't resolve AWS service outages or account limits
+- **Handle cross-account dependencies** - Limited to single AWS account context
+- **Resolve external dependencies** - Can't fix issues with third-party services
+- **Bypass IAM restrictions** - Requires proper AWS permissions to function
+
+### Common Gotchas
+- **Large stacks** - Analysis may be slow for stacks with 100+ resources
+- **Custom resources** - Limited to Lambda-backed custom resources (no SNS-backed)
+- **Nested stacks** - Deep nesting (5+ levels) may cause incomplete analysis
+- **Regional resources** - Some analysis requires resources to be in the same region
+
+### When to Use Alternatives
+- **Simple syntax errors** - Use `aws cloudformation validate-template` directly
+- **Large-scale deployments** - Consider AWS CDK or Terraform for complex infrastructure
+- **Production incidents** - Use AWS Support for critical production issues
+
+## FAQ
+
+### Why not just use AWS CLI directly?
+**Direct answer:** You could, but you'd need to run 15-20 commands manually, correlate the data yourself, and know which logs to check. This tool does all that automatically and gives you the exact fix.
+
+**Example:** For the custom resource failure above, you'd need to:
+1. `aws cloudformation describe-stack-events` 
+2. Parse events to find the failed resource
+3. Extract the Lambda function name from ServiceToken
+4. `aws logs describe-log-streams` to find log streams
+5. `aws logs get-log-events` to get actual logs
+6. Correlate RequestId between CloudFormation and Lambda
+7. Analyze the logs to understand the failure
+8. Know that custom resources must send responses even on failure
+9. Write the fix code
+
+This tool does steps 1-9 automatically in one command.
+
+### How is this better than existing CloudFormation tools?
+**Direct answer:** Existing tools show you what failed. This tool shows you why it failed and how to fix it.
+
+**Comparison:**
+- **AWS Console**: Shows stack events, but you have to interpret them
+- **AWS CLI**: Gives you raw data, but no analysis or guidance  
+- **CloudFormation Linter**: Catches syntax issues, but not runtime failures
+- **This tool**: Collects data + analyzes failures + provides specific fixes
+
+### Is this just another ChatGPT wrapper?
+**Direct answer:** No. This tool makes real AWS API calls, collects actual data from your account, and provides structured troubleshooting workflows. The "AI" part is just the interface - the core functionality is AWS data collection and analysis.
+
+**What it actually does:**
+- Calls `describe-stack-events`, `filter-log-events`, `lookup-events`
+- Parses CloudFormation templates and validates syntax
+- Correlates errors across AWS services
+- Matches failure patterns to known troubleshooting procedures
+- Provides specific AWS CLI commands to run
+
+### Will this work with my existing CloudFormation setup?
+**Direct answer:** Yes, if you have AWS CLI access. This tool only reads your existing stacks and resources - it doesn't change your setup unless you explicitly ask it to deploy or fix something.
+
+**Requirements:**
+- AWS CLI configured with credentials
+- CloudFormation read permissions
+- CloudWatch Logs read permissions (for troubleshooting)
+
+## Architecture
+
+```
+Enhanced CFN MCP Server
+├── FastMCP Framework (MCP server foundation)
+├── AWS Client Management (Boto3 integration)
+├── Enhanced Troubleshooter (Data collection + failure analysis)
+│   ├── Stack Event Analysis
+│   ├── CloudWatch Log Correlation  
+│   ├── CloudTrail Event Analysis
+│   └── Template Structure Analysis
+├── Context System (Expert guidance workflows)
+│   ├── Context Loader (JSON file management)
+│   ├── Trigger Matching (Failure pattern recognition)
+│   └── Context Files (5 troubleshooting scenarios)
+├── Template Operations (Generation & analysis)
+├── Autonomous Deployer (Iterative fix-and-deploy)
+├── Template Fixer (Automated issue resolution)
+└── Resource Operations (CloudControl API)
+```
+
+## Key Files
+
+- `server.py` - Main MCP server with 22 tools
+- `enhanced_troubleshooter.py` - Core troubleshooting engine with AWS data collection
+- `context_loader.py` - Context system management
+- `context_files/` - 5 JSON files with expert troubleshooting workflows
+- `autonomous_deployer.py` - Iterative deployment with automatic fixing
+- `template_fixer.py` - Automated template issue detection and fixing
+- `template_analyzer.py` - Template structure analysis and validation
+- `stack_manager.py` - CloudFormation stack operations
 
 ## Development
 
@@ -198,7 +411,7 @@ Your AWS credentials need:
 # Install for development
 pip install -e ".[dev]"
 
-# Run tests
+# Run tests  
 pytest
 
 # Format code
@@ -207,30 +420,6 @@ ruff format .
 # Type checking
 pyright
 ```
-
-## Architecture
-
-```
-Enhanced CFN MCP Server
-├── FastMCP Framework (MCP server foundation)
-├── AWS Client Management (Boto3 integration)
-├── Resource Operations (CloudControl API)
-├── Stack Operations (CloudFormation API)
-├── Template Operations (Generation & analysis)
-├── Enhanced Troubleshooter (Data collection + analysis)
-├── Autonomous Deployer (Iterative fix-and-deploy)
-├── Template Fixer (Automated issue resolution)
-└── Prompt Generator (Expert guidance creation)
-```
-
-## Key Files
-
-- `server.py` - Main MCP server with 22 tools
-- `enhanced_troubleshooter.py` - Advanced stack analysis with AWS data collection
-- `autonomous_deployer.py` - Iterative deployment with automatic fixing
-- `template_fixer.py` - Automated template issue detection and fixing
-- `template_analyzer.py` - Template structure analysis and validation
-- `stack_manager.py` - CloudFormation stack operations
 
 ## License
 
